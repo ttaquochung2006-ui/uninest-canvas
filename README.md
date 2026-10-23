@@ -32,7 +32,7 @@ Bài browser/layout sẽ tự bỏ qua hoặc hạn chế kiểm tra nếu Micro
 ## Cấu trúc
 
 - `uninest_canvas_studio_v11.6.html`: phiên bản hiện tại.
-- `uninest_canvas_studio_v*.html`: các phiên bản lịch sử.
+- `versions/`: các phiên bản lịch sử v10.1–v11.5; bản hiện tại v11.6 vẫn ở thư mục gốc.
 - `tests/`: kiểm tra hồi quy Node và smoke test Edge.
 - `.claude/rules/`: quy ước kiến trúc, dữ liệu, nội dung và kiểm chứng.
 

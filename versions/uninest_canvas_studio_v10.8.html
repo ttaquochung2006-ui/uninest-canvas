@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+  <base href="../">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UNINEST - Canvas UI Mockup V10.7</title>
+  <title>UNINEST - Canvas UI Mockup V10.8</title>
   <!-- Tailwind CSS & Google Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -258,7 +259,7 @@
       <div>
         <div class="flex items-center gap-2">
           <h1 class="font-bold text-xs sm:text-sm tracking-tight text-white flex items-center gap-1.5">
-            UNINEST <span class="text-teal-300 font-mono text-[10px] px-1.5 py-0.2 rounded bg-teal-500/10 border border-teal-500/30">V10.7</span>
+            UNINEST <span class="text-teal-300 font-mono text-[10px] px-1.5 py-0.2 rounded bg-teal-500/10 border border-teal-500/30">V10.8</span>
           </h1>
           <span id="roleBadgeHeader" class="text-[11px] text-amber-300 font-medium hidden sm:inline">• Chưa Đăng Nhập</span>
         </div>
@@ -305,19 +306,8 @@
         </button>
       </div>
 
-      <!-- Language Selector (V10.7) -->
-      <select id="langSelect" data-i18n-skip="true" onchange="setLanguage(this.value)"
-              class="bg-slate-800 border border-slate-700 text-slate-200 text-[11px] font-semibold rounded-lg px-1.5 py-1 focus:outline-none focus:border-teal-500 cursor-pointer hover:bg-slate-700 transition">
-        <option value="vi">🇻🇳 VI</option>
-        <option value="en">🇬🇧 EN</option>
-        <option value="zh">🇨🇳 ZH</option>
-      </select>
-
-      <!-- Theme Toggle (V10.7) -->
-      <button id="themeToggleBtn" onclick="toggleTheme()" title="Chuyển sang giao diện tối"
-              class="p-1.5 w-7 h-7 text-xs font-bold bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 rounded-lg transition border border-indigo-500/40 flex items-center justify-center active:scale-95">
-        <i class="fa-solid fa-moon"></i>
-      </button>
+      <!-- V10.8: ô chọn ngôn ngữ và nút đổi tông màu ĐÃ CHUYỂN VÀO trong giao diện web app
+           giả lập (góc trên bên phải, cạnh ảnh đại diện) — xem drawAppControls() trong script. -->
 
       <!-- Help Button -->
       <button onclick="openHelpModal()" class="p-1.5 w-7 h-7 text-xs font-bold bg-teal-500/20 hover:bg-teal-500/30 text-teal-300 rounded-lg transition border border-teal-500/40 flex items-center justify-center active:scale-95" title="Hướng dẫn sử dụng chi tiết (phím ?)">
@@ -1353,13 +1343,8 @@
     function setTheme(theme) {
       state.theme = theme === 'dark' ? 'dark' : 'light';
       document.documentElement.setAttribute('data-app-theme', state.theme);
-      const btn = document.getElementById('themeToggleBtn');
-      if (btn) {
-        btn.innerHTML = state.theme === 'dark'
-          ? '<i class="fa-solid fa-sun"></i>'
-          : '<i class="fa-solid fa-moon"></i>';
-        btn.setAttribute('title', state.theme === 'dark' ? t("Chuyển sang giao diện sáng") : t("Chuyển sang giao diện tối"));
-      }
+      // V10.8: nút đổi tông nằm trên canvas (drawAppControls) nên chỉ cần vẽ lại,
+      // không còn nút DOM nào phải đồng bộ icon/tooltip.
       resizeAndDraw();
       showToast(state.theme === 'dark' ? t("Đã bật giao diện tối.") : t("Đã bật giao diện sáng."));
     }
@@ -1969,6 +1954,9 @@
       "Tiền trọ tháng này đã được thanh toán trước đó.": "This month's rent was already paid.",
       "Bấm để Đăng Xuất": "Click to sign out",
       "Mở Đăng Nhập": "Open sign-in",
+      "Đổi ngôn ngữ: Tiếng Việt": "Switch language: Vietnamese",
+      "Đổi ngôn ngữ: English": "Switch language: English",
+      "Đổi ngôn ngữ: 中文": "Switch language: Chinese",
       "Đăng nhập ngay": "Sign in now",
       "Bật/Tắt xem tất cả phòng": "Toggle show-all-rooms",
       "Mở thanh kéo ngân sách": "Open the budget slider",
@@ -2043,6 +2031,9 @@
       "Tiền trọ tháng này đã được thanh toán trước đó.": "本月房租此前已缴纳。",
       "Bấm để Đăng Xuất": "点击退出登录",
       "Mở Đăng Nhập": "打开登录框",
+      "Đổi ngôn ngữ: Tiếng Việt": "切换语言：越南语",
+      "Đổi ngôn ngữ: English": "切换语言：英语",
+      "Đổi ngôn ngữ: 中文": "切换语言：中文",
       "Đăng nhập ngay": "立即登录",
       "Bật/Tắt xem tất cả phòng": "开关「显示全部房源」",
       "Mở thanh kéo ngân sách": "打开预算滑块",
@@ -2679,11 +2670,11 @@
       "Xem sơ đồ toàn cảnh các bước trở thành chủ trọ được UNINEST bảo trợ: đăng ký → thẩm định thực tế → cam kết biểu phí → niêm yết → nhận đánh giá định kỳ.": "View the full diagram of becoming a UNINEST-backed landlord: register → on-site assessment → fee commitment → listing → receive periodic reviews.",
       "Các thao tác dùng được ở mọi màn hình, áp dụng cho cả phân hệ sinh viên lẫn chủ trọ.": "Actions available on every screen, for both the student and landlord modules.",
       "Đổi ngôn ngữ hiển thị": "Changing the display language",
-      "Dùng ô chọn <strong>🇻🇳 VI / 🇬🇧 EN / 🇨🇳 ZH</strong> trên thanh công cụ để đổi toàn bộ giao diện sang tiếng Việt, tiếng Anh hoặc tiếng Trung.": "Use the <strong>🇻🇳 VI / 🇬🇧 EN / 🇨🇳 ZH</strong> selector on the toolbar to switch the whole interface to Vietnamese, English or Chinese.",
+      "Dùng cụm <strong>VI / EN / ZH</strong> ở góc trên bên phải giao diện, ngay cạnh ảnh đại diện, để đổi toàn bộ giao diện sang tiếng Việt, tiếng Anh hoặc tiếng Trung.": "Use the <strong>VI / EN / ZH</strong> switch at the top right of the interface, right next to the avatar, to change the whole interface to Vietnamese, English or Chinese.",
       "Tiếng Việt là bản gốc. Tên riêng (tên người, tên phòng trọ, tên đường, tên trường, tên tỉnh/thành) cố ý giữ nguyên tiếng Việt vì đó là tên thật của địa điểm.": "Vietnamese is the original. Proper nouns (people, room listings, streets, universities, provinces) deliberately stay in Vietnamese because those are the real names.",
       "Đổi ngôn ngữ áp dụng ngay cho cả phần vẽ trên canvas lẫn mọi hộp thoại, không cần tải lại trang.": "The change applies instantly to both the canvas drawing and every dialog — no page reload needed.",
       "Đổi tông màu sáng / tối": "Switching between light and dark themes",
-      "Bấm nút <strong>🌙 / ☀️</strong> trên thanh công cụ để chuyển giữa giao diện sáng (bản gốc) và giao diện tối.": "Click the <strong>🌙 / ☀️</strong> button on the toolbar to switch between the light theme (the original) and the dark theme.",
+      "Bấm nút <strong>🌙 / ☀️</strong> nằm ngay bên phải cụm chọn ngôn ngữ, ở góc trên bên phải giao diện, để chuyển giữa giao diện sáng (bản gốc) và giao diện tối.": "Click the <strong>🌙 / ☀️</strong> button just to the right of the language switch, at the top right of the interface, to move between the light theme (the original) and the dark theme.",
       "Tông tối đổi nền thẻ, nền trang và màu chữ sang bảng màu tối tương ứng, nhưng <strong>giữ nguyên màu thương hiệu</strong> (teal, cam, đỏ) và chữ trắng trên nút để không mất tương phản.": "The dark theme remaps card backgrounds, page backgrounds and text colours to a dark palette, while <strong>keeping the brand colours</strong> (teal, amber, red) and white button labels so contrast is never lost.",
       "Khung Studio bao quanh (thanh công cụ, các hộp thoại) vốn đã là tông tối nên giữ nguyên ở cả hai chế độ.": "The surrounding Studio frame (toolbar and dialogs) is already dark, so it stays the same in both modes.",
       "Đổi giữa Desktop Web và Mobile App": "Switching between Desktop Web and Mobile App",
@@ -2768,11 +2759,11 @@
       "Xem sơ đồ toàn cảnh các bước trở thành chủ trọ được UNINEST bảo trợ: đăng ký → thẩm định thực tế → cam kết biểu phí → niêm yết → nhận đánh giá định kỳ.": "查看成为 UNINEST 认证房东的完整流程图：注册 → 实地评估 → 费率承诺 → 上架 → 接受定期评价。",
       "Các thao tác dùng được ở mọi màn hình, áp dụng cho cả phân hệ sinh viên lẫn chủ trọ.": "适用于所有界面的操作，学生端与房东端通用。",
       "Đổi ngôn ngữ hiển thị": "切换显示语言",
-      "Dùng ô chọn <strong>🇻🇳 VI / 🇬🇧 EN / 🇨🇳 ZH</strong> trên thanh công cụ để đổi toàn bộ giao diện sang tiếng Việt, tiếng Anh hoặc tiếng Trung.": "使用工具栏上的 <strong>🇻🇳 VI / 🇬🇧 EN / 🇨🇳 ZH</strong> 选择框，即可将整个界面切换为越南语、英语或中文。",
+      "Dùng cụm <strong>VI / EN / ZH</strong> ở góc trên bên phải giao diện, ngay cạnh ảnh đại diện, để đổi toàn bộ giao diện sang tiếng Việt, tiếng Anh hoặc tiếng Trung.": "使用界面右上角、紧挨头像的 <strong>VI / EN / ZH</strong> 切换组，即可将整个界面切换为越南语、英语或中文。",
       "Tiếng Việt là bản gốc. Tên riêng (tên người, tên phòng trọ, tên đường, tên trường, tên tỉnh/thành) cố ý giữ nguyên tiếng Việt vì đó là tên thật của địa điểm.": "越南语是原始版本。专有名词（人名、房源名、街道名、校名、省市名）有意保留越南语，因为那是实际名称。",
       "Đổi ngôn ngữ áp dụng ngay cho cả phần vẽ trên canvas lẫn mọi hộp thoại, không cần tải lại trang.": "切换后会立即应用到画布绘制内容与所有对话框，无需刷新页面。",
       "Đổi tông màu sáng / tối": "切换浅色 / 深色主题",
-      "Bấm nút <strong>🌙 / ☀️</strong> trên thanh công cụ để chuyển giữa giao diện sáng (bản gốc) và giao diện tối.": "点击工具栏上的 <strong>🌙 / ☀️</strong> 按钮，可在浅色主题（原始版本）与深色主题之间切换。",
+      "Bấm nút <strong>🌙 / ☀️</strong> nằm ngay bên phải cụm chọn ngôn ngữ, ở góc trên bên phải giao diện, để chuyển giữa giao diện sáng (bản gốc) và giao diện tối.": "点击界面右上角、语言切换组右侧的 <strong>🌙 / ☀️</strong> 按钮，可在浅色主题（原始版本）与深色主题之间切换。",
       "Tông tối đổi nền thẻ, nền trang và màu chữ sang bảng màu tối tương ứng, nhưng <strong>giữ nguyên màu thương hiệu</strong> (teal, cam, đỏ) và chữ trắng trên nút để không mất tương phản.": "深色主题会把卡片背景、页面背景与文字颜色映射到对应的深色方案，同时<strong>保留品牌色</strong>（青绿、橙、红）以及按钮上的白色文字，确保对比度不受损。",
       "Khung Studio bao quanh (thanh công cụ, các hộp thoại) vốn đã là tông tối nên giữ nguyên ở cả hai chế độ.": "外层 Studio 框架（工具栏与对话框）本身就是深色，因此在两种模式下保持不变。",
       "Đổi giữa Desktop Web và Mobile App": "在桌面网页与手机应用之间切换",
@@ -4206,7 +4197,7 @@
           {
             icon: "fa-language", title: "Đổi ngôn ngữ hiển thị",
             body: [
-              "Dùng ô chọn <strong>🇻🇳 VI / 🇬🇧 EN / 🇨🇳 ZH</strong> trên thanh công cụ để đổi toàn bộ giao diện sang tiếng Việt, tiếng Anh hoặc tiếng Trung.",
+              "Dùng cụm <strong>VI / EN / ZH</strong> ở góc trên bên phải giao diện, ngay cạnh ảnh đại diện, để đổi toàn bộ giao diện sang tiếng Việt, tiếng Anh hoặc tiếng Trung.",
               "Tiếng Việt là bản gốc. Tên riêng (tên người, tên phòng trọ, tên đường, tên trường, tên tỉnh/thành) cố ý giữ nguyên tiếng Việt vì đó là tên thật của địa điểm.",
               "Đổi ngôn ngữ áp dụng ngay cho cả phần vẽ trên canvas lẫn mọi hộp thoại, không cần tải lại trang."
             ]
@@ -4214,7 +4205,7 @@
           {
             icon: "fa-circle-half-stroke", title: "Đổi tông màu sáng / tối",
             body: [
-              "Bấm nút <strong>🌙 / ☀️</strong> trên thanh công cụ để chuyển giữa giao diện sáng (bản gốc) và giao diện tối.",
+              "Bấm nút <strong>🌙 / ☀️</strong> nằm ngay bên phải cụm chọn ngôn ngữ, ở góc trên bên phải giao diện, để chuyển giữa giao diện sáng (bản gốc) và giao diện tối.",
               "Tông tối đổi nền thẻ, nền trang và màu chữ sang bảng màu tối tương ứng, nhưng <strong>giữ nguyên màu thương hiệu</strong> (teal, cam, đỏ) và chữ trắng trên nút để không mất tương phản.",
               "Khung Studio bao quanh (thanh công cụ, các hộp thoại) vốn đã là tông tối nên giữ nguyên ở cả hai chế độ."
             ]
@@ -5362,6 +5353,65 @@
       if (strokeStyle) { ctx.strokeStyle = strokeStyle; ctx.lineWidth = lineWidth; ctx.stroke(); }
     }
 
+    // ======================================================================
+    // V10.8: CỤM ĐIỀU KHIỂN NGÔN NGỮ + TÔNG MÀU VẼ TRÊN CHÍNH GIAO DIỆN WEB APP
+    // Trước đây hai điều khiển này nằm ở thanh công cụ Studio bên ngoài khung.
+    // Nay chúng nằm ở góc trên bên phải thanh điều hướng của web app, cạnh ảnh đại diện.
+    // Desktop và mobile GỌI CHUNG hàm này (chỉ khác cờ `compact`) nên nội dung và
+    // hành vi không thể lệch nhau — theo đúng quy tắc desktop-mobile-parity.
+    // ======================================================================
+    const APP_CONTROL_SIZES = {
+      normal:  { h: 32, segW: 34, btnW: 32, gap: 8, radius: 8,   font: 10,  icon: 13 },
+      compact: { h: 24, segW: 25, btnW: 24, gap: 5, radius: 6.5, font: 8.5, icon: 11 }
+    };
+
+    function appControlMetrics(compact) {
+      return APP_CONTROL_SIZES[compact ? 'compact' : 'normal'];
+    }
+
+    function appControlsWidth(compact) {
+      const m = appControlMetrics(compact);
+      return m.segW * LANGUAGES.length + m.gap + m.btnW;
+    }
+
+    // Vẽ cụm [VI|EN|ZH] + [🌙/☀️] bắt đầu từ (x, y). Trả về tổng bề ngang đã chiếm.
+    function drawAppControls(x, y, compact) {
+      const m = appControlMetrics(compact);
+      const segTotal = m.segW * LANGUAGES.length;
+
+      drawRoundedRect(x, y, segTotal, m.h, m.radius, "#F1F5F9", "#E2E8F0", 1);
+      LANGUAGES.forEach((lang, i) => {
+        const bx = x + m.segW * i;
+        const isActive = state.language === lang.id;
+        if (isActive) {
+          drawRoundedRect(bx + 1.5, y + 1.5, m.segW - 3, m.h - 3, m.radius - 1.5, "#0F766E", null);
+        }
+        ctx.fillStyle = isActive ? "#FFFFFF" : "#475569";
+        ctx.font = `${isActive ? 800 : 600} ${m.font}px 'Plus Jakarta Sans', sans-serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(lang.id.toUpperCase(), bx + m.segW / 2, y + m.h / 2);
+        ctx.textAlign = "start";
+        ctx.textBaseline = "alphabetic";
+        registerClickZone(bx, y, m.segW, m.h, () => setLanguage(lang.id), `Đổi ngôn ngữ: ${lang.label}`);
+      });
+
+      const tx = x + segTotal + m.gap;
+      const isDark = state.theme === 'dark';
+      drawRoundedRect(tx, y, m.btnW, m.h, m.radius, "#F1F5F9", "#E2E8F0", 1);
+      ctx.fillStyle = "#0F172A";
+      ctx.font = `${m.icon}px 'Plus Jakarta Sans', sans-serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(isDark ? "☀️" : "🌙", tx + m.btnW / 2, y + m.h / 2);
+      ctx.textAlign = "start";
+      ctx.textBaseline = "alphabetic";
+      registerClickZone(tx, y, m.btnW, m.h, () => toggleTheme(),
+        isDark ? "Chuyển sang giao diện sáng" : "Chuyển sang giao diện tối");
+
+      return segTotal + m.gap + m.btnW;
+    }
+
     function drawBadge(text, x, y, bgColor, textColor, icon = "") {
       ctx.font = '600 10.5px "Plus Jakarta Sans", sans-serif';
       const displayText = (icon ? icon + " " : "") + text;
@@ -5611,10 +5661,35 @@
         ];
       }
 
-      let menuX = 310;
+      // V10.8: cụm đổi ngôn ngữ + tông màu, đặt ngay sát khối tài khoản ở góc phải.
+      // Khi chưa đăng nhập thì lùi sang phải vì chỗ đó chỉ có nút "Đăng Nhập Ngay".
+      const ctrlW = appControlsWidth(false);
+      const ctrlRight = state.isLoggedIn ? w - 296 : w - 196;
+      const ctrlX = ctrlRight - ctrlW;
+
+      // Dải menu phải dừng trước cụm điều khiển. Bản dịch EN/ZH dài ngắn khác nhau,
+      // nên tự co khoảng cách giữa các mục (rồi mới tới cỡ chữ) thay vì dùng số cố định —
+      // tiếng Anh dài hơn tiếng Việt đủ để đè lên cụm điều khiển nếu để nguyên 24px.
+      const menuStartX = 310;
+      const menuLimit = ctrlX - 16;
+      const MENU_MIN_GAP = 10;
+      let menuFont = 12, menuGap = 24;
+      const menuSizes = [12, 11.5, 11, 10.5, 10];
+      for (let i = 0; i < menuSizes.length; i++) {
+        menuFont = menuSizes[i];
+        // đo bằng nét đậm (mục đang chọn) cho chắc ăn
+        ctx.font = `700 ${menuFont}px 'Plus Jakarta Sans', sans-serif`;
+        const textTotal = menus.reduce((sum, m) => sum + ctx.measureText(m.name).width, 0);
+        const slots = Math.max(1, menus.length - 1);
+        menuGap = (menuLimit - menuStartX - textTotal) / slots;
+        if (menuGap >= MENU_MIN_GAP || i === menuSizes.length - 1) break;
+      }
+      menuGap = Math.max(MENU_MIN_GAP, Math.min(24, menuGap));
+
+      let menuX = menuStartX;
       menus.forEach(m => {
         const isActive = state.currentScreen === m.screen;
-        ctx.font = isActive ? "700 12px 'Plus Jakarta Sans', sans-serif" : "500 12px 'Plus Jakarta Sans', sans-serif";
+        ctx.font = isActive ? `700 ${menuFont}px 'Plus Jakarta Sans', sans-serif` : `500 ${menuFont}px 'Plus Jakarta Sans', sans-serif`;
         ctx.fillStyle = isActive ? "#0D9488" : "#475569";
         ctx.fillText(m.name, menuX, navY + 36);
         const textW = ctx.measureText(m.name).width;
@@ -5627,8 +5702,10 @@
           if (m.action) m.action();
           else switchScreen(m.screen);
         }, `Chuyển: ${m.name}`);
-        menuX += textW + 24;
+        menuX += textW + menuGap;
       });
+
+      drawAppControls(ctrlX, navY + 15, false);
 
       if (!state.isLoggedIn) {
         drawRoundedRect(w - 180, navY + 14, 144, 34, 7, "#0D9488", null);
@@ -7496,8 +7573,15 @@
       const roleBadgeLabel = !state.isLoggedIn ? "CHƯA LOGIN" : (state.userRole === 'student' ? "SV" : "CHỦ TRỌ");
       drawBadge(roleBadgeLabel, w - 85, headerY + 13, "#CCFBF1", "#0F766E");
 
+      // V10.8: cùng cụm điều khiển ngôn ngữ + tông màu như desktop (bản thu gọn),
+      // đặt ở góc trên bên phải ngay cạnh huy hiệu vai trò.
+      const mCtrlW = appControlsWidth(true);
+      const mCtrlX = w - 93 - mCtrlW;
+      drawAppControls(mCtrlX, headerY + 11, true);
+
       if (!state.isLoggedIn) {
-        registerClickZone(24, headerY + 8, sw, 32, () => openLoginModal(), "Mở Đăng Nhập");
+        // Vùng bấm mở đăng nhập dừng lại trước cụm điều khiển để không nuốt mất nút đổi ngôn ngữ.
+        registerClickZone(24, headerY + 8, Math.max(40, mCtrlX - 30), 32, () => openLoginModal(), "Mở Đăng Nhập");
       }
 
       const enter = screenEnterProgress();

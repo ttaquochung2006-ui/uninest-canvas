@@ -50,7 +50,8 @@ async function main() {
             result.style.display = 'none'; document.body.appendChild(result);
           });
         </script>`;
-        const html = fs.readFileSync(path.join(root, `uninest_canvas_studio_v${version}.html`), 'utf8')
+        const html = fs.readFileSync(path.join(root, version === '11.6' ? '' : 'versions', `uninest_canvas_studio_v${version}.html`), 'utf8')
+          .replace(/<base\b[^>]*>/gi, '')
           .replace('src="https://cdn.tailwindcss.com"', `src="${pathToFileURL(path.join(dir, 'tailwind.js')).href}"`)
           .replace(/<link\b[^>]*href="https?:[^>]*>/gi, '')
           .replace('<head>', `<head><base href="${pathToFileURL(root + path.sep).href}">`)

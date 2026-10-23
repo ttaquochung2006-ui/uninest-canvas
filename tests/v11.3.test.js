@@ -10,7 +10,7 @@ assert.equal(readBrowserResult(`<script>result = '${successNode}'</script><pre i
 assert.equal(readBrowserResult(`<script>result = '${successNode}'</script>${successNode}`), 'BROWSER-SMOKE-OK');
 assert.equal(readBrowserResult(successNode + successNode), null);
 
-const html = fs.readFileSync(path.join(__dirname, '..', 'uninest_canvas_studio_v11.3.html'), 'utf8');
+const html = fs.readFileSync(path.join(__dirname, '..', 'versions/uninest_canvas_studio_v11.3.html'), 'utf8');
 const slice = (start, end) => {
   const from = html.indexOf(start);
   const to = html.indexOf(end, from + start.length);

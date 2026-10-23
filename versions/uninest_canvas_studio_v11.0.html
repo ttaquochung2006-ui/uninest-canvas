@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+  <base href="../">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UNINEST - Canvas UI Mockup V11.1</title>
+  <title>UNINEST - Canvas UI Mockup V11.0</title>
   <!-- Tailwind CSS & Google Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -181,64 +182,9 @@
       background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
     }
 
-    /* ====== V11.1: ẨN / HIỆN THANH STUDIO + CHUYỂN ĐỘNG MƯỢT ====== */
-    #studioChrome {
-      display: grid;
-      grid-template-rows: 1fr;
-      transition: grid-template-rows .42s cubic-bezier(.16, 1, .3, 1);
-    }
-    #studioChromeInner {
-      overflow: hidden;
-      min-height: 0;
-    }
-    body.studio-chrome-hidden #studioChrome {
-      grid-template-rows: 0fr;
-    }
-    #chromeRevealDock {
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%) translateY(-18px);
-      z-index: 40;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .32s ease, transform .42s cubic-bezier(.16, 1, .3, 1);
-    }
-    body.studio-chrome-hidden #chromeRevealDock {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateX(-50%) translateY(0);
-    }
-    body.studio-chrome-hidden #personaCard,
-    body.studio-chrome-hidden #landlordCard,
-    body.studio-chrome-hidden #interactiveTipPill {
-      opacity: 0 !important;
-      pointer-events: none !important;
-      transform: translateY(10px);
-    }
-    #personaCard, #landlordCard, #interactiveTipPill {
-      transition: opacity .28s ease, transform .32s cubic-bezier(.16, 1, .3, 1);
-    }
-    #canvasHoverBadge {
-      transition: opacity .18s ease, transform .18s cubic-bezier(.16, 1, .3, 1);
-    }
-    #designCanvas {
-      transition: box-shadow .35s ease, border-color .35s ease, transform .45s cubic-bezier(.16, 1, .3, 1);
-    }
-    #designCanvas.is-hot {
-      box-shadow: 0 22px 48px -12px rgba(13, 148, 136, .35), 0 0 0 1px rgba(45, 212, 191, .28);
-      border-color: rgba(45, 212, 191, .45);
-    }
-    body.studio-chrome-hidden #toastNotification {
-      top: 3.25rem;
-    }
-
     @media (prefers-reduced-motion: reduce) {
       .uni-float, .uni-blink, .uni-ring-spin, .boot-star, .uni-shine::after {
         animation: none !important;
-      }
-      #studioChrome, #chromeRevealDock, #personaCard, #landlordCard, #interactiveTipPill, #designCanvas {
-        transition: none !important;
       }
     }
   </style>
@@ -319,15 +265,13 @@
     </div>
   </div>
 
-  <!-- HEADER + THANH CÔNG CỤ (V11.1: gói chung để ẩn/hiện một lần) -->
-  <div id="studioChrome" class="shrink-0 z-30">
-  <div id="studioChromeInner">
-  <header id="studioHeader" class="h-14 border-b border-slate-800 bg-slate-900/95 backdrop-blur px-4 flex items-center justify-between">
+  <!-- HEADER -->
+  <header class="h-14 border-b border-slate-800 bg-slate-900/95 backdrop-blur px-4 flex items-center justify-between shrink-0 z-30 shadow-md">
     <div class="flex items-center gap-3">
       <!-- V11.0: logo header. Bản cũ dùng `Uninest 1 - logo.png` (nền trắng ngà) đặt trong
            khung có viền + nền slate nên lộ rõ một ô vuông sáng lệch với logo bên trong.
            Nay dùng bản nền trong suốt, bỏ hẳn viền/nền khung, và phóng từ 32px lên 44px. -->
-      <img src="Uninest_1_-_logo-removebg-preview.png" alt="Logo UNINEST"
+      <img src="Uninest 1 - logo.png" alt="Logo UNINEST"
            class="w-11 h-11 object-contain shrink-0 drop-shadow-[0_2px_6px_rgba(45,212,191,0.35)]">
       <!-- V10.9: bỏ dòng vai trò và dòng "Xin chào ..." — hai thông tin đó đã hiển thị
            ngay trong giao diện web app (góc phải thanh điều hướng). Thay bằng dòng
@@ -335,7 +279,7 @@
       <div>
         <div class="flex items-center gap-2">
           <h1 class="font-bold text-xs sm:text-sm tracking-tight text-white flex items-center gap-1.5">
-            UNINEST <span class="text-teal-300 font-mono text-[10px] px-1.5 py-0.2 rounded bg-teal-500/10 border border-teal-500/30">V11.1</span>
+            UNINEST <span class="text-teal-300 font-mono text-[10px] px-1.5 py-0.2 rounded bg-teal-500/10 border border-teal-500/30">V11.0</span>
           </h1>
         </div>
         <p id="poweredByHeader" data-i18n-skip="true" class="text-[10px] text-slate-400 font-medium tracking-wide whitespace-nowrap">
@@ -393,16 +337,11 @@
       <button onclick="downloadCanvasImage()" class="p-1.5 text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition border border-slate-700" title="Tải ảnh PNG">
         <i class="fa-solid fa-download"></i>
       </button>
-
-      <!-- V11.1: ẩn thanh Studio để tối giản màn hình thuyết trình -->
-      <button id="chromeHideBtn" onclick="toggleStudioChrome()" class="p-1.5 w-7 h-7 text-xs font-bold bg-slate-800 hover:bg-teal-500/20 text-slate-300 hover:text-teal-300 rounded-lg transition border border-slate-700 hover:border-teal-500/40 flex items-center justify-center active:scale-95" title="Ẩn thanh điều khiển Studio (phím H)">
-        <i class="fa-solid fa-chevron-up"></i>
-      </button>
     </div>
   </header>
 
   <!-- SUBHEADER / TAB BAR -->
-  <div id="studioToolbar" class="bg-slate-900/85 border-b border-slate-800 px-3 py-1.5 flex items-center justify-between overflow-x-auto gap-2">
+  <div class="bg-slate-900/85 border-b border-slate-800 px-3 py-1.5 flex items-center justify-between overflow-x-auto gap-2 shrink-0">
     <div id="screenTabsContainer" class="flex items-center gap-1 shrink-0">
       <!-- Dynamic Tabs -->
     </div>
@@ -458,25 +397,14 @@
       </button>
     </div>
   </div>
-  </div>
-  </div>
 
   <!-- MAIN CANVAS AREA -->
   <main class="flex-1 relative overflow-hidden canvas-grid-bg flex items-center justify-center">
-
-    <!-- V11.1: thanh mỏng hiện lại khi Studio chrome đã ẩn -->
-    <div id="chromeRevealDock">
-      <button onclick="toggleStudioChrome(false)" class="glass-panel px-3.5 py-1.5 rounded-full border border-teal-500/40 flex items-center gap-2 text-[11px] text-slate-100 shadow-xl shadow-teal-950/40 hover:border-teal-400/70 hover:bg-slate-800/90 transition active:scale-95">
-        <i class="fa-solid fa-chevron-down text-teal-300 text-[10px]"></i>
-        <span class="font-semibold">Hiện thanh điều khiển</span>
-        <span class="font-mono text-[10px] text-teal-300/90 bg-teal-500/10 px-1.5 py-0.5 rounded border border-teal-500/30">H</span>
-      </button>
-    </div>
     
     <!-- Top Tip Pill -->
     <div id="interactiveTipPill" class="absolute top-2.5 left-1/2 transform -translate-x-1/2 z-20 glass-panel px-3.5 py-1 rounded-full border border-teal-500/30 flex items-center gap-2.5 text-[11px] text-slate-200 shadow-lg backdrop-blur-md">
       <span id="tipPillText" class="flex items-center gap-1 text-amber-300 font-semibold">
-        <i class="fa-solid fa-map-location-dot text-teal-400"></i> Bản đồ tương tác: giữ chuột để kéo xem khu vực &amp; lọc tiện ích trực quan.
+        <i class="fa-solid fa-map-location-dot text-teal-400"></i> Bản đồ tương tác V10: Giữ chuột để kéo xem khu vực xung quanh & lọc tiện ích trực quan!
       </span>
       <span class="text-slate-600">•</span>
       <button onclick="toggleShowAllRooms()" class="text-indigo-300 hover:underline flex items-center gap-1 font-semibold">
@@ -1427,7 +1355,6 @@
       updateHeaderUI();
       updateSidePanels();
       renderHelpModal();
-      markScreenEnter();
       resizeAndDraw();
       showToast(t("Đã đổi ngôn ngữ hiển thị."));
     }
@@ -1437,7 +1364,6 @@
       document.documentElement.setAttribute('data-app-theme', state.theme);
       // V10.8: nút đổi tông nằm trên canvas (drawAppControls) nên chỉ cần vẽ lại,
       // không còn nút DOM nào phải đồng bộ icon/tooltip.
-      markScreenEnter();
       resizeAndDraw();
       showToast(state.theme === 'dark' ? t("Đã bật giao diện tối.") : t("Đã bật giao diện sáng."));
     }
@@ -1486,13 +1412,7 @@
       "Chuyển sang giao diện sáng": "Switch to light theme",
       "Đã đổi ngôn ngữ hiển thị.": "Display language changed.",
       "Đã bật giao diện tối.": "Dark theme enabled.",
-      "Đã bật giao diện sáng.": "Light theme enabled.",
-      "Ẩn thanh điều khiển Studio (phím H)": "Hide Studio controls (press H)",
-      "Hiện thanh điều khiển": "Show controls",
-      "Đã ẩn thanh điều khiển Studio — phím H để hiện lại.": "Studio controls hidden — press H to show them again.",
-      "Đã hiện thanh điều khiển Studio.": "Studio controls are visible again.",
-      "Bản đồ tương tác: giữ chuột để kéo xem khu vực & lọc tiện ích trực quan.": "Interactive map: hold and drag to explore the area & filter amenities visually.",
-      "Bản đồ tương tác: giữ chuột để kéo xem khu vực &amp; lọc tiện ích trực quan.": "Interactive map: hold and drag to explore the area &amp; filter amenities visually."
+      "Đã bật giao diện sáng.": "Light theme enabled."
     });
     Object.assign(I18N.zh, {
       "• Chưa Đăng Nhập": "• 未登录",
@@ -1526,13 +1446,7 @@
       "Chuyển sang giao diện sáng": "切换到浅色主题",
       "Đã đổi ngôn ngữ hiển thị.": "已切换显示语言。",
       "Đã bật giao diện tối.": "已启用深色主题。",
-      "Đã bật giao diện sáng.": "已启用浅色主题。",
-      "Ẩn thanh điều khiển Studio (phím H)": "隐藏 Studio 控制栏（按 H）",
-      "Hiện thanh điều khiển": "显示控制栏",
-      "Đã ẩn thanh điều khiển Studio — phím H để hiện lại.": "Studio 控制栏已隐藏 — 按 H 可重新显示。",
-      "Đã hiện thanh điều khiển Studio.": "Studio 控制栏已重新显示。",
-      "Bản đồ tương tác: giữ chuột để kéo xem khu vực & lọc tiện ích trực quan.": "互动地图：按住鼠标拖动查看区域并直观筛选配套。",
-      "Bản đồ tương tác: giữ chuột để kéo xem khu vực &amp; lọc tiện ích trực quan.": "互动地图：按住鼠标拖动查看区域并直观筛选配套。"
+      "Đã bật giao diện sáng.": "已启用浅色主题。"
     });
 
     // --- Nhóm B: màn hình tải & cổng xác thực (trước đăng nhập) ---
@@ -2795,14 +2709,8 @@
       "Bấm biểu tượng <strong>tải xuống</strong> ở góc phải thanh công cụ để lưu màn hình đang xem thành file PNG chất lượng cao — tiện để chèn vào báo cáo hoặc slide.": "Click the <strong>download</strong> icon at the right of the toolbar to save the current screen as a high-quality PNG — handy for reports or slides.",
       "Phím tắt": "Keyboard shortcuts",
       "<strong class='font-mono'>?</strong> — mở lại bảng hướng dẫn này bất cứ lúc nào.": "<strong class='font-mono'>?</strong> — reopen this guide at any time.",
-      "<strong class='font-mono'>H</strong> — ẩn hoặc hiện thanh điều khiển Studio (chế độ tập trung).": "<strong class='font-mono'>H</strong> — hide or show the Studio control bars (focus mode).",
       "<strong class='font-mono'>Esc</strong> — đóng mọi hộp thoại đang mở.": "<strong class='font-mono'>Esc</strong> — close any open dialog.",
-      "<strong class='font-mono'>Esc</strong> — đóng mọi hộp thoại đang mở. Nếu không có hộp thoại, Esc hiện lại thanh Studio.": "<strong class='font-mono'>Esc</strong> — close any open dialog. If none is open, Esc shows the Studio bars again.",
       "<strong class='font-mono'>Enter</strong> — đăng nhập luôn khi đang ở hộp đăng nhập.": "<strong class='font-mono'>Enter</strong> — sign in directly while the sign-in box is open.",
-      "Ẩn thanh điều khiển Studio": "Hiding the Studio control bars",
-      "Bấm nút mũi tên lên ở góc phải thanh tiêu đề, hoặc phím <strong class='font-mono'>H</strong>, để <strong>ẩn toàn bộ thanh Studio</strong> (logo, nút vai trò, tab, bộ lọc, zoom) — canvas chiếm gần hết màn hình, đỡ rối khi thuyết trình.": "Click the up-arrow at the right of the title bar, or press <strong class='font-mono'>H</strong>, to <strong>hide the entire Studio chrome</strong> (logo, role buttons, tabs, filters, zoom) so the canvas fills the screen — less clutter when presenting.",
-      "Khi đã ẩn, một viên thuốc <strong>Hiện thanh điều khiển</strong> hiện ở mép trên. Bấm vào đó, phím <strong class='font-mono'>H</strong>, hoặc <strong>Esc</strong> (nếu không có hộp thoại đang mở) để hiện lại.": "Once hidden, a <strong>Show controls</strong> pill appears at the top edge. Click it, press <strong class='font-mono'>H</strong>, or press <strong>Esc</strong> (when no dialog is open) to bring the bars back.",
-      "Nhấp đúp vào vùng trống trên canvas cũng ẩn/hiện thanh Studio — tiện khi đang đứng thuyết trình.": "Double-clicking empty canvas space also toggles the Studio bars — handy while standing and presenting.",
       "Lưu ý về dữ liệu demo": "A note about the demo data",
       "Đây là <strong>bản mô phỏng trình diễn</strong>: toàn bộ dữ liệu là dữ liệu mẫu dựng sẵn, không có máy chủ thật.": "This is a <strong>presentation mock-up</strong>: all data is pre-built sample data with no real server.",
       "Mọi thay đổi bạn tạo ra (đánh giá mới, kết quả trắc nghiệm, giá phòng vừa sửa...) chỉ sống trong phiên làm việc và <strong>sẽ trở về ban đầu khi tải lại trang</strong>.": "Anything you change (new reviews, quiz results, edited prices) lives only in this session and <strong>resets when the page is reloaded</strong>."
@@ -2890,14 +2798,8 @@
       "Bấm biểu tượng <strong>tải xuống</strong> ở góc phải thanh công cụ để lưu màn hình đang xem thành file PNG chất lượng cao — tiện để chèn vào báo cáo hoặc slide.": "点击工具栏右侧的<strong>下载</strong>图标，可将当前界面保存为高清 PNG —— 方便插入报告或幻灯片。",
       "Phím tắt": "快捷键",
       "<strong class='font-mono'>?</strong> — mở lại bảng hướng dẫn này bất cứ lúc nào.": "<strong class='font-mono'>?</strong> —— 随时重新打开本指南。",
-      "<strong class='font-mono'>H</strong> — ẩn hoặc hiện thanh điều khiển Studio (chế độ tập trung).": "<strong class='font-mono'>H</strong> —— 隐藏或显示 Studio 控制栏（专注模式）。",
       "<strong class='font-mono'>Esc</strong> — đóng mọi hộp thoại đang mở.": "<strong class='font-mono'>Esc</strong> —— 关闭所有已打开的对话框。",
-      "<strong class='font-mono'>Esc</strong> — đóng mọi hộp thoại đang mở. Nếu không có hộp thoại, Esc hiện lại thanh Studio.": "<strong class='font-mono'>Esc</strong> —— 关闭所有已打开的对话框。若没有对话框，Esc 会重新显示 Studio 控制栏。",
       "<strong class='font-mono'>Enter</strong> — đăng nhập luôn khi đang ở hộp đăng nhập.": "<strong class='font-mono'>Enter</strong> —— 在登录框中直接登录。",
-      "Ẩn thanh điều khiển Studio": "隐藏 Studio 控制栏",
-      "Bấm nút mũi tên lên ở góc phải thanh tiêu đề, hoặc phím <strong class='font-mono'>H</strong>, để <strong>ẩn toàn bộ thanh Studio</strong> (logo, nút vai trò, tab, bộ lọc, zoom) — canvas chiếm gần hết màn hình, đỡ rối khi thuyết trình.": "点击标题栏右侧的向上箭头，或按 <strong class='font-mono'>H</strong>，即可<strong>隐藏整个 Studio 控制栏</strong>（标志、角色按钮、标签、筛选、缩放），让画布几乎占满屏幕，演示时更干净。",
-      "Khi đã ẩn, một viên thuốc <strong>Hiện thanh điều khiển</strong> hiện ở mép trên. Bấm vào đó, phím <strong class='font-mono'>H</strong>, hoặc <strong>Esc</strong> (nếu không có hộp thoại đang mở) để hiện lại.": "隐藏后，顶部会出现<strong>显示控制栏</strong>胶囊按钮。点击它、按 <strong class='font-mono'>H</strong>，或在没有对话框时按 <strong>Esc</strong>，即可重新显示。",
-      "Nhấp đúp vào vùng trống trên canvas cũng ẩn/hiện thanh Studio — tiện khi đang đứng thuyết trình.": "双击画布空白区域也可切换 Studio 控制栏 —— 站着演示时很方便。",
       "Lưu ý về dữ liệu demo": "关于演示数据的说明",
       "Đây là <strong>bản mô phỏng trình diễn</strong>: toàn bộ dữ liệu là dữ liệu mẫu dựng sẵn, không có máy chủ thật.": "这是一个<strong>演示用模拟版本</strong>：所有数据均为预设的示例数据，没有真实服务器。",
       "Mọi thay đổi bạn tạo ra (đánh giá mới, kết quả trắc nghiệm, giá phòng vừa sửa...) chỉ sống trong phiên làm việc và <strong>sẽ trở về ban đầu khi tải lại trang</strong>.": "你做出的任何改动（新评价、测试结果、刚修改的房价等）仅存在于本次会话，<strong>刷新页面后会恢复原样</strong>。"
@@ -4328,14 +4230,6 @@
             ]
           },
           {
-            icon: "fa-down-left-and-up-right-to-center", title: "Ẩn thanh điều khiển Studio",
-            body: [
-              "Bấm nút mũi tên lên ở góc phải thanh tiêu đề, hoặc phím <strong class='font-mono'>H</strong>, để <strong>ẩn toàn bộ thanh Studio</strong> (logo, nút vai trò, tab, bộ lọc, zoom) — canvas chiếm gần hết màn hình, đỡ rối khi thuyết trình.",
-              "Khi đã ẩn, một viên thuốc <strong>Hiện thanh điều khiển</strong> hiện ở mép trên. Bấm vào đó, phím <strong class='font-mono'>H</strong>, hoặc <strong>Esc</strong> (nếu không có hộp thoại đang mở) để hiện lại.",
-              "Nhấp đúp vào vùng trống trên canvas cũng ẩn/hiện thanh Studio — tiện khi đang đứng thuyết trình."
-            ]
-          },
-          {
             icon: "fa-desktop", title: "Đổi giữa Desktop Web và Mobile App",
             body: [
               "Dùng cặp nút <strong>Desktop Web / Mobile App</strong> ở góc phải thanh công cụ. Mọi nội dung đều có đủ ở cả hai chế độ, chỉ khác cách bố trí cho màn rộng/hẹp."
@@ -4370,8 +4264,7 @@
             icon: "fa-keyboard", title: "Phím tắt",
             body: [
               "<strong class='font-mono'>?</strong> — mở lại bảng hướng dẫn này bất cứ lúc nào.",
-              "<strong class='font-mono'>H</strong> — ẩn hoặc hiện thanh điều khiển Studio (chế độ tập trung).",
-              "<strong class='font-mono'>Esc</strong> — đóng mọi hộp thoại đang mở. Nếu không có hộp thoại, Esc hiện lại thanh Studio.",
+              "<strong class='font-mono'>Esc</strong> — đóng mọi hộp thoại đang mở.",
               "<strong class='font-mono'>Enter</strong> — đăng nhập luôn khi đang ở hộp đăng nhập."
             ]
           },
@@ -4429,13 +4322,6 @@
       screenEnterAt: 0,
       hoveredLabel: null,
       helpTab: 'student',
-      // V11.1: ẩn thanh Studio + cuộn mượt + gợn khi bấm
-      studioChromeHidden: false,
-      desktopScrollTarget: 0,
-      mobileScrollTarget: 0,
-      clickRipples: [],
-      pressPulseAt: 0,
-      hoverPulseAt: 0,
       // V10.7: ngôn ngữ hiển thị và tông màu giao diện
       language: 'vi',
       theme: 'light',
@@ -5382,10 +5268,10 @@
       resizeAndDraw();
     }
 
-    // ====== V10.5 / V11.1: ĐỘNG CƠ ANIMATION CHO CANVAS ======
+    // ====== V10.5: ĐỘNG CƠ ANIMATION CHO CANVAS ======
     // Canvas vốn chỉ vẽ lại khi có sự kiện. Vòng lặp dưới đây chỉ chạy khi thật sự cần
-    // (màn hình cổng xác thực, đang cuộn mượt, gợn bấm, hoặc trong vài trăm ms sau khi
-    // đổi màn hình / rê chuột) để tránh vẽ lại liên tục vô ích trên các màn nặng như bản đồ.
+    // (màn hình cổng xác thực, hoặc trong vài trăm ms sau khi đổi màn hình / rê chuột)
+    // để tránh vẽ lại liên tục vô ích trên các màn hình nặng như bản đồ.
     const REDUCED_MOTION = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     const ANIM_ORIGIN = performance.now();
     let animRafId = null;
@@ -5398,14 +5284,6 @@
       return 1 - Math.pow(1 - t, 3);
     }
 
-    function easeOutQuart(t) {
-      return 1 - Math.pow(1 - t, 4);
-    }
-
-    function lerp(a, b, k) {
-      return a + (b - a) * k;
-    }
-
     // Số "ngẫu nhiên" tất định theo chỉ số — để các hạt bay luôn ở cùng quỹ đạo mỗi lần vẽ lại
     function pseudoRand(i) {
       const x = Math.sin(i * 127.1 + 311.7) * 43758.5453;
@@ -5414,9 +5292,9 @@
 
     function screenEnterProgress() {
       if (REDUCED_MOTION) return 1;
-      const elapsed = (performance.now() - state.screenEnterAt) / 620;
+      const elapsed = (performance.now() - state.screenEnterAt) / 430;
       if (elapsed >= 1) return 1;
-      return easeOutQuart(Math.max(0, elapsed));
+      return easeOutCubic(Math.max(0, elapsed));
     }
 
     function bumpAnim(ms = 900) {
@@ -5426,72 +5304,20 @@
 
     function markScreenEnter() {
       state.screenEnterAt = performance.now();
-      bumpAnim(900);
-    }
-
-    function scrollSettled() {
-      return Math.abs(state.desktopScrollY - state.desktopScrollTarget) < 0.45
-        && Math.abs(state.mobileScrollY - state.mobileScrollTarget) < 0.45;
-    }
-
-    function pruneRipples() {
-      const now = performance.now();
-      state.clickRipples = (state.clickRipples || []).filter(r => now - r.at < 560);
-    }
-
-    function tickSmoothMotion() {
-      if (REDUCED_MOTION) {
-        state.desktopScrollY = state.desktopScrollTarget;
-        state.mobileScrollY = state.mobileScrollTarget;
-        return;
-      }
-      const k = 0.22;
-      state.desktopScrollY = lerp(state.desktopScrollY, state.desktopScrollTarget, k);
-      state.mobileScrollY = lerp(state.mobileScrollY, state.mobileScrollTarget, k);
-      if (Math.abs(state.desktopScrollY - state.desktopScrollTarget) < 0.45) {
-        state.desktopScrollY = state.desktopScrollTarget;
-      }
-      if (Math.abs(state.mobileScrollY - state.mobileScrollTarget) < 0.45) {
-        state.mobileScrollY = state.mobileScrollTarget;
-      }
-    }
-
-    function setCanvasScroll(delta, immediate) {
-      if (state.viewMode === 'desktop') {
-        const next = Math.max(0, Math.min(state.desktopMaxScroll, (immediate ? state.desktopScrollY : state.desktopScrollTarget) + delta));
-        state.desktopScrollTarget = next;
-        if (immediate || REDUCED_MOTION) state.desktopScrollY = next;
-      } else {
-        const next = Math.max(0, Math.min(state.mobileMaxScroll, (immediate ? state.mobileScrollY : state.mobileScrollTarget) + delta));
-        state.mobileScrollTarget = next;
-        if (immediate || REDUCED_MOTION) state.mobileScrollY = next;
-      }
-      if (!immediate) bumpAnim(480);
-    }
-
-    function resetCanvasScroll() {
-      state.desktopScrollY = 0;
-      state.desktopScrollTarget = 0;
-      state.mobileScrollY = 0;
-      state.mobileScrollTarget = 0;
+      bumpAnim(700);
     }
 
     function shouldKeepAnimating() {
       if (REDUCED_MOTION || state.bootLoading) return false;
-      pruneRipples();
       if (!state.isLoggedIn) return true;
-      if (!scrollSettled()) return true;
-      if (state.clickRipples.length) return true;
       return performance.now() < state.animateUntil;
     }
 
     function startAnimLoop() {
       if (animRafId !== null || REDUCED_MOTION) return;
       const tick = () => {
-        tickSmoothMotion();
         if (!shouldKeepAnimating()) {
           animRafId = null;
-          tickSmoothMotion();
           resizeAndDraw();
           return;
         }
@@ -5499,67 +5325,6 @@
         animRafId = requestAnimationFrame(tick);
       };
       animRafId = requestAnimationFrame(tick);
-    }
-
-    function drawHoverAndRipples() {
-      if (REDUCED_MOTION) return;
-      const now = performance.now();
-      const label = state.hoveredLabel;
-      if (label) {
-        const zone = interactiveZones.find(z => z.label === label);
-        if (zone && zone.w > 8 && zone.h > 8 && zone.w < 420 && zone.h < 90) {
-          const pulse = 0.5 + 0.5 * Math.sin((now - (state.hoverPulseAt || now)) / 180);
-          ctx.save();
-          ctx.globalAlpha = 0.22 + pulse * 0.12;
-          ctx.strokeStyle = "#0D9488";
-          ctx.lineWidth = 1.8;
-          ctx.beginPath();
-          ctx.roundRect(zone.x + 0.5, zone.y + 0.5, zone.w - 1, zone.h - 1, 8);
-          ctx.stroke();
-          ctx.restore();
-        }
-      }
-
-      pruneRipples();
-      (state.clickRipples || []).forEach(r => {
-        const p = Math.min(1, (now - r.at) / 520);
-        const eased = easeOutCubic(p);
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(r.x, r.y, 6 + eased * 34, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(13,148,136,${(1 - eased) * 0.5})`;
-        ctx.lineWidth = 2.2;
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(r.x, r.y, 3 + eased * 16, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(45,212,191,${(1 - eased) * 0.28})`;
-        ctx.lineWidth = 1.2;
-        ctx.stroke();
-        ctx.restore();
-      });
-    }
-
-    function isAnyModalOpen() {
-      const modals = document.querySelectorAll('[id$="Modal"]');
-      for (let i = 0; i < modals.length; i++) {
-        if (!modals[i].classList.contains('hidden')) return true;
-      }
-      return false;
-    }
-
-    function isTypingTarget(el) {
-      return el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable);
-    }
-
-    function toggleStudioChrome(forceHidden) {
-      const hide = typeof forceHidden === 'boolean' ? forceHidden : !state.studioChromeHidden;
-      state.studioChromeHidden = hide;
-      document.body.classList.toggle('studio-chrome-hidden', hide);
-      const delay = REDUCED_MOTION ? 0 : 430;
-      window.setTimeout(() => autoFitToViewport(), delay);
-      showToast(hide
-        ? t("Đã ẩn thanh điều khiển Studio — phím H để hiện lại.")
-        : t("Đã hiện thanh điều khiển Studio."));
     }
 
     function resizeAndDraw() {
@@ -5588,8 +5353,6 @@
       } else {
         drawMobileScreenWrapper(targetSize.width, targetSize.height);
       }
-
-      drawHoverAndRipples();
     }
 
     function drawRoundedRect(x, y, w, h, radius, fillStyle, strokeStyle, lineWidth = 1) {

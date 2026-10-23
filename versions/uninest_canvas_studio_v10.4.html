@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+  <base href="../">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UNINEST - Canvas UI Mockup Studio V10.0 (Interactive Map & All Rooms Filter)</title>
+  <title>UNINEST - Canvas UI Mockup V10.4</title>
   <!-- Tailwind CSS & Google Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -81,13 +82,14 @@
   <!-- HEADER -->
   <header class="h-14 border-b border-slate-800 bg-slate-900/95 backdrop-blur px-4 flex items-center justify-between shrink-0 z-30 shadow-md">
     <div class="flex items-center gap-3">
-      <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-teal-600 to-emerald-400 flex items-center justify-center shadow-md shadow-teal-500/20 shrink-0">
-        <i class="fa-solid fa-house-chimney-user text-white text-sm"></i>
+      <!-- ĐOẠN CODE MỚI: -->
+      <div class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-700/80 p-0.5 flex items-center justify-center shadow-md shrink-0">
+        <img src="Uninest 1 - logo.png" alt="Logo" class="w-full h-full object-contain">
       </div>
       <div>
         <div class="flex items-center gap-2">
           <h1 class="font-bold text-xs sm:text-sm tracking-tight text-white flex items-center gap-1.5">
-            UNINEST <span class="text-teal-300 font-mono text-[10px] px-1.5 py-0.2 rounded bg-teal-500/10 border border-teal-500/30">STUDIO V10.0 (INTERACTIVE MAP & ALL-ROOMS FILTER)</span>
+            UNINEST <span class="text-teal-300 font-mono text-[10px] px-1.5 py-0.2 rounded bg-teal-500/10 border border-teal-500/30">V10.4</span>
           </h1>
           <span id="roleBadgeHeader" class="text-[11px] text-amber-300 font-medium hidden sm:inline">• Chưa Đăng Nhập</span>
         </div>
@@ -109,7 +111,7 @@
       </div>
 
       <!-- Quick Switch Demo Role -->
-      <button id="quickSwitchRoleBtn" onclick="quickToggleRole()" class="px-2.5 py-1 text-xs font-semibold bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 border border-indigo-500/40 rounded-lg transition flex items-center gap-1 shadow-sm active:scale-95" title="Đổi nhanh giữa SV Minh Anh và Chủ Trọ Cô Nga">
+      <button id="quickSwitchRoleBtn" onclick="quickToggleRole()" class="px-2.5 py-1 text-xs font-semibold bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 border border-indigo-500/40 rounded-lg transition flex items-center gap-1 shadow-sm active:scale-95" title="Đổi nhanh giữa SV Quốc Anh và Chủ Trọ Cô Nga">
         <i class="fa-solid fa-arrows-rotate text-[11px] text-indigo-400"></i>
         <span class="hidden md:inline">Đổi Vai Trò Demo</span>
       </button>
@@ -155,7 +157,7 @@
         <span id="showAllRoomsText">Hiển Thị Tất Cả Trọ (Toàn Quốc)</span>
       </button>
 
-      <!-- THANH KÉO NGÂN SÁCH TÙY CHỌN (HORIZONTAL RANGE SLIDER) -->
+      <!-- THANH KÉO NGÂN SÁCH TÙY CHỌN -->
       <div class="flex items-center gap-2 bg-slate-950/80 px-2.5 py-0.5 rounded-lg border border-slate-700/80 shadow-inner">
         <div class="flex items-center gap-1 text-[10.5px] text-amber-300 font-semibold shrink-0">
           <i class="fa-solid fa-coins text-amber-400 text-[10px]"></i>
@@ -232,13 +234,14 @@
     <div id="personaCard" class="absolute bottom-3 left-3 glass-panel p-2.5 rounded-xl max-w-xs w-full hidden shadow-2xl transition-all duration-300 z-20 border border-teal-500/30">
       <div class="flex items-center justify-between gap-2 mb-1.5">
         <div class="flex items-center gap-2">
-          <div class="w-7 h-7 rounded-lg bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center justify-center font-bold text-[11px] shrink-0">
-            MA
+          <!-- Avatar chữ đầu Quốc Anh -->
+          <div class="relative w-8 h-8 rounded-lg overflow-hidden border border-teal-500/40 shrink-0 bg-slate-800 flex items-center justify-center shadow-sm">
+            <div class="w-full h-full bg-gradient-to-tr from-indigo-600 to-teal-500 flex items-center justify-center font-bold text-[11px] text-white">QA</div>
           </div>
           <div>
             <div class="text-[11px] font-bold text-white flex items-center gap-1">
-              Minh Anh (18t)
-              <span class="text-[9px] bg-indigo-500/20 text-indigo-300 px-1 py-0.2 rounded">UEH Năm 1</span>
+              Quốc Anh (19t)
+              <span class="text-[9px] bg-indigo-500/20 text-indigo-300 px-1 py-0.2 rounded font-mono">UEH K51 • KDQT</span>
             </div>
             <div class="flex items-center gap-1 mt-0.5 text-[10px]">
               <span class="text-slate-400">Ngân sách:</span>
@@ -352,9 +355,9 @@
               <div class="p-2 rounded-lg bg-slate-900/80 border border-teal-500/30">
                 <div class="font-bold text-teal-300 flex items-center justify-between mb-0.5">
                   <span>👨‍🎓 Sinh Viên UEH</span>
-                  <span class="text-[9px] bg-teal-500/20 text-teal-300 px-1 rounded">K49</span>
+                  <span class="text-[9px] bg-teal-500/20 text-teal-300 px-1 rounded">K51</span>
                 </div>
-                <div class="text-slate-300 text-[10px] font-mono truncate">minhanh.3123102@st.ueh.edu.vn</div>
+                <div class="text-slate-300 text-[10px] font-mono truncate">quocanh.3123102@st.ueh.edu.vn</div>
                 <div class="text-slate-300 text-[10px] font-mono">Pass: <strong class="text-emerald-400">UEH@2026</strong></div>
                 <button onclick="quickFillCredentials('student')" class="mt-1.5 w-full py-1 text-[10px] font-bold bg-teal-600 hover:bg-teal-500 text-white rounded transition shadow">⚡ Điền nhanh tài khoản SV</button>
               </div>
@@ -378,7 +381,7 @@
               <label class="block text-[11px] font-bold text-slate-300 mb-1">EMAIL / TÀI KHOẢN:</label>
               <div class="relative">
                 <i class="fa-solid fa-envelope absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
-                <input id="inputEmail" type="email" placeholder="minhanh.3123102@st.ueh.edu.vn" class="w-full bg-slate-950 border border-slate-700 rounded-lg pl-8 pr-3 py-2 text-xs text-white focus:outline-none focus:border-teal-500">
+                <input id="inputEmail" type="email" placeholder="quocanh.3123102@st.ueh.edu.vn" class="w-full bg-slate-950 border border-slate-700 rounded-lg pl-8 pr-3 py-2 text-xs text-white focus:outline-none focus:border-teal-500">
               </div>
             </div>
             <div>
@@ -411,8 +414,8 @@
         </div>
         <div class="space-y-2.5 text-slate-300">
           <div class="p-2.5 rounded-xl bg-teal-500/10 border border-teal-500/30">
-            <div class="font-bold text-teal-300 mb-1">1. Tài khoản Sinh Viên Tìm Trọ (Minh Anh):</div>
-            <p>• Email: <code class="text-white font-mono bg-slate-800 px-1 py-0.5 rounded text-[11px]">minhanh.3123102@st.ueh.edu.vn</code></p>
+            <div class="font-bold text-teal-300 mb-1">1. Tài khoản Sinh Viên Tìm Trọ (Quốc Anh):</div>
+            <p>• Email: <code class="text-white font-mono bg-slate-800 px-1 py-0.5 rounded text-[11px]">quocanh.3123102@st.ueh.edu.vn</code></p>
             <p>• Mật khẩu: <code class="text-emerald-300 font-mono font-bold bg-slate-800 px-1 py-0.5 rounded text-[11px]">UEH@2026</code></p>
             <button onclick="closeCredentialsModal(); quickFillCredentials('student'); openLoginModal();" class="mt-2 w-full py-1 text-[10px] font-bold bg-teal-600 hover:bg-teal-500 text-white rounded transition">⚡ Dùng Ngay Tài Khoản SV</button>
           </div>
@@ -443,7 +446,7 @@
             <div class="flex items-start gap-2">
               <div class="w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold text-[10px] shrink-0">AI</div>
               <div class="bg-slate-800 p-2.5 rounded-xl border border-slate-700 max-w-[85%]">
-                Xin chào Minh Anh! Tôi là trợ lý AI UNINEST. Bạn đang tìm phòng trọ khu vực nào, ngân sách ra sao và có cần tiện ích gì đặc biệt không? (VD: <em>"Cần trọ có hồ bơi, giá dưới 3.5 triệu gần UEH"</em>).
+                Xin chào Quốc Anh! Tôi là trợ lý AI UNINEST. Bạn đang tìm phòng trọ khu vực nào, ngân sách ra sao và có cần tiện ích gì đặc biệt không? (VD: <em>"Cần trọ có hồ bơi, giá dưới 3.5 triệu gần UEH"</em>). Mình sẽ gợi ý riêng ở đây, không ảnh hưởng tới bộ lọc bạn đang đặt ở trang chủ.
               </div>
             </div>
           </div>
@@ -525,7 +528,7 @@
       </div>
     </div>
 
-    <!-- CITY MODAL (CÓ TÙY CHỌN TẤT CẢ) -->
+    <!-- CITY MODAL -->
     <div id="cityModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
       <div class="bg-slate-900 border border-slate-700 w-full max-w-md rounded-2xl shadow-2xl flex flex-col overflow-hidden text-xs">
         <div class="px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-900/95">
@@ -560,6 +563,25 @@
       </div>
     </div>
 
+    <!-- MAP SEARCH MODAL (dùng chung: tìm khu vực trên bản đồ & chọn vị trí trọ cũ khi đặt dịch vụ chuyển trọ) -->
+    <div id="mapSearchModal" class="fixed inset-0 z-[60] bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+      <div class="bg-slate-900 border border-slate-700 w-full max-w-md rounded-2xl shadow-2xl flex flex-col overflow-hidden text-xs">
+        <div class="px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-900/95">
+          <div id="mapSearchTitle" class="flex items-center gap-2 text-teal-300 font-bold text-sm">
+            <i class="fa-solid fa-magnifying-glass-location"></i> TÌM KHU VỰC / TRƯỜNG TRÊN BẢN ĐỒ
+          </div>
+          <button onclick="closeMapSearchModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-base"></i></button>
+        </div>
+        <div class="p-4 space-y-3">
+          <div id="mapSearchNotice" class="text-[11px] text-amber-300 font-medium bg-amber-500/10 border border-amber-500/30 p-2 rounded-lg">
+            📍 Đang tìm trong: <strong id="mapSearchCityNotice" class="text-white">Hồ Chí Minh</strong>
+          </div>
+          <input id="mapSearchInput" type="text" oninput="filterMapLocationList(this.value)" placeholder="Nhập tên trường hoặc khu vực..." class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white text-xs focus:outline-none focus:border-teal-500">
+          <div id="mapLocationListContainer" class="max-h-56 overflow-y-auto space-y-1 pr-1"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- AMENITIES MODAL -->
     <div id="amenitiesModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
       <div class="bg-slate-900 border border-slate-700 w-full max-w-md rounded-2xl shadow-2xl flex flex-col overflow-hidden text-xs">
@@ -570,7 +592,15 @@
           <button onclick="closeAmenitiesModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-base"></i></button>
         </div>
         <div class="p-4 space-y-3">
-          <p class="text-slate-400 text-[11px]">Chọn các tiện ích sinh viên quan tâm quanh khu vực tìm trọ:</p>
+          <div>
+            <p class="text-slate-400 text-[11px] mb-1.5">🚌 Bán kính tới trạm xe buýt gần nhất:</p>
+            <div id="busRadiusContainer" class="flex flex-wrap gap-1.5"></div>
+          </div>
+          <div>
+            <p class="text-slate-400 text-[11px] mb-1.5">🍜 Tiện ích ẩm thực quanh khu trọ:</p>
+            <div id="foodTagContainer" class="grid grid-cols-2 gap-2"></div>
+          </div>
+          <p class="text-slate-400 text-[11px] pt-1 border-t border-slate-800">Chọn các tiện ích sinh viên quan tâm quanh khu vực tìm trọ:</p>
           <div id="amenitiesCheckboxContainer" class="grid grid-cols-2 gap-2"></div>
           <div class="pt-2 flex justify-end gap-2 border-t border-slate-800">
             <button onclick="closeAmenitiesModal()" class="px-4 py-1.5 bg-teal-600 hover:bg-teal-500 text-white font-bold rounded-lg">Xác Nhận Tiện Ích</button>
@@ -619,7 +649,7 @@
           </div>
           <div>
             <label class="block font-bold text-slate-300 mb-1 text-[11px]">GHI CHÚ GỬI CHỦ NHÀ:</label>
-            <textarea id="bookingNote" rows="2" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white text-xs focus:outline-none focus:border-teal-500" placeholder="Chào chủ nhà, tụi con muốn qua kiểm tra đồng hồ điện riêng và áp lực nước sinh hoạt ạ..."></textarea>
+            <textarea id="bookingNote" rows="2" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white text-xs focus:outline-none focus:border-teal-500" placeholder="Chào chủ nhà, con là Quốc Anh (SV UEH K51) muốn qua kiểm tra đồng hồ điện riêng và áp lực nước sinh hoạt ạ..."></textarea>
           </div>
         </div>
         <div class="px-4 py-2.5 border-t border-slate-800 flex justify-end gap-2 bg-slate-900/95">
@@ -641,7 +671,7 @@
           <button onclick="closeAgreementModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div class="p-4 text-xs text-slate-300 space-y-2.5 overflow-y-auto leading-relaxed">
-          <p class="text-slate-400 text-[11px]">Áp dụng giữa: <strong class="text-white">Minh Anh</strong> và <strong class="text-teal-300">Hoàng Yến (94% Match)</strong></p>
+          <p class="text-slate-400 text-[11px]">Áp dụng giữa: <strong class="text-white">Quốc Anh</strong> và <strong class="text-teal-300">Hoàng Yến (94% Match)</strong></p>
           <div class="p-2.5 rounded-xl bg-slate-800/70 border border-slate-700 space-y-1">
             <div class="font-bold text-white flex items-center gap-1.5"><i class="fa-solid fa-coins text-amber-400"></i> 1. Phân chia tài chính minh bạch:</div>
             <p class="text-[11px]">Tiền phòng chia đôi. Tiền điện nước thanh toán đúng hạn vào ngày mùng 2 hàng tháng theo công tơ niêm yết.</p>
@@ -663,7 +693,7 @@
       <div class="bg-slate-900 border border-slate-700 w-full max-w-md rounded-2xl shadow-2xl flex flex-col overflow-hidden">
         <div class="px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-900/95">
           <div class="flex items-center gap-2 text-teal-300 font-bold text-xs sm:text-sm">
-            <i class="fa-solid fa-star text-amber-400"></i> ĐÁNH GIÁ ẨN DANH RUBRIC 6 TIÊU CHÍ
+            <i class="fa-solid fa-star text-amber-400"></i> ĐÁNH GIÁ ẨN DANH RUBRIC 5 TIÊU CHÍ
           </div>
           <button onclick="closeReviewModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
         </div>
@@ -685,16 +715,12 @@
               <select id="rate3" class="bg-slate-950 border border-slate-700 rounded px-1.5 py-0.5 text-teal-300 font-bold text-xs"><option>4.8 ⭐</option><option>4.5 ⭐</option><option>4.0 ⭐</option></select>
             </div>
             <div class="flex items-center justify-between text-[11px]">
-              <span>4. Hàng xóm thân thiện, ý thức sinh viên:</span>
+              <span>4. An ninh khu vực & hoàn cọc đúng hẹn:</span>
               <select id="rate4" class="bg-slate-950 border border-slate-700 rounded px-1.5 py-0.5 text-teal-300 font-bold text-xs"><option>5.0 ⭐</option><option>4.7 ⭐</option><option>4.0 ⭐</option></select>
             </div>
             <div class="flex items-center justify-between text-[11px]">
-              <span>5. Môi trường ngõ không ngập mùa mưa:</span>
+              <span>5. Độ cách âm / yên tĩnh khu trọ:</span>
               <select id="rate5" class="bg-slate-950 border border-slate-700 rounded px-1.5 py-0.5 text-teal-300 font-bold text-xs"><option>4.9 ⭐</option><option>4.5 ⭐</option><option>4.0 ⭐</option></select>
-            </div>
-            <div class="flex items-center justify-between text-[11px]">
-              <span>6. An ninh vân tay & hoàn cọc đúng hẹn:</span>
-              <select id="rate6" class="bg-slate-950 border border-slate-700 rounded px-1.5 py-0.5 text-teal-300 font-bold text-xs"><option>5.0 ⭐</option><option>4.8 ⭐</option><option>4.0 ⭐</option></select>
             </div>
           </div>
           <div>
@@ -709,11 +735,93 @@
       </div>
     </div>
 
+    <!-- LIFESTYLE QUIZ MODAL (Roommate Match) -->
+    <div id="lifestyleQuizModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-200">
+      <div class="bg-slate-900 border border-slate-700 w-full max-w-md rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+        <div class="px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-900/95">
+          <div class="flex items-center gap-2 text-teal-300 font-bold text-xs sm:text-sm">
+            <i class="fa-solid fa-clipboard-list text-amber-400"></i> TRẮC NGHIỆM PHONG CÁCH SỐNG
+          </div>
+          <button onclick="closeLifestyleQuizModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="lifestyleQuizBody" class="p-4 space-y-3 text-xs text-slate-300 max-h-[75vh] overflow-y-auto"></div>
+        <div class="px-4 py-2.5 border-t border-slate-800 flex justify-end gap-2 bg-slate-900/95">
+          <button onclick="closeLifestyleQuizModal()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium">Hủy</button>
+          <button onclick="submitLifestyleQuiz()" class="px-4 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold shadow">Lưu Hồ Sơ Phong Cách Sống</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOVING SERVICE MODAL (Đặt Dịch Vụ Chuyển Trọ) -->
+    <div id="movingModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-200">
+      <div class="bg-slate-900 border border-slate-700 w-full max-w-md rounded-2xl shadow-2xl flex flex-col overflow-hidden text-xs">
+        <div class="px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-900/95">
+          <div class="flex items-center gap-2 text-teal-300 font-bold text-sm">
+            <i class="fa-solid fa-truck-fast text-amber-400"></i> ĐẶT DỊCH VỤ CHUYỂN TRỌ
+          </div>
+          <button onclick="closeMovingModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-base"></i></button>
+        </div>
+        <div class="p-4 space-y-3 max-h-[75vh] overflow-y-auto">
+          <div class="p-2.5 rounded-xl bg-teal-500/10 border border-teal-500/30 text-slate-200">
+            <div class="text-[10.5px] text-slate-400 mb-1">Trọ mới (đang xem):</div>
+            <div id="movingNewRoomTitle" class="font-bold text-white text-xs">—</div>
+          </div>
+          <div>
+            <div class="text-[10.5px] text-slate-400 mb-1">Trọ cũ (nơi cần chuyển đi):</div>
+            <button onclick="openMapSearchModal('oldRoom')" id="movingOldLocationBtn" class="w-full text-left p-2.5 rounded-xl bg-slate-950 border border-slate-700 hover:border-teal-500/50 text-slate-300 transition">
+              📍 <span id="oldLocationLabel">Bấm để chọn vị trí trọ cũ...</span>
+            </button>
+          </div>
+          <div class="text-[10.5px] text-amber-300 bg-amber-500/10 border border-amber-500/30 p-2 rounded-lg">
+            🛣️ Khoảng cách ước tính: <strong id="movingDistanceLabel" class="text-white">Chọn vị trí phòng cũ để tính khoảng cách</strong>
+          </div>
+          <div class="text-[10.5px] font-bold text-slate-300 pt-1 border-t border-slate-800">SO SÁNH GIÁ CÁC ĐƠN VỊ VẬN CHUYỂN:</div>
+          <div id="movingBrokerListContainer" class="space-y-2"></div>
+        </div>
+        <div class="px-4 py-2.5 border-t border-slate-800 flex justify-end gap-2 bg-slate-900/95">
+          <button onclick="closeMovingModal()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium">Đóng</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOVING BROKER CHAT MODAL -->
+    <div id="movingChatModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-200">
+      <div class="bg-slate-900 border border-teal-500/40 w-full max-w-lg rounded-2xl shadow-2xl flex flex-col overflow-hidden text-xs">
+        <div class="px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-gradient-to-r from-teal-900/50 to-slate-900/50">
+          <div id="movingChatTitle" class="flex items-center gap-2 text-teal-300 font-bold text-sm">
+            <i class="fa-solid fa-comments text-teal-400"></i> CHAT VỚI ĐƠN VỊ VẬN CHUYỂN
+          </div>
+          <button onclick="closeMovingChatModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-base"></i></button>
+        </div>
+        <div class="p-4 space-y-3">
+          <div id="movingChatMessages" class="h-56 overflow-y-auto space-y-2.5 p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 text-xs leading-relaxed"></div>
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-1">
+            <span class="text-[10px] text-slate-400 shrink-0 font-medium">Gợi ý nhanh:</span>
+            <button onclick="sendMovingChatPrompt('Giá dịch vụ khoảng bao nhiêu?')" class="px-2 py-1 rounded bg-teal-500/20 hover:bg-teal-500/30 text-teal-300 border border-teal-500/30 text-[10px] shrink-0 font-medium">💰 Hỏi giá</button>
+            <button onclick="sendMovingChatPrompt('Khi nào có thể chuyển được?')" class="px-2 py-1 rounded bg-teal-500/20 hover:bg-teal-500/30 text-teal-300 border border-teal-500/30 text-[10px] shrink-0 font-medium">📅 Hỏi lịch</button>
+          </div>
+          <div class="flex items-center gap-2 pt-1">
+            <input id="movingChatInput" type="text" onkeydown="if(event.key==='Enter') submitMovingChatPrompt()" placeholder="Nhập tin nhắn..." class="flex-1 bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white text-xs focus:outline-none focus:border-teal-500">
+            <button onclick="submitMovingChatPrompt()" class="px-4 py-2 bg-teal-600 hover:bg-teal-500 text-white font-bold rounded-lg transition shadow flex items-center gap-1.5">
+              <i class="fa-solid fa-paper-plane text-[10px]"></i> Gửi
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <script>
+    // Khai báo ảnh logo UNINEST (bản đã tách nền)
+    const uninestLogo = new Image();
+    uninestLogo.src = "Uninest_1_-_logo-removebg-preview.png";
+    uninestLogo.onload = function() {
+      if (typeof resizeAndDraw === 'function') resizeAndDraw();
+    };
+
     const PROVINCES_CITIES_LIST = [
-      "Tất Cả", // Thêm tùy chọn toàn quốc
+      "Tất Cả",
       "Hồ Chí Minh", "Hà Nội", "Đà Nẵng", "Cần Thơ", "Hải Phòng", 
       "Bình Dương", "Đồng Nai", "Bà Rịa - Vũng Tàu", "Thừa Thiên Huế", "Khánh Hòa",
       "Lâm Đồng", "Quảng Nam", "Quảng Ninh", "Bắc Ninh", "Hải Dương",
@@ -725,16 +833,16 @@
 
     const UNIVERSITIES_LIST = [
       { id: 'all', name: "Tất cả các trường & cơ sở", city: "Tất Cả", address: "Toàn quốc" },
-      { id: 'ueh_b', name: "ĐH Kinh Tế TP.HCM (UEH) - Cơ sở B", city: "Hồ Chí Minh", address: "279 Nguyễn Tri Phương, Q.10" },
-      { id: 'ueh_a', name: "ĐH Kinh Tế TP.HCM (UEH) - Cơ sở A", city: "Hồ Chí Minh", address: "59C Nguyễn Đình Chiểu, Q.3" },
-      { id: 'hcmut', name: "ĐH Bách Khoa TP.HCM - CS Lý Thường Kiệt", city: "Hồ Chí Minh", address: "268 Lý Thường Kiệt, Q.10" },
-      { id: 'ftu_hcm', name: "ĐH Ngoại Thương - Cơ sở 2", city: "Hồ Chí Minh", address: "91 Chùa Hàng, Bình Thạnh" },
-      { id: 'hcmus', name: "ĐH Khoa Học Tự Nhiên - ĐHQG", city: "Hồ Chí Minh", address: "227 Nguyễn Văn Cừ, Q.5" },
-      { id: 'neu', name: "ĐH Kinh Tế Quốc Dân (NEU)", city: "Hà Nội", address: "Giải Phóng, Hai Bà Trưng, Hà Nội" },
-      { id: 'hust', name: "ĐH Bách Khoa Hà Nội (HUST)", city: "Hà Nội", address: "Đại Cồ Việt, Hai Bà Trưng, Hà Nội" },
-      { id: 'dnu', name: "ĐH Đà Nẵng - Khoa Kinh Tế", city: "Đà Nẵng", address: "71 Ngũ Hành Sơn, Đà Nẵng" },
-      { id: 'ctu', name: "ĐH Cần Thơ - Khu II", city: "Cần Thơ", address: "3 Tháng 2, Xuân Khánh, Ninh Kiều, Cần Thơ" },
-      { id: 'bdu', name: "ĐH Bình Dương", city: "Bình Dương", address: "504 Đại lộ Bình Dương, Thủ Dầu Một" }
+      { id: 'ueh_b', name: "ĐH Kinh Tế TP.HCM (UEH) - Cơ sở B", city: "Hồ Chí Minh", address: "279 Nguyễn Tri Phương, Q.10", mapCoord: { x: 230, y: 230 } },
+      { id: 'ueh_a', name: "ĐH Kinh Tế TP.HCM (UEH) - Cơ sở A", city: "Hồ Chí Minh", address: "59C Nguyễn Đình Chiểu, Q.3", mapCoord: { x: 340, y: 150 } },
+      { id: 'hcmut', name: "ĐH Bách Khoa TP.HCM - CS Lý Thường Kiệt", city: "Hồ Chí Minh", address: "268 Lý Thường Kiệt, Q.10", mapCoord: { x: 110, y: 340 } },
+      { id: 'ftu_hcm', name: "ĐH Ngoại Thương - Cơ sở 2", city: "Hồ Chí Minh", address: "91 Chùa Hàng, Bình Thạnh", mapCoord: { x: 460, y: 260 } },
+      { id: 'hcmus', name: "ĐH Khoa Học Tự Nhiên - ĐHQG", city: "Hồ Chí Minh", address: "227 Nguyễn Văn Cừ, Q.5", mapCoord: { x: 490, y: 340 } },
+      { id: 'neu', name: "ĐH Kinh Tế Quốc Dân (NEU)", city: "Hà Nội", address: "Giải Phóng, Hai Bà Trưng, Hà Nội", mapCoord: { x: 300, y: 150 } },
+      { id: 'hust', name: "ĐH Bách Khoa Hà Nội (HUST)", city: "Hà Nội", address: "Đại Cồ Việt, Hai Bà Trưng, Hà Nội", mapCoord: { x: 420, y: 260 } },
+      { id: 'dnu', name: "ĐH Đà Nẵng - Khoa Kinh Tế", city: "Đà Nẵng", address: "71 Ngũ Hành Sơn, Đà Nẵng", mapCoord: { x: 260, y: 220 } },
+      { id: 'ctu', name: "ĐH Cần Thơ - Khu II", city: "Cần Thơ", address: "3 Tháng 2, Xuân Khánh, Ninh Kiều, Cần Thơ", mapCoord: { x: 280, y: 210 } },
+      { id: 'bdu', name: "ĐH Bình Dương", city: "Bình Dương", address: "504 Đại lộ Bình Dương, Thủ Dầu Một", mapCoord: { x: 250, y: 240 } }
     ];
 
     const EXTENDED_AMENITIES = [
@@ -748,14 +856,68 @@
       { id: 'security', label: "Bảo vệ & Vân tay 24/7", icon: "fa-fingerprint" }
     ];
 
+    const BUS_RADIUS_OPTIONS = [
+      { value: 300, label: "< 300m" },
+      { value: 500, label: "< 500m" },
+      { value: 800, label: "< 10 phút đi bộ" }
+    ];
+
+    // Quy ước: mỗi thành phố dùng 1 không gian toạ độ bản đồ trừu tượng riêng (x:0-600, y:0-500),
+    // KHÔNG phải toạ độ GPS thật. 1 đơn vị canvas ≈ MAP_SCALE_M_PER_UNIT mét (chỉ mang tính minh hoạ demo).
+    const MAP_SCALE_M_PER_UNIT = 10;
+
+    const MAP_RADIUS_OPTIONS = [
+      { value: 1, label: "< 1 km" },
+      { value: 3, label: "< 3 km" },
+      { value: 5, label: "< 5 km" }
+    ];
+
+    // Chiều cao khung bản đồ desktop (đã phóng to so với bản cũ 500px để dễ quan sát/kéo xem hơn)
+    const MAP_BOX_H = 680;
+
+    // Không gian toạ độ cục bộ dùng cho MỌI tỉnh/thành (0-620 x 0-520, trừu tượng, KHÔNG phải GPS thật) —
+    // khớp với coordScaleX/Y = mapW/620, mapH/520 dùng khi vẽ pin. Vùng "vật cản" (đường lớn/sông/công viên)
+    // được định nghĩa cố định trong không gian này vì nền minh hoạ (drawCityMapBackground) dùng chung 1 bố cục
+    // theo tỉ lệ % cho mọi thành phố.
+    const MAP_LOCAL_W = 620;
+    const MAP_LOCAL_H = 520;
+
+    // Mỗi tỉnh/thành có 1 "chủ đề" nhãn riêng để bản đồ minh hoạ không còn luôn trông giống TP.HCM
+    // khi đang xem phòng ở tỉnh/thành khác.
+    const CITY_MAP_THEMES = {
+      "Hồ Chí Minh": { park: "Công viên Lê Văn Tám", river: "Kênh Nhiêu Lộc - Thị Nghè", road1: "Đường Nguyễn Tri Phương", road2: "Đường Sư Vạn Hạnh" },
+      "Hà Nội": { park: "Công viên Thống Nhất", river: "Sông Tô Lịch", road1: "Đường Giải Phóng", road2: "Phố Tôn Đức Thắng" },
+      "Đà Nẵng": { park: "Công viên 29/3", river: "Sông Hàn", road1: "Đường Nguyễn Văn Linh", road2: "Đường Ngũ Hành Sơn" },
+      "Cần Thơ": { park: "Công viên Ninh Kiều", river: "Sông Hậu", road1: "Đường 3 Tháng 2", road2: "Đường Nguyễn Văn Cừ" },
+      "Bình Dương": { park: "Công viên Thành phố Mới", river: "Sông Sài Gòn", road1: "Đại lộ Bình Dương", road2: "Đường Lê Lợi" }
+    };
+
+    function getCityMapTheme(city) {
+      return CITY_MAP_THEMES[city] || { park: "Công viên trung tâm", river: "Sông / kênh khu vực", road1: `Trục chính ${city}`, road2: `Đường nội khu ${city}` };
+    }
+
+    const FOOD_TAGS = [
+      { id: 'quanCom', label: "Quán cơm / ăn bình dân gần", icon: "fa-bowl-food" },
+      { id: 'choSieuThi', label: "Chợ / siêu thị tiện lợi", icon: "fa-cart-shopping" },
+      { id: 'khuPhoAmThuc', label: "Khu phố ẩm thực", icon: "fa-utensils" },
+      { id: 'dem', label: "Cứu đói đêm khuya (24/7, <500m)", icon: "fa-moon" }
+    ];
+
+    const FOOD_SHORT_LABELS = {
+      quanCom: "🍚 Cơm gần",
+      choSieuThi: "🏪 Chợ/Siêu thị",
+      khuPhoAmThuc: "🍢 Phố ẩm thực",
+      dem: "🌙 Đêm khuya"
+    };
+
     const MOCK_ACCOUNTS = {
       student: {
-        email: "minhanh.3123102@st.ueh.edu.vn",
+        email: "quocanh.3123102@st.ueh.edu.vn",
         password: "UEH@2026",
         role: "student",
-        name: "Minh Anh",
-        title: "Sinh Viên K49 UEH",
-        avatar: "MA",
+        name: "Quốc Anh",
+        title: "Sinh Viên K51 UEH (19t)",
+        avatar: "QA",
         color: "#6366F1"
       },
       landlord: {
@@ -787,6 +949,8 @@
         verifiedCost: "Điện: 3.500đ/kWh • Nước: 100k/người",
         feedback: "“Chủ trọ cô Nga hiền lành, trả lại cọc đúng ngày, hàng xóm tri thức yên tĩnh.”",
         category: "studio",
+        busStopDistanceM: 280,
+        nearbyFood: { quanCom: true, choSieuThi: true, khuPhoAmThuc: true, dem: true },
         mapCoord: { x: 180, y: 190 }
       },
       {
@@ -806,6 +970,8 @@
         verifiedCost: "Điện: 3.600đ/kWh • Miễn phí gửi xe",
         feedback: "“Đã ở 2 năm ra trường, ngõ cao không ngập nước mùa mưa, an ninh đảm bảo.”",
         category: "gac_duc",
+        busStopDistanceM: 340,
+        nearbyFood: { quanCom: true, choSieuThi: true, khuPhoAmThuc: false, dem: false },
         mapCoord: { x: 310, y: 280 }
       },
       {
@@ -823,8 +989,10 @@
         amenities: ["bus", "gym", "security"],
         amenitiesLabels: ["Xe buýt", "Gym", "Bảo vệ"],
         verifiedCost: "Chia đôi tiền điện nước theo cam kết sinh hoạt",
-        feedback: "“Cần tìm 1 bạn nữ UEH sạch sẽ, ngủ trước 0h để ghép chung phòng.”",
+        feedback: "“Cần tìm 1 bạn UEH sạch sẽ, ngủ trước 0h để ghép chung phòng.”",
         category: "roommate",
+        busStopDistanceM: 120,
+        nearbyFood: { quanCom: true, choSieuThi: false, khuPhoAmThuc: true, dem: true },
         mapCoord: { x: 420, y: 200 }
       },
       {
@@ -844,6 +1012,8 @@
         verifiedCost: "Đã gồm: Điện, nước, wifi, máy giặt",
         feedback: "“Hộp ngủ riêng tư, máy lạnh bật cả ngày không phát sinh 1 đồng chi phí nào.”",
         category: "sleepbox",
+        busStopDistanceM: 450,
+        nearbyFood: { quanCom: true, choSieuThi: true, khuPhoAmThuc: true, dem: true },
         mapCoord: { x: 490, y: 340 }
       },
       {
@@ -863,6 +1033,8 @@
         verifiedCost: "Điện: 3.500đ/kWh • Nước: 100k/ng",
         feedback: "“Bác Hùng rất tốt tính, đồ đạc mới toanh, học tập thi cử cực kỳ yên tĩnh.”",
         category: "full_furnish",
+        busStopDistanceM: 900,
+        nearbyFood: { quanCom: false, choSieuThi: true, khuPhoAmThuc: false, dem: false },
         mapCoord: { x: 120, y: 320 }
       },
       {
@@ -882,22 +1054,735 @@
         verifiedCost: "Điện: 3.700đ/kWh • Nước: 90k/người",
         feedback: "“Phòng gần trường NEU, đi bộ ra lớp rất gần, chủ nhà chu đáo.”",
         category: "studio",
+        busStopDistanceM: 500,
+        nearbyFood: { quanCom: true, choSieuThi: true, khuPhoAmThuc: false, dem: false },
         mapCoord: { x: 300, y: 150 }
+      },
+      {
+        id: 7,
+        title: "Chung Cư Mini Cao Cấp - Cách Mạng Tháng 8",
+        landlord: "Anh Tuấn (Q.3)",
+        city: "Hồ Chí Minh",
+        universityTag: "ueh_a",
+        priceNum: 4500000,
+        priceStr: "4.500.000 đ/tháng",
+        distance: "Cách UEH CS A: 350m",
+        rating: 4.7,
+        reviews: 15,
+        badge: "CHUNG CƯ MINI AN NINH VÂN TAY",
+        amenities: ["elevator", "gym", "security", "parking"],
+        amenitiesLabels: ["Thang máy", "Gym", "Bảo vệ", "Bãi xe"],
+        verifiedCost: "Điện: 3.800đ/kWh • Nước: 100k/người",
+        feedback: "“Căn hộ mới, an ninh 24/7, gần chợ Bàn Cờ tiện mua đồ ăn.”",
+        category: "chung_cu_mini",
+        busStopDistanceM: 600,
+        nearbyFood: { quanCom: true, choSieuThi: true, khuPhoAmThuc: false, dem: false },
+        mapCoord: { x: 360, y: 170 }
+      },
+      {
+        id: 8,
+        title: "Phòng Trọ Bình Dân Giá Rẻ - Nguyễn Kiệm",
+        landlord: "Chú Sáu (Gò Vấp)",
+        city: "Hồ Chí Minh",
+        universityTag: "hcmus",
+        priceNum: 1500000,
+        priceStr: "1.500.000 đ/tháng",
+        distance: "Cách ĐH KHTN: 1.2km (đi xe buýt)",
+        rating: 4.3,
+        reviews: 27,
+        badge: "GIÁ SINH VIÊN SIÊU TIẾT KIỆM",
+        amenities: ["bus"],
+        amenitiesLabels: ["Xe buýt"],
+        verifiedCost: "Điện: 3.500đ/kWh • Nước: 80k/người",
+        feedback: "“Phòng đơn giản nhưng sạch, giá rẻ nhất khu vực, hợp túi tiền tân sinh viên.”",
+        category: "nha_tro_binh_dan",
+        busStopDistanceM: 200,
+        nearbyFood: { quanCom: true, choSieuThi: false, khuPhoAmThuc: false, dem: true },
+        mapCoord: { x: 520, y: 400 }
+      },
+      {
+        id: 9,
+        title: "Phòng Ghép Đôi Giá Tốt - Bình Thạnh",
+        landlord: "Cô Hạnh (Bình Thạnh)",
+        city: "Hồ Chí Minh",
+        universityTag: "ftu_hcm",
+        priceNum: 1800000,
+        priceStr: "1.800.000 đ/người (Tổng 3.6Tr)",
+        distance: "Cách ĐH Ngoại Thương CS2: 450m",
+        rating: 4.6,
+        reviews: 20,
+        badge: "TÌM BẠN Ở GHÉP NGOẠI THƯƠNG",
+        amenities: ["park", "parking"],
+        amenitiesLabels: ["Công viên", "Bãi xe"],
+        verifiedCost: "Chia đôi tiền điện nước theo cam kết sinh hoạt",
+        feedback: "“Cần thêm 1 bạn ở ghép, phòng rộng thoáng, gần công viên tập thể dục sáng.”",
+        category: "roommate",
+        busStopDistanceM: 320,
+        nearbyFood: { quanCom: true, choSieuThi: true, khuPhoAmThuc: false, dem: false },
+        mapCoord: { x: 480, y: 280 }
+      },
+      {
+        id: 10,
+        title: "Penthouse Sinh Viên Cao Cấp - Q.10",
+        landlord: "Anh Đức (Q.10)",
+        city: "Hồ Chí Minh",
+        universityTag: "hcmut",
+        priceNum: 5000000,
+        priceStr: "5.000.000 đ/tháng",
+        distance: "Cách ĐH Bách Khoa: 300m",
+        rating: 4.9,
+        reviews: 11,
+        badge: "PENTHOUSE VIEW THÀNH PHỐ",
+        amenities: ["pool", "gym", "elevator", "security"],
+        amenitiesLabels: ["Hồ bơi", "Gym", "Thang máy", "Bảo vệ"],
+        verifiedCost: "Điện: 3.800đ/kWh • Nước: 100k/người",
+        feedback: "“Sân thượng riêng, view đẹp, phù hợp nhóm bạn muốn ở sang trọng gần trường.”",
+        category: "penthouse_sinh_vien",
+        busStopDistanceM: 400,
+        nearbyFood: { quanCom: false, choSieuThi: true, khuPhoAmThuc: true, dem: true },
+        mapCoord: { x: 140, y: 310 }
+      },
+      {
+        id: 11,
+        title: "Homestay Khép Kín Gần Bách Khoa Hà Nội",
+        landlord: "Chị Thu (Hai Bà Trưng)",
+        city: "Hà Nội",
+        universityTag: "hust",
+        priceNum: 3000000,
+        priceStr: "3.000.000 đ/tháng",
+        distance: "Cách HUST: 250m",
+        rating: 4.8,
+        reviews: 21,
+        badge: "HOMESTAY PHONG CÁCH TRẺ",
+        amenities: ["elevator", "security", "bus"],
+        amenitiesLabels: ["Thang máy", "Bảo vệ", "Xe buýt"],
+        verifiedCost: "Điện: 3.700đ/kWh • Nước: 90k/người",
+        feedback: "“Trang trí hiện đại, chủ nhà là cựu sinh viên HUST rất hiểu sinh viên.”",
+        category: "homestay_khep_kin",
+        busStopDistanceM: 180,
+        nearbyFood: { quanCom: true, choSieuThi: true, khuPhoAmThuc: true, dem: false },
+        mapCoord: { x: 400, y: 240 }
+      },
+      {
+        id: 12,
+        title: "Phòng Trọ Giá Rẻ Gần NEU - Trương Định",
+        landlord: "Bác Tùng (Hai Bà Trưng)",
+        city: "Hà Nội",
+        universityTag: "neu",
+        priceNum: 1700000,
+        priceStr: "1.700.000 đ/tháng",
+        distance: "Cách NEU: 900m (đi xe buýt)",
+        rating: 4.4,
+        reviews: 24,
+        badge: "GIÁ RẺ CHO TÂN SINH VIÊN",
+        amenities: ["bus"],
+        amenitiesLabels: ["Xe buýt"],
+        verifiedCost: "Điện: 3.600đ/kWh • Nước: 85k/người",
+        feedback: "“Phòng nhỏ gọn, giá mềm, chủ nhà dễ tính không khó khăn giờ giấc.”",
+        category: "nha_tro_binh_dan",
+        busStopDistanceM: 250,
+        nearbyFood: { quanCom: true, choSieuThi: false, khuPhoAmThuc: false, dem: true },
+        mapCoord: { x: 320, y: 180 }
+      },
+      {
+        id: 13,
+        title: "Căn Hộ Full Nội Thất - Cầu Giấy",
+        landlord: "Anh Quang (Cầu Giấy)",
+        city: "Hà Nội",
+        universityTag: "hust",
+        priceNum: 4200000,
+        priceStr: "4.200.000 đ/tháng",
+        distance: "Cách HUST: 3km (có tuyến buýt thẳng)",
+        rating: 4.7,
+        reviews: 13,
+        badge: "NỘI THẤT CAO CẤP MỚI 100%",
+        amenities: ["pool", "parking", "elevator"],
+        amenitiesLabels: ["Hồ bơi", "Bãi xe", "Thang máy"],
+        verifiedCost: "Điện: 3.800đ/kWh • Nước: 100k/người",
+        feedback: "“Nội thất mới tinh, khu Cầu Giấy nhiều dịch vụ tiện ích xung quanh.”",
+        category: "full_furnish",
+        busStopDistanceM: 450,
+        nearbyFood: { quanCom: true, choSieuThi: true, khuPhoAmThuc: true, dem: false },
+        mapCoord: { x: 450, y: 220 }
+      },
+      {
+        id: 14,
+        title: "Phòng Ban Công Gần ĐH Đà Nẵng",
+        landlord: "Bác Ba (Ngũ Hành Sơn)",
+        city: "Đà Nẵng",
+        universityTag: "dnu",
+        priceNum: 2200000,
+        priceStr: "2.200.000 đ/tháng",
+        distance: "Cách ĐH Đà Nẵng - Khoa Kinh Tế: 400m",
+        rating: 4.6,
+        reviews: 12,
+        badge: "GẦN BIỂN, GIÓ MÁT QUANH NĂM",
+        amenities: ["park", "parking"],
+        amenitiesLabels: ["Công viên", "Bãi xe"],
+        verifiedCost: "Điện: 3.500đ/kWh • Nước: 85k/người",
+        feedback: "“Cách biển Mỹ Khê 10 phút xe máy, khu vực yên tĩnh phù hợp học tập.”",
+        category: "gac_duc",
+        busStopDistanceM: 350,
+        nearbyFood: { quanCom: true, choSieuThi: true, khuPhoAmThuc: false, dem: false },
+        mapCoord: { x: 240, y: 200 }
+      },
+      {
+        id: 15,
+        title: "Sleepbox Hiện Đại Gần Biển Mỹ Khê",
+        landlord: "Chị Hoa (Sơn Trà)",
+        city: "Đà Nẵng",
+        universityTag: "dnu",
+        priceNum: 2000000,
+        priceStr: "2.000.000 đ/tháng (Trọn gói)",
+        distance: "Cách ĐH Đà Nẵng: 2km",
+        rating: 4.5,
+        reviews: 16,
+        badge: "BAO TRỌN GÓI GẦN BIỂN",
+        amenities: ["elevator", "bus"],
+        amenitiesLabels: ["Thang máy", "Xe buýt"],
+        verifiedCost: "Đã gồm: Điện, nước, wifi",
+        feedback: "“Hộp ngủ nhỏ gọn, sáng dậy đi bộ ra biển tập thể dục rất tiện.”",
+        category: "sleepbox",
+        busStopDistanceM: 300,
+        nearbyFood: { quanCom: true, choSieuThi: false, khuPhoAmThuc: true, dem: true },
+        mapCoord: { x: 280, y: 240 }
+      },
+      {
+        id: 16,
+        title: "Studio Cao Cấp View Sông Hàn",
+        landlord: "Anh Kiên (Hải Châu)",
+        city: "Đà Nẵng",
+        universityTag: "dnu",
+        priceNum: 3800000,
+        priceStr: "3.800.000 đ/tháng",
+        distance: "Cách ĐH Đà Nẵng: 1.5km",
+        rating: 4.9,
+        reviews: 9,
+        badge: "VIEW SÔNG HÀN CỰC ĐẸP",
+        amenities: ["pool", "gym", "security"],
+        amenitiesLabels: ["Hồ bơi", "Gym", "Bảo vệ"],
+        verifiedCost: "Điện: 3.700đ/kWh • Nước: 95k/người",
+        feedback: "“Studio đẹp, ban công nhìn thẳng ra sông Hàn, chủ nhà thân thiện.”",
+        category: "studio",
+        busStopDistanceM: 500,
+        nearbyFood: { quanCom: false, choSieuThi: true, khuPhoAmThuc: true, dem: false },
+        mapCoord: { x: 220, y: 180 }
+      },
+      {
+        id: 17,
+        title: "Sleepbox Hiện Đại Gần ĐH Cần Thơ",
+        landlord: "Cô Bảy (Ninh Kiều)",
+        city: "Cần Thơ",
+        universityTag: "ctu",
+        priceNum: 1900000,
+        priceStr: "1.900.000 đ/tháng (Trọn gói)",
+        distance: "Cách ĐH Cần Thơ - Khu II: 300m",
+        rating: 4.7,
+        reviews: 18,
+        badge: "BAO TRỌN GÓI SINH VIÊN MIỀN TÂY",
+        amenities: ["elevator", "bus", "security"],
+        amenitiesLabels: ["Thang máy", "Xe buýt", "Bảo vệ"],
+        verifiedCost: "Đã gồm: Điện, nước, wifi",
+        feedback: "“Không gian nhỏ gọn nhưng đầy đủ tiện nghi, gần chợ đêm Ninh Kiều.”",
+        category: "sleepbox",
+        busStopDistanceM: 280,
+        nearbyFood: { quanCom: true, choSieuThi: true, khuPhoAmThuc: true, dem: true },
+        mapCoord: { x: 270, y: 190 }
+      },
+      {
+        id: 18,
+        title: "Phòng Trọ Bình Dân Ninh Kiều",
+        landlord: "Chú Tám (Ninh Kiều)",
+        city: "Cần Thơ",
+        universityTag: "ctu",
+        priceNum: 1300000,
+        priceStr: "1.300.000 đ/tháng",
+        distance: "Cách ĐH Cần Thơ: 1km",
+        rating: 4.2,
+        reviews: 14,
+        badge: "GIÁ SIÊU RẺ MIỀN TÂY",
+        amenities: ["bus"],
+        amenitiesLabels: ["Xe buýt"],
+        verifiedCost: "Điện: 3.300đ/kWh • Nước: 70k/người",
+        feedback: "“Phòng đơn giản, giá rẻ nhất khu vực, chủ nhà là người địa phương hiền lành.”",
+        category: "nha_tro_binh_dan",
+        busStopDistanceM: 220,
+        nearbyFood: { quanCom: true, choSieuThi: false, khuPhoAmThuc: false, dem: false },
+        mapCoord: { x: 300, y: 220 }
+      },
+      {
+        id: 19,
+        title: "Căn Hộ Ghép Đôi Gần Chợ Đêm",
+        landlord: "Chị Kim (Ninh Kiều)",
+        city: "Cần Thơ",
+        universityTag: "ctu",
+        priceNum: 1700000,
+        priceStr: "1.700.000 đ/người (Tổng 3.4Tr)",
+        distance: "Cách ĐH Cần Thơ: 700m",
+        rating: 4.6,
+        reviews: 10,
+        badge: "TÌM BẠN Ở GHÉP GẦN CHỢ ĐÊM",
+        amenities: ["park", "parking"],
+        amenitiesLabels: ["Công viên", "Bãi xe"],
+        verifiedCost: "Chia đôi tiền điện nước theo cam kết sinh hoạt",
+        feedback: "“Cần 1 bạn nữ ở ghép, gần chợ đêm Ninh Kiều tiện ăn uống buổi tối.”",
+        category: "roommate",
+        busStopDistanceM: 260,
+        nearbyFood: { quanCom: true, choSieuThi: true, khuPhoAmThuc: true, dem: true },
+        mapCoord: { x: 250, y: 170 }
+      },
+      {
+        id: 20,
+        title: "Phòng Full Nội Thất Gần ĐH Bình Dương",
+        landlord: "Anh Phát (Thủ Dầu Một)",
+        city: "Bình Dương",
+        universityTag: "bdu",
+        priceNum: 2600000,
+        priceStr: "2.600.000 đ/tháng",
+        distance: "Cách ĐH Bình Dương: 500m",
+        rating: 4.5,
+        reviews: 9,
+        badge: "NỘI THẤT ĐẦY ĐỦ GIÁ TỐT",
+        amenities: ["parking", "gym"],
+        amenitiesLabels: ["Bãi xe", "Gym"],
+        verifiedCost: "Điện: 3.600đ/kWh • Nước: 90k/người",
+        feedback: "“Khu công nghiệp gần đó nên an ninh khu trọ được đầu tư kỹ.”",
+        category: "full_furnish",
+        busStopDistanceM: 420,
+        nearbyFood: { quanCom: true, choSieuThi: false, khuPhoAmThuc: false, dem: false },
+        mapCoord: { x: 260, y: 250 }
+      },
+      {
+        id: 21,
+        title: "Căn Hộ Ghép 2 Người Gần NEU - Phố Vọng",
+        landlord: "Chị Hằng (Hai Bà Trưng)",
+        city: "Hà Nội",
+        universityTag: "neu",
+        priceNum: 1900000,
+        priceStr: "1.900.000 đ/người (Tổng 3.8Tr)",
+        distance: "Cách NEU: 600m",
+        rating: 4.5,
+        reviews: 17,
+        badge: "TÌM BẠN Ở GHÉP GẦN NEU",
+        amenities: ["bus", "parking"],
+        amenitiesLabels: ["Xe buýt", "Bãi xe"],
+        verifiedCost: "Chia đôi tiền điện nước theo cam kết sinh hoạt",
+        feedback: "“Cần 1 bạn nữ năm nhất NEU ở ghép, phòng sạch sẽ, giờ giấc thoải mái.”",
+        category: "roommate",
+        busStopDistanceM: 300,
+        nearbyFood: { quanCom: true, choSieuThi: true, khuPhoAmThuc: false, dem: true },
+        mapCoord: { x: 280, y: 190 }
+      },
+      {
+        id: 22,
+        title: "Phòng Ghép Đôi Hiện Đại - Tạ Quang Bửu",
+        landlord: "Anh Huy (Hai Bà Trưng)",
+        city: "Hà Nội",
+        universityTag: "hust",
+        priceNum: 2100000,
+        priceStr: "2.100.000 đ/người (Tổng 4.2Tr)",
+        distance: "Cách HUST: 350m",
+        rating: 4.7,
+        reviews: 13,
+        badge: "TÌM BẠN Ở GHÉP GẦN HUST",
+        amenities: ["elevator", "security", "bus"],
+        amenitiesLabels: ["Thang máy", "Bảo vệ", "Xe buýt"],
+        verifiedCost: "Chia đôi tiền điện nước theo cam kết sinh hoạt",
+        feedback: "“Đang cần 1 bạn nam kỹ thuật ở ghép, phòng có ban công thoáng, gần cổng trường.”",
+        category: "roommate",
+        busStopDistanceM: 220,
+        nearbyFood: { quanCom: true, choSieuThi: true, khuPhoAmThuc: true, dem: false },
+        mapCoord: { x: 440, y: 280 }
+      },
+      {
+        id: 23,
+        title: "Chung Cư Mini An Ninh Cao - Trương Định",
+        landlord: "Chị Phương (Hoàng Mai)",
+        city: "Hà Nội",
+        universityTag: "neu",
+        priceNum: 3300000,
+        priceStr: "3.300.000 đ/tháng",
+        distance: "Cách NEU: 1km (đi xe buýt)",
+        rating: 4.6,
+        reviews: 15,
+        badge: "AN NINH VÂN TAY 24/7",
+        amenities: ["elevator", "security", "parking"],
+        amenitiesLabels: ["Thang máy", "Bảo vệ", "Bãi xe"],
+        verifiedCost: "Điện: 3.700đ/kWh • Nước: 90k/người",
+        feedback: "“Chung cư mini mới xây, camera khắp hành lang, phù hợp sinh viên nữ ở một mình.”",
+        category: "chung_cu_mini",
+        busStopDistanceM: 480,
+        nearbyFood: { quanCom: true, choSieuThi: true, khuPhoAmThuc: false, dem: false },
+        mapCoord: { x: 350, y: 160 }
+      },
+      {
+        id: 24,
+        title: "Căn Hộ Ghép Đôi View Biển - Phạm Văn Đồng",
+        landlord: "Chị Yến (Sơn Trà)",
+        city: "Đà Nẵng",
+        universityTag: "dnu",
+        priceNum: 1700000,
+        priceStr: "1.700.000 đ/người (Tổng 3.4Tr)",
+        distance: "Cách ĐH Đà Nẵng: 2.5km",
+        rating: 4.6,
+        reviews: 11,
+        badge: "TÌM BẠN Ở GHÉP GẦN BIỂN",
+        amenities: ["park", "bus"],
+        amenitiesLabels: ["Công viên", "Xe buýt"],
+        verifiedCost: "Chia đôi tiền điện nước theo cam kết sinh hoạt",
+        feedback: "“Cần 1 bạn cùng giới ở ghép, sáng đi bộ ra biển, chiều đạp xe tới trường.”",
+        category: "roommate",
+        busStopDistanceM: 260,
+        nearbyFood: { quanCom: true, choSieuThi: false, khuPhoAmThuc: true, dem: true },
+        mapCoord: { x: 300, y: 210 }
+      },
+      {
+        id: 25,
+        title: "Phòng Ghép 3 Người Giá Sinh Viên - Hòa Khánh",
+        landlord: "Chú Long (Liên Chiểu)",
+        city: "Đà Nẵng",
+        universityTag: "dnu",
+        priceNum: 1100000,
+        priceStr: "1.100.000 đ/người (Tổng 3.3Tr)",
+        distance: "Cách ĐH Đà Nẵng: 3km (đi xe buýt)",
+        rating: 4.3,
+        reviews: 19,
+        badge: "GIÁ SIÊU RẺ - Ở GHÉP 3 NGƯỜI",
+        amenities: ["bus", "parking"],
+        amenitiesLabels: ["Xe buýt", "Bãi xe"],
+        verifiedCost: "Chia đều tiền điện nước 3 người theo cam kết",
+        feedback: "“Phòng rộng cho 3 người, giá cực mềm, khu Hoà Khánh nhiều sinh viên nên vui.”",
+        category: "roommate",
+        busStopDistanceM: 350,
+        nearbyFood: { quanCom: true, choSieuThi: true, khuPhoAmThuc: false, dem: true },
+        mapCoord: { x: 260, y: 260 }
+      },
+      {
+        id: 26,
+        title: "Homestay Khép Kín Gần Cầu Rồng",
+        landlord: "Anh Vũ (Hải Châu)",
+        city: "Đà Nẵng",
+        universityTag: "dnu",
+        priceNum: 2900000,
+        priceStr: "2.900.000 đ/tháng",
+        distance: "Cách ĐH Đà Nẵng: 1.8km",
+        rating: 4.8,
+        reviews: 8,
+        badge: "HOMESTAY PHONG CÁCH TRẺ",
+        amenities: ["elevator", "security"],
+        amenitiesLabels: ["Thang máy", "Bảo vệ"],
+        verifiedCost: "Điện: 3.600đ/kWh • Nước: 90k/người",
+        feedback: "“Trang trí xinh xắn, gần cầu Rồng đi dạo buổi tối, chủ nhà nhiệt tình.”",
+        category: "homestay_khep_kin",
+        busStopDistanceM: 400,
+        nearbyFood: { quanCom: false, choSieuThi: true, khuPhoAmThuc: true, dem: true },
+        mapCoord: { x: 200, y: 220 }
+      },
+      {
+        id: 27,
+        title: "Phòng Ghép Đôi Sinh Viên - Xuân Khánh",
+        landlord: "Chị Thảo (Ninh Kiều)",
+        city: "Cần Thơ",
+        universityTag: "ctu",
+        priceNum: 1200000,
+        priceStr: "1.200.000 đ/người (Tổng 2.4Tr)",
+        distance: "Cách ĐH Cần Thơ: 500m",
+        rating: 4.5,
+        reviews: 14,
+        badge: "TÌM BẠN Ở GHÉP GẦN ĐH CẦN THƠ",
+        amenities: ["bus", "parking"],
+        amenitiesLabels: ["Xe buýt", "Bãi xe"],
+        verifiedCost: "Chia đôi tiền điện nước theo cam kết sinh hoạt",
+        feedback: "“Cần 1 bạn cùng ngành nông nghiệp ở ghép, phòng thoáng mát gần cổng sau trường.”",
+        category: "roommate",
+        busStopDistanceM: 230,
+        nearbyFood: { quanCom: true, choSieuThi: true, khuPhoAmThuc: false, dem: false },
+        mapCoord: { x: 320, y: 200 }
+      },
+      {
+        id: 28,
+        title: "Phòng Gác Đúc Thoáng Mát - An Khánh",
+        landlord: "Bác Năm (Ninh Kiều)",
+        city: "Cần Thơ",
+        universityTag: "ctu",
+        priceNum: 1600000,
+        priceStr: "1.600.000 đ/tháng",
+        distance: "Cách ĐH Cần Thơ: 900m",
+        rating: 4.4,
+        reviews: 12,
+        badge: "GÁC ĐÚC CAO RÁO KHÔNG NGẬP",
+        amenities: ["park", "bus"],
+        amenitiesLabels: ["Công viên", "Xe buýt"],
+        verifiedCost: "Điện: 3.400đ/kWh • Nước: 80k/người",
+        feedback: "“Khu vực An Khánh yên tĩnh, gác đúc cao không lo ngập nước mùa lũ.”",
+        category: "gac_duc",
+        busStopDistanceM: 310,
+        nearbyFood: { quanCom: true, choSieuThi: false, khuPhoAmThuc: false, dem: true },
+        mapCoord: { x: 260, y: 240 }
+      },
+      {
+        id: 29,
+        title: "Phòng Ghép Đôi Gần ĐH Bình Dương",
+        landlord: "Chị Duyên (Thủ Dầu Một)",
+        city: "Bình Dương",
+        universityTag: "bdu",
+        priceNum: 1400000,
+        priceStr: "1.400.000 đ/người (Tổng 2.8Tr)",
+        distance: "Cách ĐH Bình Dương: 700m",
+        rating: 4.4,
+        reviews: 10,
+        badge: "TÌM BẠN Ở GHÉP GẦN ĐH BÌNH DƯƠNG",
+        amenities: ["bus", "parking"],
+        amenitiesLabels: ["Xe buýt", "Bãi xe"],
+        verifiedCost: "Chia đôi tiền điện nước theo cam kết sinh hoạt",
+        feedback: "“Cần 1 bạn cùng làm thêm ca tối ở ghép, khu an toàn gần khu công nghiệp.”",
+        category: "roommate",
+        busStopDistanceM: 290,
+        nearbyFood: { quanCom: true, choSieuThi: true, khuPhoAmThuc: false, dem: false },
+        mapCoord: { x: 280, y: 220 }
+      },
+      {
+        id: 30,
+        title: "Sleepbox Mini Giá Tốt - Thủ Dầu Một",
+        landlord: "Anh Khoa (Thủ Dầu Một)",
+        city: "Bình Dương",
+        universityTag: "bdu",
+        priceNum: 1700000,
+        priceStr: "1.700.000 đ/tháng (Trọn gói)",
+        distance: "Cách ĐH Bình Dương: 1.2km",
+        rating: 4.3,
+        reviews: 9,
+        badge: "BAO TRỌN GÓI GIÁ SINH VIÊN",
+        amenities: ["elevator", "bus"],
+        amenitiesLabels: ["Thang máy", "Xe buýt"],
+        verifiedCost: "Đã gồm: Điện, nước, wifi",
+        feedback: "“Sleepbox nhỏ gọn nhưng đủ dùng, giá trọn gói dễ tính toán chi tiêu tháng.”",
+        category: "sleepbox",
+        busStopDistanceM: 360,
+        nearbyFood: { quanCom: true, choSieuThi: false, khuPhoAmThuc: false, dem: true },
+        mapCoord: { x: 220, y: 260 }
+      },
+      {
+        id: 31,
+        title: "Phòng Ghép Đôi Gần Bách Khoa - Tô Hiến Thành",
+        landlord: "Cô Diệp (Q.10)",
+        city: "Hồ Chí Minh",
+        universityTag: "hcmut",
+        priceNum: 1900000,
+        priceStr: "1.900.000 đ/người (Tổng 3.8Tr)",
+        distance: "Cách ĐH Bách Khoa: 450m",
+        rating: 4.6,
+        reviews: 16,
+        badge: "TÌM BẠN Ở GHÉP GẦN BÁCH KHOA",
+        amenities: ["bus", "security"],
+        amenitiesLabels: ["Xe buýt", "Bảo vệ"],
+        verifiedCost: "Chia đôi tiền điện nước theo cam kết sinh hoạt",
+        feedback: "“Cần 1 bạn nam khối kỹ thuật ở ghép, phòng có bàn học riêng cho từng người.”",
+        category: "roommate",
+        busStopDistanceM: 270,
+        nearbyFood: { quanCom: true, choSieuThi: true, khuPhoAmThuc: false, dem: true },
+        mapCoord: { x: 150, y: 300 }
+      },
+      {
+        id: 32,
+        title: "Căn Hộ Ghép 3 Người - Nguyễn Văn Cừ",
+        landlord: "Chị Ngọc (Q.5)",
+        city: "Hồ Chí Minh",
+        universityTag: "hcmus",
+        priceNum: 1500000,
+        priceStr: "1.500.000 đ/người (Tổng 4.5Tr)",
+        distance: "Cách ĐH KHTN: 250m",
+        rating: 4.5,
+        reviews: 21,
+        badge: "TÌM 2 BẠN Ở GHÉP GẦN ĐHKHTN",
+        amenities: ["bus", "parking", "elevator"],
+        amenitiesLabels: ["Xe buýt", "Bãi xe", "Thang máy"],
+        verifiedCost: "Chia đều tiền điện nước 3 người theo cam kết",
+        feedback: "“Căn hộ rộng cho 3 người, gần cổng trường KHTN, khu này nhiều quán ăn sinh viên.”",
+        category: "roommate",
+        busStopDistanceM: 240,
+        nearbyFood: { quanCom: true, choSieuThi: true, khuPhoAmThuc: true, dem: true },
+        mapCoord: { x: 470, y: 320 }
       }
     ];
 
     const LANDLORD_ROOMS_DATA = [
-      { id: 101, name: "Studio Ban Công Thoáng - Sư Vạn Hạnh", price: "3.200.000 đ/tháng", status: "Đang cho thuê", cost: "Điện 3.5k/kWh • Nước 100k/ng" },
-      { id: 102, name: "Phòng Gác Đúc Cao Ráo - Nguyễn Tri Phương", price: "2.400.000 đ/tháng", status: "Đang cho thuê", cost: "Điện 3.6k/kWh • Miễn phí xe" },
-      { id: 103, name: "Căn Hộ Mini 2 Phòng (Tìm Bạn Ở Ghép)", price: "1.600.000 đ/ng", status: "Còn trống 1 suất", cost: "Chia đôi điện nước cam kết" },
-      { id: 104, name: "Phòng Đơn Cửa Sổ Trời - Sư Vạn Hạnh (Lầu 2)", price: "2.800.000 đ/tháng", status: "Trống sẵn", cost: "Điện 3.5k/kWh • Nước 90k/ng" },
-      { id: 105, name: "Phòng Ban Công Đôi - Nguyễn Tri Phương (Lầu 3)", price: "3.500.000 đ/tháng", status: "Đang cho thuê", cost: "Điện 3.5k/kWh • Nước 100k/ng" },
-      { id: 106, name: "Studio Tầng Thượng Sân Vườn Mini (Q.10)", price: "3.600.000 đ/tháng", status: "Trống sẵn", cost: "Điện 3.5k/kWh • Nước 100k/ng" }
+      { id: 101, name: "Studio Ban Công Thoáng - Sư Vạn Hạnh", price: "3.200.000 đ/tháng", priceNum: 3200000, status: "Đang cho thuê", cost: "Điện 3.5k/kWh • Nước 100k/ng" },
+      { id: 102, name: "Phòng Gác Đúc Cao Ráo - Nguyễn Tri Phương", price: "2.400.000 đ/tháng", priceNum: 2400000, status: "Đang cho thuê", cost: "Điện 3.6k/kWh • Miễn phí xe" },
+      { id: 103, name: "Căn Hộ Mini 2 Phòng (Tìm Bạn Ở Ghép)", price: "1.600.000 đ/ng", priceNum: 1600000, status: "Còn trống 1 suất", cost: "Chia đôi điện nước cam kết" },
+      { id: 104, name: "Phòng Đơn Cửa Sổ Trời - Sư Vạn Hạnh (Lầu 2)", price: "2.800.000 đ/tháng", priceNum: 2800000, status: "Trống sẵn", cost: "Điện 3.5k/kWh • Nước 90k/ng" },
+      { id: 105, name: "Phòng Ban Công Đôi - Nguyễn Tri Phương (Lầu 3)", price: "3.500.000 đ/tháng", priceNum: 3500000, status: "Đang cho thuê", cost: "Điện 3.5k/kWh • Nước 100k/ng" },
+      { id: 106, name: "Studio Tầng Thượng Sân Vườn Mini (Q.10)", price: "3.600.000 đ/tháng", priceNum: 3600000, status: "Trống sẵn", cost: "Điện 3.5k/kWh • Nước 100k/ng" }
     ];
+
+    const MOVING_BROKERS = [
+      { id: 'mb1', name: "Chuyển Trọ Nhanh 247", vehicleType: "Xe tải nhỏ 500kg", basePrice: 150000, pricePerKm: 25000, rating: 4.8, reviews: 34, note: "Có 2 người bốc xếp đi kèm, hỗ trợ tháo lắp giường tủ." },
+      { id: 'mb2', name: "Sinh Viên Dọn Nhà Express", vehicleType: "Xe ba gác máy", basePrice: 100000, pricePerKm: 18000, rating: 4.6, reviews: 51, note: "Giá sinh viên, phù hợp phòng ít đồ đạc." },
+      { id: 'mb3', name: "Kiến Vàng Vận Chuyển", vehicleType: "Xe tải 1 tấn", basePrice: 200000, pricePerKm: 30000, rating: 4.9, reviews: 22, note: "Có bảo hiểm hàng hoá, phù hợp chuyển đồ điện tử dễ vỡ." },
+      { id: 'mb4', name: "Trọ Chuyển Liền Tay", vehicleType: "Xe tải nhỏ 500kg", basePrice: 120000, pricePerKm: 20000, rating: 4.5, reviews: 17, note: "Nhận việc trong ngày, phù hợp chuyển gấp cuối tuần." }
+    ];
+
+    function getBrokerPrice(broker, distanceKm) {
+      const km = distanceKm != null ? distanceKm : 0;
+      return broker.basePrice + Math.round(km * broker.pricePerKm);
+    }
+
+    function getBrokerReviews(broker) {
+      if (!state.brokerReviews[broker.id]) {
+        state.brokerReviews[broker.id] = [
+          { userBadge: "SV Ẩn Danh · UEH K50", stayDuration: "Đã dùng dịch vụ", verifiedTag: "Đã Xác Minh Đơn Hàng", stars: broker.rating, text: `“Đội ${broker.name} bốc dỡ cẩn thận, đúng giờ hẹn, giá đúng như báo trước.”` }
+        ];
+      }
+      return state.brokerReviews[broker.id];
+    }
+
+    // Rubric 5 tiêu chí chuẩn (dùng chung desktop/mobile để không lệch nội dung)
+    const ROOM_RUBRIC_CRITERIA = [
+      { short: "Thái độ chủ trọ", name: "1. Thái độ chủ trọ & tôn trọng riêng tư", score: "4.9 / 5.0", bar: 0.98, note: "Hỗ trợ nhanh khi hỏng thiết bị, không tự ý vào phòng." },
+      { short: "Minh bạch chi phí", name: "2. Minh bạch chi phí (Điện, Nước, Xe)", score: "4.8 / 5.0", bar: 0.96, note: "Công tơ riêng tử tế, chụp hình báo Zalo mùng 1 hàng tháng." },
+      { short: "Cơ sở vật chất", name: "3. Cơ sở vật chất & độ bền thiết bị", score: "4.6 / 5.0", bar: 0.92, note: "Máy lạnh lạnh sâu, áp lực nước mạnh, ngõ cao ráo không ngập mùa mưa." },
+      { short: "An ninh & hoàn cọc", name: "4. An ninh khu vực & hoàn cọc đúng hẹn", score: "4.9 / 5.0", bar: 0.98, note: "Khóa vân tay 2 lớp, camera 24/7, hoàn cọc đúng hẹn." },
+      { short: "Cách âm / yên tĩnh", name: "5. Độ cách âm / yên tĩnh khu trọ", score: "4.8 / 5.0", bar: 0.96, note: "Hàng xóm ý thức, không ồn karaoke nhậu nhẹt về khuya." }
+    ];
+
+    const LANDLORD_RUBRIC_CRITERIA = [
+      { short: "Thái độ chủ trọ", name: "1. Thái độ chủ trọ & tôn trọng riêng tư", score: "4.9 / 5.0", bar: 0.98 },
+      { short: "Minh bạch chi phí", name: "2. Minh bạch chi phí (Điện, Nước, Xe)", score: "4.8 / 5.0", bar: 0.96 },
+      { short: "Cơ sở vật chất", name: "3. Cơ sở vật chất & độ bền thiết bị", score: "4.7 / 5.0", bar: 0.94 },
+      { short: "An ninh & hoàn cọc", name: "4. An ninh khu vực & hoàn cọc đúng hẹn", score: "4.9 / 5.0", bar: 0.98 },
+      { short: "Cách âm / yên tĩnh", name: "5. Độ cách âm / yên tĩnh khu trọ", score: "4.7 / 5.0", bar: 0.94 }
+    ];
+
+    // Danh sách ứng viên ghép phòng dùng chung desktop/mobile
+    const CANDIDATES = [
+      {
+        name: "Hoàng Yến (19t)", school: "Marketing - K51", matchScore: 94, scoreColor: "#059669", avatarColor: "#EC4899",
+        traits: [{ icon: "🌙", label: "Ngủ 0h ôn bài" }, { icon: "✨", label: "Sạch sẽ tuyệt đối" }, { icon: "💰", label: "Chia tiền sòng phẳng" }],
+        bio: "“Mình hướng nội, nấu ăn tiết kiệm. Muốn tìm bạn cùng thuê phòng gần trường.”", agreementStatus: "Đã ký Cam Kết Quy Tắc",
+        lifestyleProfile: { sleep: 'late', cleanliness: 'high', smoking: 'no', guests: 'rare', budget: '25to35' }
+      },
+      {
+        name: "Thanh Trúc (18t)", school: "Kinh Doanh Quốc Tế", matchScore: 89, scoreColor: "#0D9488", avatarColor: "#8B5CF6",
+        traits: [{ icon: "⏰", label: "Dậy sớm 6h đi học" }, { icon: "🧹", label: "Lịch dọn dẹp cụ thể" }, { icon: "📚", label: "Học thư viện tối" }],
+        bio: "“Tính thẳng thắn, tiền trọ chia đều mùng 1. Tôn trọng không gian riêng.”", agreementStatus: "Sẵn sàng ký Cam Kết",
+        lifestyleProfile: { sleep: 'early', cleanliness: 'high', smoking: 'no', guests: 'rare', budget: 'under25' }
+      },
+      {
+        name: "Phương Linh (20t)", school: "ĐH Khoa Học Tự Nhiên", matchScore: 84, scoreColor: "#D97706", avatarColor: "#3B82F6",
+        traits: [{ icon: "🚌", label: "Đi lại thuận tiện" }, { icon: "🍳", label: "Nấu ăn cuối tuần" }, { icon: "🔒", label: "Đã ở trọ 1 năm" }],
+        bio: "“Đã có sẵn tủ lạnh mini & nồi cơm điện. Cần tìm bạn ở ghép chia sẻ phòng.”", agreementStatus: "Đã xác thực Thẻ SV",
+        lifestyleProfile: { sleep: 'early', cleanliness: 'medium', smoking: 'no', guests: 'often', budget: '25to35' }
+      }
+    ];
+
+    function computeMatchScore(myAnswers, candidateProfile) {
+      if (!myAnswers) return null;
+      const keys = Object.keys(myAnswers);
+      const matched = keys.filter(k => myAnswers[k] === candidateProfile[k]).length;
+      return Math.round((matched / keys.length) * 100);
+    }
+
+    function scoreColorFor(score) {
+      if (score >= 90) return "#059669";
+      if (score >= 80) return "#0D9488";
+      return "#D97706";
+    }
+
+    function mapDistanceKm(coordA, coordB) {
+      if (!coordA || !coordB) return null;
+      const dx = coordA.x - coordB.x;
+      const dy = coordA.y - coordB.y;
+      const units = Math.sqrt(dx * dx + dy * dy);
+      return Math.round((units * MAP_SCALE_M_PER_UNIT / 1000) * 10) / 10;
+    }
+
+    // Đảm bảo pin (phòng/trường) không bị vẽ đè lên đường lớn/sông/công viên minh hoạ trên bản đồ.
+    // Vùng "vật cản" dưới đây khớp với các hình dạng % cố định trong drawCityMapBackground — dùng
+    // CHUNG cho mọi tỉnh/thành (nền minh hoạ có cùng 1 bố cục cho tất cả) và CHUNG cho desktop lẫn mobile
+    // (cả 2 đều quy đổi qua coordScaleX/Y = mapW/620, mapH/520 nên toạ độ cục bộ luôn giống nhau).
+    function getSafeMapCoord(x, y) {
+      let sx = x, sy = y;
+      // Sông (dải cong nhẹ quanh y 250-340 theo toàn bộ chiều rộng)
+      if (sy >= 248 && sy <= 342) sy = sy < 295 ? 244 : 348;
+      // Đường ngang trục chính (quanh y 226-254)
+      if (sy >= 224 && sy <= 256) sy = sy < 240 ? 218 : 262;
+      // Đường dọc trục chính màu vàng (quanh x 188-222)
+      if (sx >= 186 && sx <= 224) sx = sx < 205 ? 178 : 232;
+      // Đường chéo phụ (quanh x 328-356, phần đứng phía trên khúc cua ở đáy)
+      if (sx >= 326 && sx <= 358 && sy < 470) sx = sx < 341 ? 318 : 364;
+      // Đường chéo phụ (đoạn nằm ngang ở đáy, quanh y 468-490)
+      if (sy >= 466 && sy <= 492 && sx >= 326 && sx <= 500) sy = sy < 478 ? 458 : 498;
+      // Công viên góc trên-trái (x 35-190, y 45-150)
+      if (sx >= 30 && sx <= 195 && sy >= 40 && sy <= 155) sx = sx < 112 ? 20 : 202;
+      return { x: sx, y: sy };
+    }
+
+    // Danh sách phòng gần nhất tính từ 1 vị trí đã chọn trên bản đồ (dùng chung desktop/mobile) —
+    // chỉ so sánh trong cùng tỉnh/thành với vị trí đó vì mỗi thành phố dùng 1 không gian toạ độ riêng.
+    function getNearestRoomsFromLocation(location, limit) {
+      if (!location || !location.mapCoord || !location.city) return [];
+      return ROOMS_DATABASE
+        .filter(r => r.city === location.city && r.mapCoord)
+        .map(r => ({ room: r, distanceKm: mapDistanceKm(r.mapCoord, location.mapCoord) }))
+        .sort((a, b) => a.distanceKm - b.distanceKm)
+        .slice(0, limit || 5);
+    }
+
+    function parseVndPrice(str) {
+      if (typeof str !== 'string') return 0;
+      const digits = str.replace(/[^\d]/g, '');
+      return digits ? parseInt(digits, 10) : 0;
+    }
+
+    function getLandlordStats() {
+      const roomCount = LANDLORD_ROOMS_DATA.length;
+      const revenue = LANDLORD_ROOMS_DATA
+        .filter(r => r.status === "Đang cho thuê")
+        .reduce((sum, r) => sum + (r.priceNum != null ? r.priceNum : parseVndPrice(r.price)), 0);
+      return {
+        roomCount,
+        revenue,
+        revenueStr: revenue.toLocaleString('vi-VN') + " đ"
+      };
+    }
+
+    function getRoomReviews(room) {
+      if (!state.roomReviews[room.id]) {
+        state.roomReviews[room.id] = [
+          { userBadge: "SV Ẩn Danh · UEH K49", stayDuration: "Tân sinh viên", verifiedTag: "Đã Xác Minh Cọc", stars: 5, text: "“Khu trọ rất yên tĩnh, chủ nhà hỗ trợ cực kỳ nhiệt tình, đúng cam kết bảo trợ của UNINEST.”" },
+          { userBadge: "SV Ẩn Danh · UEH K50", stayDuration: "Đang ở trọ", verifiedTag: "Xác Minh Hóa Đơn", stars: 4.8, text: "“Tiền điện nước đúng chuẩn niêm yết, tính tiền sòng phẳng chụp ảnh công tơ gửi qua Zalo.”" }
+        ];
+      }
+      return state.roomReviews[room.id];
+    }
+
+    function getRankedCandidates() {
+      const list = CANDIDATES.map(c => {
+        const live = state.quizCompleted ? computeMatchScore(state.myLifestyleAnswers, c.lifestyleProfile) : c.matchScore;
+        return Object.assign({}, c, { matchScore: live, scoreColor: scoreColorFor(live) });
+      });
+      list.sort((a, b) => b.matchScore - a.matchScore);
+      return list;
+    }
+
+    const LIFESTYLE_QUESTIONS = [
+      { key: 'sleep', question: 'Giờ giấc ngủ của bạn thường như thế nào?', options: [{ value: 'early', label: 'Ngủ sớm trước 22h30' }, { value: 'late', label: 'Ngủ muộn sau 0h để ôn bài' }] },
+      { key: 'cleanliness', question: 'Mức độ giữ gìn vệ sinh phòng ở của bạn?', options: [{ value: 'high', label: 'Rất gọn gàng, dọn dẹp hàng ngày' }, { value: 'medium', label: 'Dọn dẹp vài lần / tuần' }] },
+      { key: 'smoking', question: 'Bạn có hút thuốc hoặc nuôi thú cưng trong phòng không?', options: [{ value: 'no', label: 'Không hút thuốc, không nuôi thú cưng' }, { value: 'yes', label: 'Có hút thuốc hoặc nuôi thú cưng' }] },
+      { key: 'guests', question: 'Tần suất bạn dẫn bạn bè/người quen về phòng?', options: [{ value: 'rare', label: 'Hiếm khi dẫn khách về' }, { value: 'often', label: 'Thường xuyên có khách ghé' }] },
+      { key: 'budget', question: 'Ngân sách chia sẻ tiền phòng bạn có thể chi trả?', options: [{ value: 'under25', label: 'Dưới 2.5 triệu/tháng' }, { value: '25to35', label: '2.5 - 3.5 triệu/tháng' }] }
+    ];
+
+    const LIFESTYLE_LABELS = {
+      sleep: { early: 'Ngủ sớm', late: 'Ngủ muộn ôn bài' },
+      cleanliness: { high: 'Rất gọn gàng', medium: 'Gọn gàng vừa' },
+      smoking: { no: 'Không hút thuốc/thú cưng', yes: 'Có hút thuốc/thú cưng' },
+      guests: { rare: 'Ít dẫn khách về', often: 'Hay có khách' },
+      budget: { under25: 'Dưới 2.5tr', '25to35': '2.5-3.5tr' }
+    };
 
     let currentEditingRoomIndex = -1;
 
-    // STATE VỚI CÁC TÍNH NĂNG MỚI ĐƯỢC FIX
     const state = {
       isLoggedIn: false,
       userRole: null,
@@ -906,12 +1791,32 @@
       viewMode: 'desktop',
       zoom: 1.0,
       priceFilter: 'all',
-      maxPriceBudget: 5000000, // Giá trị ngân sách tối đa do thanh trượt ngang điều chỉnh
-      isUnlimitedPrice: true, // Mặc định là không giới hạn
-      showAllRooms: false, // Bật tắt hiển thị tất cả các phòng
+      maxPriceBudget: 5000000,
+      isUnlimitedPrice: true,
+      showAllRooms: false,
       selectedCity: "Hồ Chí Minh",
       selectedUniversity: UNIVERSITIES_LIST[1],
       selectedAmenities: [],
+      busRadiusFilter: null,
+      selectedFoodTags: [],
+      // appliedFilters = bản "đã áp dụng" của các bộ lọc chọn-từ-danh-sách (tỉnh/thành, trường, tiện ích, xe buýt, ẩm thực).
+      // Các trường state.selectedCity/selectedUniversity/selectedAmenities/busRadiusFilter/selectedFoodTags ở trên
+      // là bản NHÁP (đang chỉnh) — getFilteredRooms() chỉ đọc appliedFilters, chỉ cập nhật khi bấm "Áp Dụng Bộ Lọc".
+      appliedFilters: {
+        selectedCity: "Hồ Chí Minh",
+        selectedUniversity: UNIVERSITIES_LIST[1],
+        selectedAmenities: [],
+        busRadiusFilter: null,
+        selectedFoodTags: []
+      },
+      myLifestyleAnswers: null,
+      quizCompleted: false,
+      roomReviews: {},
+      mapRadiusFilter: null,
+      mapSelectedLocation: null,
+      oldRoomLocation: null,
+      selectedMovingBroker: null,
+      brokerReviews: {},
       personaBudget: '3.0tr',
       landlordAppointmentAccepted: false,
       hoveredZone: null,
@@ -922,19 +1827,18 @@
       mobileMaxScroll: 650,
       isDraggingCanvas: false,
       dragStartY: 0,
-      // Fix lỗi 1: State dành cho Map tương tác, pan/drag, bộ lọc layer
       mapOffsetX: 0,
       mapOffsetY: 0,
       isDraggingMap: false,
       mapDragStartX: 0,
       mapDragStartY: 0,
+      mobileMapBox: null,
       mapFilters: {
         schools: true,
         rooms: true,
         bus: true,
         amenities: true
       },
-      currentMapPreset: "ueh",
       appointmentData: {
         date: "2026-09-13",
         time: "15:30 Chiều Mai",
@@ -1008,34 +1912,135 @@
       interactiveZones.push({ x, y, w, h, onClick, label });
     }
 
-    // ==========================================
-    // LOGIC LỌC PHÒNG THEO GIÁ & NGÂN SÁCH TỰ CHỌN
-    // ==========================================
     function getFilteredRooms() {
       let list = [...ROOMS_DATABASE];
+      const f = state.appliedFilters;
 
-      // Nếu đang KHÔNG bật chế độ 'Xem tất cả', sẽ lọc theo Tỉnh thành & Trường
       if (!state.showAllRooms) {
-        if (state.selectedCity && state.selectedCity !== "Tất Cả") {
-          list = list.filter(r => r.city.toLowerCase() === state.selectedCity.toLowerCase());
+        if (f.selectedCity && f.selectedCity !== "Tất Cả") {
+          list = list.filter(r => r.city.toLowerCase() === f.selectedCity.toLowerCase());
         }
 
-        if (state.selectedUniversity && state.selectedUniversity.id !== 'all') {
-          list = list.filter(r => r.universityTag === state.selectedUniversity.id);
+        if (f.selectedUniversity && f.selectedUniversity.id !== 'all') {
+          list = list.filter(r => r.universityTag === f.selectedUniversity.id);
         }
       }
 
-      // LỌC THEO THANH KÉO NGÂN SÁCH DO NGƯỜI DÙNG TỰ CHỌN (SLIDER)
       if (!state.isUnlimitedPrice && state.maxPriceBudget > 0) {
         list = list.filter(r => r.priceNum <= state.maxPriceBudget);
       }
 
-      // Lọc theo tiện ích mở rộng
-      if (state.selectedAmenities.length > 0) {
-        list = list.filter(r => state.selectedAmenities.every(a => r.amenities.includes(a)));
+      if (f.selectedAmenities.length > 0) {
+        list = list.filter(r => f.selectedAmenities.every(a => r.amenities.includes(a)));
+      }
+
+      if (f.busRadiusFilter) {
+        list = list.filter(r => r.busStopDistanceM != null && r.busStopDistanceM <= f.busRadiusFilter);
+      }
+
+      if (f.selectedFoodTags.length > 0) {
+        list = list.filter(r => f.selectedFoodTags.every(tag => r.nearbyFood && r.nearbyFood[tag]));
       }
 
       return list;
+    }
+
+    // So sánh bộ lọc đang chỉnh (nháp) với bộ lọc đã áp dụng, để hiện nút "Áp Dụng"/"Huỷ" đúng trạng thái.
+    function hasPendingFilterChanges() {
+      const f = state.appliedFilters;
+      if (state.selectedCity !== f.selectedCity) return true;
+      const draftUniId = state.selectedUniversity ? state.selectedUniversity.id : null;
+      const appliedUniId = f.selectedUniversity ? f.selectedUniversity.id : null;
+      if (draftUniId !== appliedUniId) return true;
+      if (state.selectedAmenities.length !== f.selectedAmenities.length || state.selectedAmenities.some(a => !f.selectedAmenities.includes(a))) return true;
+      if (state.busRadiusFilter !== f.busRadiusFilter) return true;
+      if (state.selectedFoodTags.length !== f.selectedFoodTags.length || state.selectedFoodTags.some(t => !f.selectedFoodTags.includes(t))) return true;
+      return false;
+    }
+
+    function applyFilters() {
+      state.appliedFilters = {
+        selectedCity: state.selectedCity,
+        selectedUniversity: state.selectedUniversity,
+        selectedAmenities: [...state.selectedAmenities],
+        busRadiusFilter: state.busRadiusFilter,
+        selectedFoodTags: [...state.selectedFoodTags]
+      };
+      state.desktopScrollY = 0;
+      state.mobileScrollY = 0;
+      resizeAndDraw();
+      showToast("✓ Đã áp dụng bộ lọc!");
+    }
+
+    function cancelFilters() {
+      const f = state.appliedFilters;
+      state.selectedCity = f.selectedCity;
+      state.selectedUniversity = f.selectedUniversity;
+      state.selectedAmenities = [...f.selectedAmenities];
+      state.busRadiusFilter = f.busRadiusFilter;
+      state.selectedFoodTags = [...f.selectedFoodTags];
+      updateShowAllButtonUI();
+      resizeAndDraw();
+      showToast("Đã huỷ thay đổi, quay về bộ lọc trước đó.");
+    }
+
+    function getMapFilteredRooms() {
+      let list = getFilteredRooms();
+      if (state.mapRadiusFilter && state.mapSelectedLocation && state.mapSelectedLocation.mapCoord) {
+        list = list.filter(r => {
+          const d = mapDistanceKm(r.mapCoord, state.mapSelectedLocation.mapCoord);
+          return d != null && d <= state.mapRadiusFilter;
+        });
+      }
+      return list;
+    }
+
+    function setMapRadiusFilter(km) {
+      state.mapRadiusFilter = state.mapRadiusFilter === km ? null : km;
+      resizeAndDraw();
+    }
+
+    function setBusRadiusFilter(meters) {
+      state.busRadiusFilter = state.busRadiusFilter === meters ? null : meters;
+      renderAmenitiesModalExtras();
+    }
+
+    function toggleFoodTagSelection(id) {
+      const idx = state.selectedFoodTags.indexOf(id);
+      if (idx === -1) state.selectedFoodTags.push(id);
+      else state.selectedFoodTags.splice(idx, 1);
+      renderAmenitiesModalExtras();
+    }
+
+    function renderAmenitiesModalExtras() {
+      const busContainer = document.getElementById('busRadiusContainer');
+      if (busContainer) {
+        busContainer.innerHTML = '';
+        BUS_RADIUS_OPTIONS.forEach(opt => {
+          const isActive = state.busRadiusFilter === opt.value;
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = `px-2.5 py-1 rounded-lg border text-[10.5px] font-semibold transition-colors ${isActive ? 'bg-teal-600 border-teal-500 text-white' : 'bg-slate-950 border-slate-700 text-slate-300 hover:border-teal-600'}`;
+          btn.textContent = opt.label;
+          btn.onclick = () => setBusRadiusFilter(opt.value);
+          busContainer.appendChild(btn);
+        });
+      }
+      const foodContainer = document.getElementById('foodTagContainer');
+      if (foodContainer) {
+        foodContainer.innerHTML = '';
+        FOOD_TAGS.forEach(tag => {
+          const isChecked = state.selectedFoodTags.includes(tag.id);
+          const label = document.createElement('label');
+          label.className = "flex items-center gap-2 p-2 rounded-lg bg-slate-950 border border-slate-800 hover:border-teal-500/50 cursor-pointer text-slate-200 text-xs transition";
+          label.innerHTML = `
+            <input type="checkbox" value="${tag.id}" ${isChecked ? 'checked' : ''} onchange="toggleFoodTagSelection('${tag.id}')" class="rounded bg-slate-900 border-slate-700 text-teal-600 focus:ring-teal-500">
+            <i class="fa-solid ${tag.icon} text-teal-400 text-sm"></i>
+            <span class="font-medium">${tag.label}</span>
+          `;
+          foodContainer.appendChild(label);
+        });
+      }
     }
 
     function handlePriceSliderChange(rawVal) {
@@ -1079,11 +2084,22 @@
 
     function toggleShowAllRooms() {
       state.showAllRooms = !state.showAllRooms;
+      if (state.showAllRooms) {
+        // "Xem Tất Cả" phải thật sự xoá sạch mọi bộ lọc khác (kể cả bộ lọc do AI hay do người dùng để lại trước đó),
+        // nếu không phòng vẫn có thể bị ẩn bởi tiện ích/xe buýt/ẩm thực/giá còn sót lại dù đã bật "xem tất cả".
+        state.selectedAmenities = [];
+        state.busRadiusFilter = null;
+        state.selectedFoodTags = [];
+        state.appliedFilters.selectedAmenities = [];
+        state.appliedFilters.busRadiusFilter = null;
+        state.appliedFilters.selectedFoodTags = [];
+        if (!state.isUnlimitedPrice) handlePriceSliderChange(5000000);
+      }
       updateShowAllButtonUI();
       state.desktopScrollY = 0;
       state.mobileScrollY = 0;
       resizeAndDraw();
-      showToast(state.showAllRooms ? "✓ Đang hiển thị TẤT CẢ phòng trên hệ thống!" : "Đã kích hoạt lại bộ lọc theo khu vực.");
+      showToast(state.showAllRooms ? "✓ Đang hiển thị TẤT CẢ phòng trên hệ thống (đã xoá mọi bộ lọc)!" : "Đã kích hoạt lại bộ lọc theo khu vực.");
     }
 
     function updateShowAllButtonUI() {
@@ -1100,22 +2116,6 @@
       }
     }
 
-    function setPriceFilter(filterKey) {
-      state.priceFilter = filterKey;
-      document.querySelectorAll('.price-pill').forEach(btn => {
-        btn.className = "price-pill px-2 py-0.5 rounded text-[10.5px] font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700";
-      });
-      const activeBtn = event && event.target ? event.target : null;
-      if (activeBtn) {
-        activeBtn.className = "price-pill px-2 py-0.5 rounded text-[10.5px] font-semibold bg-teal-500/30 text-teal-300 border border-teal-400/40";
-      }
-      state.desktopScrollY = 0;
-      state.mobileScrollY = 0;
-      resizeAndDraw();
-      const labels = { all: "Mọi Giá", under25: "< 2.5 Triệu", '25to35': "2.5Tr - 3.5Tr", above35: "> 3.5 Triệu" };
-      showToast(`Đã lọc danh sách theo mức giá: ${labels[filterKey]}`);
-    }
-
     function setPersonaBudget(budgetStr) {
       state.personaBudget = budgetStr;
       document.querySelectorAll('.budget-chip').forEach(btn => {
@@ -1130,7 +2130,7 @@
       state.desktopScrollY = 0;
       state.mobileScrollY = 0;
       resizeAndDraw();
-      showToast(`Persona Minh Anh đổi mức lọc: ${budgetStr.toUpperCase()}`);
+      showToast(`Persona Quốc Anh đổi mức lọc: ${budgetStr.toUpperCase()}`);
     }
 
     function openCityModal() {
@@ -1153,6 +2153,12 @@
         div.innerHTML = `<span>${isAll ? '🌐 [TẤT CẢ TỈNH / THÀNH PHỐ - TOÀN QUỐC]' : '📍 ' + city}</span> ${state.selectedCity === city ? '<i class="fa-solid fa-check text-teal-400"></i>' : ''}`;
         div.onclick = () => {
           state.selectedCity = city;
+          // Đổi tỉnh/thành ở bộ lọc trang chủ khiến vị trí/bán kính đã chọn trên Bản Đồ (nếu có, thuộc tỉnh/thành
+          // khác) không còn cùng không gian toạ độ với tỉnh/thành mới — xoá luôn để tránh so khoảng cách sai.
+          state.mapSelectedLocation = null;
+          state.mapRadiusFilter = null;
+          state.mapOffsetX = 0;
+          state.mapOffsetY = 0;
           if (city === "Tất Cả") {
             state.showAllRooms = true;
             state.selectedUniversity = UNIVERSITIES_LIST[0];
@@ -1170,7 +2176,7 @@
           state.desktopScrollY = 0;
           state.mobileScrollY = 0;
           resizeAndDraw();
-          showToast(`Đã chọn: ${city}`);
+          showToast(`Đã chọn (nháp): ${city} — bấm "Áp Dụng Bộ Lọc" để xem kết quả.`);
         };
         container.appendChild(div);
       });
@@ -1217,7 +2223,7 @@
           state.desktopScrollY = 0;
           state.mobileScrollY = 0;
           resizeAndDraw();
-          showToast(`Đã chọn: ${u.name}`);
+          showToast(`Đã chọn (nháp): ${u.name} — bấm "Áp Dụng Bộ Lọc" để xem kết quả.`);
         };
         container.appendChild(div);
       });
@@ -1227,9 +2233,82 @@
       renderUniList(filtered);
     }
 
+    // mapSearchModal dùng chung 2 chế độ: 'center' (tìm tâm bản đồ — LIỆT KÊ MỌI TỈNH/THÀNH, chọn xong sẽ tự
+    // chuyển bản đồ sang đúng tỉnh/thành của vị trí đó) và 'oldRoom' (chọn vị trí trọ cũ cho tính năng chuyển
+    // trọ, cũng liệt kê mọi tỉnh/thành). Cả 2 chế độ đều dùng chung 1 nguồn UNIVERSITIES_LIST, không giới hạn
+    // theo state.selectedCity nữa — đây là điểm sửa để tìm được vị trí ở các tỉnh/thành khác ngay từ màn Bản Đồ.
+    let mapSearchMode = 'center';
+    function openMapSearchModal(mode) {
+      mapSearchMode = mode || 'center';
+      const modal = document.getElementById('mapSearchModal');
+      if (modal) modal.classList.remove('hidden');
+      const input = document.getElementById('mapSearchInput');
+      if (input) input.value = '';
+      const titleEl = document.getElementById('mapSearchTitle');
+      if (mapSearchMode === 'oldRoom') {
+        if (titleEl) titleEl.innerHTML = '<i class="fa-solid fa-magnifying-glass-location"></i> CHỌN VỊ TRÍ TRỌ CŨ';
+      } else {
+        if (titleEl) titleEl.innerHTML = '<i class="fa-solid fa-magnifying-glass-location"></i> TÌM KHU VỰC / TRƯỜNG TRÊN BẢN ĐỒ';
+      }
+      setInnerText('mapSearchCityNotice', 'Toàn quốc (mọi tỉnh/thành)');
+      renderMapLocationList(UNIVERSITIES_LIST.filter(u => u.id !== 'all'));
+    }
+    function closeMapSearchModal() {
+      const modal = document.getElementById('mapSearchModal');
+      if (modal) modal.classList.add('hidden');
+    }
+    function renderMapLocationList(list) {
+      const c = document.getElementById('mapLocationListContainer');
+      if (!c) return;
+      c.innerHTML = '';
+      if (list.length === 0) {
+        c.innerHTML = '<div class="text-slate-500 text-center py-3">Không tìm thấy khu vực phù hợp.</div>';
+        return;
+      }
+      list.forEach(u => {
+        const div = document.createElement('div');
+        div.className = "p-2.5 rounded-lg hover:bg-slate-800 cursor-pointer border border-slate-800 transition";
+        div.innerHTML = `
+          <div class="font-bold text-teal-300">🎓 ${u.name}</div>
+          <div class="text-[10px] text-slate-400 mt-0.5">📍 ${u.address} (${u.city})</div>
+        `;
+        div.onclick = () => {
+          if (mapSearchMode === 'oldRoom') {
+            state.oldRoomLocation = u;
+            closeMapSearchModal();
+            if (typeof renderMovingModalBody === 'function') renderMovingModalBody();
+            showToast(`Đã chọn: ${u.name}`);
+          } else {
+            const changedCity = state.selectedCity !== u.city;
+            state.mapSelectedLocation = u;
+            state.selectedCity = u.city;
+            state.selectedUniversity = u;
+            state.mapOffsetX = 0;
+            state.mapOffsetY = 0;
+            state.mapRadiusFilter = null;
+            // Chuyển tỉnh/thành từ ô tìm kiếm trên Bản Đồ có hiệu lực NGAY (không qua cơ chế nháp/Áp Dụng của
+            // bộ lọc trang chủ) — nếu không, getFilteredRooms()/getMapFilteredRooms() vẫn lọc theo tỉnh/thành
+            // CŨ trong state.appliedFilters, khiến bản đồ đổi nền/trường nhưng không hiện phòng nào của tỉnh mới.
+            state.appliedFilters.selectedCity = u.city;
+            state.appliedFilters.selectedUniversity = u;
+            closeMapSearchModal();
+            resizeAndDraw();
+            showToast(changedCity ? `Đã chuyển bản đồ sang ${u.city} — chọn: ${u.name}` : `Đã chọn: ${u.name}`);
+          }
+        };
+        c.appendChild(div);
+      });
+    }
+    function filterMapLocationList(query) {
+      const q = query.toLowerCase();
+      const base = UNIVERSITIES_LIST.filter(u => u.id !== 'all');
+      renderMapLocationList(base.filter(u => u.name.toLowerCase().includes(q) || u.address.toLowerCase().includes(q) || u.city.toLowerCase().includes(q)));
+    }
+
     function openAmenitiesModal() {
       const modal = document.getElementById('amenitiesModal');
       if (modal) modal.classList.remove('hidden');
+      renderAmenitiesModalExtras();
       const container = document.getElementById('amenitiesCheckboxContainer');
       if (!container) return;
       container.innerHTML = '';
@@ -1277,6 +2356,29 @@
       if (input) input.value = promptText;
       submitAiPrompt();
     }
+    // AI tự tìm trong ROOMS_DATABASE theo từ khoá, HOÀN TOÀN độc lập với state bộ lọc chính ở trang chủ
+    // (không đụng state.selectedAmenities/showAllRooms/maxPriceBudget...) để không làm rối/kẹt bộ lọc thật.
+    function aiSearchRooms(text) {
+      const lower = text.toLowerCase();
+      let list = [...ROOMS_DATABASE];
+      if (lower.includes('hồ bơi') || lower.includes('pool')) list = list.filter(r => r.amenities.includes('pool'));
+      if (lower.includes('buýt') || lower.includes('bus')) list = list.filter(r => r.amenities.includes('bus'));
+      if (lower.includes('gym')) list = list.filter(r => r.amenities.includes('gym'));
+      if (lower.includes('dưới 2.5') || lower.includes('2.5tr')) list = list.filter(r => r.priceNum <= 2500000);
+      else if (lower.includes('3.5') || lower.includes('3.5tr') || lower.includes('3tr')) list = list.filter(r => r.priceNum <= 3500000);
+      if (lower.includes('tất cả') || lower.includes('toàn bộ')) list = [...ROOMS_DATABASE];
+      return list.slice(0, 5);
+    }
+
+    function aiGoToRoom(id) {
+      const room = ROOMS_DATABASE.find(r => r.id === id);
+      if (!room) return;
+      state.selectedRoomDetail = room;
+      closeAiChatModal();
+      switchScreen(1);
+      showToast(`Đang xem: ${room.title}`);
+    }
+
     function submitAiPrompt() {
       const input = document.getElementById('aiPromptInput');
       if (!input) return;
@@ -1297,44 +2399,28 @@
       chatContainer.scrollTop = chatContainer.scrollHeight;
 
       setTimeout(() => {
-        let aiReply = "Dựa trên yêu cầu của bạn, tôi đã phân tích kho phòng trọ thực tế và áp dụng bộ lọc tự động:";
-        const lower = text.toLowerCase();
-        if (lower.includes('tất cả') || lower.includes('toàn bộ')) {
-          state.showAllRooms = true;
-          updateShowAllButtonUI();
-          aiReply += " Đã mở toàn bộ danh sách phòng trên toàn quốc.";
-        }
-        if (lower.includes('hồ bơi') || lower.includes('pool')) {
-          if (!state.selectedAmenities.includes('pool')) state.selectedAmenities.push('pool');
-          aiReply += " Đã thêm tiện ích [Hồ bơi].";
-        }
-        if (lower.includes('buýt') || lower.includes('bus')) {
-          if (!state.selectedAmenities.includes('bus')) state.selectedAmenities.push('bus');
-          aiReply += " Đã tích hợp tuyến xe buýt gần kề.";
-        }
-        if (lower.includes('dưới 2.5') || lower.includes('2.5tr')) {
-          state.priceFilter = 'under25';
-          aiReply += " Đã lọc mức giá < 2.5 Tr/tháng.";
-        } else if (lower.includes('3.5') || lower.includes('3.5tr') || lower.includes('3tr')) {
-          state.priceFilter = '25to35';
-          aiReply += " Đã lọc mức giá 2.5Tr - 3.5Tr.";
-        }
-
-        const currentResults = getFilteredRooms();
-        aiReply += `\n\n✨ AI đề xuất ${currentResults.length} phòng trọ tối ưu nhất hiện đang hiển thị ngay trên màn hình chính cho bạn!`;
+        const matched = aiSearchRooms(text);
+        const aiReply = matched.length > 0
+          ? `Mình gợi ý ${matched.length} phòng trọ phù hợp với yêu cầu này (gợi ý riêng của AI, không thay đổi bộ lọc ở trang chủ):`
+          : "Mình chưa tìm thấy phòng nào khớp chính xác, đây là một vài phòng tiêu biểu bạn có thể tham khảo:";
+        const listHtml = matched.map(r => `
+          <div class="mt-1.5 p-2 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-between gap-2">
+            <div class="min-w-0">
+              <div class="font-bold text-white text-[11px] truncate">${r.title}</div>
+              <div class="text-[10px] text-teal-300">${r.priceStr} • ${r.city}</div>
+            </div>
+            <button onclick="aiGoToRoom(${r.id})" class="px-2 py-1 rounded bg-purple-600 hover:bg-purple-500 text-white text-[10px] font-bold shrink-0">Xem</button>
+          </div>
+        `).join('');
 
         const aiDiv = document.createElement('div');
         aiDiv.className = "flex items-start gap-2";
         aiDiv.innerHTML = `
           <div class="w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold text-[10px] shrink-0">AI</div>
-          <div class="bg-slate-800 p-2.5 rounded-xl border border-slate-700 max-w-[85%] leading-relaxed">${aiReply}</div>
+          <div class="bg-slate-800 p-2.5 rounded-xl border border-slate-700 max-w-[85%] leading-relaxed">${aiReply}${listHtml}</div>
         `;
         chatContainer.appendChild(aiDiv);
         chatContainer.scrollTop = chatContainer.scrollHeight;
-
-        resizeAndDraw();
-        closeAiChatModal();
-        showToast("🤖 AI đã cập nhật bộ lọc trọ theo yêu cầu của bạn!");
       }, 500);
     }
 
@@ -1449,7 +2535,7 @@
         showToast("⚡ Chuyển nhanh sang: Chủ Nhà Cô Nga");
       } else {
         performLoginSuccess(MOCK_ACCOUNTS.student);
-        showToast("⚡ Chuyển nhanh sang: Sinh Viên Minh Anh");
+        showToast("⚡ Chuyển nhanh sang: Sinh Viên Quốc Anh");
       }
     }
 
@@ -1508,7 +2594,9 @@
           authContainer.innerHTML = `
             <div class="flex items-center gap-2">
               <div class="flex items-center gap-1.5 bg-slate-800/90 py-0.5 px-2 rounded-lg border border-slate-700">
-                <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-bold text-white" style="background-color: ${u.color}">${u.avatar}</span>
+                <span class="w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-bold text-white overflow-hidden" style="background-color: ${u.color}">
+                  ${u.avatar}
+                </span>
                 <span class="text-xs font-semibold text-white hidden md:inline">${u.name}</span>
               </div>
               <button onclick="performLogout()" class="px-2.5 py-1 text-xs font-semibold bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/30 rounded-lg transition flex items-center gap-1 active:scale-95" title="Đăng xuất">
@@ -1558,18 +2646,21 @@
     function updateStudentNotes() {
       const container = document.getElementById('screenNotesContent');
       const notes = [
-        `Khám phá trọ: ${state.showAllRooms ? 'Toàn bộ phòng trên hệ thống' : state.selectedCity + ' gần ' + (state.selectedUniversity ? state.selectedUniversity.name : 'trường')}.`,
-        "Xem chi tiết phòng, bảng Rubric 6 tiêu chí và đánh giá thực tế.",
-        "Ghép bạn ở cùng thông minh (>85% match) kèm Bản Cam Kết Mẫu.",
+        `Khám phá trọ: ${state.showAllRooms ? 'Toàn bộ phòng trên hệ thống' : state.selectedCity + ' gần ' + (state.selectedUniversity ? state.selectedUniversity.name : 'trường')}. Lọc phòng thật, biểu phí minh bạch tránh tin ảo.`,
+        "Xem chi tiết phòng, bảng Rubric 6 tiêu chí và đánh giá thực tế từ cựu sinh viên.",
+        "Ghép bạn ở cùng thông minh (>85% match) theo lối sống, giờ giấc kèm Bản Cam Kết Mẫu.",
         "Bản đồ tương tác đa lớp: Kéo chuột để di chuyển quanh khu vực, lọc trường học & tiện ích.",
-        "Toàn cảnh hành trình tìm trọ minh bạch từ xác thực thẻ SV."
+        "Toàn cảnh hành trình tìm trọ minh bạch từ xác thực thẻ SV UEH."
       ];
       if (container) {
         container.innerHTML = `
           <div class="font-bold text-teal-300 text-[10.5px] flex items-center gap-1 mb-0.5">
-            <i class="fa-solid fa-graduation-cap text-teal-400"></i> Phân Hệ Sinh Viên Tìm Trọ
+            <i class="fa-solid fa-graduation-cap text-teal-400"></i> Persona: Quốc Anh (19t • KDQT UEH)
           </div>
-          <p class="text-[10px] text-slate-300 leading-snug">${notes[state.currentScreen] || notes[0]}</p>
+          <p class="text-[10px] text-slate-300 leading-snug mb-1.5">${notes[state.currentScreen] || notes[0]}</p>
+          <div class="pt-1 border-t border-slate-800/80 text-[9.5px] text-slate-400 italic">
+            "Mình chỉ muốn tìm một nơi ở an toàn, giá hợp lý, không lo rủi ro mất cọc."
+          </div>
         `;
       }
     }
@@ -1732,10 +2823,17 @@
       const navY = 36;
       drawRoundedRect(0, navY, w, 62, 0, "#FFFFFF", "#E2E8F0", 1);
 
-      drawRoundedRect(36, navY + 12, 36, 36, 8, "#0D9488", null);
-      ctx.fillStyle = "#FFFFFF";
-      ctx.font = "bold 18px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("U", 47, navY + 36);
+      // ĐOẠN CODE MỚI:
+      if (uninestLogo.complete && uninestLogo.naturalWidth > 0) {
+        // Vẽ logo dạng ảnh với kích thước 38x38px cân đối với thanh điều hướng
+        ctx.drawImage(uninestLogo, 36, navY + 11, 38, 38);
+      } else {
+        // Dự phòng khi ảnh chưa tải xong
+        drawRoundedRect(36, navY + 12, 36, 36, 8, "#0D9488", null);
+        ctx.fillStyle = "#FFFFFF";
+        ctx.font = "bold 18px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText("U", 47, navY + 36);
+}
 
       ctx.fillStyle = "#0F172A";
       ctx.font = "800 18px 'Plus Jakarta Sans', sans-serif";
@@ -1802,7 +2900,7 @@
         registerClickZone(w - 180, navY + 14, 144, 34, () => openLoginModal(), "Mở Đăng Nhập");
       } else {
         const u = state.currentUser;
-        drawBadge(state.userRole === 'student' ? "✓ SV UEH K49" : "✓ Chủ Nhà Uy Tín", w - 280, navY + 21, "#CCFBF1", "#0F766E");
+        drawBadge(state.userRole === 'student' ? "✓ SV UEH K51" : "✓ Chủ Nhà Uy Tín", w - 280, navY + 21, "#CCFBF1", "#0F766E");
         drawAvatar(w - 55, navY + 31, 16, u.avatar, u.color);
         ctx.fillStyle = "#1E293B";
         ctx.font = "700 12px 'Plus Jakarta Sans', sans-serif";
@@ -1885,7 +2983,7 @@
 
       ctx.fillStyle = "#0F172A";
       ctx.font = "700 12px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("Trải nghiệm dành cho Tân Sinh Viên:", 55, cardY + 98);
+      ctx.fillText("Trải nghiệm dành cho Tân Sinh Viên Quốc Anh:", 55, cardY + 98);
 
       const svFeatures = [
         "✓ Kho phòng kiểm định thực tế theo 34+ Tỉnh Thành & Toàn quốc.",
@@ -1925,7 +3023,7 @@
       ctx.fillText("Công cụ quản trị dành cho Chủ Trọ Minh Bạch:", col2X + 15, cardY + 98);
 
       const landlordFeatures = [
-        "✓ Phê duyệt lịch hẹn xem phòng trực tiếp từ bạn Minh Anh.",
+        "✓ Phê duyệt lịch hẹn xem phòng trực tiếp từ bạn Quốc Anh.",
         "✓ Quản lý niêm yết biểu phí cam kết: Điện 3.5k/kWh, Nước 100k.",
         "✓ Theo dõi điểm đánh giá Rubric định kỳ (4.8★) từ cựu SV.",
         "✓ Tự động hóa mẫu hợp đồng thuê phòng chuẩn pháp lý."
@@ -1948,11 +3046,8 @@
       registerClickZone(col2X + 15, btn2Y, cardW - 30, 36, () => { quickFillCredentials('landlord'); openLoginModal(); }, "Đăng nhập phân hệ Chủ Nhà");
     }
 
-    // ==========================================
-    // MÀN HÌNH 0: KHÁM PHÁ TRỌ (CẬP NHẬT THANH LỌC GIÁ)
-    // ==========================================
     function drawScreen1_Home(w, h) {
-      state.desktopMaxScroll = 480;
+      state.desktopMaxScroll = 520;
       const topY = 132;
       ctx.fillStyle = "#0F172A";
       ctx.font = "800 18px 'Plus Jakarta Sans', sans-serif";
@@ -1967,7 +3062,6 @@
       
       const colW = (w - 120) / 4;
 
-      // Cột 1: Tỉnh thành (Có hỗ trợ Xem Tất Cả)
       ctx.fillStyle = "#64748B";
       ctx.font = "700 9.5px 'Plus Jakarta Sans', sans-serif";
       ctx.fillText("1. TỈNH / THÀNH PHỐ", 58, filterBoxY + 20);
@@ -1982,7 +3076,6 @@
       ctx.strokeStyle = "#E2E8F0";
       ctx.strokeRect(58 + colW - 10, filterBoxY + 14, 1, 60);
 
-      // Cột 2: Trường và Cơ sở
       const col2X = 58 + colW + 15;
       ctx.fillStyle = "#64748B";
       ctx.font = "700 9.5px 'Plus Jakarta Sans', sans-serif";
@@ -1999,7 +3092,6 @@
       ctx.strokeStyle = "#E2E8F0";
       ctx.strokeRect(col2X + colW - 10, filterBoxY + 14, 1, 60);
 
-      // Cột 3: Ngân sách tự chọn (Price Slider Indicator)
       const col3X = col2X + colW + 15;
       ctx.fillStyle = "#64748B";
       ctx.font = "700 9.5px 'Plus Jakarta Sans', sans-serif";
@@ -2013,7 +3105,6 @@
       ctx.fillText("🎚️ Kéo thanh ngang / Bấm đổi giá", col3X, filterBoxY + 56);
       registerClickZone(col3X, filterBoxY + 12, colW - 20, 62, () => openPriceModal(), "Tùy chỉnh ngân sách tự chọn");
 
-      // Cột 4: Nút Tìm trọ AI & Tiện ích
       const btnX = col3X + colW + 10;
       drawRoundedRect(btnX, filterBoxY + 14, colW - 35, 60, 8, "#7C3AED", null);
       ctx.fillStyle = "#FFFFFF";
@@ -2030,7 +3121,6 @@
         : `Tìm Thấy ${filteredRooms.length} Phòng Trọ Phù Hợp (${priceText})`;
       ctx.fillText(headerTitle, 40, listHeaderY);
 
-      // Nút mở tùy chỉnh thanh kéo giá ngay trên tiêu đề danh sách
       const priceBtnX = w - 380;
       drawRoundedRect(priceBtnX, listHeaderY - 16, 130, 24, 5, "#FEF3C7", "#FDE68A", 1);
       ctx.fillStyle = "#92400E";
@@ -2040,7 +3130,6 @@
       ctx.textAlign = "start";
       registerClickZone(priceBtnX, listHeaderY - 16, 130, 24, () => openPriceModal(), "Mở thanh kéo ngân sách");
 
-      // Nút bật/tắt toggle 'Hiển thị tất cả'
       const toggleAllX = w - 240;
       drawRoundedRect(toggleAllX, listHeaderY - 16, 200, 24, 5, state.showAllRooms ? "#DCFCE7" : "#F1F5F9", state.showAllRooms ? "#86EFAC" : "#CBD5E1", 1);
       ctx.fillStyle = state.showAllRooms ? "#15803D" : "#475569";
@@ -2050,11 +3139,45 @@
       ctx.textAlign = "start";
       registerClickZone(toggleAllX, listHeaderY - 16, 200, 24, () => toggleShowAllRooms(), "Bật/Tắt xem tất cả phòng");
 
+      const extraFilterY = listHeaderY + 14;
+      const busLabel = state.busRadiusFilter ? `<${state.busRadiusFilter}m` : "Bất kỳ";
+      const foodLabel = state.selectedFoodTags.length > 0 ? `${state.selectedFoodTags.length} tiện ích` : "Bất kỳ";
+      drawRoundedRect(40, extraFilterY, 280, 24, 5, "#ECFEFF", "#A5F3FC", 1);
+      ctx.fillStyle = "#155E75";
+      ctx.font = "700 9.5px 'Plus Jakarta Sans', sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(`🚌 Xe buýt: ${busLabel}  •  🍜 Ẩm thực: ${foodLabel}`, 40 + 140, extraFilterY + 16);
+      ctx.textAlign = "start";
+      registerClickZone(40, extraFilterY, 280, 24, () => openAmenitiesModal(), "Mở bộ lọc xe buýt & ẩm thực");
+
+      const pendingChanges = hasPendingFilterChanges();
+      const applyBtnX = 40 + 280 + 12;
+      const applyBtnW = 172;
+      drawRoundedRect(applyBtnX, extraFilterY, applyBtnW, 24, 5, pendingChanges ? "#0D9488" : "#E2E8F0", null);
+      ctx.fillStyle = pendingChanges ? "#FFFFFF" : "#94A3B8";
+      ctx.font = "700 9.5px 'Plus Jakarta Sans', sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(pendingChanges ? "✓ Áp Dụng Bộ Lọc (Nháp)" : "✓ Đã Áp Dụng Bộ Lọc", applyBtnX + applyBtnW / 2, extraFilterY + 16);
+      ctx.textAlign = "start";
+      registerClickZone(applyBtnX, extraFilterY, applyBtnW, 24, () => applyFilters(), "Áp dụng bộ lọc tỉnh/thành, trường, tiện ích, xe buýt & ẩm thực");
+
+      if (pendingChanges) {
+        const cancelBtnX = applyBtnX + applyBtnW + 8;
+        const cancelBtnW = 100;
+        drawRoundedRect(cancelBtnX, extraFilterY, cancelBtnW, 24, 5, "#F8FAFC", "#CBD5E1", 1);
+        ctx.fillStyle = "#475569";
+        ctx.font = "700 9.5px 'Plus Jakarta Sans', sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("↺ Huỷ", cancelBtnX + cancelBtnW / 2, extraFilterY + 16);
+        ctx.textAlign = "start";
+        registerClickZone(cancelBtnX, extraFilterY, cancelBtnW, 24, () => cancelFilters(), "Huỷ thay đổi bộ lọc chưa áp dụng");
+      }
+
       const cardW = (w - 110) / 3;
       const cardH = 330;
       const gapX = 15;
       const gapY = 18;
-      let startY = listHeaderY + 24;
+      let startY = listHeaderY + 50;
 
       if (filteredRooms.length === 0) {
         drawRoundedRect(40, startY, w - 80, 110, 10, "#FFFBEB", "#FDE68A", 1);
@@ -2100,7 +3223,8 @@
 
       ctx.fillStyle = "#64748B";
       ctx.font = "500 10px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("📍 " + data.distance, x + 12, y + 171);
+      const busText = data.busStopDistanceM != null ? ` • 🚌 Trạm buýt ${data.busStopDistanceM}m` : "";
+      ctx.fillText("📍 " + data.distance + busText, x + 12, y + 171);
 
       ctx.fillStyle = "#0F766E";
       ctx.font = "600 9.5px 'Plus Jakarta Sans', sans-serif";
@@ -2112,12 +3236,20 @@
         tagX += tw + 3;
       });
 
-      drawRoundedRect(x + 12, y + 228, w - 24, 34, 5, "#F8FAFC", "#E2E8F0", 1);
+      if (data.nearbyFood) {
+        let foodX = x + 12;
+        FOOD_TAGS.filter(t => data.nearbyFood[t.id]).slice(0, 2).forEach(t => {
+          const tw = drawBadge(FOOD_SHORT_LABELS[t.id], foodX, y + 220, "#FEF9C3", "#92400E");
+          foodX += tw + 3;
+        });
+      }
+
+      drawRoundedRect(x + 12, y + 246, w - 24, 34, 5, "#F8FAFC", "#E2E8F0", 1);
       ctx.fillStyle = "#475569";
       ctx.font = "italic 9px 'Plus Jakarta Sans', sans-serif";
-      wrapText(ctx, data.feedback, x + 16, y + 242, w - 32, 13);
+      wrapText(ctx, data.feedback, x + 16, y + 260, w - 32, 13);
 
-      const btnY = y + 278;
+      const btnY = y + 296;
       drawRoundedRect(x + 12, btnY, w - 24, 30, 6, "#0F172A", null);
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "700 10px 'Plus Jakarta Sans', sans-serif";
@@ -2132,7 +3264,7 @@
     }
 
     function drawScreen2_Detail(w, h) {
-      state.desktopMaxScroll = 300;
+      state.desktopMaxScroll = 420;
       const room = state.selectedRoomDetail || ROOMS_DATABASE[0];
       const topY = 124;
       ctx.fillStyle = "#64748B";
@@ -2179,14 +3311,7 @@
       ctx.font = "500 9.5px 'Plus Jakarta Sans', sans-serif";
       ctx.fillText(`Xác minh ${room.reviews} đánh giá thực tế kèm hóa đơn cọc`, rightX + 16, rubricY + 34);
 
-      const criteriaList = [
-        { name: "1. Thái độ chủ trọ & tôn trọng riêng tư", score: "4.9 / 5.0", bar: 0.98, note: "Hỗ trợ nhanh khi hỏng thiết bị, không tự ý vào phòng." },
-        { name: "2. Minh bạch chi phí (Điện, Nước, Xe)", score: "4.8 / 5.0", bar: 0.96, note: "Công tơ riêng tử tế, chụp hình báo Zalo mùng 1 hàng tháng." },
-        { name: "3. Cơ sở vật chất & độ bền thiết bị", score: "4.6 / 5.0", bar: 0.92, note: "Máy lạnh lạnh sâu, áp lực nước mạnh, tường sạch không mốc." },
-        { name: "4. Hàng xóm thân thiện, ý thức sinh viên", score: "4.8 / 5.0", bar: 0.96, note: "Hàng xóm trí thức, không hát karaoke nhậu nhẹt." },
-        { name: "5. Môi trường xung quanh & Vệ sinh", score: "4.7 / 5.0", bar: 0.94, note: "Ngõ cao ráo KHÔNG NGẬP mùa mưa." },
-        { name: "6. An ninh vân tay & hoàn cọc đúng hẹn", score: "4.9 / 5.0", bar: 0.98, note: "Khóa vân tay 2 lớp, camera 24/7." }
-      ];
+      const criteriaList = ROOM_RUBRIC_CRITERIA;
 
       let itemY = rubricY + 48;
       criteriaList.forEach(c => {
@@ -2208,22 +3333,18 @@
         itemY += 34;
       });
 
+      const roomReviewsList = getRoomReviews(room).slice(0, 3);
       const reviewBoxY = photoY + photoH + 12;
-      const reviewBoxH = 340;
+      const reviewBoxH = 130 + roomReviewsList.length * 92;
       drawRoundedRect(40, reviewBoxY, leftW, reviewBoxH, 10, "#FFFFFF", "#E2E8F0", 1);
 
       ctx.fillStyle = "#0F172A";
       ctx.font = "700 12.5px 'Plus Jakarta Sans', sans-serif";
       ctx.fillText(`Phản Hồi Từ Sinh Viên Đã Từng Ở (${room.reviews} Đánh Giá)`, 52, reviewBoxY + 22);
 
-      const sampleReviews = [
-        { name: "Minh Anh", stay: "Đã ở 2 năm", tag: "Đã Nhận Lại Cọc", stars: 5, text: "“Khu trọ rất yên tĩnh, chủ nhà hỗ trợ cực kỳ nhiệt tình. Lúc chuyển đi được hoàn cọc 100% đúng hẹn.”" },
-        { name: "Tuấn Kiệt", stay: "Đang ở phòng 204", tag: "Xác Minh Hóa Đơn", stars: 4.8, text: "“Tiền điện nước đúng chuẩn niêm yết, tính tiền sòng phẳng chụp ảnh công tơ gửi qua Zalo.”" }
-      ];
-
       let rY = reviewBoxY + 36;
-      sampleReviews.forEach(rev => {
-        drawReviewItem(52, rY, leftW - 24, { userBadge: rev.name, stayDuration: rev.stay, verifiedTag: rev.tag, stars: rev.stars, text: rev.text });
+      roomReviewsList.forEach(rev => {
+        drawReviewItem(52, rY, leftW - 24, rev);
         rY += 92;
       });
 
@@ -2237,7 +3358,7 @@
       registerClickZone(52, addReviewBtnY, leftW - 24, 28, () => openReviewModal(), "Viết đánh giá ẩn danh");
 
       const bookBoxY = rubricY + rubricH + 12;
-      const bookBoxH = 140;
+      const bookBoxH = 176;
       drawRoundedRect(rightX, bookBoxY, rightW, bookBoxH, 10, "#F0FDFA", "#99F6E4", 1);
 
       ctx.fillStyle = "#0F766E";
@@ -2262,6 +3383,15 @@
         setInnerText('bookingRoomPrice', `${room.priceStr} • ${room.verifiedCost}`);
         openBookingModal();
       }, `Đặt lịch xem phòng với ${room.landlord}`);
+
+      const movingBtnY = bookBtnY + 40;
+      drawRoundedRect(rightX + 16, movingBtnY, rightW - 32, 32, 6, "#FFFFFF", "#0D9488", 1.5);
+      ctx.fillStyle = "#0D9488";
+      ctx.font = "700 10.5px 'Plus Jakarta Sans', sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("🚚 Đặt Dịch Vụ Chuyển Trọ", rightX + rightW / 2, movingBtnY + 21);
+      ctx.textAlign = "start";
+      registerClickZone(rightX + 16, movingBtnY, rightW - 32, 32, () => openMovingModal(room), "Đặt dịch vụ chuyển trọ");
     }
 
     function drawReviewItem(x, y, w, data) {
@@ -2299,14 +3429,25 @@
       drawRoundedRect(40, filterBoxY, w - 80, 68, 10, "#FFFFFF", "#E2E8F0", 1);
       ctx.fillStyle = "#0F172A";
       ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText(`Hồ Sơ Phong Cách Sống Minh Anh (Ngân sách share: ~${state.personaBudget.toUpperCase()}):`, 50, filterBoxY + 20);
+      ctx.fillText(`Hồ Sơ Phong Cách Sống Quốc Anh (Ngân sách share: ~${state.personaBudget.toUpperCase()}):`, 50, filterBoxY + 20);
 
-      const myTags = ["Giờ ngủ: 23h30", "Gọn gàng (5/5)", "Không hút thuốc", "Khu vực: " + state.selectedCity];
+      const myTags = state.quizCompleted
+        ? ["Giờ ngủ: " + LIFESTYLE_LABELS.sleep[state.myLifestyleAnswers.sleep], "Gọn gàng: " + LIFESTYLE_LABELS.cleanliness[state.myLifestyleAnswers.cleanliness], "Khu vực: " + state.selectedCity]
+        : ["Giờ ngủ: 23h30", "Gọn gàng (5/5)", "Không hút thuốc", "Khu vực: " + state.selectedCity];
       let tagX = 50;
       myTags.forEach(t => {
         const tw = drawBadge(t, tagX, filterBoxY + 32, "#F1F5F9", "#0F766E");
         tagX += tw + 6;
       });
+
+      const quizBtnW = 170;
+      drawRoundedRect(w - 80 - quizBtnW + 40, filterBoxY + 16, quizBtnW, 36, 7, state.quizCompleted ? "#F0FDF4" : "#0D9488", state.quizCompleted ? "#BBF7D0" : null, state.quizCompleted ? 1 : 0);
+      ctx.fillStyle = state.quizCompleted ? "#059669" : "#FFFFFF";
+      ctx.font = "700 10.5px 'Plus Jakarta Sans', sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(state.quizCompleted ? "✓ Đã Làm Trắc Nghiệm" : "📝 Làm Trắc Nghiệm Phong Cách Sống", w - 80 - quizBtnW / 2 + 40, filterBoxY + 39);
+      ctx.textAlign = "start";
+      registerClickZone(w - 80 - quizBtnW + 40, filterBoxY + 16, quizBtnW, 36, () => openLifestyleQuizModal(), "Làm bài trắc nghiệm phong cách sống");
 
       ctx.fillStyle = "#0F172A";
       ctx.font = "700 13px 'Plus Jakarta Sans', sans-serif";
@@ -2315,22 +3456,9 @@
       const cardW = (w - 110) / 3;
       const cardY = filterBoxY + 110;
 
-      drawCandidateCard(40, cardY, cardW, 370, {
-        name: "Hoàng Yến (19t)", school: "Marketing - K49", matchScore: 94, scoreColor: "#059669", avatarColor: "#EC4899",
-        traits: [{ icon: "🌙", label: "Ngủ 0h ôn bài" }, { icon: "✨", label: "Sạch sẽ tuyệt đối" }, { icon: "💰", label: "Chia tiền sòng phẳng" }],
-        bio: "“Mình hướng nội, nấu ăn tiết kiệm. Muốn tìm bạn nữ cùng thuê phòng gần trường.”", agreementStatus: "Đã ký Cam Kết Quy Tắc"
-      });
-
-      drawCandidateCard(40 + cardW + 15, cardY, cardW, 370, {
-        name: "Thanh Trúc (18t)", school: "Kinh Doanh Quốc Tế", matchScore: 89, scoreColor: "#0D9488", avatarColor: "#8B5CF6",
-        traits: [{ icon: "⏰", label: "Dậy sớm 6h đi học" }, { icon: "🧹", label: "Lịch dọn dẹp cụ thể" }, { icon: "📚", label: "Học thư viện tối" }],
-        bio: "“Tính thẳng thắn, tiền trọ chia đều mùng 1. Tôn trọng không gian riêng.”", agreementStatus: "Sẵn sàng ký Cam Kết"
-      });
-
-      drawCandidateCard(40 + (cardW + 15) * 2, cardY, cardW, 370, {
-        name: "Phương Linh (20t)", school: "ĐH Khoa Học Tự Nhiên", matchScore: 84, scoreColor: "#D97706", avatarColor: "#3B82F6",
-        traits: [{ icon: "🚌", label: "Đi lại thuận tiện" }, { icon: "🍳", label: "Nấu ăn cuối tuần" }, { icon: "🔒", label: "Đã ở trọ 1 năm" }],
-        bio: "“Đã có sẵn tủ lạnh mini & nồi cơm điện. Cần tìm bạn ở ghép chia sẻ phòng.”", agreementStatus: "Đã xác thực Thẻ SV"
+      const ranked = getRankedCandidates();
+      ranked.forEach((c, i) => {
+        drawCandidateCard(40 + (cardW + 15) * i, cardY, cardW, 370, c);
       });
     }
 
@@ -2394,9 +3522,6 @@
       registerClickZone(x + 12, btn2Y, w - 24, 28, () => { showToast(`Đã thêm ${data.name} vào danh sách ghép phòng!`); switchScreen(0); }, "Ghép nhóm thuê trọ");
     }
 
-    // ==========================================
-    // MÀN HÌNH 4: BẢN ĐỒ TƯƠNG TÁC THỰC TẾ (FIX 1)
-    // ==========================================
     function drawScreen4_Map(w, h) {
       state.desktopMaxScroll = 0;
       const topY = 130;
@@ -2406,128 +3531,65 @@
 
       ctx.fillStyle = "#475569";
       ctx.font = "500 11px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("🖐️ Giữ chuột và kéo trên bản đồ để di chuyển góc nhìn. Chọn khu vực và tích chọn các lớp địa điểm ở bên phải.", 40, topY + 20);
+      ctx.fillText("🖐️ Giữ chuột và kéo bản đồ theo mọi hướng để mở rộng góc nhìn. Tìm khu vực/trường ở BẤT KỲ tỉnh/thành nào và chọn bán kính ở bên phải để so sánh khoảng cách.", 40, topY + 20);
 
       const mapW = w * 0.66;
-      const mapH = 500;
+      const mapH = MAP_BOX_H;
       const mapX = 40;
       const mapY = topY + 34;
+      const coordScaleX = mapW / MAP_LOCAL_W;
+      const coordScaleY = mapH / MAP_LOCAL_H;
 
-      // Khung chứa bản đồ
       drawRoundedRect(mapX, mapY, mapW, mapH, 12, "#E9ECEF", "#CBD5E1", 1.5);
 
-      // Cắt theo khung để hiệu ứng Pan/Drag không lọt ra ngoài
       ctx.save();
       ctx.beginPath();
       ctx.roundRect(mapX, mapY, mapW, mapH, 12);
       ctx.clip();
 
-      // Dịch chuyển theo tọa độ Pan Drag
+      drawMapTileFiller(mapX, mapY, mapW, mapH, state.mapOffsetX, state.mapOffsetY);
+
       ctx.save();
       ctx.translate(state.mapOffsetX, state.mapOffsetY);
 
-      // --- 1. LỚP ĐỊA HÌNH TỰ NHIÊN (CÔNG VIÊN, SÔNG HỒ) ---
-      // Công viên Lê Thị Riêng / Mảng xanh
-      ctx.fillStyle = "#DCFCE7";
-      ctx.beginPath();
-      ctx.roundRect(mapX + 50, mapY + 60, 180, 120, 16);
-      ctx.fill();
-      ctx.fillStyle = "#15803D";
-      ctx.font = "600 10px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("🌳 Công viên Cây Xanh", mapX + 65, mapY + 120);
+      drawCityMapBackground(mapX, mapY, mapW, mapH, state.selectedCity);
 
-      // Đoạn kênh/sông cảnh quan
-      ctx.strokeStyle = "#BAE6FD";
-      ctx.lineWidth = 36;
-      ctx.beginPath();
-      ctx.moveTo(mapX - 50, mapY + 390);
-      ctx.bezierCurveTo(mapX + 160, mapY + 340, mapX + 340, mapY + 460, mapX + mapW + 80, mapY + 400);
-      ctx.stroke();
-      ctx.fillStyle = "#0284C7";
-      ctx.font = "bold 9px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("🌊 Kênh Nhiêu Lộc / Sông Cảnh Quan", mapX + 180, mapY + 410);
-
-      // Khuôn viên các khối nhà dân cư
-      ctx.fillStyle = "rgba(226, 232, 240, 0.7)";
-      ctx.fillRect(mapX + 60, mapY + 270, 90, 80);
-      ctx.fillRect(mapX + 270, mapY + 70, 80, 110);
-      ctx.fillRect(mapX + 410, mapY + 270, 110, 80);
-
-      // --- 2. HỆ THỐNG GIAO THÔNG (ĐẠI LỘ & HẺM XE HƠI) ---
-      // Đường Nguyễn Tri Phương
-      ctx.strokeStyle = "#FFFFFF";
-      ctx.lineWidth = 26;
-      ctx.beginPath();
-      ctx.moveTo(mapX + 230, mapY - 60);
-      ctx.lineTo(mapX + 230, mapY + mapH + 60);
-      ctx.stroke();
-
-      // Vạch kẻ vàng phân làn
-      ctx.strokeStyle = "#FACC15";
-      ctx.lineWidth = 2;
-      ctx.setLineDash([8, 6]);
-      ctx.beginPath();
-      ctx.moveTo(mapX + 230, mapY - 60);
-      ctx.lineTo(mapX + 230, mapY + mapH + 60);
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      // Đường Sư Vạn Hạnh
-      ctx.strokeStyle = "#FFFFFF";
-      ctx.lineWidth = 22;
-      ctx.beginPath();
-      ctx.moveTo(mapX - 50, mapY + 230);
-      ctx.lineTo(mapX + mapW + 60, mapY + 230);
-      ctx.stroke();
-
-      // Hẻm liên khu vực
-      ctx.strokeStyle = "#F1F5F9";
-      ctx.lineWidth = 14;
-      ctx.beginPath();
-      ctx.moveTo(mapX + 380, mapY + 40);
-      ctx.lineTo(mapX + 380, mapY + 460);
-      ctx.lineTo(mapX + 540, mapY + 460);
-      ctx.stroke();
-
-      // Nhãn tên đường
-      ctx.fillStyle = "#64748B";
-      ctx.font = "bold 9.5px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("ĐƯỜNG NGUYỄN TRI PHƯƠNG (TRỤC CHÍNH)", mapX + 242, mapY + 40);
-      ctx.fillText("ĐƯỜNG SƯ VẠN HẠNH", mapX + 70, mapY + 224);
-
-      // --- 3. HIỂN THỊ CÁC PIN GHIM ĐỊA ĐIỂM THEO TÍCH CHỌN FILTER ---
-      // Trường học
       if (state.mapFilters.schools) {
-        drawMapPin(mapX + 230, mapY + 230, "ĐH Kinh Tế (UEH Cơ sở B)", "#DC2626", "🎓", () => showToast("Điểm đến: UEH Cơ sở B (Q.10)"));
-        drawMapPin(mapX + 110, mapY + 340, "ĐH Bách Khoa (CS Lý Thường Kiệt)", "#DC2626", "🎓", () => showToast("Điểm đến: ĐH Bách Khoa"));
+        UNIVERSITIES_LIST.filter(u => u.id !== 'all' && u.city === state.selectedCity && u.mapCoord).forEach(u => {
+          const label = u.name.length > 30 ? u.name.slice(0, 30) + '…' : u.name;
+          const c = getSafeMapCoord(u.mapCoord.x, u.mapCoord.y);
+          drawMapPin(mapX + c.x * coordScaleX, mapY + c.y * coordScaleY, label, "#DC2626", "🎓", () => showToast(`Điểm đến: ${u.name}`));
+        });
       }
 
-      // Phòng trọ đã kiểm định
       if (state.mapFilters.rooms) {
-        drawMapPin(mapX + 170, mapY + 180, "Studio Sư Vạn Hạnh (3.2Tr)", "#0D9488", "🏠", () => switchScreen(1));
-        drawMapPin(mapX + 320, mapY + 280, "Phòng Gác Đúc (2.4Tr)", "#0D9488", "🏠", () => switchScreen(1));
-        drawMapPin(mapX + 430, mapY + 200, "Căn Hộ Mini Ở Ghép (1.6Tr)", "#0D9488", "🏠", () => switchScreen(1));
+        getMapFilteredRooms().filter(r => r.city === state.selectedCity && r.mapCoord).forEach(r => {
+          const label = `${r.title.length > 24 ? r.title.slice(0, 24) + '…' : r.title} (${(r.priceNum / 1000000).toFixed(1)}Tr)`;
+          const c = getSafeMapCoord(r.mapCoord.x, r.mapCoord.y);
+          drawMapPin(mapX + c.x * coordScaleX, mapY + c.y * coordScaleY, label, "#0D9488", "🏠", () => { state.selectedRoomDetail = r; switchScreen(1); });
+        });
       }
 
-      // Tuyến xe buýt
       if (state.mapFilters.bus) {
-        drawMapPin(mapX + 230, mapY + 120, "Trạm Buýt 150 & 08", "#2563EB", "🚌", () => showToast("Trạm xe buýt: Chạy thẳng qua các cơ sở UEH & KHTN"));
-        drawMapPin(mapX + 380, mapY + 320, "Trạm Buýt 59", "#2563EB", "🚌", () => showToast("Trạm xe buýt 59"));
+        drawMapPin(mapX + 230 * coordScaleX, mapY + 120 * coordScaleY, "Trạm Buýt Gần Trường", "#2563EB", "🚌", () => showToast("Trạm xe buýt: Chạy thẳng qua các trường trong khu vực"));
+        drawMapPin(mapX + 380 * coordScaleX, mapY + 320 * coordScaleY, "Trạm Buýt Trung Tâm", "#2563EB", "🚌", () => showToast("Trạm xe buýt trung tâm khu vực"));
       }
 
-      // Tiện ích (Gym / Hồ bơi)
       if (state.mapFilters.amenities) {
-        drawMapPin(mapX + 380, mapY + 130, "Phòng Gym / Fitness", "#D97706", "💪", () => showToast("Phòng Gym California Fitness cách 200m"));
-        drawMapPin(mapX + 130, mapY + 110, "Hồ Bơi Khuôn Viên", "#0284C7", "🏊", () => showToast("Hồ bơi công cộng sạch sẽ"));
+        drawMapPin(mapX + 380 * coordScaleX, mapY + 130 * coordScaleY, "Phòng Gym / Fitness", "#D97706", "💪", () => showToast("Phòng Gym gần khu vực"));
+        drawMapPin(mapX + 130 * coordScaleX, mapY + 110 * coordScaleY, "Hồ Bơi Khuôn Viên", "#0284C7", "🏊", () => showToast("Hồ bơi công cộng sạch sẽ"));
+      }
+
+      if (state.mapSelectedLocation && state.mapSelectedLocation.city === state.selectedCity && state.mapSelectedLocation.mapCoord) {
+        const sc = getSafeMapCoord(state.mapSelectedLocation.mapCoord.x, state.mapSelectedLocation.mapCoord.y);
+        drawSearchMarker(mapX + sc.x * coordScaleX, mapY + sc.y * coordScaleY, "Vị trí tìm kiếm");
       }
 
       ctx.restore();
       ctx.restore();
 
-      // Vùng tương tác drag & click map
       registerClickZone(mapX, mapY, mapW, mapH, () => {}, "Bấm giữ và di chuyển chuột để xem khu vực");
 
-      // Nút overlay thu nhỏ / phóng to / định vị tâm map
       const ctlX = mapX + 14;
       const ctlY = mapY + 14;
       drawRoundedRect(ctlX, ctlY, 110, 26, 6, "rgba(15, 23, 42, 0.85)", "rgba(255, 255, 255, 0.2)", 1);
@@ -2535,7 +3597,6 @@
       ctx.font = "bold 9.5px 'Plus Jakarta Sans', sans-serif";
       ctx.fillText("🧭 Chế độ: Pan & Drag", ctlX + 8, ctlY + 17);
 
-      // --- BẢNG ĐIỀU KHIỂN & BỘ LỌC TÍCH CHỌN BÊN PHẢI ---
       const sideX = mapX + mapW + 16;
       const sideW = w - sideX - 40;
 
@@ -2544,35 +3605,44 @@
       ctx.font = "700 13px 'Plus Jakarta Sans', sans-serif";
       ctx.fillText("Bộ Lọc & Khu Vực Khám Phá", sideX + 16, mapY + 24);
 
-      // 1. Tùy chọn khu vực nhanh (Presets)
       ctx.fillStyle = "#64748B";
       ctx.font = "700 10px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("CHỌN KHU VỰC NHANH:", sideX + 16, mapY + 48);
+      ctx.fillText("TÌM KHU VỰC / TRƯỜNG (MỌI TỈNH/THÀNH):", sideX + 16, mapY + 48);
 
-      const presets = [
-        { id: "ueh", label: "📍 UEH Cơ sở B (Q.10)", ox: 0, oy: 0 },
-        { id: "bk", label: "📍 ĐH Bách Khoa (Lý Thường Kiệt)", ox: 80, oy: -80 },
-        { id: "khtn", label: "📍 ĐH KHTN (Q.5 / Nguyễn Văn Cừ)", ox: -70, oy: 50 }
-      ];
+      const searchBtnY = mapY + 58;
+      const searchLabel = state.mapSelectedLocation ? `📍 ${state.mapSelectedLocation.name}` : "🔍 Bấm để tìm khu vực...";
+      drawRoundedRect(sideX + 14, searchBtnY, sideW - 28, 30, 6, state.mapSelectedLocation ? "#F0FDFA" : "#F8FAFC", state.mapSelectedLocation ? "#0D9488" : "#E2E8F0", 1);
+      ctx.fillStyle = state.mapSelectedLocation ? "#0F766E" : "#475569";
+      ctx.font = "600 10px 'Plus Jakarta Sans', sans-serif";
+      const displaySearchLabel = searchLabel.length > 34 ? searchLabel.slice(0, 34) + '…' : searchLabel;
+      ctx.fillText(displaySearchLabel, sideX + 22, searchBtnY + 20);
+      registerClickZone(sideX + 14, searchBtnY, sideW - 28, 30, () => openMapSearchModal('center'), "Tìm khu vực / trường trên bản đồ");
 
-      let preY = mapY + 58;
-      presets.forEach(p => {
-        const isSelected = state.currentMapPreset === p.id;
-        drawRoundedRect(sideX + 14, preY, sideW - 28, 28, 6, isSelected ? "#F0FDFA" : "#F8FAFC", isSelected ? "#0D9488" : "#E2E8F0", 1);
-        ctx.fillStyle = isSelected ? "#0F766E" : "#1E293B";
-        ctx.font = isSelected ? "700 10.5px 'Plus Jakarta Sans', sans-serif" : "500 10.5px 'Plus Jakarta Sans', sans-serif";
-        ctx.fillText(p.label, sideX + 22, preY + 18);
-        registerClickZone(sideX + 14, preY, sideW - 28, 28, () => {
-          state.currentMapPreset = p.id;
-          state.mapOffsetX = p.ox;
-          state.mapOffsetY = p.oy;
-          resizeAndDraw();
-          showToast(`Đã chuyển góc nhìn tới: ${p.label}`);
-        }, `Chuyển tới ${p.label}`);
-        preY += 34;
+      let preY = searchBtnY + 40;
+      ctx.fillStyle = "#64748B";
+      ctx.font = "700 10px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText("BÁN KÍNH HIỂN THỊ (ƯỚC TÍNH):", sideX + 16, preY);
+      preY += 10;
+
+      const radiusPillW = (sideW - 28 - 12) / 3;
+      MAP_RADIUS_OPTIONS.forEach((opt, i) => {
+        const isActive = state.mapRadiusFilter === opt.value;
+        const rx = sideX + 14 + i * (radiusPillW + 6);
+        drawRoundedRect(rx, preY, radiusPillW, 26, 6, isActive ? "#0D9488" : "#F8FAFC", isActive ? "#0D9488" : "#E2E8F0", 1);
+        ctx.fillStyle = isActive ? "#FFFFFF" : "#1E293B";
+        ctx.font = "600 9.5px 'Plus Jakarta Sans', sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText(opt.label, rx + radiusPillW / 2, preY + 17);
+        ctx.textAlign = "start";
+        registerClickZone(rx, preY, radiusPillW, 26, () => setMapRadiusFilter(opt.value), `Bán kính ${opt.label}`);
       });
+      preY += 36;
+      if (!state.mapSelectedLocation) {
+        ctx.fillStyle = "#94A3B8"; ctx.font = "italic 9px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText("Chọn khu vực trước để lọc theo bán kính.", sideX + 16, preY);
+        preY += 14;
+      }
 
-      // 2. Tích chọn các lớp địa điểm (Layer Checkboxes)
       ctx.fillStyle = "#64748B";
       ctx.font = "700 10px 'Plus Jakarta Sans', sans-serif";
       ctx.fillText("TÍCH CHỌN ĐỊA ĐIỂM HIỂN THỊ:", sideX + 16, preY + 14);
@@ -2589,7 +3659,6 @@
         const isChecked = state.mapFilters[t.key];
         drawRoundedRect(sideX + 14, tY, sideW - 28, 32, 6, isChecked ? "#F0FDFA" : "#F8FAFC", isChecked ? "#99F6E4" : "#E2E8F0", 1);
         
-        // Hộp checkbox giả lập
         drawRoundedRect(sideX + 22, tY + 8, 16, 16, 4, isChecked ? t.color : "#FFFFFF", isChecked ? t.color : "#94A3B8", 1);
         if (isChecked) {
           ctx.fillStyle = "#FFFFFF";
@@ -2610,18 +3679,43 @@
         tY += 38;
       });
 
-      // 3. Nút căn giữa bản đồ & Ghi chú
+      if (state.mapSelectedLocation && state.mapSelectedLocation.city === state.selectedCity) {
+        ctx.fillStyle = "#64748B";
+        ctx.font = "700 10px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText("🔴 PHÒNG GẦN VỊ TRÍ ĐÃ CHỌN NHẤT:", sideX + 16, tY + 12);
+        let nrY = tY + 22;
+        const nearest = getNearestRoomsFromLocation(state.mapSelectedLocation, 4);
+        if (nearest.length === 0) {
+          ctx.fillStyle = "#94A3B8"; ctx.font = "italic 9px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillText("Chưa có phòng nào ở tỉnh/thành này.", sideX + 16, nrY + 10);
+        } else {
+          nearest.forEach(({ room, distanceKm }) => {
+            drawRoundedRect(sideX + 14, nrY, sideW - 28, 28, 6, "#FEF2F2", "#FECACA", 1);
+            ctx.fillStyle = "#991B1B";
+            ctx.font = "700 9.5px 'Plus Jakarta Sans', sans-serif";
+            const rTitle = room.title.length > 26 ? room.title.slice(0, 26) + '…' : room.title;
+            ctx.fillText(`📍→🏠 ${rTitle}`, sideX + 22, nrY + 12);
+            ctx.fillStyle = "#DC2626";
+            ctx.font = "800 9.5px 'Plus Jakarta Sans', sans-serif";
+            ctx.fillText(`~${distanceKm} km`, sideX + 22, nrY + 24);
+            registerClickZone(sideX + 14, nrY, sideW - 28, 28, () => { state.selectedRoomDetail = room; switchScreen(1); }, `Xem ${room.title} (cách ${distanceKm}km)`);
+            nrY += 32;
+          });
+        }
+      }
+
       const resetBtnY = mapY + mapH - 74;
       drawRoundedRect(sideX + 14, resetBtnY, sideW - 28, 30, 6, "#0F172A", null);
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "700 10.5px 'Plus Jakarta Sans', sans-serif";
       ctx.textAlign = "center";
-      ctx.fillText("🔄 Căn Giữa Tâm Bản Đồ", sideX + sideW / 2, resetBtnY + 19);
+      ctx.fillText("🔄 Căn Giữa & Bỏ Lọc Bán Kính", sideX + sideW / 2, resetBtnY + 19);
       ctx.textAlign = "start";
       registerClickZone(sideX + 14, resetBtnY, sideW - 28, 30, () => {
         state.mapOffsetX = 0;
         state.mapOffsetY = 0;
-        state.currentMapPreset = "ueh";
+        state.mapSelectedLocation = null;
+        state.mapRadiusFilter = null;
         resizeAndDraw();
         showToast("Đã đưa bản đồ về tâm vị trí ban đầu.");
       }, "Căn giữa bản đồ");
@@ -2630,6 +3724,99 @@
       ctx.fillStyle = "#64748B";
       ctx.font = "500 9.5px 'Plus Jakarta Sans', sans-serif";
       ctx.fillText("🔒 Tọa độ & khoảng cách được kiểm chứng bởi UNINEST", sideX + 16, noteY);
+    }
+
+    // Lớp nền "ô phố" lặp vô hạn, vẽ TRƯỚC khi áp dụng ctx.translate(offsetX, offsetY) và tự dịch pha theo
+    // offsetX/offsetY (chia lấy dư theo kích thước ô) — nhờ vậy khi kéo bản đồ theo bất kỳ hướng nào, luôn có
+    // thêm "mặt bản đồ" xuất hiện thay vì lộ ra nền trống, mô phỏng cảm giác bản đồ trải dài vô tận.
+    function drawMapTileFiller(mapX, mapY, mapW, mapH, offsetX, offsetY, scale) {
+      const s = scale || 1;
+      const tile = 44 * s;
+      ctx.fillStyle = "#EEF2F6";
+      ctx.fillRect(mapX, mapY, mapW, mapH);
+      ctx.strokeStyle = "#E2E8F0";
+      ctx.lineWidth = 1;
+      const phaseX = ((offsetX % tile) + tile) % tile;
+      const phaseY = ((offsetY % tile) + tile) % tile;
+      ctx.beginPath();
+      for (let gx = mapX - tile + phaseX; gx < mapX + mapW + tile; gx += tile) {
+        ctx.moveTo(gx, mapY); ctx.lineTo(gx, mapY + mapH);
+      }
+      for (let gy = mapY - tile + phaseY; gy < mapY + mapH + tile; gy += tile) {
+        ctx.moveTo(mapX, gy); ctx.lineTo(mapX + mapW, gy);
+      }
+      ctx.stroke();
+    }
+
+    // Vẽ nền minh hoạ (công viên, sông, đường) theo tỉ lệ % của khung bản đồ, gắn nhãn theo đúng thành phố
+    // đang chọn — để bản đồ không còn luôn trông giống TP.HCM khi đang xem tỉnh/thành khác.
+    function drawCityMapBackground(mapX, mapY, mapW, mapH, city, scale) {
+      const s = scale || 1;
+      const theme = getCityMapTheme(city);
+
+      ctx.fillStyle = "#DCFCE7";
+      ctx.beginPath();
+      ctx.roundRect(mapX + mapW * 0.06, mapY + mapH * 0.09, mapW * 0.24, mapH * 0.19, 16 * s);
+      ctx.fill();
+      ctx.fillStyle = "#15803D";
+      ctx.font = `600 ${Math.round(11 * s)}px 'Plus Jakarta Sans', sans-serif`;
+      ctx.fillText("🌳 " + (s < 0.6 ? "" : theme.park), mapX + mapW * 0.075, mapY + mapH * 0.19);
+
+      ctx.strokeStyle = "#BAE6FD";
+      ctx.lineWidth = 42 * s;
+      ctx.beginPath();
+      ctx.moveTo(mapX - 60, mapY + mapH * 0.62);
+      ctx.bezierCurveTo(mapX + mapW * 0.22, mapY + mapH * 0.52, mapX + mapW * 0.5, mapY + mapH * 0.76, mapX + mapW + 80, mapY + mapH * 0.6);
+      ctx.stroke();
+      if (s >= 0.6) {
+        ctx.fillStyle = "#0284C7";
+        ctx.font = `bold ${Math.round(10.5 * s)}px 'Plus Jakarta Sans', sans-serif`;
+        ctx.fillText("🌊 " + theme.river, mapX + mapW * 0.26, mapY + mapH * 0.65);
+      }
+
+      ctx.fillStyle = "rgba(226, 232, 240, 0.7)";
+      ctx.fillRect(mapX + mapW * 0.08, mapY + mapH * 0.42, mapW * 0.13, mapH * 0.13);
+      ctx.fillRect(mapX + mapW * 0.38, mapY + mapH * 0.09, mapW * 0.11, mapH * 0.17);
+      ctx.fillRect(mapX + mapW * 0.58, mapY + mapH * 0.42, mapW * 0.16, mapH * 0.13);
+      ctx.fillRect(mapX + mapW * 0.72, mapY + mapH * 0.66, mapW * 0.15, mapH * 0.16);
+
+      ctx.strokeStyle = "#FFFFFF";
+      ctx.lineWidth = 30 * s;
+      ctx.beginPath();
+      ctx.moveTo(mapX + mapW * 0.33, mapY - 60);
+      ctx.lineTo(mapX + mapW * 0.33, mapY + mapH + 60);
+      ctx.stroke();
+
+      ctx.strokeStyle = "#FACC15";
+      ctx.lineWidth = 2;
+      ctx.setLineDash([8, 6]);
+      ctx.beginPath();
+      ctx.moveTo(mapX + mapW * 0.33, mapY - 60);
+      ctx.lineTo(mapX + mapW * 0.33, mapY + mapH + 60);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.strokeStyle = "#FFFFFF";
+      ctx.lineWidth = 24 * s;
+      ctx.beginPath();
+      ctx.moveTo(mapX - 60, mapY + mapH * 0.46);
+      ctx.lineTo(mapX + mapW + 60, mapY + mapH * 0.46);
+      ctx.stroke();
+
+      ctx.strokeStyle = "#F1F5F9";
+      ctx.lineWidth = 16 * s;
+      ctx.beginPath();
+      ctx.moveTo(mapX + mapW * 0.55, mapY + mapH * 0.06);
+      ctx.lineTo(mapX + mapW * 0.55, mapY + mapH * 0.92);
+      ctx.lineTo(mapX + mapW * 0.8, mapY + mapH * 0.92);
+      ctx.stroke();
+
+      if (s >= 0.6) {
+        ctx.fillStyle = "#64748B";
+        ctx.font = `bold ${Math.round(10.5 * s)}px 'Plus Jakarta Sans', sans-serif`;
+        ctx.fillText((theme.road1 + " (TRỤC CHÍNH)").toUpperCase(), mapX + mapW * 0.35, mapY + mapH * 0.045);
+        ctx.fillText(theme.road2.toUpperCase(), mapX + mapW * 0.1, mapY + mapH * 0.445);
+      }
     }
 
     function drawMapPin(x, y, label, color, emoji, onClick) {
@@ -2642,6 +3829,21 @@
       ctx.fillStyle = "#FFFFFF"; ctx.fillText(label, x, y + 25);
       ctx.textAlign = "start";
       if (onClick) registerClickZone(x - tw / 2 - 6, y - 12, tw + 12, 42, onClick, `Ghim: ${label}`);
+    }
+
+    // Chấm đỏ nổi bật đánh dấu vị trí vừa tìm kiếm trên bản đồ (khác hẳn pin trường/phòng thường)
+    // để người dùng thấy ngay đâu là "tâm" đang so sánh khoảng cách tới các phòng trọ.
+    function drawSearchMarker(x, y, label) {
+      ctx.beginPath(); ctx.arc(x, y, 17, 0, Math.PI * 2);
+      ctx.strokeStyle = "#DC2626"; ctx.lineWidth = 2; ctx.globalAlpha = 0.35; ctx.stroke(); ctx.globalAlpha = 1;
+      ctx.beginPath(); ctx.arc(x, y, 9, 0, Math.PI * 2); ctx.fillStyle = "#EF4444"; ctx.fill();
+      ctx.strokeStyle = "#FFFFFF"; ctx.lineWidth = 2.5; ctx.stroke();
+      ctx.fillStyle = "#FFFFFF"; ctx.font = "10px 'Plus Jakarta Sans', sans-serif"; ctx.textAlign = "center"; ctx.fillText("📍", x, y + 3.5);
+      ctx.font = "800 9.5px 'Plus Jakarta Sans', sans-serif";
+      const tw = ctx.measureText(label).width;
+      drawRoundedRect(x - tw / 2 - 6, y - 35, tw + 12, 18, 5, "#DC2626", null);
+      ctx.fillStyle = "#FFFFFF"; ctx.fillText(label, x, y - 22);
+      ctx.textAlign = "start";
     }
 
     function drawScreen6_Overview(w, h) {
@@ -2705,14 +3907,15 @@
 
       const statW = (w - 110) / 3;
       const statY = topY + 36;
+      const stats = getLandlordStats();
 
       drawRoundedRect(40, statY, statW, 65, 10, "#FFFFFF", "#E2E8F0", 1);
       ctx.fillStyle = "#64748B"; ctx.font = "700 9.5px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("TỔNG SỐ PHÒNG", 50, statY + 20);
-      ctx.fillStyle = "#0F172A"; ctx.font = "800 16px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("6 Phòng", 50, statY + 44);
+      ctx.fillStyle = "#0F172A"; ctx.font = "800 16px 'Plus Jakarta Sans', sans-serif"; ctx.fillText(`${stats.roomCount} Phòng`, 50, statY + 44);
 
       drawRoundedRect(40 + statW + 15, statY, statW, 65, 10, "#FFFFFF", "#E2E8F0", 1);
       ctx.fillStyle = "#64748B"; ctx.font = "700 9.5px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("DOANH THU THÁNG", 40 + statW + 25, statY + 20);
-      ctx.fillStyle = "#0D9488"; ctx.font = "800 16px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("16.200.000 đ", 40 + statW + 25, statY + 44);
+      ctx.fillStyle = "#0D9488"; ctx.font = "800 16px 'Plus Jakarta Sans', sans-serif"; ctx.fillText(stats.revenueStr, 40 + statW + 25, statY + 44);
 
       drawRoundedRect(40 + (statW + 15) * 2, statY, statW, 65, 10, "#FFFFFF", "#E2E8F0", 1);
       ctx.fillStyle = "#64748B"; ctx.font = "700 9.5px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("ĐIỂM RUBRIC UY TÍN", 40 + (statW + 15) * 2 + 20, statY + 20);
@@ -2725,8 +3928,8 @@
       const cardApptY = apptY + 36;
       drawRoundedRect(55, cardApptY, w - 110, 100, 8, state.landlordAppointmentAccepted ? "#F0FDF4" : "#FFFBEB", state.landlordAppointmentAccepted ? "#BBF7D0" : "#FDE68A", 1);
 
-      drawAvatar(80, cardApptY + 50, 16, "MA", "#6366F1");
-      ctx.fillStyle = "#0F172A"; ctx.font = "700 12px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("Sinh viên: Minh Anh (UEH K49)", 115, cardApptY + 30);
+      drawAvatar(80, cardApptY + 50, 16, "QA", "#6366F1");
+      ctx.fillStyle = "#0F172A"; ctx.font = "700 12px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("Sinh viên: Quốc Anh (UEH K51)", 115, cardApptY + 30);
       ctx.fillStyle = "#64748B"; ctx.font = "500 10.5px 'Plus Jakarta Sans', sans-serif"; ctx.fillText(`Phòng: Studio Ban Công Thoáng - Sư Vạn Hạnh • Lịch hẹn: 15:30 Chiều Mai`, 115, cardApptY + 48);
       ctx.fillStyle = "#0F766E"; ctx.font = "500 10px 'Plus Jakarta Sans', sans-serif"; ctx.fillText(`Ghi chú: "Tụi con muốn qua kiểm tra đồng hồ điện riêng và áp lực nước."`, 115, cardApptY + 66);
 
@@ -2735,7 +3938,7 @@
       if (!state.landlordAppointmentAccepted) {
         drawRoundedRect(actBtnX, actBtnY, 140, 34, 6, "#0D9488", null);
         ctx.fillStyle = "#FFFFFF"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif"; ctx.textAlign = "center"; ctx.fillText("✓ Chấp Nhận Lịch Hẹn", actBtnX + 70, actBtnY + 22); ctx.textAlign = "start";
-        registerClickZone(actBtnX, actBtnY, 140, 34, () => { state.landlordAppointmentAccepted = true; resizeAndDraw(); showToast("Đã duyệt lịch hẹn với Minh Anh!"); }, "Chấp nhận hẹn");
+        registerClickZone(actBtnX, actBtnY, 140, 34, () => { state.landlordAppointmentAccepted = true; resizeAndDraw(); showToast("Đã duyệt lịch hẹn với Quốc Anh!"); }, "Chấp nhận hẹn");
       } else {
         drawBadge("✓ ĐÃ CHẤP NHẬN HẸN", actBtnX, actBtnY + 6, "#DCFCE7", "#15803D");
         registerClickZone(actBtnX, actBtnY, 140, 34, () => { state.landlordAppointmentAccepted = false; resizeAndDraw(); showToast("Đã hủy duyệt lịch."); }, "Hoàn tác lịch hẹn");
@@ -2781,14 +3984,7 @@
       drawRoundedRect(40, boxY, w - 80, 290, 10, "#FFFFFF", "#E2E8F0", 1);
       ctx.fillStyle = "#0F172A"; ctx.font = "700 13px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("⭐ Tổng Quan Điểm Rubric Chủ Trọ Cô Nga: 4.8 / 5.0 (Dựa trên 84 lượt đánh giá)", 55, boxY + 24);
 
-      const criteria = [
-        { name: "1. Thái độ chủ trọ & tôn trọng riêng tư", score: "4.9 / 5.0", bar: 0.98 },
-        { name: "2. Minh bạch chi phí (Điện, Nước, Xe)", score: "4.8 / 5.0", bar: 0.96 },
-        { name: "3. Cơ sở vật chất & độ bền thiết bị", score: "4.7 / 5.0", bar: 0.94 },
-        { name: "4. Hàng xóm thân thiện, ý thức sinh viên", score: "4.8 / 5.0", bar: 0.96 },
-        { name: "5. Môi trường ngõ không ngập mùa mưa", score: "4.7 / 5.0", bar: 0.94 },
-        { name: "6. An ninh vân tay & hoàn cọc đúng hẹn", score: "4.9 / 5.0", bar: 0.98 }
-      ];
+      const criteria = LANDLORD_RUBRIC_CRITERIA;
 
       let iy = boxY + 45;
       criteria.forEach(c => {
@@ -2857,7 +4053,13 @@
 
       const headerY = 44;
       drawRoundedRect(screenMargin, headerY, sw, 46, 0, "#FFFFFF", "#E2E8F0", 1);
-      ctx.fillStyle = "#0D9488"; ctx.font = "800 15px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("UNINEST", 24, headerY + 28);
+      if (uninestLogo.complete && uninestLogo.naturalWidth > 0) {
+        ctx.drawImage(uninestLogo, screenMargin + 16, headerY + 10, 26, 26);
+      } else {
+        drawRoundedRect(screenMargin + 16, headerY + 10, 26, 26, 6, "#0D9488", null);
+        ctx.fillStyle = "#FFFFFF"; ctx.font = "bold 13px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("U", screenMargin + 24, headerY + 28);
+      }
+      ctx.fillStyle = "#0D9488"; ctx.font = "800 15px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("UNINEST", screenMargin + 50, headerY + 28);
 
       const roleBadgeLabel = !state.isLoggedIn ? "CHƯA LOGIN" : (state.userRole === 'student' ? "SV" : "CHỦ TRỌ");
       drawBadge(roleBadgeLabel, w - 85, headerY + 13, "#CCFBF1", "#0F766E");
@@ -2906,26 +4108,28 @@
         ctx.fillStyle = "#0D9488"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif"; ctx.textAlign = "center"; ctx.fillText("🔑 Bấm Vào Đây Để Mở Hộp Đăng Nhập", w / 2, bottomY + 30); ctx.textAlign = "start";
         registerClickZone(screenMargin, bottomY, sw, bottomBarH, () => openLoginModal(), "Đăng nhập ngay");
       } else {
-        const tabs = state.userRole === 'student' 
+        const tabs = state.userRole === 'student'
           ? [
-              { label: "Khám phá", screen: 0 }, 
-              { label: "Chi tiết", screen: 1 }, 
-              { label: "Ở ghép", screen: 2 }, 
-              { label: "Bản đồ", screen: 3 }
+              { label: "Khám phá", screen: 0 },
+              { label: "Chi tiết", screen: 1 },
+              { label: "Ở ghép", screen: 2 },
+              { label: "Bản đồ", screen: 3 },
+              { label: "Quy trình", screen: 4 }
             ]
           : [
-              { label: "Lịch hẹn", screen: 0 }, 
-              { label: "Phòng trọ", screen: 1 }, 
-              { label: "Rubric", screen: 2 }, 
+              { label: "Lịch hẹn", screen: 0 },
+              { label: "Phòng trọ", screen: 1 },
+              { label: "Rubric", screen: 2 },
               { label: "Đối tác", screen: 3 }
             ];
-        
-        const tabW = sw / 4;
+
+        const tabW = sw / tabs.length;
+        const tabFontSize = tabs.length > 4 ? 8.5 : 9.5;
         tabs.forEach((tb, i) => {
           const tx = screenMargin + tabW * i + tabW / 2;
           const isActive = state.currentScreen === tb.screen;
           ctx.fillStyle = isActive ? "#0D9488" : "#94A3B8";
-          ctx.font = isActive ? "bold 10px 'Plus Jakarta Sans', sans-serif" : "500 9.5px 'Plus Jakarta Sans', sans-serif";
+          ctx.font = isActive ? `bold ${tabFontSize + 0.5}px 'Plus Jakarta Sans', sans-serif` : `500 ${tabFontSize}px 'Plus Jakarta Sans', sans-serif`;
           ctx.textAlign = "center"; ctx.fillText(tb.label, tx, bottomY + 31); ctx.textAlign = "start";
           registerClickZone(screenMargin + tabW * i, bottomY, tabW, bottomBarH, () => { 
             state.mobileScrollY = 0; 
@@ -2945,19 +4149,18 @@
 
       const b1 = y + 84;
       drawRoundedRect(28, b1, sw - 56, 36, 7, "#0D9488", null);
-      ctx.fillStyle = "#FFFFFF"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif"; ctx.textAlign = "center"; ctx.fillText("Đăng Nhập Sinh Viên", sw / 2, b1 + 22); ctx.textAlign = "start";
+      ctx.fillStyle = "#FFFFFF"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif"; ctx.textAlign = "center"; ctx.fillText("Đăng Nhập Sinh Viên (Quốc Anh)", sw / 2, b1 + 22); ctx.textAlign = "start";
       registerClickZone(28, b1, sw - 56, 36, () => { quickFillCredentials('student'); openLoginModal(); }, "Đăng nhập SV");
     }
 
     function drawMobileScreen0_Home(sw, y) {
-      state.mobileMaxScroll = 1300;
-      drawRoundedRect(16, y, sw - 32, 85, 8, "#FFFFFF", "#CBD5E1", 1);
-      ctx.fillStyle = "#0F172A"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif"; 
+      state.mobileMaxScroll = 1590;
+      drawRoundedRect(16, y, sw - 32, 149, 8, "#FFFFFF", "#CBD5E1", 1);
+      ctx.fillStyle = "#0F172A"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif";
       ctx.fillText(`📍 ${state.showAllRooms ? 'Toàn Quốc (Tất Cả)' : state.selectedCity} • Lọc: ${state.priceFilter.toUpperCase()}`, 26, y + 20);
-      ctx.fillStyle = "#0D9488"; ctx.font = "600 10px 'Plus Jakarta Sans', sans-serif"; 
+      ctx.fillStyle = "#0D9488"; ctx.font = "600 10px 'Plus Jakarta Sans', sans-serif";
       ctx.fillText(`🎓 ${state.showAllRooms ? 'Tất cả các trường' : (state.selectedUniversity ? state.selectedUniversity.name : 'Trường')}`, 26, y + 38);
 
-      // Nút tắt xem tất cả trên mobile
       drawRoundedRect(26, y + 50, sw - 52, 24, 5, state.showAllRooms ? "#DCFCE7" : "#F1F5F9", state.showAllRooms ? "#86EFAC" : "#CBD5E1", 1);
       ctx.fillStyle = state.showAllRooms ? "#15803D" : "#475569";
       ctx.font = "bold 9.5px 'Plus Jakarta Sans', sans-serif";
@@ -2966,37 +4169,79 @@
       ctx.textAlign = "start";
       registerClickZone(26, y + 50, sw - 52, 24, () => toggleShowAllRooms(), "Bật/Tắt xem tất cả phòng");
 
+      const mBusLabel = state.busRadiusFilter ? `<${state.busRadiusFilter}m` : "Bất kỳ";
+      const mFoodLabel = state.selectedFoodTags.length > 0 ? `${state.selectedFoodTags.length} tiện ích` : "Bất kỳ";
+      drawRoundedRect(26, y + 80, sw - 52, 24, 5, "#ECFEFF", "#A5F3FC", 1);
+      ctx.fillStyle = "#155E75";
+      ctx.font = "bold 9.5px 'Plus Jakarta Sans', sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(`🚌 Xe buýt: ${mBusLabel}  •  🍜 Ẩm thực: ${mFoodLabel}`, sw / 2, y + 96);
+      ctx.textAlign = "start";
+      registerClickZone(26, y + 80, sw - 52, 24, () => openAmenitiesModal(), "Mở bộ lọc xe buýt & ẩm thực");
+
+      const mPendingChanges = hasPendingFilterChanges();
+      const applyBtnW = mPendingChanges ? (sw - 52 - 8) * 0.62 : (sw - 52);
+      drawRoundedRect(26, y + 110, applyBtnW, 26, 6, mPendingChanges ? "#0D9488" : "#E2E8F0", null);
+      ctx.fillStyle = mPendingChanges ? "#FFFFFF" : "#94A3B8";
+      ctx.font = "700 9.5px 'Plus Jakarta Sans', sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(mPendingChanges ? "✓ Áp Dụng Bộ Lọc (Nháp)" : "✓ Đã Áp Dụng Bộ Lọc", 26 + applyBtnW / 2, y + 128);
+      ctx.textAlign = "start";
+      registerClickZone(26, y + 110, applyBtnW, 26, () => applyFilters(), "Áp dụng bộ lọc");
+
+      if (mPendingChanges) {
+        const cancelBtnX = 26 + applyBtnW + 8;
+        const cancelBtnW = sw - 52 - applyBtnW - 8;
+        drawRoundedRect(cancelBtnX, y + 110, cancelBtnW, 26, 6, "#F8FAFC", "#CBD5E1", 1);
+        ctx.fillStyle = "#475569";
+        ctx.font = "700 9.5px 'Plus Jakarta Sans', sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("↺ Huỷ", cancelBtnX + cancelBtnW / 2, y + 128);
+        ctx.textAlign = "start";
+        registerClickZone(cancelBtnX, y + 110, cancelBtnW, 26, () => cancelFilters(), "Huỷ thay đổi bộ lọc");
+      }
+
       const rooms = getFilteredRooms();
-      let cardY = y + 96;
+      let cardY = y + 160;
       if (rooms.length === 0) {
         drawRoundedRect(16, cardY, sw - 32, 80, 8, "#FFFBEB", "#FDE68A", 1);
         ctx.fillStyle = "#92400E"; ctx.font = "700 10.5px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("⚠️ Không tìm thấy phòng trọ phù hợp.", 28, cardY + 30);
         ctx.font = "500 9.5px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("Thử chọn Tỉnh/Thành phố hoặc nhờ AI tư vấn.", 28, cardY + 50);
       } else {
         rooms.forEach((room) => {
-          drawRoundedRect(16, cardY, sw - 32, 165, 10, "#FFFFFF", "#E2E8F0", 1);
+          drawRoundedRect(16, cardY, sw - 32, 188, 10, "#FFFFFF", "#E2E8F0", 1);
           drawBadge("✓ " + room.badge, 24, cardY + 12, "#0D9488", "#FFFFFF");
           ctx.fillStyle = "#0F172A"; ctx.font = "800 11px 'Plus Jakarta Sans', sans-serif"; ctx.fillText(room.title, 24, cardY + 42);
           ctx.fillStyle = "#0D9488"; ctx.font = "800 12px 'Plus Jakarta Sans', sans-serif"; ctx.fillText(room.priceStr, 24, cardY + 62);
-          ctx.fillStyle = "#64748B"; ctx.font = "500 9.5px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("📍 " + room.distance, 24, cardY + 78);
+          ctx.fillStyle = "#64748B"; ctx.font = "500 9.5px 'Plus Jakarta Sans', sans-serif";
+          const busText = room.busStopDistanceM != null ? ` • 🚌 ${room.busStopDistanceM}m` : "";
+          ctx.fillText("📍 " + room.distance + busText, 24, cardY + 78);
           ctx.fillStyle = "#0F766E"; ctx.font = "500 9px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("✨ " + room.amenitiesLabels.join(', '), 24, cardY + 94);
 
-          const mBtnY = cardY + 116;
+          if (room.nearbyFood) {
+            let foodX = 24;
+            FOOD_TAGS.filter(t => room.nearbyFood[t.id]).slice(0, 2).forEach(t => {
+              const tw = drawBadge(FOOD_SHORT_LABELS[t.id], foodX, cardY + 104, "#FEF9C3", "#92400E");
+              foodX += tw + 3;
+            });
+          }
+
+          const mBtnY = cardY + 140;
           drawRoundedRect(24, mBtnY, sw - 48, 32, 6, "#0F172A", null);
           ctx.fillStyle = "#FFFFFF"; ctx.font = "700 10px 'Plus Jakarta Sans', sans-serif"; ctx.textAlign = "center"; ctx.fillText("Xem Chi Tiết & Đặt Lịch", sw / 2, mBtnY + 20); ctx.textAlign = "start";
-          registerClickZone(24, mBtnY, sw - 48, 32, () => { 
-            state.selectedRoomDetail = room; 
+          registerClickZone(24, mBtnY, sw - 48, 32, () => {
+            state.selectedRoomDetail = room;
             state.mobileScrollY = 0;
-            switchScreen(1); 
+            switchScreen(1);
           }, `Xem chi tiết: ${room.title}`);
 
-          cardY += 178;
+          cardY += 201;
         });
       }
     }
 
     function drawMobileScreen1_Detail(sw, y) {
-      state.mobileMaxScroll = 750;
+      state.mobileMaxScroll = 1130;
       const room = state.selectedRoomDetail || ROOMS_DATABASE[0];
 
       drawRoundedRect(16, y, sw - 32, 180, 10, "#FFFFFF", "#E2E8F0", 1);
@@ -3017,18 +4262,18 @@
         openBookingModal();
       }, "Đặt lịch xem phòng");
 
-      let rubricY = y + 195;
+      const movingBtnY = bookBtnY + 40;
+      drawRoundedRect(26, movingBtnY, sw - 52, 30, 7, "#FFFFFF", "#0D9488", 1.5);
+      ctx.fillStyle = "#0D9488"; ctx.font = "700 10.5px 'Plus Jakarta Sans', sans-serif"; ctx.textAlign = "center";
+      ctx.fillText("🚚 Đặt Dịch Vụ Chuyển Trọ", sw / 2, movingBtnY + 20);
+      ctx.textAlign = "start";
+      registerClickZone(26, movingBtnY, sw - 52, 30, () => openMovingModal(room), "Đặt dịch vụ chuyển trọ");
+
+      let rubricY = movingBtnY + 40;
       drawRoundedRect(16, rubricY, sw - 32, 230, 10, "#FFFFFF", "#E2E8F0", 1);
       ctx.fillStyle = "#0F172A"; ctx.font = "700 11.5px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("📋 Rubric Đánh Giá Đa Chiều", 26, rubricY + 22);
 
-      const mCriteria = [
-        "1. Thái độ chủ trọ: 4.9/5.0 ⭐",
-        "2. Minh bạch điện nước: 4.8/5.0 ⭐",
-        "3. Cơ sở vật chất/máy lạnh: 4.6/5.0 ⭐",
-        "4. Hàng xóm ý thức: 4.8/5.0 ⭐",
-        "5. Ngõ không ngập nước: 4.7/5.0 ⭐",
-        "6. An ninh & hoàn cọc: 4.9/5.0 ⭐"
-      ];
+      const mCriteria = ROOM_RUBRIC_CRITERIA.map(c => `${c.name.split(' ')[0]} ${c.short}: ${c.score} ⭐`);
       let mcY = rubricY + 42;
       mCriteria.forEach(mc => {
         ctx.fillStyle = "#334155"; ctx.font = "500 10px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("• " + mc, 26, mcY);
@@ -3039,26 +4284,46 @@
       drawRoundedRect(16, fbY, sw - 32, 110, 10, "#F8FAFC", "#E2E8F0", 1);
       ctx.fillStyle = "#0F172A"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("💬 Phản Hồi Sinh Viên", 26, fbY + 22);
       ctx.fillStyle = "#475569"; ctx.font = "italic 9.5px 'Plus Jakarta Sans', sans-serif"; wrapText(ctx, room.feedback, 26, fbY + 40, sw - 52, 14);
+
+      const roomReviewsList = getRoomReviews(room).slice(0, 3);
+      let rvBoxY = fbY + 122;
+      const rvBoxH = 34 + roomReviewsList.length * 92;
+      drawRoundedRect(16, rvBoxY, sw - 32, rvBoxH, 10, "#FFFFFF", "#E2E8F0", 1);
+      ctx.fillStyle = "#0F172A"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif"; ctx.fillText(`⭐ Đánh Giá Từ SV Đã Ở (${room.reviews})`, 26, rvBoxY + 22);
+      let rvY = rvBoxY + 34;
+      roomReviewsList.forEach(rev => {
+        drawReviewItem(26, rvY, sw - 52, rev);
+        rvY += 92;
+      });
+
+      const addReviewBtnY = rvBoxY + rvBoxH + 10;
+      drawRoundedRect(26, addReviewBtnY, sw - 52, 30, 6, "#F8FAFC", "#CBD5E1", 1);
+      ctx.fillStyle = "#0F766E"; ctx.font = "700 10px 'Plus Jakarta Sans', sans-serif"; ctx.textAlign = "center";
+      ctx.fillText("✍️ Viết Thêm Đánh Giá Ẩn Danh", sw / 2, addReviewBtnY + 19);
+      ctx.textAlign = "start";
+      registerClickZone(26, addReviewBtnY, sw - 52, 30, () => openReviewModal(), "Viết đánh giá ẩn danh");
     }
 
     function drawMobileScreen2_Match(sw, y) {
-      state.mobileMaxScroll = 520;
+      state.mobileMaxScroll = 560;
       drawRoundedRect(16, y, sw - 32, 55, 8, "#F0FDFA", "#99F6E4", 1);
       ctx.fillStyle = "#0F766E"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("🤝 Roommate Match (>85% Tương Thích)", 26, y + 22);
-      ctx.fillStyle = "#334155"; ctx.font = "500 9.5px 'Plus Jakarta Sans', sans-serif"; ctx.fillText(`Khu vực: ${state.selectedCity} • Ngân sách: ~${state.personaBudget.toUpperCase()}`, 26, y + 38);
+      ctx.fillStyle = "#334155"; ctx.font = "500 9.5px 'Plus Jakarta Sans', sans-serif"; ctx.fillText(`Quốc Anh • ${state.selectedCity} • Ngân sách: ~${state.personaBudget.toUpperCase()}`, 26, y + 38);
 
-      const matches = [
-        { name: "Hoàng Yến (19t)", score: "94%", bio: "Hướng nội, ngủ sớm 23h30" },
-        { name: "Thanh Trúc (18t)", score: "89%", bio: "Sạch sẽ, chia tiền sòng phẳng" },
-        { name: "Phương Linh (20t)", score: "84%", bio: "Có sẵn tủ lạnh & bếp" }
-      ];
+      const quizBtnY = y + 63;
+      drawRoundedRect(16, quizBtnY, sw - 32, 30, 7, state.quizCompleted ? "#F0FDF4" : "#0D9488", state.quizCompleted ? "#BBF7D0" : null, state.quizCompleted ? 1 : 0);
+      ctx.fillStyle = state.quizCompleted ? "#059669" : "#FFFFFF"; ctx.font = "700 10px 'Plus Jakarta Sans', sans-serif"; ctx.textAlign = "center";
+      ctx.fillText(state.quizCompleted ? "✓ Đã Làm Trắc Nghiệm Phong Cách Sống" : "📝 Làm Trắc Nghiệm Phong Cách Sống", sw / 2, quizBtnY + 19);
+      ctx.textAlign = "start";
+      registerClickZone(16, quizBtnY, sw - 32, 30, () => openLifestyleQuizModal(), "Làm bài trắc nghiệm phong cách sống");
 
-      let cardY = y + 65;
-      matches.forEach(m => {
+      const ranked = getRankedCandidates();
+      let cardY = quizBtnY + 40;
+      ranked.forEach(m => {
         drawRoundedRect(16, cardY, sw - 32, 110, 10, "#FFFFFF", "#E2E8F0", 1);
         ctx.fillStyle = "#0F172A"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif"; ctx.fillText(m.name, 26, cardY + 22);
-        drawBadge(m.score + " Match", sw - 95, cardY + 12, "#D1FAE5", "#065F46");
-        ctx.fillStyle = "#64748B"; ctx.font = "500 10px 'Plus Jakarta Sans', sans-serif"; ctx.fillText(m.bio, 26, cardY + 42);
+        drawBadge(m.matchScore + "% Match", sw - 95, cardY + 12, "#D1FAE5", "#065F46");
+        ctx.fillStyle = "#64748B"; ctx.font = "500 10px 'Plus Jakarta Sans', sans-serif"; ctx.fillText(m.bio.replace(/[“”]/g, ''), 26, cardY + 42, sw - 52);
 
         const agBtnY = cardY + 62;
         drawRoundedRect(26, agBtnY, sw - 52, 28, 6, "#0D9488", null);
@@ -3070,46 +4335,138 @@
     }
 
     function drawMobileScreen3_Map(sw, y) {
-      state.mobileMaxScroll = 420;
-      drawRoundedRect(16, y, sw - 32, 190, 10, "#E2E8F0", "#CBD5E1", 1);
-      
-      // Bản đồ mini trên mobile (hỗ trợ hiển thị cảnh quan)
-      ctx.fillStyle = "#DCFCE7";
-      ctx.fillRect(26, y + 10, 100, 60);
-      ctx.fillStyle = "#15803D";
-      ctx.font = "bold 8.5px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("🌳 Công viên", 32, y + 42);
+      const boxX = 16, boxY = y, boxW = sw - 32, boxH = 460;
+      drawRoundedRect(boxX, boxY, boxW, boxH, 10, "#E2E8F0", "#CBD5E1", 1);
+      state.mobileMapBox = { x: boxX, y: boxY, w: boxW, h: boxH };
 
-      ctx.strokeStyle = "#BAE6FD";
-      ctx.lineWidth = 14;
+      ctx.save();
       ctx.beginPath();
-      ctx.moveTo(26, y + 140);
-      ctx.lineTo(sw - 26, y + 140);
-      ctx.stroke();
+      ctx.roundRect(boxX, boxY, boxW, boxH, 10);
+      ctx.clip();
 
-      ctx.strokeStyle = "#FFFFFF";
-      ctx.lineWidth = 12;
-      ctx.beginPath();
-      ctx.moveTo(sw / 2, y + 10);
-      ctx.lineTo(sw / 2, y + 180);
-      ctx.stroke();
+      drawMapTileFiller(boxX, boxY, boxW, boxH, state.mapOffsetX, state.mapOffsetY, 0.42);
 
-      drawMapPin(sw / 2, y + 90, "Đích: UEH Cơ Sở B", "#DC2626", "🎓", () => showToast("Trường UEH Cơ sở B"));
-      drawMapPin(sw / 2 + 50, y + 60, "Phòng Trọ Cô Nga", "#0D9488", "🏠", () => switchScreen(1));
+      ctx.save();
+      ctx.translate(state.mapOffsetX, state.mapOffsetY);
 
-      // Preset khu vực trên mobile
-      const preY = y + 205;
-      drawRoundedRect(16, preY, sw - 32, 110, 10, "#FFFFFF", "#E2E8F0", 1);
-      ctx.fillStyle = "#0F172A"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("📍 Chọn Nhanh Khu Vực Bản Đồ:", 26, preY + 22);
+      drawCityMapBackground(boxX, boxY, boxW, boxH, state.selectedCity, 0.42);
 
-      const mPresets = ["UEH CS B (Q.10)", "ĐH Bách Khoa", "ĐH KHTN (Q.5)"];
-      let myP = preY + 34;
-      mPresets.forEach(mp => {
-        drawRoundedRect(26, myP, sw - 52, 22, 4, "#F8FAFC", "#CBD5E1", 1);
-        ctx.fillStyle = "#1E293B"; ctx.font = "600 9.5px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("👉 " + mp, 34, myP + 15);
-        registerClickZone(26, myP, sw - 52, 22, () => showToast(`Đã định vị bản đồ tới: ${mp}`), mp);
-        myP += 25;
+      const scaleX = boxW / MAP_LOCAL_W, scaleY = boxH / MAP_LOCAL_H;
+      if (state.mapFilters.schools) {
+        UNIVERSITIES_LIST.filter(u => u.id !== 'all' && u.city === state.selectedCity && u.mapCoord).forEach(u => {
+          const label = u.name.length > 16 ? u.name.slice(0, 16) + '…' : u.name;
+          const c = getSafeMapCoord(u.mapCoord.x, u.mapCoord.y);
+          drawMapPin(boxX + c.x * scaleX, boxY + c.y * scaleY, label, "#DC2626", "🎓", () => showToast(`Điểm đến: ${u.name}`));
+        });
+      }
+      if (state.mapFilters.rooms) {
+        getMapFilteredRooms().filter(r => r.city === state.selectedCity && r.mapCoord).forEach(r => {
+          const label = r.title.length > 14 ? r.title.slice(0, 14) + '…' : r.title;
+          const c = getSafeMapCoord(r.mapCoord.x, r.mapCoord.y);
+          drawMapPin(boxX + c.x * scaleX, boxY + c.y * scaleY, label, "#0D9488", "🏠", () => { state.selectedRoomDetail = r; switchScreen(1); });
+        });
+      }
+      if (state.mapSelectedLocation && state.mapSelectedLocation.city === state.selectedCity && state.mapSelectedLocation.mapCoord) {
+        const sc = getSafeMapCoord(state.mapSelectedLocation.mapCoord.x, state.mapSelectedLocation.mapCoord.y);
+        drawSearchMarker(boxX + sc.x * scaleX, boxY + sc.y * scaleY, "Vị trí tìm");
+      }
+      ctx.restore();
+      ctx.restore();
+
+      drawRoundedRect(boxX + 8, boxY + 8, 96, 22, 6, "rgba(15, 23, 42, 0.85)", "rgba(255, 255, 255, 0.2)", 1);
+      ctx.fillStyle = "#38BDF8"; ctx.font = "bold 8.5px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText("🧭 Kéo để xem thêm", boxX + 14, boxY + 22);
+
+      const mResetBtnX = boxX + boxW - 82;
+      drawRoundedRect(mResetBtnX, boxY + 8, 74, 22, 6, "rgba(15, 23, 42, 0.85)", "rgba(255, 255, 255, 0.2)", 1);
+      ctx.fillStyle = "#FFFFFF"; ctx.font = "bold 8.5px 'Plus Jakarta Sans', sans-serif"; ctx.textAlign = "center";
+      ctx.fillText("🔄 Căn giữa", mResetBtnX + 37, boxY + 22);
+      ctx.textAlign = "start";
+      // Đăng ký nút "Căn giữa" TRƯỚC vùng bấm toàn khung bản đồ bên dưới — registerClickZone dùng
+      // Array.find() nên vùng đăng ký trước sẽ được ưu tiên khớp trước; nếu đảo thứ tự, vùng "bắt mọi click"
+      // của cả khung sẽ nuốt mất click vào nút nhỏ nằm bên trong nó.
+      registerClickZone(mResetBtnX, boxY + 8, 74, 22, () => {
+        state.mapOffsetX = 0;
+        state.mapOffsetY = 0;
+        state.mapSelectedLocation = null;
+        state.mapRadiusFilter = null;
+        resizeAndDraw();
+        showToast("Đã đưa bản đồ về tâm vị trí ban đầu.");
+      }, "Căn giữa bản đồ");
+
+      registerClickZone(boxX, boxY, boxW, boxH, () => {}, "Giữ và kéo để xem thêm khu vực bản đồ");
+
+      let ctrlY = boxY + boxH + 12;
+      const mSearchLabel = state.mapSelectedLocation ? `📍 ${state.mapSelectedLocation.name}` : "🔍 Bấm để tìm khu vực (mọi tỉnh/thành)...";
+      drawRoundedRect(16, ctrlY, sw - 32, 34, 8, state.mapSelectedLocation ? "#F0FDFA" : "#F8FAFC", state.mapSelectedLocation ? "#0D9488" : "#E2E8F0", 1);
+      ctx.fillStyle = state.mapSelectedLocation ? "#0F766E" : "#475569";
+      ctx.font = "600 10px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText(mSearchLabel.length > 40 ? mSearchLabel.slice(0, 40) + '…' : mSearchLabel, 26, ctrlY + 22);
+      registerClickZone(16, ctrlY, sw - 32, 34, () => openMapSearchModal('center'), "Tìm khu vực / trường trên bản đồ");
+      ctrlY += 46;
+
+      ctx.fillStyle = "#64748B"; ctx.font = "700 9.5px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("BÁN KÍNH HIỂN THỊ:", 16, ctrlY);
+      ctrlY += 8;
+      const mRadiusPillW = (sw - 32 - 12) / 3;
+      MAP_RADIUS_OPTIONS.forEach((opt, i) => {
+        const isActive = state.mapRadiusFilter === opt.value;
+        const rx = 16 + i * (mRadiusPillW + 6);
+        drawRoundedRect(rx, ctrlY, mRadiusPillW, 26, 6, isActive ? "#0D9488" : "#F8FAFC", isActive ? "#0D9488" : "#E2E8F0", 1);
+        ctx.fillStyle = isActive ? "#FFFFFF" : "#1E293B";
+        ctx.font = "600 9.5px 'Plus Jakarta Sans', sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText(opt.label, rx + mRadiusPillW / 2, ctrlY + 17);
+        ctx.textAlign = "start";
+        registerClickZone(rx, ctrlY, mRadiusPillW, 26, () => setMapRadiusFilter(opt.value), `Bán kính ${opt.label}`);
       });
+      ctrlY += 38;
+
+      ctx.fillStyle = "#64748B"; ctx.font = "700 9.5px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("LỚP HIỂN THỊ:", 16, ctrlY);
+      ctrlY += 10;
+      const mToggleItems = [
+        { key: "rooms", label: "Phòng Trọ", icon: "🏠" },
+        { key: "schools", label: "Trường ĐH", icon: "🎓" },
+        { key: "bus", label: "Xe Buýt", icon: "🚌" },
+        { key: "amenities", label: "Gym/Hồ Bơi", icon: "💪" }
+      ];
+      const chipW = (sw - 32 - 6) / 2;
+      mToggleItems.forEach((t, i) => {
+        const col = i % 2, row = Math.floor(i / 2);
+        const cx = 16 + col * (chipW + 6);
+        const cy = ctrlY + row * 32;
+        const isChecked = state.mapFilters[t.key];
+        drawRoundedRect(cx, cy, chipW, 26, 6, isChecked ? "#F0FDFA" : "#F8FAFC", isChecked ? "#99F6E4" : "#E2E8F0", 1);
+        ctx.fillStyle = isChecked ? "#0F766E" : "#64748B";
+        ctx.font = "600 9.5px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText((isChecked ? "✓ " : "") + t.icon + " " + t.label, cx + 8, cy + 17);
+        registerClickZone(cx, cy, chipW, 26, () => { state.mapFilters[t.key] = !state.mapFilters[t.key]; resizeAndDraw(); }, `Bật/Tắt ${t.label}`);
+      });
+      ctrlY += Math.ceil(mToggleItems.length / 2) * 32 + 16;
+
+      if (state.mapSelectedLocation && state.mapSelectedLocation.city === state.selectedCity) {
+        ctx.fillStyle = "#64748B"; ctx.font = "700 9.5px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText("🔴 PHÒNG GẦN VỊ TRÍ ĐÃ CHỌN NHẤT:", 16, ctrlY);
+        ctrlY += 10;
+        const mNearest = getNearestRoomsFromLocation(state.mapSelectedLocation, 4);
+        if (mNearest.length === 0) {
+          ctx.fillStyle = "#94A3B8"; ctx.font = "italic 9px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillText("Chưa có phòng nào ở tỉnh/thành này.", 16, ctrlY + 10);
+          ctrlY += 20;
+        } else {
+          mNearest.forEach(({ room, distanceKm }) => {
+            drawRoundedRect(16, ctrlY, sw - 32, 32, 6, "#FEF2F2", "#FECACA", 1);
+            ctx.fillStyle = "#991B1B"; ctx.font = "700 9.5px 'Plus Jakarta Sans', sans-serif";
+            const rTitle = room.title.length > 26 ? room.title.slice(0, 26) + '…' : room.title;
+            ctx.fillText(`📍→🏠 ${rTitle}`, 24, ctrlY + 13);
+            ctx.fillStyle = "#DC2626"; ctx.font = "800 9.5px 'Plus Jakarta Sans', sans-serif";
+            ctx.fillText(`~${distanceKm} km`, 24, ctrlY + 26);
+            registerClickZone(16, ctrlY, sw - 32, 32, () => { state.selectedRoomDetail = room; switchScreen(1); }, `Xem ${room.title} (cách ${distanceKm}km)`);
+            ctrlY += 36;
+          });
+        }
+      }
+
+      state.mobileMaxScroll = Math.max(650, ctrlY - y + 40);
     }
 
     function drawMobileScreen4_Overview(sw, y) {
@@ -3129,26 +4486,27 @@
       });
     }
 
-    // ==========================================
-    // MOBILE LANDLORD SCREENS
-    // ==========================================
     function drawMobileLandlord0_Overview(sw, y) {
-      state.mobileMaxScroll = 400;
-      drawRoundedRect(16, y, sw - 32, 70, 10, "#FFFFFF", "#E2E8F0", 1);
+      state.mobileMaxScroll = 430;
+      const stats = getLandlordStats();
+      drawRoundedRect(16, y, sw - 32, 100, 10, "#FFFFFF", "#E2E8F0", 1);
       ctx.fillStyle = "#64748B"; ctx.font = "700 9px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("PHÒNG TRỐNG / TỔNG", 28, y + 22);
       ctx.fillStyle = "#0F172A"; ctx.font = "800 15px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("2 / 6 Phòng", 28, y + 46);
 
       ctx.fillStyle = "#64748B"; ctx.font = "700 9px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("ĐIỂM RUBRIC", sw / 2 + 10, y + 22);
       ctx.fillStyle = "#D97706"; ctx.font = "800 15px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("4.8 ⭐ (84)", sw / 2 + 10, y + 46);
 
-      const cardY = y + 82;
+      ctx.fillStyle = "#64748B"; ctx.font = "700 9px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("DOANH THU THÁNG", 28, y + 68);
+      ctx.fillStyle = "#0D9488"; ctx.font = "800 15px 'Plus Jakarta Sans', sans-serif"; ctx.fillText(stats.revenueStr, 28, y + 92);
+
+      const cardY = y + 112;
       drawRoundedRect(16, cardY, sw - 32, 230, 10, "#FFFFFF", "#E2E8F0", 1);
       ctx.fillStyle = "#0F172A"; ctx.font = "800 12px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("📬 Yêu Cầu Hẹn Xem Trực Tiếp", 26, cardY + 24);
       
       const subCardY = cardY + 38;
       drawRoundedRect(26, subCardY, sw - 52, 110, 8, state.landlordAppointmentAccepted ? "#F0FDF4" : "#FEF3C7", state.landlordAppointmentAccepted ? "#BBF7D0" : "#FDE68A", 1);
-      drawAvatar(44, subCardY + 30, 13, "MA", "#6366F1");
-      ctx.fillStyle = "#0F172A"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("Sinh viên: Minh Anh (K49 UEH)", 65, subCardY + 24);
+      drawAvatar(44, subCardY + 30, 13, "QA", "#6366F1");
+      ctx.fillStyle = "#0F172A"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("Sinh viên: Quốc Anh (K51 UEH)", 65, subCardY + 24);
       ctx.fillStyle = "#64748B"; ctx.font = "500 9.5px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("Hẹn: 15:30 Chiều Mai • Studio Ban Công", 65, subCardY + 40);
       ctx.fillStyle = "#0F766E"; ctx.font = "italic 9px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("“Tụi con muốn qua kiểm tra công tơ điện...”", 36, subCardY + 68);
 
@@ -3161,7 +4519,7 @@
         registerClickZone(26, mActBtnY, sw - 52, 36, () => { 
           state.landlordAppointmentAccepted = true; 
           resizeAndDraw(); 
-          showToast("✓ Đã phê duyệt lịch hẹn với SV Minh Anh!"); 
+          showToast("✓ Đã phê duyệt lịch hẹn với SV Quốc Anh!"); 
         }, "Duyệt lịch hẹn sinh viên");
       } else {
         drawRoundedRect(26, mActBtnY, sw - 52, 36, 7, "#15803D", null);
@@ -3214,14 +4572,7 @@
       ctx.fillStyle = "#0F172A"; ctx.font = "800 12px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("⭐ Rubric Tín Nhiệm: 4.8 / 5.0", 26, y + 24);
       ctx.fillStyle = "#64748B"; ctx.font = "500 9.5px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("Dựa trên 84 lượt đánh giá thật kèm hợp đồng", 26, y + 40);
 
-      const mCriteria = [
-        "1. Thái độ & tôn trọng riêng tư: 4.9 ⭐",
-        "2. Minh bạch điện nước: 4.8 ⭐",
-        "3. Cơ sở vật chất/máy lạnh: 4.7 ⭐",
-        "4. Hàng xóm ý thức: 4.8 ⭐",
-        "5. Ngõ không ngập mùa mưa: 4.7 ⭐",
-        "6. An ninh & hoàn cọc: 4.9 ⭐"
-      ];
+      const mCriteria = LANDLORD_RUBRIC_CRITERIA.map(c => `${c.name.split(' ')[0]} ${c.short}: ${c.score} ⭐`);
       let mcY = y + 62;
       mCriteria.forEach(mc => {
         ctx.fillStyle = "#334155"; ctx.font = "600 10px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("• " + mc, 26, mcY);
@@ -3260,9 +4611,6 @@
       registerClickZone(26, mExportBtnY, sw - 52, 36, () => showToast("Đã tải hợp đồng mẫu bảo lãnh UNINEST!"), "Tải hợp đồng mẫu mobile");
     }
 
-    // ==========================================
-    // CANVAS EVENT HANDLERS (VỚI PAN/DRAG MAP FIX)
-    // ==========================================
     function getCanvasCoordinates(e) {
       const rect = canvas.getBoundingClientRect();
       const clientX = e.clientX || (e.touches && e.touches[0].clientX);
@@ -3283,10 +4631,11 @@
     canvas.addEventListener('mousemove', (e) => {
       const coords = getCanvasCoordinates(e);
 
-      // Nếu đang kéo bản đồ (Map Pan/Drag)
       if (state.isDraggingMap) {
-        state.mapOffsetX = Math.max(-180, Math.min(180, coords.x - state.mapDragStartX));
-        state.mapOffsetY = Math.max(-140, Math.min(140, coords.y - state.mapDragStartY));
+        const panX = state.viewMode === 'desktop' ? 420 : 240;
+        const panY = state.viewMode === 'desktop' ? 320 : 220;
+        state.mapOffsetX = Math.max(-panX, Math.min(panX, coords.x - state.mapDragStartX));
+        state.mapOffsetY = Math.max(-panY, Math.min(panY, coords.y - state.mapDragStartY));
         resizeAndDraw();
         return;
       }
@@ -3321,10 +4670,20 @@
 
     canvas.addEventListener('mousedown', (e) => {
       const coords = getCanvasCoordinates(e);
-      
-      // Kiểm tra nếu click trong khung map ở màn hình 3 (Bản đồ)
+
       const mapW = SIZES.desktop.width * 0.66;
-      if (state.currentScreen === 3 && state.viewMode === 'desktop' && coords.x >= 40 && coords.x <= 40 + mapW && coords.y >= 164 && coords.y <= 164 + 500) {
+      const onDesktopMap = state.currentScreen === 3 && state.viewMode === 'desktop' && state.userRole === 'student' &&
+        coords.x >= 40 && coords.x <= 40 + mapW && coords.y >= 164 && coords.y <= 164 + MAP_BOX_H;
+
+      // Bản đồ mobile cuộn cả trang qua state.mobileScrollY, nên khung bản đồ hiển thị TRÊN MÀN HÌNH ở vị trí
+      // (boxY - mobileScrollY), không phải boxY "ảo" ghi trong state.mobileMapBox — phải trừ độ cuộn hiện tại
+      // trước khi so khớp toạ độ chuột thì mới kéo đúng bản đồ thay vì nhầm sang cuộn trang.
+      const mb = state.mobileMapBox;
+      const onMobileMap = mb && state.currentScreen === 3 && state.viewMode === 'mobile' && state.userRole === 'student' &&
+        coords.x >= mb.x && coords.x <= mb.x + mb.w &&
+        coords.y >= (mb.y - state.mobileScrollY) && coords.y <= (mb.y - state.mobileScrollY + mb.h);
+
+      if (onDesktopMap || onMobileMap) {
         state.isDraggingMap = true;
         state.mapDragStartX = coords.x - state.mapOffsetX;
         state.mapDragStartY = coords.y - state.mapOffsetY;
@@ -3486,11 +4845,221 @@
         setTimeout(() => m.classList.add('hidden'), 200); 
       }
     }
-    function submitReviewAction() { closeReviewModal(); showToast("Đã gửi đánh giá ẩn danh thành công!"); resizeAndDraw(); }
+    function submitReviewAction() {
+      const room = state.selectedRoomDetail;
+      if (!room) { closeReviewModal(); return; }
+      const rates = ['rate1', 'rate2', 'rate3', 'rate4', 'rate5'].map(id => parseFloat(document.getElementById(id).value));
+      const avgStars = rates.reduce((a, b) => a + b, 0) / rates.length;
+      const text = document.getElementById('reviewText').value.trim() || "Không có nhận xét chi tiết thêm.";
+      const uniShort = (state.currentUser && state.currentUser.title || "UEH").match(/[A-Z]{2,}/);
+      const list = getRoomReviews(room);
+      list.unshift({
+        userBadge: `SV Ẩn Danh · ${uniShort ? uniShort[0] : 'UEH'}`,
+        stayDuration: "Vừa gửi đánh giá",
+        verifiedTag: "Đánh Giá Mới",
+        stars: Math.round(avgStars * 10) / 10,
+        text: `“${text}”`
+      });
+      closeReviewModal();
+      showToast("Đã gửi đánh giá ẩn danh thành công!");
+      resizeAndDraw();
+    }
+
+    let quizDraftAnswers = {};
+
+    function renderLifestyleQuizBody() {
+      const body = document.getElementById('lifestyleQuizBody');
+      if (!body) return;
+      body.innerHTML = LIFESTYLE_QUESTIONS.map(q => `
+        <div>
+          <div class="font-bold text-slate-200 mb-1 text-[11px]">${q.question}</div>
+          <div class="flex flex-wrap gap-1.5">
+            ${q.options.map(o => `
+              <button type="button" onclick="selectQuizAnswer('${q.key}','${o.value}')"
+                class="px-2 py-1 rounded-lg border text-[10.5px] font-medium transition-colors ${quizDraftAnswers[q.key] === o.value ? 'bg-teal-600 border-teal-500 text-white' : 'bg-slate-950 border-slate-700 text-slate-300 hover:border-teal-600'}">
+                ${o.label}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function selectQuizAnswer(key, value) {
+      quizDraftAnswers[key] = value;
+      renderLifestyleQuizBody();
+    }
+
+    function openLifestyleQuizModal() {
+      quizDraftAnswers = Object.assign({}, state.myLifestyleAnswers || {});
+      renderLifestyleQuizBody();
+      const m = document.getElementById('lifestyleQuizModal');
+      if (m) {
+        m.classList.remove('hidden');
+        setTimeout(() => m.classList.remove('opacity-0'), 10);
+      }
+    }
+
+    function closeLifestyleQuizModal() {
+      const m = document.getElementById('lifestyleQuizModal');
+      if (m) {
+        m.classList.add('opacity-0');
+        setTimeout(() => m.classList.add('hidden'), 200);
+      }
+    }
+
+    function submitLifestyleQuiz() {
+      if (Object.keys(quizDraftAnswers).length < LIFESTYLE_QUESTIONS.length) {
+        showToast("Vui lòng trả lời đủ " + LIFESTYLE_QUESTIONS.length + " câu hỏi!");
+        return;
+      }
+      state.myLifestyleAnswers = Object.assign({}, quizDraftAnswers);
+      state.quizCompleted = true;
+      closeLifestyleQuizModal();
+      showToast("Đã lưu hồ sơ phong cách sống! Điểm ghép phòng đã được cập nhật.");
+      resizeAndDraw();
+    }
+
+    function openMovingModal(room) {
+      state.selectedRoomDetail = room;
+      const modal = document.getElementById('movingModal');
+      if (modal) { modal.classList.remove('hidden'); setTimeout(() => modal.classList.remove('opacity-0'), 10); }
+      renderMovingModalBody();
+    }
+    function closeMovingModal() {
+      const modal = document.getElementById('movingModal');
+      if (modal) { modal.classList.add('opacity-0'); setTimeout(() => modal.classList.add('hidden'), 200); }
+    }
+    function renderMovingModalBody() {
+      const room = state.selectedRoomDetail;
+      if (!room) return;
+      setInnerText('movingNewRoomTitle', `${room.title} (${room.priceStr})`);
+      setInnerText('oldLocationLabel', state.oldRoomLocation ? state.oldRoomLocation.name : "Bấm để chọn vị trí trọ cũ...");
+      const distanceKm = (state.oldRoomLocation && room.mapCoord) ? mapDistanceKm(state.oldRoomLocation.mapCoord, room.mapCoord) : null;
+      setInnerText('movingDistanceLabel', distanceKm != null ? `${distanceKm} km (ước tính)` : "Chọn vị trí phòng cũ để tính khoảng cách");
+      renderMovingBrokerList(room, distanceKm);
+    }
+    function renderMovingBrokerList(room, distanceKm) {
+      const c = document.getElementById('movingBrokerListContainer');
+      if (!c) return;
+      c.innerHTML = '';
+      MOVING_BROKERS.forEach(b => {
+        const price = getBrokerPrice(b, distanceKm);
+        const div = document.createElement('div');
+        div.className = "p-2.5 rounded-lg border border-slate-800 bg-slate-950 space-y-1.5";
+        div.innerHTML = `
+          <div class="flex justify-between items-start gap-2">
+            <div>
+              <div class="font-bold text-teal-300">${b.name}</div>
+              <div class="text-[10px] text-slate-400">${b.vehicleType} • ⭐ ${b.rating} (${b.reviews})</div>
+            </div>
+            <div class="text-amber-300 font-bold font-mono shrink-0">${price.toLocaleString('vi-VN')} đ</div>
+          </div>
+          <div class="text-[10px] text-slate-400 italic">${b.note}</div>
+          <div class="flex gap-1.5 pt-1">
+            <button data-broker="${b.id}" class="moving-chat-btn flex-1 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-teal-300 text-[10px] font-bold border border-slate-700">💬 Chat</button>
+            <button data-broker="${b.id}" data-name="${b.name}" class="moving-select-btn flex-1 py-1.5 rounded bg-teal-600 hover:bg-teal-500 text-white text-[10px] font-bold">Đặt Ngay</button>
+          </div>
+        `;
+        c.appendChild(div);
+      });
+      c.querySelectorAll('.moving-chat-btn').forEach(btn => {
+        btn.onclick = () => openMovingChatModal(btn.getAttribute('data-broker'));
+      });
+      c.querySelectorAll('.moving-select-btn').forEach(btn => {
+        btn.onclick = () => {
+          state.selectedMovingBroker = btn.getAttribute('data-broker');
+          showToast(`Đã gửi yêu cầu đặt dịch vụ tới ${btn.getAttribute('data-name')}!`);
+          closeMovingModal();
+        };
+      });
+    }
+
+    let movingChatBrokerId = null;
+    function openMovingChatModal(brokerId) {
+      movingChatBrokerId = brokerId;
+      const broker = MOVING_BROKERS.find(b => b.id === brokerId);
+      if (!broker) return;
+      const titleEl = document.getElementById('movingChatTitle');
+      if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-comments text-teal-400"></i> CHAT VỚI ${broker.name.toUpperCase()}`;
+
+      const container = document.getElementById('movingChatMessages');
+      const reviews = getBrokerReviews(broker);
+      const reviewLine = reviews[0] ? reviews[0].text : '';
+      if (container) {
+        container.innerHTML = `
+          <div class="flex items-start gap-2">
+            <div class="w-6 h-6 rounded-full bg-teal-600 flex items-center justify-center text-white font-bold text-[10px] shrink-0">${broker.name.slice(0, 2).toUpperCase()}</div>
+            <div class="bg-slate-800 p-2.5 rounded-xl border border-slate-700 max-w-[85%]">
+              Chào bạn! Mình là ${broker.name} (${broker.vehicleType}). ⭐ ${broker.rating}/5 (${broker.reviews} đánh giá). Bạn cần hỗ trợ gì về lịch chuyển trọ không?
+              ${reviewLine ? `<div class="mt-1.5 text-[10px] text-slate-400 italic">Đánh giá gần đây: ${reviewLine}</div>` : ''}
+            </div>
+          </div>
+        `;
+      }
+      const input = document.getElementById('movingChatInput');
+      if (input) input.value = '';
+
+      const modal = document.getElementById('movingChatModal');
+      if (modal) { modal.classList.remove('hidden'); setTimeout(() => modal.classList.remove('opacity-0'), 10); }
+    }
+    function closeMovingChatModal() {
+      const modal = document.getElementById('movingChatModal');
+      if (modal) { modal.classList.add('opacity-0'); setTimeout(() => modal.classList.add('hidden'), 200); }
+    }
+    function sendMovingChatPrompt(text) {
+      const input = document.getElementById('movingChatInput');
+      if (input) input.value = text;
+      submitMovingChatPrompt();
+    }
+    function submitMovingChatPrompt() {
+      const input = document.getElementById('movingChatInput');
+      if (!input) return;
+      const text = input.value.trim();
+      if (!text || !movingChatBrokerId) return;
+      const broker = MOVING_BROKERS.find(b => b.id === movingChatBrokerId);
+      const container = document.getElementById('movingChatMessages');
+      if (!broker || !container) return;
+
+      const userDiv = document.createElement('div');
+      userDiv.className = "flex items-start gap-2 justify-end";
+      userDiv.innerHTML = `
+        <div class="bg-teal-600 text-white p-2.5 rounded-xl border border-teal-500 max-w-[85%]">${text}</div>
+        <div class="w-6 h-6 rounded-full bg-indigo-500 flex items-center justify-center text-white font-bold text-[10px] shrink-0">SV</div>
+      `;
+      container.appendChild(userDiv);
+      input.value = "";
+      container.scrollTop = container.scrollHeight;
+
+      setTimeout(() => {
+        const room = state.selectedRoomDetail;
+        const distanceKm = (state.oldRoomLocation && room && room.mapCoord) ? mapDistanceKm(state.oldRoomLocation.mapCoord, room.mapCoord) : null;
+        const lower = text.toLowerCase();
+        let reply = `Cảm ơn bạn đã nhắn tin cho ${broker.name}!`;
+        if (lower.includes('giá') || lower.includes('bao nhiêu') || lower.includes('phí')) {
+          const price = getBrokerPrice(broker, distanceKm);
+          reply = distanceKm != null
+            ? `Với khoảng cách ước tính ${distanceKm}km, chi phí dự kiến là ${price.toLocaleString('vi-VN')} đ (đã gồm phí cơ bản ${broker.basePrice.toLocaleString('vi-VN')}đ). Bạn chọn vị trí trọ cũ trong màn đặt dịch vụ để mình báo giá chính xác hơn nhé!`
+            : `Phí cơ bản của bên mình là ${broker.basePrice.toLocaleString('vi-VN')}đ, cộng thêm ${broker.pricePerKm.toLocaleString('vi-VN')}đ/km. Bạn chọn vị trí trọ cũ để mình tính tổng chi phí chính xác nhé!`;
+        } else if (lower.includes('khi nào') || lower.includes('lịch') || lower.includes('ngày')) {
+          reply = `Bên mình có thể sắp xếp trong 1-2 ngày tới, kể cả cuối tuần. Bạn cho mình xin ngày giờ mong muốn nhé!`;
+        } else if (lower.includes('xe') || lower.includes('loại')) {
+          reply = `Bên mình dùng ${broker.vehicleType}, phù hợp với phòng trọ sinh viên. ${broker.note}`;
+        }
+        const aiDiv = document.createElement('div');
+        aiDiv.className = "flex items-start gap-2";
+        aiDiv.innerHTML = `
+          <div class="w-6 h-6 rounded-full bg-teal-600 flex items-center justify-center text-white font-bold text-[10px] shrink-0">${broker.name.slice(0, 2).toUpperCase()}</div>
+          <div class="bg-slate-800 p-2.5 rounded-xl border border-slate-700 max-w-[85%]">${reply}</div>
+        `;
+        container.appendChild(aiDiv);
+        container.scrollTop = container.scrollHeight;
+      }, 500);
+    }
 
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        closeLoginModal(); closeCredentialsModal(); closeAgreementModal(); closeBookingModal(); closeReviewModal(); closeCityModal(); closeUniversityModal(); closeAmenitiesModal(); closeAiChatModal(); closeLandlordEditModal(); closePriceModal();
+        closeLoginModal(); closeCredentialsModal(); closeAgreementModal(); closeBookingModal(); closeReviewModal(); closeCityModal(); closeUniversityModal(); closeAmenitiesModal(); closeAiChatModal(); closeLandlordEditModal(); closePriceModal(); closeLifestyleQuizModal(); closeMapSearchModal(); closeMovingModal(); closeMovingChatModal();
       }
       const loginModal = document.getElementById('loginModal');
       if (e.key === 'Enter' && loginModal && !loginModal.classList.contains('hidden')) {

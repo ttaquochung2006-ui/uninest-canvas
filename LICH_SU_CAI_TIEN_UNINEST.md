@@ -279,7 +279,7 @@ for f in v10.1 v10.2 v10.3 v10.5 v10.6 v10.7 v11.0; do
 done
 ```
 
-Các con số khác trong tài liệu (5 tiêu chí rubric, 5 câu hỏi quiz, 4 đơn vị chuyển trọ, 11 trường, công thức điểm uy tín, 4 mức xếp hạng) đều lấy trực tiếp từ các hằng số `ROOM_RUBRIC_CRITERIA`, `LIFESTYLE_QUESTIONS`, `MOVING_BROKERS`, `UNIVERSITIES_LIST`, `TRUST_RULES`, `TRUST_RANKS` trong `uninest_canvas_studio_v11.0.html`.
+Các con số khác trong tài liệu (5 tiêu chí rubric, 5 câu hỏi quiz, 4 đơn vị chuyển trọ, 11 trường, công thức điểm uy tín, 4 mức xếp hạng) đều lấy trực tiếp từ các hằng số `ROOM_RUBRIC_CRITERIA`, `LIFESTYLE_QUESTIONS`, `MOVING_BROKERS`, `UNIVERSITIES_LIST`, `TRUST_RULES`, `TRUST_RANKS` trong `versions/uninest_canvas_studio_v11.0.html`.
 
 ---
 

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+  <base href="../">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UNINEST - Canvas UI Mockup V10.4</title>
+  <title>UNINEST - Canvas UI Mockup V10.5</title>
   <!-- Tailwind CSS & Google Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,9 +75,168 @@
       box-sizing: border-box;
       overflow: hidden;
     }
+
+    /* ====== V10.5: ANIMATION ====== */
+    @keyframes uniFloat {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-7px); }
+    }
+    @keyframes uniGlowPulse {
+      0%, 100% { opacity: .35; transform: scale(1); }
+      50%      { opacity: .85; transform: scale(1.14); }
+    }
+    @keyframes uniTwinkle {
+      0%, 100% { opacity: .18; transform: scale(.7); }
+      50%      { opacity: 1;   transform: scale(1.25); }
+    }
+    @keyframes uniFadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes uniFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes uniShimmer {
+      0%   { transform: translateX(-120%); }
+      100% { transform: translateX(320%); }
+    }
+    @keyframes uniBlink {
+      0%, 45%   { opacity: 1; }
+      55%, 100% { opacity: 0; }
+    }
+    @keyframes uniDrawLine {
+      from { stroke-dashoffset: 300; }
+      to   { stroke-dashoffset: 0; }
+    }
+    @keyframes uniRingSpin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .uni-float      { animation: uniFloat 4.5s ease-in-out infinite; }
+    .uni-fade-up    { animation: uniFadeUp .55s cubic-bezier(.16,1,.3,1) both; }
+    .uni-fade-in    { animation: uniFadeIn .6s ease both; }
+    .uni-blink      { animation: uniBlink 1.05s steps(1) infinite; }
+    .uni-ring-spin  { animation: uniRingSpin 9s linear infinite; }
+
+    /* Vệt sáng quét ngang dùng cho nút thương hiệu trong header */
+    .uni-shine { position: relative; overflow: hidden; }
+    .uni-shine::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 38%;
+      background: linear-gradient(100deg, transparent, rgba(255,255,255,.42), transparent);
+      animation: uniShimmer 3.6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    /* Modal: thêm hiệu ứng trượt + phóng nhẹ cho khung bên trong, không cần sửa HTML từng modal */
+    [id$="Modal"] > div {
+      transition: transform .24s cubic-bezier(.16,1,.3,1), opacity .24s ease;
+    }
+    [id$="Modal"].opacity-0 > div {
+      transform: translateY(12px) scale(.97);
+      opacity: 0;
+    }
+
+    /* ====== V10.5: MÀN HÌNH TẢI DỮ LIỆU GIẢ LẬP ====== */
+    #bootLoader {
+      background:
+        radial-gradient(circle at 50% 34%, rgba(13,148,136,.16), transparent 58%),
+        radial-gradient(circle at 78% 78%, rgba(99,102,241,.12), transparent 55%),
+        #05080f;
+      transition: opacity .55s ease, visibility .55s ease;
+    }
+    #bootLoader.boot-done {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .boot-star {
+      position: absolute;
+      width: 4px; height: 4px;
+      border-radius: 9999px;
+      background: #CCFBF1;
+      box-shadow: 0 0 8px 2px rgba(45,212,191,.75);
+      animation: uniTwinkle 2.8s ease-in-out infinite;
+    }
+    .boot-row {
+      opacity: .32;
+      transition: opacity .4s ease, color .4s ease;
+    }
+    .boot-row.is-active { opacity: 1; }
+    .boot-bar-fill {
+      transition: width .45s cubic-bezier(.4,0,.2,1);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .uni-float, .uni-blink, .uni-ring-spin, .boot-star, .uni-shine::after {
+        animation: none !important;
+      }
+    }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans h-screen flex flex-col overflow-hidden">
+
+  <!-- ====== MÀN HÌNH TẢI DỮ LIỆU GIẢ LẬP (V10.5) ====== -->
+  <div id="bootLoader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden">
+
+    <!-- Các đốm sáng nền nhấp nháy -->
+    <span class="boot-star" style="top:14%; left:12%;  animation-delay:0s"></span>
+    <span class="boot-star" style="top:22%; left:82%;  animation-delay:.4s"></span>
+    <span class="boot-star" style="top:34%; left:26%;  animation-delay:1.1s"></span>
+    <span class="boot-star" style="top:12%; left:58%;  animation-delay:.7s"></span>
+    <span class="boot-star" style="top:66%; left:9%;   animation-delay:1.6s"></span>
+    <span class="boot-star" style="top:78%; left:74%;  animation-delay:.2s"></span>
+    <span class="boot-star" style="top:52%; left:91%;  animation-delay:1.3s"></span>
+    <span class="boot-star" style="top:86%; left:34%;  animation-delay:.9s"></span>
+    <span class="boot-star" style="top:8%;  left:38%;  animation-delay:2s"></span>
+    <span class="boot-star" style="top:60%; left:20%;  animation-delay:2.4s"></span>
+    <span class="boot-star" style="top:30%; left:70%;  animation-delay:1.8s"></span>
+    <span class="boot-star" style="top:90%; left:60%;  animation-delay:.55s"></span>
+
+    <button id="bootSkipBtn" onclick="finishBootLoader(true)"
+            class="absolute top-5 right-6 z-10 font-mono text-[11px] text-slate-500 hover:text-teal-300 border border-slate-800 hover:border-teal-500/40 px-3 py-1.5 rounded-lg transition flex items-center gap-1.5">
+      Bỏ qua <i class="fa-solid fa-angles-right text-[10px]"></i>
+    </button>
+
+    <div class="relative w-full max-w-[540px] px-7 flex flex-col items-center">
+
+      <!-- Logo UNINEST: thẻ trắng + quầng sáng + vòng nét đứt xoay chậm -->
+      <div class="relative uni-float mb-6">
+        <div class="absolute -inset-6 rounded-full bg-teal-400/30 blur-2xl"
+             style="animation: uniGlowPulse 3.4s ease-in-out infinite"></div>
+        <svg class="absolute -inset-4 uni-ring-spin" viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="50" r="47" stroke="rgba(45,212,191,.45)" stroke-width="1"
+                  stroke-dasharray="7 11" stroke-linecap="round"></circle>
+        </svg>
+        <div class="relative w-[112px] h-[112px] rounded-[28px] bg-white shadow-2xl shadow-teal-500/20 flex items-center justify-center p-3.5 border border-teal-200/40">
+          <img src="Uninest_1_-_logo-removebg-preview.png" alt="UNINEST" class="w-full h-full object-contain">
+        </div>
+      </div>
+
+      <div class="font-mono text-[15px] tracking-[0.46em] text-slate-100 uni-fade-in pl-[0.46em]">uninest</div>
+      <div class="mt-2 text-[11.5px] text-slate-500 uni-fade-in" style="animation-delay:.25s">
+        nền tảng tìm trọ minh bạch cho sinh viên Việt Nam
+      </div>
+
+      <!-- Thanh tiến trình -->
+      <div class="w-full h-[3px] bg-slate-800/90 rounded-full overflow-hidden mt-8">
+        <div id="bootBarFill" class="boot-bar-fill h-full w-0 rounded-full bg-gradient-to-r from-teal-400 via-emerald-300 to-teal-400"></div>
+      </div>
+
+      <!-- Danh sách gói dữ liệu đang tải -->
+      <div id="bootModuleList" class="w-full mt-6 font-mono text-[11.5px] leading-[1.75]"></div>
+
+      <!-- Dòng trạng thái -->
+      <div class="mt-8 font-mono text-[11px] text-slate-500 flex items-center gap-1.5 h-4">
+        <span id="bootStatusText">đang kết nối máy chủ uninest</span>
+        <span class="uni-blink text-teal-400">▌</span>
+      </div>
+    </div>
+  </div>
 
   <!-- HEADER -->
   <header class="h-14 border-b border-slate-800 bg-slate-900/95 backdrop-blur px-4 flex items-center justify-between shrink-0 z-30 shadow-md">
@@ -88,7 +248,7 @@
       <div>
         <div class="flex items-center gap-2">
           <h1 class="font-bold text-xs sm:text-sm tracking-tight text-white flex items-center gap-1.5">
-            UNINEST <span class="text-teal-300 font-mono text-[10px] px-1.5 py-0.2 rounded bg-teal-500/10 border border-teal-500/30">V10.4</span>
+            UNINEST <span class="text-teal-300 font-mono text-[10px] px-1.5 py-0.2 rounded bg-teal-500/10 border border-teal-500/30">V10.5</span>
           </h1>
           <span id="roleBadgeHeader" class="text-[11px] text-amber-300 font-medium hidden sm:inline">• Chưa Đăng Nhập</span>
         </div>
@@ -134,6 +294,11 @@
           <span>Đăng Nhập</span>
         </button>
       </div>
+
+      <!-- Help Button -->
+      <button onclick="openHelpModal()" class="p-1.5 w-7 h-7 text-xs font-bold bg-teal-500/20 hover:bg-teal-500/30 text-teal-300 rounded-lg transition border border-teal-500/40 flex items-center justify-center active:scale-95" title="Hướng dẫn sử dụng chi tiết (phím ?)">
+        <i class="fa-solid fa-question"></i>
+      </button>
 
       <!-- PNG Download Button -->
       <button onclick="downloadCanvasImage()" class="p-1.5 text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition border border-slate-700" title="Tải ảnh PNG">
@@ -805,6 +970,35 @@
               <i class="fa-solid fa-paper-plane text-[10px]"></i> Gửi
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== HƯỚNG DẪN SỬ DỤNG CHI TIẾT (V10.5) ====== -->
+    <div id="helpModal" class="fixed inset-0 z-[70] bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-200">
+      <div class="bg-slate-900 border border-teal-500/40 w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col overflow-hidden text-xs">
+        <div class="px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-gradient-to-r from-teal-900/60 to-slate-900/60">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-xl bg-teal-500/20 border border-teal-500/40 text-teal-300 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-circle-question"></i>
+            </div>
+            <div>
+              <div class="text-white font-bold text-sm">HƯỚNG DẪN SỬ DỤNG UNINEST</div>
+              <div class="text-[10.5px] text-slate-400">Bản demo mô phỏng — mọi nút trên màn hình đều bấm thử được</div>
+            </div>
+          </div>
+          <button onclick="closeHelpModal()" class="text-slate-400 hover:text-white transition shrink-0"><i class="fa-solid fa-xmark text-base"></i></button>
+        </div>
+
+        <div id="helpTabBar" class="px-4 pt-3 pb-2.5 flex items-center gap-1.5 border-b border-slate-800 bg-slate-900/95 overflow-x-auto"></div>
+
+        <div id="helpModalBody" class="p-4 space-y-2.5 text-slate-300 max-h-[62vh] overflow-y-auto"></div>
+
+        <div class="px-4 py-2.5 border-t border-slate-800 flex items-center justify-between gap-3 bg-slate-900/95">
+          <span class="text-[10.5px] text-slate-500 hidden sm:inline">
+            Phím tắt: <strong class="text-slate-300 font-mono">?</strong> mở hướng dẫn • <strong class="text-slate-300 font-mono">Esc</strong> đóng
+          </span>
+          <button onclick="closeHelpModal()" class="px-4 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs shadow transition active:scale-95 ml-auto">Đã Hiểu</button>
         </div>
       </div>
     </div>
@@ -1782,6 +1976,215 @@
 
     let currentEditingRoomIndex = -1;
 
+    // ====== V10.5: NGUỒN NỘI DUNG DÙNG CHUNG CHO CỔNG XÁC THỰC (desktop + mobile đọc cùng 1 chỗ) ======
+    const GATEWAY_HERO = {
+      brand: "UNINEST",
+      tagline: "Nền tảng tìm trọ minh bạch dành cho sinh viên Việt Nam",
+      headline: "Hệ Thống Kiểm Chứng Nhà Trọ Sinh Viên Minh Bạch",
+      subline: "Vui lòng chọn phân hệ tài khoản để tiếp tục trải nghiệm quy trình chuẩn hóa của UNINEST."
+    };
+
+    const GATEWAY_STATS = [
+      { value: ROOMS_DATABASE.length, decimals: 0, suffix: "", label: "Phòng đã kiểm định" },
+      { value: 34, decimals: 0, suffix: "+", label: "Tỉnh thành phủ sóng" },
+      { value: 4.8, decimals: 1, suffix: "★", label: "Điểm Rubric trung bình" }
+    ];
+
+    const GATEWAY_STEPS = [
+      { icon: "🔍", title: "Tìm & Lọc", desc: "Chọn tỉnh thành, trường, ngân sách, tiện ích." },
+      { icon: "🗺️", title: "Xem Bản Đồ", desc: "Kéo bản đồ, đo bán kính tới trường & trạm buýt." },
+      { icon: "🤝", title: "Ghép Bạn Ở", desc: "Trắc nghiệm lối sống, tính % tương thích thật." },
+      { icon: "📝", title: "Hẹn & Ký", desc: "Đặt lịch xem phòng, ký cam kết, đặt chuyển trọ." }
+    ];
+
+    // ====== V10.5: DANH SÁCH GÓI DỮ LIỆU GIẢ LẬP CHO MÀN HÌNH TẢI ======
+    const BOOT_MODULES = [
+      { name: "kho phòng trọ kiểm định", size: "2.4 MB" },
+      { name: "danh mục 34+ tỉnh thành", size: "0.6 MB" },
+      { name: "bản đồ khu vực & trường đại học", size: "4.1 MB" },
+      { name: "biểu phí điện nước niêm yết", size: "0.9 MB" },
+      { name: "hồ sơ ghép bạn ở cùng", size: "" },
+      { name: "điểm rubric & đánh giá thực tế", size: "" },
+      { name: "đơn vị dịch vụ chuyển trọ", size: "" },
+      { name: "giao diện phân hệ sinh viên", size: "" },
+      { name: "giao diện phân hệ chủ trọ", size: "" },
+      { name: "trợ lý ai tìm trọ", size: "" },
+      { name: "bộ lọc nâng cao & tiện ích", size: "" },
+      { name: "lịch hẹn xem phòng", size: "" }
+    ];
+
+    const BOOT_STATUS_TEXTS = [
+      "đang kết nối máy chủ uninest",
+      "đang tải kho phòng đã kiểm định",
+      "đang dựng bản đồ khu vực",
+      "đang đồng bộ biểu phí niêm yết",
+      "đang chuẩn bị giao diện",
+      "sẵn sàng"
+    ];
+
+    // ====== V10.5: NỘI DUNG HƯỚNG DẪN SỬ DỤNG (dùng chung cho cả desktop & mobile) ======
+    const HELP_GUIDE = {
+      student: {
+        tabLabel: "Sinh Viên",
+        tabIcon: "fa-graduation-cap",
+        accent: "teal",
+        intro: "Phân hệ dành cho bạn Quốc Anh (SV năm 1, UEH). Đăng nhập bằng tài khoản mẫu ở nút <strong class='text-amber-300'>Tài Khoản Mẫu</strong> trên thanh công cụ, hoặc bấm <strong>Điền nhanh tài khoản SV</strong> trong hộp đăng nhập.",
+        steps: [
+          {
+            icon: "fa-right-to-bracket", title: "1. Đăng nhập phân hệ Sinh Viên",
+            body: [
+              "Bấm nút <strong>Đăng Nhập Phân Hệ Sinh Viên</strong> ngay trên màn hình cổng xác thực, hệ thống sẽ tự điền sẵn email <span class='font-mono text-teal-300'>quocanh.3123102@st.ueh.edu.vn</span>.",
+              "Mật khẩu mẫu: <span class='font-mono text-emerald-400'>UEH@2026</span>. Bấm biểu tượng con mắt để xem mật khẩu đang gõ."
+            ]
+          },
+          {
+            icon: "fa-house", title: "2. Khám phá & lọc phòng trọ",
+            body: [
+              "Chọn <strong>Tỉnh/Thành</strong>, <strong>Trường đại học</strong>, <strong>Tiện ích</strong>, <strong>Xe buýt</strong>, <strong>Ẩm thực</strong> — các lựa chọn này là bản nháp, phải bấm <strong class='text-teal-300'>Áp Dụng Bộ Lọc</strong> mới chạy (bấm <strong>Hủy</strong> để quay lại bản cũ).",
+              "Riêng <strong>thanh kéo ngân sách</strong> trên thanh công cụ và nút <strong>Hiển Thị Tất Cả Trọ</strong> lọc ngay lập tức, không cần áp dụng.",
+              "Bấm vào một thẻ phòng bất kỳ để mở màn hình chi tiết."
+            ]
+          },
+          {
+            icon: "fa-star", title: "3. Chi tiết phòng, Rubric & đánh giá",
+            body: [
+              "Xem biểu phí điện nước niêm yết, ảnh mô tả và bảng điểm <strong>Rubric 5 tiêu chí</strong> do sinh viên từng thuê chấm.",
+              "Bấm <strong>Viết Đánh Giá</strong> để chấm sao và gửi nhận xét — đánh giá mới sẽ hiện ngay trong danh sách (chỉ lưu trong phiên làm việc).",
+              "Bấm <strong>Đặt Lịch Xem Phòng</strong> để gửi yêu cầu hẹn sang phía chủ trọ."
+            ]
+          },
+          {
+            icon: "fa-user-group", title: "4. Ghép bạn ở cùng",
+            body: [
+              "Bấm <strong>Làm Trắc Nghiệm Phong Cách Sống</strong> và trả lời đủ 5 câu (giờ ngủ, độ sạch, tiếng ồn, khách khứa, chia sẻ đồ).",
+              "Sau khi lưu, danh sách ứng viên sẽ được <strong>tính lại % tương thích thật</strong> và sắp xếp từ cao xuống thấp.",
+              "Bấm một ứng viên rồi chọn <strong>Ký Thỏa Thuận Ở Ghép</strong> để xem mẫu cam kết sinh hoạt chung."
+            ]
+          },
+          {
+            icon: "fa-map-location-dot", title: "5. Bản đồ tương tác",
+            body: [
+              "<strong>Giữ chuột trái và kéo</strong> trên bản đồ để di chuyển xem khu vực xung quanh (thao tác kéo hiện chỉ có ở chế độ Desktop Web).",
+              "Bấm ô <strong>tìm kiếm khu vực/trường</strong> để nhảy tới vị trí, rồi chọn <strong>bán kính</strong> (1km / 2km / 3km) để lọc phòng quanh điểm đó.",
+              "Dùng các công tắc lớp bản đồ để bật/tắt hiển thị: trường học, phòng trọ, trạm buýt, tiện ích."
+            ]
+          },
+          {
+            icon: "fa-truck-fast", title: "6. Đặt dịch vụ chuyển trọ",
+            body: [
+              "Trong màn chi tiết phòng, bấm <strong>Đặt Dịch Vụ Chuyển Trọ</strong>.",
+              "Chọn <strong>vị trí trọ cũ</strong> → hệ thống ước tính khoảng cách và báo giá của 4 đơn vị vận chuyển để bạn so sánh.",
+              "Bấm <strong>Chat</strong> với một đơn vị để hỏi giá/lịch, hoặc xem đánh giá dịch vụ của các sinh viên trước."
+            ]
+          },
+          {
+            icon: "fa-wand-magic-sparkles", title: "7. Trợ lý AI tìm trọ",
+            body: [
+              "Bấm nút tím <strong>AI Tìm Trọ</strong> trên thanh công cụ và hỏi bằng câu tự nhiên, ví dụ: <em>“phòng dưới 3 triệu gần UEH có máy lạnh”</em>.",
+              "AI trả gợi ý ngay trong khung chat và <strong>không làm thay đổi bộ lọc</strong> ở trang chủ, nên bạn không bị mất danh sách đang xem."
+            ]
+          }
+        ]
+      },
+      landlord: {
+        tabLabel: "Chủ Trọ",
+        tabIcon: "fa-house-chimney-user",
+        accent: "amber",
+        intro: "Phân hệ dành cho Cô Nga — chủ trọ khu Sư Vạn Hạnh & Nguyễn Tri Phương (Q.10). Tài khoản mẫu: <span class='font-mono text-amber-300'>conga.chutro@gmail.com</span> / <span class='font-mono text-amber-300'>ChuTro@2026</span>.",
+        steps: [
+          {
+            icon: "fa-right-to-bracket", title: "1. Đăng nhập phân hệ Chủ Nhà",
+            body: [
+              "Bấm <strong>Đăng Nhập Phân Hệ Chủ Nhà</strong> trên cổng xác thực, hoặc dùng nút <strong>Đổi Vai Trò Demo</strong> trên thanh công cụ để nhảy nhanh từ tài khoản sinh viên sang chủ trọ."
+            ]
+          },
+          {
+            icon: "fa-calendar-check", title: "2. Bảng tổng quan & duyệt lịch hẹn",
+            body: [
+              "Xem yêu cầu hẹn xem phòng do sinh viên gửi sang (ngày giờ, phòng, người đi cùng, ghi chú).",
+              "Bấm <strong>Chấp Nhận Lịch Hẹn</strong> để xác nhận — trạng thái trên bảng sẽ đổi ngay.",
+              "Thẻ <strong>Doanh Thu Tháng</strong> được tính tự động từ danh sách phòng đang cho thuê (giống hệt nhau ở cả Desktop và Mobile)."
+            ]
+          },
+          {
+            icon: "fa-list-check", title: "3. Quản lý phòng & biểu phí",
+            body: [
+              "Bấm vào một phòng trong danh sách để mở hộp <strong>Cập Nhật Phòng & Biểu Phí</strong>.",
+              "Sửa được: <strong>giá thuê</strong>, <strong>trạng thái phòng</strong> (đang cho thuê / trống sẵn / còn 1 suất) và <strong>biểu phí điện nước niêm yết</strong>.",
+              "Bấm <strong>Lưu Thay Đổi</strong> — số liệu doanh thu sẽ tự tính lại theo giá mới."
+            ]
+          },
+          {
+            icon: "fa-award", title: "4. Điểm Rubric & góp ý của sinh viên",
+            body: [
+              "Xem điểm từng tiêu chí trong <strong>bộ Rubric 5 tiêu chí</strong> mà sinh viên chấm cho khu trọ.",
+              "Đọc phần góp ý để biết nên cải thiện chỗ nào (áp lực nước, an ninh, tốc độ sửa chữa...)."
+            ]
+          },
+          {
+            icon: "fa-handshake", title: "5. Quy trình đối tác chủ trọ",
+            body: [
+              "Xem sơ đồ toàn cảnh các bước trở thành chủ trọ được UNINEST bảo trợ: đăng ký → thẩm định thực tế → cam kết biểu phí → niêm yết → nhận đánh giá định kỳ."
+            ]
+          }
+        ]
+      },
+      general: {
+        tabLabel: "Mẹo Chung",
+        tabIcon: "fa-lightbulb",
+        accent: "indigo",
+        intro: "Các thao tác dùng được ở mọi màn hình, áp dụng cho cả phân hệ sinh viên lẫn chủ trọ.",
+        steps: [
+          {
+            icon: "fa-desktop", title: "Đổi giữa Desktop Web và Mobile App",
+            body: [
+              "Dùng cặp nút <strong>Desktop Web / Mobile App</strong> ở góc phải thanh công cụ. Mọi nội dung đều có đủ ở cả hai chế độ, chỉ khác cách bố trí cho màn rộng/hẹp."
+            ]
+          },
+          {
+            icon: "fa-magnifying-glass-plus", title: "Phóng to / thu nhỏ khung xem",
+            body: [
+              "Bấm <strong>Vừa Khung</strong> để tự căn vừa cửa sổ, <strong>100%</strong> để về kích thước gốc, hoặc dùng nút <strong>+ / −</strong> để chỉnh từng nấc."
+            ]
+          },
+          {
+            icon: "fa-computer-mouse", title: "Cuộn & kéo màn hình",
+            body: [
+              "<strong>Lăn chuột</strong> để cuộn nội dung dài. <strong>Giữ chuột và kéo dọc</strong> ngay trên khung giao diện cũng cuộn được.",
+              "Riêng khung bản đồ ở Desktop: giữ chuột và kéo sẽ <strong>di chuyển bản đồ</strong> thay vì cuộn trang."
+            ]
+          },
+          {
+            icon: "fa-arrows-rotate", title: "Đổi vai trò nhanh khi thuyết trình",
+            body: [
+              "Nút <strong>Đổi Vai Trò Demo</strong> chuyển thẳng giữa sinh viên Quốc Anh và chủ trọ Cô Nga, không cần đăng xuất rồi đăng nhập lại."
+            ]
+          },
+          {
+            icon: "fa-download", title: "Xuất ảnh màn hình",
+            body: [
+              "Bấm biểu tượng <strong>tải xuống</strong> ở góc phải thanh công cụ để lưu màn hình đang xem thành file PNG chất lượng cao — tiện để chèn vào báo cáo hoặc slide."
+            ]
+          },
+          {
+            icon: "fa-keyboard", title: "Phím tắt",
+            body: [
+              "<strong class='font-mono'>?</strong> — mở lại bảng hướng dẫn này bất cứ lúc nào.",
+              "<strong class='font-mono'>Esc</strong> — đóng mọi hộp thoại đang mở.",
+              "<strong class='font-mono'>Enter</strong> — đăng nhập luôn khi đang ở hộp đăng nhập."
+            ]
+          },
+          {
+            icon: "fa-triangle-exclamation", title: "Lưu ý về dữ liệu demo",
+            body: [
+              "Đây là <strong>bản mô phỏng trình diễn</strong>: toàn bộ dữ liệu là dữ liệu mẫu dựng sẵn, không có máy chủ thật.",
+              "Mọi thay đổi bạn tạo ra (đánh giá mới, kết quả trắc nghiệm, giá phòng vừa sửa...) chỉ sống trong phiên làm việc và <strong>sẽ trở về ban đầu khi tải lại trang</strong>."
+            ]
+          }
+        ]
+      }
+    };
+
     const state = {
       isLoggedIn: false,
       userRole: null,
@@ -1819,6 +2222,12 @@
       personaBudget: '3.0tr',
       landlordAppointmentAccepted: false,
       hoveredZone: null,
+      // V10.5: trạng thái phục vụ animation & hướng dẫn
+      bootLoading: true,
+      animateUntil: 0,
+      screenEnterAt: 0,
+      hoveredLabel: null,
+      helpTab: 'student',
       selectedRoomDetail: ROOMS_DATABASE[0],
       desktopScrollY: 0,
       desktopMaxScroll: 450,
@@ -2547,6 +2956,7 @@
       updateHeaderUI();
       renderTabs();
       updateSidePanels();
+      markScreenEnter();
       resizeAndDraw();
       showToast(`Chào mừng ${account.name} (${account.title})!`);
     }
@@ -2559,6 +2969,7 @@
       updateHeaderUI();
       renderTabs();
       updateSidePanels();
+      markScreenEnter();
       resizeAndDraw();
       showToast("Đã đăng xuất khỏi hệ thống.");
     }
@@ -2712,12 +3123,77 @@
       resizeAndDraw();
     }
 
+    // ====== V10.5: ĐỘNG CƠ ANIMATION CHO CANVAS ======
+    // Canvas vốn chỉ vẽ lại khi có sự kiện. Vòng lặp dưới đây chỉ chạy khi thật sự cần
+    // (màn hình cổng xác thực, hoặc trong vài trăm ms sau khi đổi màn hình / rê chuột)
+    // để tránh vẽ lại liên tục vô ích trên các màn hình nặng như bản đồ.
+    const REDUCED_MOTION = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    const ANIM_ORIGIN = performance.now();
+    let animRafId = null;
+
+    function animClock() {
+      return (performance.now() - ANIM_ORIGIN) / 1000;
+    }
+
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    // Số "ngẫu nhiên" tất định theo chỉ số — để các hạt bay luôn ở cùng quỹ đạo mỗi lần vẽ lại
+    function pseudoRand(i) {
+      const x = Math.sin(i * 127.1 + 311.7) * 43758.5453;
+      return x - Math.floor(x);
+    }
+
+    function screenEnterProgress() {
+      if (REDUCED_MOTION) return 1;
+      const elapsed = (performance.now() - state.screenEnterAt) / 430;
+      if (elapsed >= 1) return 1;
+      return easeOutCubic(Math.max(0, elapsed));
+    }
+
+    function bumpAnim(ms = 900) {
+      state.animateUntil = Math.max(state.animateUntil, performance.now() + ms);
+      startAnimLoop();
+    }
+
+    function markScreenEnter() {
+      state.screenEnterAt = performance.now();
+      bumpAnim(700);
+    }
+
+    function shouldKeepAnimating() {
+      if (REDUCED_MOTION || state.bootLoading) return false;
+      if (!state.isLoggedIn) return true;
+      return performance.now() < state.animateUntil;
+    }
+
+    function startAnimLoop() {
+      if (animRafId !== null || REDUCED_MOTION) return;
+      const tick = () => {
+        if (!shouldKeepAnimating()) {
+          animRafId = null;
+          resizeAndDraw();
+          return;
+        }
+        resizeAndDraw();
+        animRafId = requestAnimationFrame(tick);
+      };
+      animRafId = requestAnimationFrame(tick);
+    }
+
     function resizeAndDraw() {
       const targetSize = state.viewMode === 'desktop' ? SIZES.desktop : SIZES.mobile;
       const dpr = window.devicePixelRatio || 2;
+      const pixelW = Math.round(targetSize.width * dpr);
+      const pixelH = Math.round(targetSize.height * dpr);
 
-      canvas.width = targetSize.width * dpr;
-      canvas.height = targetSize.height * dpr;
+      // Chỉ cấp phát lại bộ đệm canvas khi kích thước thật sự đổi — gán canvas.width mỗi khung hình
+      // sẽ khiến trình duyệt tạo lại buffer và làm giật vòng lặp animation.
+      if (canvas.width !== pixelW || canvas.height !== pixelH) {
+        canvas.width = pixelW;
+        canvas.height = pixelH;
+      }
       canvas.style.width = `${targetSize.width * state.zoom}px`;
       canvas.style.height = `${targetSize.height * state.zoom}px`;
 
@@ -2792,6 +3268,122 @@
         }
       }
       context.fillText(line, x, y);
+    }
+
+    // V10.5: vệt sáng quét ngang qua nút, chỉ chạy khi vòng lặp animation đang sống
+    function drawButtonShine(x, y, bw, bh, radius, phase = 0) {
+      if (REDUCED_MOTION || !shouldKeepAnimating()) return;
+      const cycle = 3.4;
+      const p = ((animClock() + phase) % cycle) / cycle;
+      if (p > 0.42) return;
+      const sweep = p / 0.42;
+      const sx = x - bw * 0.35 + sweep * bw * 1.6;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.roundRect(x, y, bw, bh, radius);
+      ctx.clip();
+      const g = ctx.createLinearGradient(sx - 34, y, sx + 34, y + bh);
+      g.addColorStop(0, "rgba(255,255,255,0)");
+      g.addColorStop(0.5, "rgba(255,255,255,0.34)");
+      g.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = g;
+      ctx.fillRect(x, y, bw, bh);
+      ctx.restore();
+    }
+
+    const HELP_FAB_LABEL = "Mở hướng dẫn sử dụng chi tiết";
+
+    // V10.5: nút tròn "?" nổi ở góc phải dưới màn hình web
+    function drawHelpFab(w, h) {
+      const r = 26;
+      const cx = w - 62;
+      const cy = h - 62;
+      const hovered = state.hoveredLabel === HELP_FAB_LABEL;
+
+      if (!REDUCED_MOTION && shouldKeepAnimating()) {
+        const t = animClock();
+        for (let i = 0; i < 2; i++) {
+          const p = (t * 0.55 + i * 0.5) % 1;
+          ctx.beginPath();
+          ctx.arc(cx, cy, r + p * 22, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(13,148,136,${(1 - p) * 0.38})`;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
+      }
+
+      // Nhãn chữ chỉ hiện ở màn hình chưa đăng nhập (chỗ còn trống) hoặc khi đang rê chuột,
+      // để không che nội dung ở các màn hình bên trong.
+      const showPill = !state.isLoggedIn || hovered;
+      const pillText = "Hướng Dẫn Sử Dụng";
+      ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif";
+      const pillW = showPill ? ctx.measureText(pillText).width + 24 : 0;
+      const pillX = cx - r - 10 - pillW;
+      if (showPill) {
+        drawRoundedRect(pillX, cy - 14, pillW, 28, 14, hovered ? "#0F766E" : "#0F172A", null);
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillText(pillText, pillX + 12, cy + 4);
+      }
+
+      const g = ctx.createLinearGradient(cx - r, cy - r, cx + r, cy + r);
+      g.addColorStop(0, hovered ? "#14B8A6" : "#0D9488");
+      g.addColorStop(1, hovered ? "#34D399" : "#10B981");
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.fillStyle = g;
+      ctx.fill();
+      ctx.strokeStyle = "#FFFFFF";
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      ctx.fillStyle = "#FFFFFF";
+      ctx.font = "800 26px 'Plus Jakarta Sans', sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("?", cx, cy + 1);
+      ctx.textAlign = "start";
+      ctx.textBaseline = "alphabetic";
+
+      registerClickZone(pillX, cy - r, pillW + 10 + r * 2, r * 2, () => openHelpModal(), HELP_FAB_LABEL);
+    }
+
+    // V10.5: bản thu nhỏ của nút "?" cho khung điện thoại
+    function drawMobileHelpFab(w, bottomY) {
+      const r = 19;
+      const cx = w - 38;
+      const cy = bottomY - 32;
+      const hovered = state.hoveredLabel === HELP_FAB_LABEL;
+
+      if (!REDUCED_MOTION && shouldKeepAnimating()) {
+        const p = (animClock() * 0.6) % 1;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r + p * 16, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(13,148,136,${(1 - p) * 0.4})`;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+
+      const g = ctx.createLinearGradient(cx - r, cy - r, cx + r, cy + r);
+      g.addColorStop(0, hovered ? "#14B8A6" : "#0D9488");
+      g.addColorStop(1, hovered ? "#34D399" : "#10B981");
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.fillStyle = g;
+      ctx.fill();
+      ctx.strokeStyle = "#FFFFFF";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.fillStyle = "#FFFFFF";
+      ctx.font = "800 19px 'Plus Jakarta Sans', sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("?", cx, cy + 1);
+      ctx.textAlign = "start";
+      ctx.textBaseline = "alphabetic";
+
+      registerClickZone(cx - r, cy - r, r * 2, r * 2, () => openHelpModal(), HELP_FAB_LABEL);
     }
 
     function drawBrowserBar(w) {
@@ -2919,8 +3511,11 @@
 
       if (!state.isLoggedIn) {
         drawGuestGatewayScreen(w, h);
+        drawHelpFab(w, h);
         return;
       }
+
+      const enter = screenEnterProgress();
 
       ctx.save();
       ctx.beginPath();
@@ -2928,7 +3523,7 @@
       ctx.clip();
 
       ctx.save();
-      ctx.translate(0, -state.desktopScrollY);
+      ctx.translate(0, -state.desktopScrollY + (1 - enter) * 18);
 
       if (state.userRole === 'student') {
         switch (state.currentScreen) {
@@ -2950,26 +3545,256 @@
       ctx.restore();
       ctx.restore();
 
+      // Màn che sáng mờ dần: tạo cảm giác nội dung "hiện lên" khi vừa đổi màn hình.
+      // Dùng lớp phủ thay cho globalAlpha vì một số hàm vẽ bên trong tự đặt lại globalAlpha = 1.
+      if (enter < 1) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.roundRect(0, 98, w, h - 98, [0, 0, 14, 14]);
+        ctx.clip();
+        ctx.globalAlpha = (1 - enter) * 0.9;
+        ctx.fillStyle = "#F8FAFC";
+        ctx.fillRect(0, 98, w, h - 98);
+        ctx.restore();
+      }
+
       if (state.desktopMaxScroll > 0) {
         const sbH = 60;
         const sbY = 110 + (state.desktopScrollY / state.desktopMaxScroll) * (h - 180 - sbH);
         drawRoundedRect(w - 10, sbY, 4, sbH, 2, "rgba(100, 116, 139, 0.5)", null);
       }
+
+      drawHelpFab(w, h);
+    }
+
+    // Độ hiện của từng khối trên cổng xác thực: 0 → 1, có thể trễ (delay) để các khối lần lượt hiện ra
+    function revealProgress(since, delay, duration = 0.5) {
+      const p = (since - delay) / duration;
+      if (p <= 0) return 0;
+      if (p >= 1) return 1;
+      return easeOutCubic(p);
+    }
+
+    // Dải hero đầu trang cổng xác thực: logo UNINEST, tên thương hiệu và 3 con số nổi bật.
+    function drawGatewayHeroBand(w, since) {
+      const t = REDUCED_MOTION ? 0 : animClock();
+      const hx = 40, hy = 112, hw = w - 80, hh = 146;
+
+      const bg = ctx.createLinearGradient(hx, hy, hx + hw, hy + hh);
+      bg.addColorStop(0, "#115E59");
+      bg.addColorStop(0.5, "#0D9488");
+      bg.addColorStop(1, "#0F766E");
+      drawRoundedRect(hx, hy, hw, hh, 16, bg, null);
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.roundRect(hx, hy, hw, hh, 16);
+      ctx.clip();
+
+      // Các quầng sáng trôi chậm tạo chiều sâu cho nền
+      const blobs = [
+        { bx: 0.18, by: 0.25, r: 165, color: "rgba(45,212,191,0.34)", speed: 0.17 },
+        { bx: 0.62, by: 0.85, r: 205, color: "rgba(16,185,129,0.26)", speed: -0.12 },
+        { bx: 0.90, by: 0.22, r: 180, color: "rgba(99,102,241,0.22)", speed: 0.23 }
+      ];
+      blobs.forEach((b, i) => {
+        const bcx = hx + hw * b.bx + Math.sin(t * b.speed + i * 1.7) * 55;
+        const bcy = hy + hh * b.by + Math.cos(t * b.speed * 1.4 + i) * 20;
+        const g = ctx.createRadialGradient(bcx, bcy, 0, bcx, bcy, b.r);
+        g.addColorStop(0, b.color);
+        g.addColorStop(1, "rgba(13,148,136,0)");
+        ctx.fillStyle = g;
+        ctx.fillRect(hx, hy, hw, hh);
+      });
+
+      // Hạt sáng bay lên như bụi sao
+      for (let i = 0; i < 26; i++) {
+        const driftSpeed = 10 + pseudoRand(i + 90) * 22;
+        const px = hx + pseudoRand(i) * hw + Math.sin(t * 0.55 + i) * 9;
+        const py = hy + hh - ((t * driftSpeed + pseudoRand(i + 40) * hh * 2) % (hh + 24));
+        ctx.beginPath();
+        ctx.arc(px, py, 1 + pseudoRand(i + 150) * 1.7, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(204,251,241,${0.14 + pseudoRand(i + 200) * 0.34})`;
+        ctx.fill();
+      }
+
+      // ===== Logo UNINEST =====
+      const bob = REDUCED_MOTION ? 0 : Math.sin(t * 1.2) * 4;
+      const boxSize = 92;
+      const boxX = hx + 34;
+      const boxY = hy + (hh - boxSize) / 2 + bob;
+      const ccx = boxX + boxSize / 2;
+      const ccy = boxY + boxSize / 2;
+
+      const pulse = REDUCED_MOTION ? 0.5 : 0.5 + 0.5 * Math.sin(t * 1.7);
+      const halo = ctx.createRadialGradient(ccx, ccy, 12, ccx, ccy, 86);
+      halo.addColorStop(0, `rgba(204,251,241,${0.20 + pulse * 0.20})`);
+      halo.addColorStop(1, "rgba(204,251,241,0)");
+      ctx.fillStyle = halo;
+      ctx.fillRect(boxX - 90, boxY - 90, boxSize + 180, boxSize + 180);
+
+      drawRoundedRect(boxX, boxY, boxSize, boxSize, 22, "#FFFFFF", "rgba(204,251,241,0.85)", 2);
+      if (uninestLogo.complete && uninestLogo.naturalWidth > 0) {
+        ctx.drawImage(uninestLogo, boxX + 9, boxY + 9, boxSize - 18, boxSize - 18);
+      } else {
+        ctx.fillStyle = "#0D9488";
+        ctx.font = "800 40px 'Plus Jakarta Sans', sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("U", ccx, ccy);
+        ctx.textAlign = "start";
+        ctx.textBaseline = "alphabetic";
+      }
+      registerClickZone(boxX, boxY, boxSize, boxSize, () => openHelpModal(), "Xem hướng dẫn sử dụng UNINEST");
+
+      // ===== Tên thương hiệu & khẩu hiệu =====
+      const textX = boxX + boxSize + 26;
+      ctx.fillStyle = "#FFFFFF";
+      ctx.font = "800 31px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText(GATEWAY_HERO.brand, textX, hy + 62);
+
+      // Gạch chân chạy dài dần dưới tên thương hiệu
+      const brandW = ctx.measureText(GATEWAY_HERO.brand).width;
+      const lineGrow = revealProgress(since, 0.3, 0.7);
+      drawRoundedRect(textX, hy + 70, brandW * lineGrow, 3, 1.5, "#5EEAD4", null);
+
+      ctx.fillStyle = "rgba(204,251,241,0.94)";
+      ctx.font = "600 13px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText(GATEWAY_HERO.tagline, textX, hy + 94);
+
+      let badgeX = textX;
+      [
+        "✓ Kiểm định thực tế",
+        "✓ Biểu phí cam kết 12 tháng",
+        "✓ Không môi giới ảo"
+      ].forEach(label => {
+        badgeX += drawBadge(label, badgeX, hy + 106, "rgba(255,255,255,0.18)", "#ECFDF5") + 8;
+      });
+
+      // ===== 3 con số nổi bật, đếm tăng dần khi vào trang =====
+      const countUp = revealProgress(since, 0.35, 1.5);
+      const statW = 138;
+      let statX = hx + hw - 30 - GATEWAY_STATS.length * statW;
+      GATEWAY_STATS.forEach((s, i) => {
+        if (i > 0) {
+          drawRoundedRect(statX - 4, hy + 44, 1, 58, 0.5, "rgba(204,251,241,0.28)", null);
+        }
+        const shown = (s.value * countUp).toFixed(s.decimals);
+        ctx.fillStyle = "#FFFFFF";
+        ctx.font = "800 27px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText(shown + s.suffix, statX + 14, hy + 76);
+
+        ctx.fillStyle = "rgba(204,251,241,0.78)";
+        ctx.font = "600 10.5px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText(s.label, statX + 14, hy + 95);
+        statX += statW;
+      });
+
+      ctx.restore();
+    }
+
+    // Dải "quy trình 4 bước" ở cuối trang cổng xác thực
+    function drawGatewayStepStrip(w, stripY, since) {
+      const t = REDUCED_MOTION ? 0 : animClock();
+      const stripH = 86;
+      drawRoundedRect(40, stripY, w - 80, stripH, 14, "#FFFFFF", "#E2E8F0", 1.5);
+
+      ctx.fillStyle = "#0F172A";
+      ctx.font = "700 11.5px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText("QUY TRÌNH 4 BƯỚC KHI DÙNG UNINEST", 62, stripY + 22);
+
+      const activeStep = REDUCED_MOTION ? -1 : Math.floor(t / 1.7) % GATEWAY_STEPS.length;
+      const colW = (w - 128) / GATEWAY_STEPS.length;
+
+      GATEWAY_STEPS.forEach((step, i) => {
+        const colX = 64 + i * colW;
+        const isActive = i === activeStep;
+        const cy = stripY + 56;
+
+        if (isActive) {
+          const ringPulse = 0.5 + 0.5 * Math.sin(t * 3.4);
+          ctx.beginPath();
+          ctx.arc(colX + 17, cy, 17 + ringPulse * 6, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(13,148,136,${0.45 - ringPulse * 0.32})`;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
+
+        ctx.beginPath();
+        ctx.arc(colX + 17, cy, 17, 0, Math.PI * 2);
+        ctx.fillStyle = isActive ? "#0D9488" : "#CCFBF1";
+        ctx.fill();
+
+        ctx.font = "15px 'Plus Jakarta Sans', sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(step.icon, colX + 17, cy + 1);
+        ctx.textAlign = "start";
+        ctx.textBaseline = "alphabetic";
+
+        ctx.fillStyle = isActive ? "#0F766E" : "#1E293B";
+        ctx.font = "700 12px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText(`${i + 1}. ${step.title}`, colX + 44, cy - 3);
+
+        ctx.fillStyle = "#64748B";
+        ctx.font = "500 10px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText(step.desc, colX + 44, cy + 14);
+
+        if (i < GATEWAY_STEPS.length - 1) {
+          ctx.save();
+          ctx.setLineDash([4, 4]);
+          ctx.beginPath();
+          ctx.moveTo(colX + 38, cy - 22);
+          ctx.lineTo(colX + colW - 10, cy - 22);
+          ctx.strokeStyle = "#CBD5E1";
+          ctx.lineWidth = 1;
+          ctx.stroke();
+          ctx.setLineDash([]);
+          ctx.restore();
+        }
+      });
     }
 
     function drawGuestGatewayScreen(w, h) {
-      const topY = 130;
+      const since = REDUCED_MOTION ? 99 : (performance.now() - state.screenEnterAt) / 1000;
+
+      const heroReveal = revealProgress(since, 0, 0.55);
+      ctx.save();
+      ctx.globalAlpha = heroReveal;
+      ctx.translate(0, (1 - heroReveal) * 14);
+      drawGatewayHeroBand(w, since);
+      ctx.restore();
+
+      const topY = 292;
+      const titleReveal = revealProgress(since, 0.12, 0.5);
+      ctx.save();
+      ctx.globalAlpha = titleReveal;
+      ctx.translate(0, (1 - titleReveal) * 12);
+
       ctx.fillStyle = "#0F172A";
       ctx.font = "800 20px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("Hệ Thống Kiểm Chứng Nhà Trọ Sinh Viên Minh Bạch", 40, topY);
+      ctx.fillText(GATEWAY_HERO.headline, 40, topY);
 
       ctx.fillStyle = "#475569";
       ctx.font = "500 12px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("Vui lòng chọn phân hệ tài khoản để tiếp tục trải nghiệm quy trình chuẩn hóa của UNINEST.", 40, topY + 24);
+      ctx.fillText(GATEWAY_HERO.subline, 40, topY + 22);
+      ctx.restore();
+
+      const stripReveal = revealProgress(since, 0.42, 0.55);
+      ctx.save();
+      ctx.globalAlpha = stripReveal;
+      ctx.translate(0, (1 - stripReveal) * 16);
+      drawGatewayStepStrip(w, 678, since);
+      ctx.restore();
+
+      const cardsReveal = revealProgress(since, 0.26, 0.55);
+      ctx.save();
+      ctx.globalAlpha = cardsReveal;
+      ctx.translate(0, (1 - cardsReveal) * 16);
 
       const cardW = (w - 104) / 2;
-      const cardY = topY + 40;
-      const cardH = 345;
+      const cardY = 330;
+      const cardH = 336;
 
       drawRoundedRect(40, cardY, cardW, cardH, 12, "#FFFFFF", "#0D9488", 1.5);
       drawRoundedRect(40, cardY, cardW, 46, [12, 12, 0, 0], "#0D9488", null);
@@ -2998,14 +3823,17 @@
         fy += 21;
       });
 
+      const btn1Label = "Đăng nhập phân hệ Sinh Viên";
       const btn1Y = cardY + 285;
-      drawRoundedRect(55, btn1Y, cardW - 30, 36, 7, "#0D9488", null);
+      const btn1Hover = state.hoveredLabel === btn1Label;
+      drawRoundedRect(55, btn1Y, cardW - 30, 36, 7, btn1Hover ? "#0F766E" : "#0D9488", null);
+      drawButtonShine(55, btn1Y, cardW - 30, 36, 7, 0);
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "700 11.5px 'Plus Jakarta Sans', sans-serif";
       ctx.textAlign = "center";
       ctx.fillText("Đăng Nhập Phân Hệ Sinh Viên", 55 + (cardW - 30) / 2, btn1Y + 23);
       ctx.textAlign = "start";
-      registerClickZone(55, btn1Y, cardW - 30, 36, () => { quickFillCredentials('student'); openLoginModal(); }, "Đăng nhập phân hệ Sinh Viên");
+      registerClickZone(55, btn1Y, cardW - 30, 36, () => { quickFillCredentials('student'); openLoginModal(); }, btn1Label);
 
       const col2X = 40 + cardW + 24;
       drawRoundedRect(col2X, cardY, cardW, cardH, 12, "#FFFFFF", "#D97706", 1.5);
@@ -3035,14 +3863,19 @@
         lfy += 21;
       });
 
+      const btn2Label = "Đăng nhập phân hệ Chủ Nhà";
       const btn2Y = cardY + 285;
-      drawRoundedRect(col2X + 15, btn2Y, cardW - 30, 36, 7, "#D97706", null);
+      const btn2Hover = state.hoveredLabel === btn2Label;
+      drawRoundedRect(col2X + 15, btn2Y, cardW - 30, 36, 7, btn2Hover ? "#B45309" : "#D97706", null);
+      drawButtonShine(col2X + 15, btn2Y, cardW - 30, 36, 7, 1.6);
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "700 11.5px 'Plus Jakarta Sans', sans-serif";
       ctx.textAlign = "center";
       ctx.fillText("Đăng Nhập Phân Hệ Chủ Nhà", col2X + 15 + (cardW - 30) / 2, btn2Y + 23);
       ctx.textAlign = "start";
-      registerClickZone(col2X + 15, btn2Y, cardW - 30, 36, () => { quickFillCredentials('landlord'); openLoginModal(); }, "Đăng nhập phân hệ Chủ Nhà");
+      registerClickZone(col2X + 15, btn2Y, cardW - 30, 36, () => { quickFillCredentials('landlord'); openLoginModal(); }, btn2Label);
+
+      ctx.restore();
     }
 
     function drawScreen1_Home(w, h) {
@@ -4067,13 +4900,15 @@
         registerClickZone(24, headerY + 8, sw, 32, () => openLoginModal(), "Mở Đăng Nhập");
       }
 
+      const enter = screenEnterProgress();
+
       ctx.save();
       ctx.beginPath();
       ctx.roundRect(screenMargin, headerY + 46, sw, sh - 98, 0);
       ctx.clip();
 
       ctx.save();
-      ctx.translate(0, -state.mobileScrollY);
+      ctx.translate(0, -state.mobileScrollY + (1 - enter) * 18);
 
       const innerY = headerY + 54;
       if (!state.isLoggedIn) {
@@ -4098,6 +4933,17 @@
       }
       ctx.restore();
       ctx.restore();
+
+      if (enter < 1) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.roundRect(screenMargin, headerY + 46, sw, sh - 98, 0);
+        ctx.clip();
+        ctx.globalAlpha = (1 - enter) * 0.9;
+        ctx.fillStyle = "#F8FAFC";
+        ctx.fillRect(screenMargin, headerY + 46, sw, sh - 98);
+        ctx.restore();
+      }
 
       const bottomBarH = 50;
       const bottomY = h - screenMargin - bottomBarH;
@@ -4137,19 +4983,116 @@
         });
       }
 
+      drawMobileHelpFab(w, bottomY);
+
       drawRoundedRect(w / 2 - 45, h - 16, 90, 3.5, 2, "#475569", null);
     }
 
     function drawMobileGuest(sw, y) {
-      state.mobileMaxScroll = 250;
-      drawRoundedRect(16, y, sw - 32, 175, 12, "#FFFFFF", "#0D9488", 1.5);
-      ctx.fillStyle = "#0F172A"; ctx.font = "800 13px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("Yêu Cầu Đăng Nhập Tài Khoản", 28, y + 26);
-      ctx.fillStyle = "#64748B"; ctx.font = "500 10.5px 'Plus Jakarta Sans', sans-serif"; wrapText(ctx, "Hệ thống yêu cầu xác thực để bảo vệ sinh viên khỏi môi giới lừa đảo cọc.", 28, y + 48, sw - 56, 15);
+      // Toàn bộ nội dung cổng xác thực mobile vừa đúng một màn hình nên không cần cuộn
+      state.mobileMaxScroll = 0;
+      const t = REDUCED_MOTION ? 0 : animClock();
 
-      const b1 = y + 84;
-      drawRoundedRect(28, b1, sw - 56, 36, 7, "#0D9488", null);
+      // ===== Dải hero có logo UNINEST (dùng chung nội dung với bản desktop qua GATEWAY_HERO) =====
+      const hx = 16, hy = y, hw = sw - 32, hh = 132;
+      const bg = ctx.createLinearGradient(hx, hy, hx + hw, hy + hh);
+      bg.addColorStop(0, "#115E59");
+      bg.addColorStop(0.55, "#0D9488");
+      bg.addColorStop(1, "#0F766E");
+      drawRoundedRect(hx, hy, hw, hh, 14, bg, null);
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.roundRect(hx, hy, hw, hh, 14);
+      ctx.clip();
+
+      for (let i = 0; i < 14; i++) {
+        const driftSpeed = 9 + pseudoRand(i + 90) * 18;
+        const px = hx + pseudoRand(i) * hw + Math.sin(t * 0.55 + i) * 7;
+        const py = hy + hh - ((t * driftSpeed + pseudoRand(i + 40) * hh * 2) % (hh + 20));
+        ctx.beginPath();
+        ctx.arc(px, py, 1 + pseudoRand(i + 150) * 1.4, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(204,251,241,${0.16 + pseudoRand(i + 200) * 0.32})`;
+        ctx.fill();
+      }
+
+      const bob = REDUCED_MOTION ? 0 : Math.sin(t * 1.2) * 3;
+      const boxSize = 58;
+      const boxX = hx + 16;
+      const boxY = hy + 16 + bob;
+      drawRoundedRect(boxX, boxY, boxSize, boxSize, 14, "#FFFFFF", "rgba(204,251,241,0.85)", 1.5);
+      if (uninestLogo.complete && uninestLogo.naturalWidth > 0) {
+        ctx.drawImage(uninestLogo, boxX + 6, boxY + 6, boxSize - 12, boxSize - 12);
+      } else {
+        ctx.fillStyle = "#0D9488"; ctx.font = "800 26px 'Plus Jakarta Sans', sans-serif";
+        ctx.textAlign = "center"; ctx.textBaseline = "middle";
+        ctx.fillText("U", boxX + boxSize / 2, boxY + boxSize / 2);
+        ctx.textAlign = "start"; ctx.textBaseline = "alphabetic";
+      }
+
+      ctx.fillStyle = "#FFFFFF"; ctx.font = "800 21px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText(GATEWAY_HERO.brand, boxX + boxSize + 14, hy + 40);
+      ctx.fillStyle = "rgba(204,251,241,0.92)"; ctx.font = "600 9.5px 'Plus Jakarta Sans', sans-serif";
+      wrapText(ctx, GATEWAY_HERO.tagline, boxX + boxSize + 14, hy + 58, hw - boxSize - 42, 12);
+
+      // 3 con số nổi bật, đếm tăng dần
+      const since = REDUCED_MOTION ? 99 : (performance.now() - state.screenEnterAt) / 1000;
+      const countUp = revealProgress(since, 0.35, 1.5);
+      const statW = (hw - 32) / GATEWAY_STATS.length;
+      GATEWAY_STATS.forEach((s, i) => {
+        const sx = hx + 16 + statW * i;
+        ctx.fillStyle = "#FFFFFF"; ctx.font = "800 15px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText((s.value * countUp).toFixed(s.decimals) + s.suffix, sx, hy + 106);
+        ctx.fillStyle = "rgba(204,251,241,0.78)"; ctx.font = "600 8px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText(s.label, sx, hy + 119);
+      });
+      ctx.restore();
+
+      // ===== Thẻ đăng nhập =====
+      const cardY = hy + hh + 14;
+      drawRoundedRect(16, cardY, sw - 32, 175, 12, "#FFFFFF", "#0D9488", 1.5);
+      ctx.fillStyle = "#0F172A"; ctx.font = "800 13px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("Yêu Cầu Đăng Nhập Tài Khoản", 28, cardY + 26);
+      ctx.fillStyle = "#64748B"; ctx.font = "500 10.5px 'Plus Jakarta Sans', sans-serif"; wrapText(ctx, "Hệ thống yêu cầu xác thực để bảo vệ sinh viên khỏi môi giới lừa đảo cọc.", 28, cardY + 48, sw - 56, 15);
+
+      const b1 = cardY + 84;
+      const mbBtnLabel = "Đăng nhập SV";
+      drawRoundedRect(28, b1, sw - 56, 36, 7, state.hoveredLabel === mbBtnLabel ? "#0F766E" : "#0D9488", null);
+      drawButtonShine(28, b1, sw - 56, 36, 7, 0);
       ctx.fillStyle = "#FFFFFF"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif"; ctx.textAlign = "center"; ctx.fillText("Đăng Nhập Sinh Viên (Quốc Anh)", sw / 2, b1 + 22); ctx.textAlign = "start";
-      registerClickZone(28, b1, sw - 56, 36, () => { quickFillCredentials('student'); openLoginModal(); }, "Đăng nhập SV");
+      registerClickZone(28, b1, sw - 56, 36, () => { quickFillCredentials('student'); openLoginModal(); }, mbBtnLabel);
+
+      const b2 = cardY + 128;
+      const mbBtn2Label = "Đăng nhập Chủ Trọ";
+      drawRoundedRect(28, b2, sw - 56, 32, 7, "#FFFFFF", "#D97706", 1.5);
+      ctx.fillStyle = "#B45309"; ctx.font = "700 10.5px 'Plus Jakarta Sans', sans-serif"; ctx.textAlign = "center"; ctx.fillText("Đăng Nhập Chủ Trọ (Cô Nga)", sw / 2, b2 + 20); ctx.textAlign = "start";
+      registerClickZone(28, b2, sw - 56, 32, () => { quickFillCredentials('landlord'); openLoginModal(); }, mbBtn2Label);
+
+      // ===== Quy trình 4 bước (cùng nguồn GATEWAY_STEPS với desktop) =====
+      let stepY = cardY + 191;
+      ctx.fillStyle = "#0F172A"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText("QUY TRÌNH 4 BƯỚC KHI DÙNG UNINEST", 24, stepY);
+      stepY += 12;
+
+      const activeStep = REDUCED_MOTION ? -1 : Math.floor(t / 1.7) % GATEWAY_STEPS.length;
+      GATEWAY_STEPS.forEach((step, i) => {
+        const rowY = stepY + i * 46;
+        const isActive = i === activeStep;
+        drawRoundedRect(16, rowY, sw - 32, 40, 10, isActive ? "#F0FDFA" : "#FFFFFF", isActive ? "#0D9488" : "#E2E8F0", 1.2);
+
+        ctx.beginPath();
+        ctx.arc(40, rowY + 20, 14, 0, Math.PI * 2);
+        ctx.fillStyle = isActive ? "#0D9488" : "#CCFBF1";
+        ctx.fill();
+        ctx.font = "13px 'Plus Jakarta Sans', sans-serif";
+        ctx.textAlign = "center"; ctx.textBaseline = "middle";
+        ctx.fillText(step.icon, 40, rowY + 21);
+        ctx.textAlign = "start"; ctx.textBaseline = "alphabetic";
+
+        ctx.fillStyle = isActive ? "#0F766E" : "#1E293B"; ctx.font = "700 10.5px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText(`${i + 1}. ${step.title}`, 62, rowY + 17);
+        ctx.fillStyle = "#64748B"; ctx.font = "500 8.5px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText(step.desc, 62, rowY + 31);
+      });
     }
 
     function drawMobileScreen0_Home(sw, y) {
@@ -4639,10 +5582,18 @@
         return;
       }
 
-      const hitZone = interactiveZones.find(z => 
+      const hitZone = interactiveZones.find(z =>
         coords.x >= z.x && coords.x <= z.x + z.w &&
         coords.y >= z.y && coords.y <= z.y + z.h
       );
+
+      // Ghi nhận vùng đang rê chuột để các hàm vẽ tô đậm nút tương ứng.
+      // Chỉ vẽ lại khi vùng hover đổi (và khi vòng lặp animation đang ngủ) để tránh vẽ lại liên tục.
+      const hoverLabel = hitZone ? (hitZone.label || null) : null;
+      if (hoverLabel !== state.hoveredLabel) {
+        state.hoveredLabel = hoverLabel;
+        if (animRafId === null) resizeAndDraw();
+      }
 
       if (hitZone) {
         canvas.style.cursor = 'pointer';
@@ -4737,6 +5688,7 @@
       state.mobileScrollY = 0;
       renderTabs();
       updateSidePanels();
+      markScreenEnter();
       resizeAndDraw();
     }
 
@@ -4754,6 +5706,7 @@
         if (mobBtn) mobBtn.className = "px-2.5 py-1 text-xs font-semibold rounded-md transition-all flex items-center gap-1 bg-teal-600 text-white shadow";
         if (deskBtn) deskBtn.className = "px-2.5 py-1 text-xs font-semibold rounded-md transition-all flex items-center gap-1 text-slate-300 hover:text-white";
       }
+      markScreenEnter();
       autoFitToViewport();
       showToast(`Đã chuyển sang: ${mode === 'desktop' ? 'Desktop Web' : 'Mobile App'}`);
     }
@@ -5056,13 +6009,167 @@
       }, 500);
     }
 
+    // ====== V10.5: MÀN HÌNH TẢI DỮ LIỆU GIẢ LẬP ======
+    const BOOT_TOTAL_MS = 3500;
+    let bootTimers = [];
+    let bootFinished = false;
+
+    function setBootRowStatus(index, text, colorClass) {
+      const el = document.querySelector(`[data-boot-status="${index}"]`);
+      if (el) {
+        el.textContent = text;
+        el.className = `w-14 text-right shrink-0 ${colorClass}`;
+      }
+    }
+
+    function renderBootModuleList() {
+      const container = document.getElementById('bootModuleList');
+      if (!container) return;
+      container.innerHTML = BOOT_MODULES.map((m, i) => `
+        <div class="boot-row flex items-center gap-3" data-boot-row="${i}">
+          <span class="flex-1 text-slate-300 truncate">${m.name}</span>
+          <span class="w-14 text-right text-slate-500 shrink-0">${m.size}</span>
+          <span class="w-14 text-right text-slate-700 shrink-0" data-boot-status="${i}"></span>
+        </div>
+      `).join('');
+      const first = document.querySelector('[data-boot-row="0"]');
+      if (first) first.classList.add('is-active');
+      setBootRowStatus(0, '···', 'text-slate-500');
+    }
+
+    function startBootLoader() {
+      const overlay = document.getElementById('bootLoader');
+      if (!overlay) { state.bootLoading = false; return; }
+
+      if (REDUCED_MOTION) { finishBootLoader(true); return; }
+
+      renderBootModuleList();
+      const stepMs = BOOT_TOTAL_MS / (BOOT_MODULES.length + 1);
+
+      BOOT_MODULES.forEach((m, i) => {
+        bootTimers.push(setTimeout(() => {
+          const row = document.querySelector(`[data-boot-row="${i}"]`);
+          if (row) row.classList.add('is-active');
+          setBootRowStatus(i, 'xong', 'text-teal-400');
+
+          const nextRow = document.querySelector(`[data-boot-row="${i + 1}"]`);
+          if (nextRow) {
+            nextRow.classList.add('is-active');
+            setBootRowStatus(i + 1, '···', 'text-slate-500');
+          }
+
+          const fill = document.getElementById('bootBarFill');
+          if (fill) fill.style.width = `${Math.round(((i + 1) / BOOT_MODULES.length) * 100)}%`;
+
+          const statusIdx = Math.min(
+            BOOT_STATUS_TEXTS.length - 2,
+            Math.floor((i / BOOT_MODULES.length) * (BOOT_STATUS_TEXTS.length - 1))
+          );
+          setInnerText('bootStatusText', BOOT_STATUS_TEXTS[statusIdx]);
+        }, stepMs * (i + 1)));
+      });
+
+      bootTimers.push(setTimeout(() => finishBootLoader(false), BOOT_TOTAL_MS));
+    }
+
+    function finishBootLoader(skipped) {
+      if (bootFinished) return;
+      bootFinished = true;
+      bootTimers.forEach(clearTimeout);
+      bootTimers = [];
+
+      const fill = document.getElementById('bootBarFill');
+      if (fill) fill.style.width = '100%';
+      setInnerText('bootStatusText', BOOT_STATUS_TEXTS[BOOT_STATUS_TEXTS.length - 1]);
+
+      const overlay = document.getElementById('bootLoader');
+      if (overlay) overlay.classList.add('boot-done');
+
+      state.bootLoading = false;
+      markScreenEnter();
+      if (skipped) resizeAndDraw();
+    }
+
+    // ====== V10.5: BẢNG HƯỚNG DẪN SỬ DỤNG ======
+    const HELP_ACCENT_CLASS = {
+      teal:   { icon: "bg-teal-500/15 border-teal-500/30 text-teal-300",     marker: "marker:text-teal-500",   hover: "hover:border-teal-500/40" },
+      amber:  { icon: "bg-amber-500/15 border-amber-500/30 text-amber-300",  marker: "marker:text-amber-500",  hover: "hover:border-amber-500/40" },
+      indigo: { icon: "bg-indigo-500/15 border-indigo-500/30 text-indigo-300", marker: "marker:text-indigo-500", hover: "hover:border-indigo-500/40" }
+    };
+
+    function setHelpTab(key) {
+      state.helpTab = key;
+      renderHelpModal();
+    }
+
+    function renderHelpModal() {
+      const tabBar = document.getElementById('helpTabBar');
+      const body = document.getElementById('helpModalBody');
+      if (!tabBar || !body) return;
+
+      tabBar.innerHTML = Object.keys(HELP_GUIDE).map(key => {
+        const g = HELP_GUIDE[key];
+        const active = state.helpTab === key;
+        return `<button onclick="setHelpTab('${key}')" class="px-3 py-1.5 rounded-lg text-[11px] font-bold transition flex items-center gap-1.5 shrink-0 border active:scale-95 ${
+          active ? 'bg-teal-600 text-white border-teal-400/50 shadow' : 'bg-slate-800/70 text-slate-300 border-slate-700 hover:bg-slate-800 hover:text-white'
+        }"><i class="fa-solid ${g.tabIcon} text-[10px]"></i> ${g.tabLabel}</button>`;
+      }).join('');
+
+      const guide = HELP_GUIDE[state.helpTab];
+      const accent = HELP_ACCENT_CLASS[guide.accent] || HELP_ACCENT_CLASS.teal;
+
+      body.innerHTML = `
+        <div class="p-3 rounded-xl bg-slate-800/70 border border-slate-700 text-[11.5px] leading-relaxed uni-fade-up">${guide.intro}</div>
+        ${guide.steps.map((s, i) => `
+          <div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800 transition ${accent.hover} uni-fade-up" style="animation-delay:${(i + 1) * 45}ms">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-6 h-6 rounded-lg border flex items-center justify-center shrink-0 ${accent.icon}">
+                <i class="fa-solid ${s.icon} text-[10px]"></i>
+              </div>
+              <div class="font-bold text-white text-[12px]">${s.title}</div>
+            </div>
+            <ul class="space-y-1.5 pl-9 list-disc ${accent.marker} text-[11.5px] leading-relaxed text-slate-300">
+              ${s.body.map(line => `<li>${line}</li>`).join('')}
+            </ul>
+          </div>
+        `).join('')}
+      `;
+    }
+
+    function openHelpModal() {
+      state.helpTab = (state.isLoggedIn && state.userRole === 'landlord') ? 'landlord' : 'student';
+      renderHelpModal();
+      const m = document.getElementById('helpModal');
+      if (m) {
+        m.classList.remove('hidden');
+        setTimeout(() => m.classList.remove('opacity-0'), 10);
+      }
+    }
+
+    function closeHelpModal() {
+      const m = document.getElementById('helpModal');
+      if (m) {
+        m.classList.add('opacity-0');
+        setTimeout(() => m.classList.add('hidden'), 200);
+      }
+    }
+
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        closeLoginModal(); closeCredentialsModal(); closeAgreementModal(); closeBookingModal(); closeReviewModal(); closeCityModal(); closeUniversityModal(); closeAmenitiesModal(); closeAiChatModal(); closeLandlordEditModal(); closePriceModal(); closeLifestyleQuizModal(); closeMapSearchModal(); closeMovingModal(); closeMovingChatModal();
+        closeLoginModal(); closeCredentialsModal(); closeAgreementModal(); closeBookingModal(); closeReviewModal(); closeCityModal(); closeUniversityModal(); closeAmenitiesModal(); closeAiChatModal(); closeLandlordEditModal(); closePriceModal(); closeLifestyleQuizModal(); closeMapSearchModal(); closeMovingModal(); closeMovingChatModal(); closeHelpModal();
       }
       const loginModal = document.getElementById('loginModal');
       if (e.key === 'Enter' && loginModal && !loginModal.classList.contains('hidden')) {
         handleLoginSubmit();
+      }
+      // Phím "?" mở nhanh bảng hướng dẫn, trừ khi con trỏ đang nằm trong ô nhập liệu
+      if (e.key === '?' && !state.bootLoading) {
+        const active = document.activeElement;
+        const isTyping = active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.isContentEditable);
+        if (!isTyping) {
+          e.preventDefault();
+          openHelpModal();
+        }
       }
     });
 
@@ -5081,6 +6188,9 @@
     window.addEventListener('resize', () => {
       autoFitToViewport();
     });
+
+    // Khởi động màn hình tải ngay khi script chạy xong (DOM đã sẵn sàng vì script nằm cuối body)
+    startBootLoader();
   </script>
 </body>
 </html>

@@ -20,7 +20,8 @@ const htmlFile = path.join(dir, 'browser-smoke.html');
 try {
   // Only the temporary fixture skips CDN styling/fonts: canvas logic stays unchanged.
   // This makes the behavior test deterministic when the network is unavailable.
-  const html = fs.readFileSync(path.join(root, 'uninest_canvas_studio_v11.4.html'), 'utf8')
+  const html = fs.readFileSync(path.join(root, 'versions/uninest_canvas_studio_v11.4.html'), 'utf8')
+    .replace(/<base\b[^>]*>/gi, '')
     .replace(/<script\b[^>]*src="https?:[^>]*><\/script>/gi, '')
     .replace(/<link\b[^>]*href="https?:[^>]*>/gi, '')
     .replace('<head>', `<head><base href="${new URL('file:///' + root.replace(/\\/g, '/') + '/').href}"><script>window.tailwind = {};

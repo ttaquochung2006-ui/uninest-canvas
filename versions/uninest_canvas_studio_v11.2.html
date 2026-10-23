@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+  <base href="../">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UNINEST - Canvas UI Mockup V10.8</title>
+<title>UNINEST - Canvas UI Mockup V11.2</title>
   <!-- Tailwind CSS & Google Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,6 +40,7 @@
       user-select: none;
       -webkit-user-select: none;
     }
+    #designCanvas { touch-action: none; }
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -181,9 +183,64 @@
       background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
     }
 
+    /* ====== V11.1: ẨN / HIỆN THANH STUDIO + CHUYỂN ĐỘNG MƯỢT ====== */
+    #studioChrome {
+      display: grid;
+      grid-template-rows: 1fr;
+      transition: grid-template-rows .42s cubic-bezier(.16, 1, .3, 1);
+    }
+    #studioChromeInner {
+      overflow: hidden;
+      min-height: 0;
+    }
+    body.studio-chrome-hidden #studioChrome {
+      grid-template-rows: 0fr;
+    }
+    #chromeRevealDock {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-18px);
+      z-index: 40;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .32s ease, transform .42s cubic-bezier(.16, 1, .3, 1);
+    }
+    body.studio-chrome-hidden #chromeRevealDock {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    body.studio-chrome-hidden #personaCard,
+    body.studio-chrome-hidden #landlordCard,
+    body.studio-chrome-hidden #interactiveTipPill {
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transform: translateY(10px);
+    }
+    #personaCard, #landlordCard, #interactiveTipPill {
+      transition: opacity .28s ease, transform .32s cubic-bezier(.16, 1, .3, 1);
+    }
+    #canvasHoverBadge {
+      transition: opacity .18s ease, transform .18s cubic-bezier(.16, 1, .3, 1);
+    }
+    #designCanvas {
+      transition: box-shadow .35s ease, border-color .35s ease, transform .45s cubic-bezier(.16, 1, .3, 1);
+    }
+    #designCanvas.is-hot {
+      box-shadow: 0 22px 48px -12px rgba(13, 148, 136, .35), 0 0 0 1px rgba(45, 212, 191, .28);
+      border-color: rgba(45, 212, 191, .45);
+    }
+    body.studio-chrome-hidden #toastNotification {
+      top: 3.25rem;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .uni-float, .uni-blink, .uni-ring-spin, .boot-star, .uni-shine::after {
         animation: none !important;
+      }
+      #studioChrome, #chromeRevealDock, #personaCard, #landlordCard, #interactiveTipPill, #designCanvas {
+        transition: none !important;
       }
     }
   </style>
@@ -212,58 +269,79 @@
       Bỏ qua <i class="fa-solid fa-angles-right text-[10px]"></i>
     </button>
 
-    <div class="relative w-full max-w-[540px] px-7 flex flex-col items-center">
+    <!-- V10.9: bố cục 3 cột — chữ thương hiệu bên trái, LOGO LỚN ở chính giữa,
+         danh sách gói dữ liệu bên phải; thanh tiến trình và dòng trạng thái nằm dưới cùng.
+         Dưới 1024px tự xếp dọc lại (logo lên trước) để không vỡ trên màn hẹp. -->
+    <div class="relative w-full max-w-[1040px] px-7 flex flex-col items-center">
 
-      <!-- Logo UNINEST: thẻ trắng + quầng sáng + vòng nét đứt xoay chậm -->
-      <div class="relative uni-float mb-6">
-        <div class="absolute -inset-6 rounded-full bg-teal-400/30 blur-2xl"
-             style="animation: uniGlowPulse 3.4s ease-in-out infinite"></div>
-        <svg class="absolute -inset-4 uni-ring-spin" viewBox="0 0 100 100" fill="none">
-          <circle cx="50" cy="50" r="47" stroke="rgba(45,212,191,.45)" stroke-width="1"
-                  stroke-dasharray="7 11" stroke-linecap="round"></circle>
-        </svg>
-        <div class="relative w-[112px] h-[112px] rounded-[28px] bg-white shadow-2xl shadow-teal-500/20 flex items-center justify-center p-3.5 border border-teal-200/40">
-          <img src="Uninest_1_-_logo-removebg-preview.png" alt="UNINEST" class="w-full h-full object-contain">
+      <div class="w-full grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] items-center gap-y-6 gap-x-10">
+
+        <!-- CỘT TRÁI: tên thương hiệu + khẩu hiệu -->
+        <div class="order-2 lg:order-1 text-center lg:text-right uni-fade-in">
+          <div class="font-mono text-[19px] lg:text-[22px] tracking-[0.46em] text-slate-100 pl-[0.46em]">uninest</div>
+          <div class="mt-2.5 text-[12px] lg:text-[12.5px] text-slate-500 leading-relaxed lg:max-w-[240px] lg:ml-auto">
+            nền tảng tìm trọ minh bạch cho sinh viên Việt Nam
+          </div>
+          <div class="mt-4 text-[10.5px] text-slate-600 font-medium tracking-wide">
+            Powered by <span class="text-teal-500/80 font-semibold">Cuu Long Group</span>
+          </div>
+        </div>
+
+        <!-- CỘT GIỮA: LOGO UNINEST cỡ lớn — thẻ trắng + quầng sáng + vòng nét đứt xoay chậm -->
+        <div class="order-1 lg:order-2 flex justify-center">
+          <div class="relative uni-float">
+            <div class="absolute -inset-10 rounded-full bg-teal-400/30 blur-3xl"
+                 style="animation: uniGlowPulse 3.4s ease-in-out infinite"></div>
+            <svg class="absolute -inset-7 uni-ring-spin" viewBox="0 0 100 100" fill="none">
+              <circle cx="50" cy="50" r="47" stroke="rgba(45,212,191,.45)" stroke-width="1"
+                      stroke-dasharray="7 11" stroke-linecap="round"></circle>
+            </svg>
+            <div class="relative w-[150px] h-[150px] sm:w-[186px] sm:h-[186px] lg:w-[244px] lg:h-[244px] rounded-[48px] bg-white shadow-2xl shadow-teal-500/25 flex items-center justify-center p-7 border border-teal-200/40">
+              <img src="Uninest 1 - logo.png" alt="UNINEST" class="w-full h-full object-contain">
+            </div>
+          </div>
+        </div>
+
+        <!-- CỘT PHẢI: danh sách gói dữ liệu đang tải -->
+        <div class="order-3 w-full min-w-0">
+          <div id="bootModuleList" class="w-full font-mono text-[11.5px] leading-[1.75]"></div>
         </div>
       </div>
 
-      <div class="font-mono text-[15px] tracking-[0.46em] text-slate-100 uni-fade-in pl-[0.46em]">uninest</div>
-      <div class="mt-2 text-[11.5px] text-slate-500 uni-fade-in" style="animation-delay:.25s">
-        nền tảng tìm trọ minh bạch cho sinh viên Việt Nam
-      </div>
-
       <!-- Thanh tiến trình -->
-      <div class="w-full h-[3px] bg-slate-800/90 rounded-full overflow-hidden mt-8">
+      <div class="w-full h-[3px] bg-slate-800/90 rounded-full overflow-hidden mt-10">
         <div id="bootBarFill" class="boot-bar-fill h-full w-0 rounded-full bg-gradient-to-r from-teal-400 via-emerald-300 to-teal-400"></div>
       </div>
 
-      <!-- Danh sách gói dữ liệu đang tải -->
-      <div id="bootModuleList" class="w-full mt-6 font-mono text-[11.5px] leading-[1.75]"></div>
-
       <!-- Dòng trạng thái -->
-      <div class="mt-8 font-mono text-[11px] text-slate-500 flex items-center gap-1.5 h-4">
+      <div class="mt-5 font-mono text-[11px] text-slate-500 flex items-center gap-1.5 h-4">
         <span id="bootStatusText">đang kết nối máy chủ uninest</span>
         <span class="uni-blink text-teal-400">▌</span>
       </div>
     </div>
   </div>
 
-  <!-- HEADER -->
-  <header class="h-14 border-b border-slate-800 bg-slate-900/95 backdrop-blur px-4 flex items-center justify-between shrink-0 z-30 shadow-md">
+  <!-- HEADER + THANH CÔNG CỤ (V11.1: gói chung để ẩn/hiện một lần) -->
+  <div id="studioChrome" class="shrink-0 z-30">
+  <div id="studioChromeInner">
+  <header id="studioHeader" class="h-14 border-b border-slate-800 bg-slate-900/95 backdrop-blur px-4 flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <!-- ĐOẠN CODE MỚI: -->
-      <div class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-700/80 p-0.5 flex items-center justify-center shadow-md shrink-0">
-        <img src="Uninest 1 - logo.png" alt="Logo" class="w-full h-full object-contain">
-      </div>
+      <!-- V11.0: logo header. Bản cũ dùng `Uninest 1 - logo.png` (nền trắng ngà) đặt trong
+           khung có viền + nền slate nên lộ rõ một ô vuông sáng lệch với logo bên trong.
+           Nay dùng bản nền trong suốt, bỏ hẳn viền/nền khung, và phóng từ 32px lên 44px. -->
+      <img src="Uninest_1_-_logo-removebg-preview.png" alt="Logo UNINEST"
+           class="w-11 h-11 object-contain shrink-0 drop-shadow-[0_2px_6px_rgba(45,212,191,0.35)]">
+      <!-- V10.9: bỏ dòng vai trò và dòng "Xin chào ..." — hai thông tin đó đã hiển thị
+           ngay trong giao diện web app (góc phải thanh điều hướng). Thay bằng dòng
+           ghi công "Powered by Cuu Long Group" đặt cạnh logo UNINEST. -->
       <div>
         <div class="flex items-center gap-2">
           <h1 class="font-bold text-xs sm:text-sm tracking-tight text-white flex items-center gap-1.5">
-            UNINEST <span class="text-teal-300 font-mono text-[10px] px-1.5 py-0.2 rounded bg-teal-500/10 border border-teal-500/30">V10.8</span>
+              UNINEST <span class="text-teal-300 font-mono text-[10px] px-1.5 py-0.2 rounded bg-teal-500/10 border border-teal-500/30">V11.2</span>
           </h1>
-          <span id="roleBadgeHeader" class="text-[11px] text-amber-300 font-medium hidden sm:inline">• Chưa Đăng Nhập</span>
         </div>
-        <p id="subHeaderHint" class="text-[10px] text-slate-400 truncate max-w-[260px] sm:max-w-md font-medium">
-          ✨ Bản đồ tương tác kéo thả đa lớp, tùy chọn hiển thị toàn bộ phòng & trợ lý AI.
+        <p id="poweredByHeader" data-i18n-skip="true" class="text-[10px] text-slate-400 font-medium tracking-wide whitespace-nowrap">
+          Powered by <span class="text-teal-300 font-semibold">Cuu Long Group</span>
         </p>
       </div>
     </div>
@@ -317,11 +395,16 @@
       <button onclick="downloadCanvasImage()" class="p-1.5 text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition border border-slate-700" title="Tải ảnh PNG">
         <i class="fa-solid fa-download"></i>
       </button>
+
+      <!-- V11.1: ẩn thanh Studio để tối giản màn hình thuyết trình -->
+      <button id="chromeHideBtn" onclick="toggleStudioChrome()" class="p-1.5 w-7 h-7 text-xs font-bold bg-slate-800 hover:bg-teal-500/20 text-slate-300 hover:text-teal-300 rounded-lg transition border border-slate-700 hover:border-teal-500/40 flex items-center justify-center active:scale-95" title="Ẩn thanh điều khiển Studio (phím H)">
+        <i class="fa-solid fa-chevron-up"></i>
+      </button>
     </div>
   </header>
 
   <!-- SUBHEADER / TAB BAR -->
-  <div class="bg-slate-900/85 border-b border-slate-800 px-3 py-1.5 flex items-center justify-between overflow-x-auto gap-2 shrink-0">
+  <div id="studioToolbar" class="bg-slate-900/85 border-b border-slate-800 px-3 py-1.5 flex items-center justify-between overflow-x-auto gap-2">
     <div id="screenTabsContainer" class="flex items-center gap-1 shrink-0">
       <!-- Dynamic Tabs -->
     </div>
@@ -377,14 +460,25 @@
       </button>
     </div>
   </div>
+  </div>
+  </div>
 
   <!-- MAIN CANVAS AREA -->
   <main class="flex-1 relative overflow-hidden canvas-grid-bg flex items-center justify-center">
+
+    <!-- V11.1: thanh mỏng hiện lại khi Studio chrome đã ẩn -->
+    <div id="chromeRevealDock">
+      <button onclick="toggleStudioChrome(false)" class="glass-panel px-3.5 py-1.5 rounded-full border border-teal-500/40 flex items-center gap-2 text-[11px] text-slate-100 shadow-xl shadow-teal-950/40 hover:border-teal-400/70 hover:bg-slate-800/90 transition active:scale-95">
+        <i class="fa-solid fa-chevron-down text-teal-300 text-[10px]"></i>
+        <span class="font-semibold">Hiện thanh điều khiển</span>
+        <span class="font-mono text-[10px] text-teal-300/90 bg-teal-500/10 px-1.5 py-0.5 rounded border border-teal-500/30">H</span>
+      </button>
+    </div>
     
     <!-- Top Tip Pill -->
     <div id="interactiveTipPill" class="absolute top-2.5 left-1/2 transform -translate-x-1/2 z-20 glass-panel px-3.5 py-1 rounded-full border border-teal-500/30 flex items-center gap-2.5 text-[11px] text-slate-200 shadow-lg backdrop-blur-md">
       <span id="tipPillText" class="flex items-center gap-1 text-amber-300 font-semibold">
-        <i class="fa-solid fa-map-location-dot text-teal-400"></i> Bản đồ tương tác V10: Giữ chuột để kéo xem khu vực xung quanh & lọc tiện ích trực quan!
+        <i class="fa-solid fa-map-location-dot text-teal-400"></i> Bản đồ tương tác: giữ chuột để kéo xem khu vực &amp; lọc tiện ích trực quan.
       </span>
       <span class="text-slate-600">•</span>
       <button onclick="toggleShowAllRooms()" class="text-indigo-300 hover:underline flex items-center gap-1 font-semibold">
@@ -619,11 +713,11 @@
           <button onclick="closeAiChatModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-base"></i></button>
         </div>
         <div class="p-4 space-y-3">
-          <div id="aiChatMessages" class="h-64 overflow-y-auto space-y-2.5 p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 text-xs leading-relaxed">
+          <div id="aiChatMessages" class="h-72 overflow-y-auto space-y-2.5 p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 text-xs leading-relaxed">
             <div class="flex items-start gap-2">
               <div class="w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold text-[10px] shrink-0">AI</div>
               <div class="bg-slate-800 p-2.5 rounded-xl border border-slate-700 max-w-[85%]">
-                Xin chào Quốc Anh! Tôi là trợ lý AI UNINEST. Bạn đang tìm phòng trọ khu vực nào, ngân sách ra sao và có cần tiện ích gì đặc biệt không? (VD: <em>"Cần trọ có hồ bơi, giá dưới 3.5 triệu gần UEH"</em>). Mình sẽ gợi ý riêng ở đây, không ảnh hưởng tới bộ lọc bạn đang đặt ở trang chủ.
+                Xin chào Quốc Anh! Mình tìm trong 32 phòng mẫu theo khu vực, trường, giá, tiện ích, xe buýt và đồ ăn quanh trọ. Thử hỏi “Khu Q.10 có trọ dưới 3 triệu gần UEH, có xe buýt không?”. Khoảng cách trên bản đồ chỉ là ước tính; chat không thay đổi bộ lọc trang chủ.
               </div>
             </div>
           </div>
@@ -632,6 +726,7 @@
             <button onclick="sendAiPrompt('Hiển thị tất cả các phòng trên hệ thống')" class="px-2 py-1 rounded bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 border border-indigo-500/30 text-[10px] shrink-0 font-medium">📋 Xem tất cả trọ</button>
             <button onclick="sendAiPrompt('Cần trọ có hồ bơi và giá dưới 3.5Tr')" class="px-2 py-1 rounded bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/30 text-[10px] shrink-0 font-medium">🏊 Hồ bơi &lt; 3.5Tr</button>
             <button onclick="sendAiPrompt('Phòng gần trạm xe buýt 150 giá rẻ')" class="px-2 py-1 rounded bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/30 text-[10px] shrink-0 font-medium">🚌 Gần trạm Bus 150</button>
+            <button onclick="sendAiPrompt('Khu vực Quận 10 có trọ gần UEH dưới 3 triệu không?')" class="px-2 py-1 rounded bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/30 text-[10px] shrink-0 font-medium">📍 Q.10 gần UEH</button>
           </div>
           <div class="flex items-center gap-2 pt-1">
             <input id="aiPromptInput" type="text" onkeydown="if(event.key==='Enter') submitAiPrompt()" placeholder="Nhập yêu cầu tìm trọ của bạn..." class="flex-1 bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white text-xs focus:outline-none focus:border-purple-500">
@@ -1335,6 +1430,7 @@
       updateHeaderUI();
       updateSidePanels();
       renderHelpModal();
+      markScreenEnter();
       resizeAndDraw();
       showToast(t("Đã đổi ngôn ngữ hiển thị."));
     }
@@ -1344,6 +1440,7 @@
       document.documentElement.setAttribute('data-app-theme', state.theme);
       // V10.8: nút đổi tông nằm trên canvas (drawAppControls) nên chỉ cần vẽ lại,
       // không còn nút DOM nào phải đồng bộ icon/tooltip.
+      markScreenEnter();
       resizeAndDraw();
       showToast(state.theme === 'dark' ? t("Đã bật giao diện tối.") : t("Đã bật giao diện sáng."));
     }
@@ -1392,7 +1489,13 @@
       "Chuyển sang giao diện sáng": "Switch to light theme",
       "Đã đổi ngôn ngữ hiển thị.": "Display language changed.",
       "Đã bật giao diện tối.": "Dark theme enabled.",
-      "Đã bật giao diện sáng.": "Light theme enabled."
+      "Đã bật giao diện sáng.": "Light theme enabled.",
+      "Ẩn thanh điều khiển Studio (phím H)": "Hide Studio controls (press H)",
+      "Hiện thanh điều khiển": "Show controls",
+      "Đã ẩn thanh điều khiển Studio — phím H để hiện lại.": "Studio controls hidden — press H to show them again.",
+      "Đã hiện thanh điều khiển Studio.": "Studio controls are visible again.",
+      "Bản đồ tương tác: giữ chuột để kéo xem khu vực & lọc tiện ích trực quan.": "Interactive map: hold and drag to explore the area & filter amenities visually.",
+      "Bản đồ tương tác: giữ chuột để kéo xem khu vực &amp; lọc tiện ích trực quan.": "Interactive map: hold and drag to explore the area &amp; filter amenities visually."
     });
     Object.assign(I18N.zh, {
       "• Chưa Đăng Nhập": "• 未登录",
@@ -1426,7 +1529,13 @@
       "Chuyển sang giao diện sáng": "切换到浅色主题",
       "Đã đổi ngôn ngữ hiển thị.": "已切换显示语言。",
       "Đã bật giao diện tối.": "已启用深色主题。",
-      "Đã bật giao diện sáng.": "已启用浅色主题。"
+      "Đã bật giao diện sáng.": "已启用浅色主题。",
+      "Ẩn thanh điều khiển Studio (phím H)": "隐藏 Studio 控制栏（按 H）",
+      "Hiện thanh điều khiển": "显示控制栏",
+      "Đã ẩn thanh điều khiển Studio — phím H để hiện lại.": "Studio 控制栏已隐藏 — 按 H 可重新显示。",
+      "Đã hiện thanh điều khiển Studio.": "Studio 控制栏已重新显示。",
+      "Bản đồ tương tác: giữ chuột để kéo xem khu vực & lọc tiện ích trực quan.": "互动地图：按住鼠标拖动查看区域并直观筛选配套。",
+      "Bản đồ tương tác: giữ chuột để kéo xem khu vực &amp; lọc tiện ích trực quan.": "互动地图：按住鼠标拖动查看区域并直观筛选配套。"
     });
 
     // --- Nhóm B: màn hình tải & cổng xác thực (trước đăng nhập) ---
@@ -2624,7 +2733,8 @@
       "Sau khi lưu, danh sách ứng viên sẽ được <strong>tính lại % tương thích thật</strong> và sắp xếp từ cao xuống thấp.": "Once saved, the candidate list is <strong>recalculated with real compatibility percentages</strong> and sorted from highest to lowest.",
       "Bấm một ứng viên rồi chọn <strong>Ký Thỏa Thuận Ở Ghép</strong> để xem mẫu cam kết sinh hoạt chung.": "Click a candidate then choose <strong>Sign The Roommate Pledge</strong> to view the shared-living agreement template.",
       "5. Bản đồ tương tác": "5. Interactive map",
-      "<strong>Giữ chuột trái và kéo</strong> trên bản đồ để di chuyển xem khu vực xung quanh (thao tác kéo hiện chỉ có ở chế độ Desktop Web).": "<strong>Hold the left mouse button and drag</strong> on the map to explore the surroundings (dragging is currently available in Desktop Web mode only).",
+      "<strong>Kéo chuột hoặc vuốt một ngón</strong> trong khung bản đồ để xem khu vực xung quanh; chạm nhẹ vào ghim để mở phòng.": "<strong>Drag with the mouse or swipe with one finger</strong> inside the map to explore; tap a pin to open a room.",
+      "Bấm ô <strong>tìm kiếm khu vực/trường</strong> để nhảy tới vị trí, rồi chọn <strong>bán kính</strong> (1km / 3km / 5km) để lọc phòng quanh điểm đó.": "Search for an <strong>area or university</strong>, then use the <strong>radius</strong> (1 km / 3 km / 5 km) to filter nearby rooms.",
       "Bấm ô <strong>tìm kiếm khu vực/trường</strong> để nhảy tới vị trí, rồi chọn <strong>bán kính</strong> (1km / 2km / 3km) để lọc phòng quanh điểm đó.": "Click the <strong>area/university search</strong> box to jump to a location, then pick a <strong>radius</strong> (1km / 2km / 3km) to filter rooms around it.",
       "Dùng các công tắc lớp bản đồ để bật/tắt hiển thị: trường học, phòng trọ, trạm buýt, tiện ích.": "Use the map layer switches to show or hide universities, rooms, bus stops and amenities.",
       "6. Đặt dịch vụ chuyển trọ": "6. Order a moving service",
@@ -2638,7 +2748,7 @@
       "Bấm <strong>Xem cách tính điểm</strong> để thấy công thức công khai: trừ điểm theo số tháng trễ, số ngày trễ, tháng còn nợ; cộng thưởng cho chuỗi tháng đúng hạn liên tiếp.": "Click <strong>See how it's calculated</strong> for the public formula: points deducted for late months, late days and unpaid months; bonus points for a streak of on-time months.",
       "Điểm này <strong>chủ trọ xem được</strong> khi bạn gửi yêu cầu xem phòng — điểm càng cao càng dễ được duyệt và thương lượng cọc.": "<strong>Landlords can see this score</strong> when you send a viewing request — the higher it is, the easier approval and deposit negotiation become.",
       "8. Trợ lý AI tìm trọ": "8. AI room-finding assistant",
-      "Bấm nút tím <strong>AI Tìm Trọ</strong> trên thanh công cụ và hỏi bằng câu tự nhiên, ví dụ: <em>“phòng dưới 3 triệu gần UEH có máy lạnh”</em>.": "Click the purple <strong>AI Room Finder</strong> button on the toolbar and ask in plain language, e.g. <em>“a room under 3 million near UEH with air conditioning”</em>.",
+      "Bấm nút tím <strong>AI Tìm Trọ</strong> và hỏi, ví dụ: <em>“Quận 10 gần UEH dưới 3 triệu có xe buýt và quán cơm”</em>.": "Click <strong>AI Room Finder</strong> and ask, for example: <em>“District 10 near UEH, under 3 million, with buses and cheap food”</em>.",
       "AI trả gợi ý ngay trong khung chat và <strong>không làm thay đổi bộ lọc</strong> ở trang chủ, nên bạn không bị mất danh sách đang xem.": "The AI answers inside the chat box and <strong>never changes the filters</strong> on the home page, so you don't lose the list you were browsing.",
       "Phân hệ dành cho Cô Nga — chủ trọ khu Sư Vạn Hạnh & Nguyễn Tri Phương (Q.10). Tài khoản mẫu: <span class='font-mono text-amber-300'>conga.chutro@gmail.com</span> / <span class='font-mono text-amber-300'>ChuTro@2026</span>.": "The module for Cô Nga — landlord of the Sư Vạn Hạnh & Nguyễn Tri Phương area (District 10). Sample account: <span class='font-mono text-amber-300'>conga.chutro@gmail.com</span> / <span class='font-mono text-amber-300'>ChuTro@2026</span>.",
       "1. Đăng nhập phân hệ Chủ Nhà": "1. Sign in as a landlord",
@@ -2682,15 +2792,21 @@
       "Bấm <strong>Vừa Khung</strong> để tự căn vừa cửa sổ, <strong>100%</strong> để về kích thước gốc, hoặc dùng nút <strong>+ / −</strong> để chỉnh từng nấc.": "Click <strong>Fit View</strong> to fit the window, <strong>100%</strong> to return to original size, or use <strong>+ / −</strong> to adjust step by step.",
       "Cuộn & kéo màn hình": "Scrolling and dragging",
       "<strong>Lăn chuột</strong> để cuộn nội dung dài. <strong>Giữ chuột và kéo dọc</strong> ngay trên khung giao diện cũng cuộn được.": "<strong>Scroll the wheel</strong> for long content. <strong>Holding and dragging vertically</strong> on the interface also scrolls.",
-      "Riêng khung bản đồ ở Desktop: giữ chuột và kéo sẽ <strong>di chuyển bản đồ</strong> thay vì cuộn trang.": "Inside the Desktop map area, holding and dragging <strong>pans the map</strong> instead of scrolling the page.",
+      "Trong khung bản đồ: kéo chuột hoặc vuốt một ngón sẽ <strong>di chuyển bản đồ</strong> thay vì cuộn trang.": "Inside the map: dragging with a mouse or swiping with one finger <strong>pans the map</strong> instead of scrolling the page.",
       "Đổi vai trò nhanh khi thuyết trình": "Switching roles quickly during a presentation",
       "Nút <strong>Đổi Vai Trò Demo</strong> chuyển thẳng giữa sinh viên Quốc Anh và chủ trọ Cô Nga, không cần đăng xuất rồi đăng nhập lại.": "The <strong>Switch Demo Role</strong> button jumps straight between student Quốc Anh and landlord Cô Nga without signing out and back in.",
       "Xuất ảnh màn hình": "Exporting a screenshot",
       "Bấm biểu tượng <strong>tải xuống</strong> ở góc phải thanh công cụ để lưu màn hình đang xem thành file PNG chất lượng cao — tiện để chèn vào báo cáo hoặc slide.": "Click the <strong>download</strong> icon at the right of the toolbar to save the current screen as a high-quality PNG — handy for reports or slides.",
       "Phím tắt": "Keyboard shortcuts",
       "<strong class='font-mono'>?</strong> — mở lại bảng hướng dẫn này bất cứ lúc nào.": "<strong class='font-mono'>?</strong> — reopen this guide at any time.",
+      "<strong class='font-mono'>H</strong> — ẩn hoặc hiện thanh điều khiển Studio (chế độ tập trung).": "<strong class='font-mono'>H</strong> — hide or show the Studio control bars (focus mode).",
       "<strong class='font-mono'>Esc</strong> — đóng mọi hộp thoại đang mở.": "<strong class='font-mono'>Esc</strong> — close any open dialog.",
+      "<strong class='font-mono'>Esc</strong> — đóng mọi hộp thoại đang mở. Nếu không có hộp thoại, Esc hiện lại thanh Studio.": "<strong class='font-mono'>Esc</strong> — close any open dialog. If none is open, Esc shows the Studio bars again.",
       "<strong class='font-mono'>Enter</strong> — đăng nhập luôn khi đang ở hộp đăng nhập.": "<strong class='font-mono'>Enter</strong> — sign in directly while the sign-in box is open.",
+      "Ẩn thanh điều khiển Studio": "Hiding the Studio control bars",
+      "Bấm nút mũi tên lên ở góc phải thanh tiêu đề, hoặc phím <strong class='font-mono'>H</strong>, để <strong>ẩn toàn bộ thanh Studio</strong> (logo, nút vai trò, tab, bộ lọc, zoom) — canvas chiếm gần hết màn hình, đỡ rối khi thuyết trình.": "Click the up-arrow at the right of the title bar, or press <strong class='font-mono'>H</strong>, to <strong>hide the entire Studio chrome</strong> (logo, role buttons, tabs, filters, zoom) so the canvas fills the screen — less clutter when presenting.",
+      "Khi đã ẩn, một viên thuốc <strong>Hiện thanh điều khiển</strong> hiện ở mép trên. Bấm vào đó, phím <strong class='font-mono'>H</strong>, hoặc <strong>Esc</strong> (nếu không có hộp thoại đang mở) để hiện lại.": "Once hidden, a <strong>Show controls</strong> pill appears at the top edge. Click it, press <strong class='font-mono'>H</strong>, or press <strong>Esc</strong> (when no dialog is open) to bring the bars back.",
+      "Nhấp đúp vào vùng trống trên canvas cũng ẩn/hiện thanh Studio — tiện khi đang đứng thuyết trình.": "Double-clicking empty canvas space also toggles the Studio bars — handy while standing and presenting.",
       "Lưu ý về dữ liệu demo": "A note about the demo data",
       "Đây là <strong>bản mô phỏng trình diễn</strong>: toàn bộ dữ liệu là dữ liệu mẫu dựng sẵn, không có máy chủ thật.": "This is a <strong>presentation mock-up</strong>: all data is pre-built sample data with no real server.",
       "Mọi thay đổi bạn tạo ra (đánh giá mới, kết quả trắc nghiệm, giá phòng vừa sửa...) chỉ sống trong phiên làm việc và <strong>sẽ trở về ban đầu khi tải lại trang</strong>.": "Anything you change (new reviews, quiz results, edited prices) lives only in this session and <strong>resets when the page is reloaded</strong>."
@@ -2713,7 +2829,8 @@
       "Sau khi lưu, danh sách ứng viên sẽ được <strong>tính lại % tương thích thật</strong> và sắp xếp từ cao xuống thấp.": "保存后，候选人列表会<strong>重新计算真实匹配度</strong>，并从高到低排序。",
       "Bấm một ứng viên rồi chọn <strong>Ký Thỏa Thuận Ở Ghép</strong> để xem mẫu cam kết sinh hoạt chung.": "点击某位候选人，再选择<strong>签署合租公约</strong>，即可查看共同生活公约范本。",
       "5. Bản đồ tương tác": "5. 互动地图",
-      "<strong>Giữ chuột trái và kéo</strong> trên bản đồ để di chuyển xem khu vực xung quanh (thao tác kéo hiện chỉ có ở chế độ Desktop Web).": "<strong>按住鼠标左键拖动</strong>地图即可查看周边区域（拖动功能目前仅在桌面网页模式下可用）。",
+      "<strong>Kéo chuột hoặc vuốt một ngón</strong> trong khung bản đồ để xem khu vực xung quanh; chạm nhẹ vào ghim để mở phòng.": "<strong>用鼠标拖动或单指滑动</strong>地图查看周边；轻点图钉查看房源。",
+      "Bấm ô <strong>tìm kiếm khu vực/trường</strong> để nhảy tới vị trí, rồi chọn <strong>bán kính</strong> (1km / 3km / 5km) để lọc phòng quanh điểm đó.": "搜索<strong>区域或高校</strong>，然后选择<strong>半径</strong>（1 / 3 / 5 公里）筛选附近房源。",
       "Bấm ô <strong>tìm kiếm khu vực/trường</strong> để nhảy tới vị trí, rồi chọn <strong>bán kính</strong> (1km / 2km / 3km) để lọc phòng quanh điểm đó.": "点击<strong>区域/学校搜索框</strong>跳转到目标位置，再选择<strong>半径</strong>（1 公里 / 2 公里 / 3 公里）筛选周边房源。",
       "Dùng các công tắc lớp bản đồ để bật/tắt hiển thị: trường học, phòng trọ, trạm buýt, tiện ích.": "使用地图图层开关，可显示或隐藏高校、房源、公交站与配套设施。",
       "6. Đặt dịch vụ chuyển trọ": "6. 预订搬家服务",
@@ -2727,7 +2844,7 @@
       "Bấm <strong>Xem cách tính điểm</strong> để thấy công thức công khai: trừ điểm theo số tháng trễ, số ngày trễ, tháng còn nợ; cộng thưởng cho chuỗi tháng đúng hạn liên tiếp.": "点击<strong>查看计分方式</strong>即可看到公开公式：按逾期月数、逾期天数与欠缴月数扣分；连续按时缴费则获得奖励分。",
       "Điểm này <strong>chủ trọ xem được</strong> khi bạn gửi yêu cầu xem phòng — điểm càng cao càng dễ được duyệt và thương lượng cọc.": "当你提交看房申请时，<strong>房东可以看到这个分数</strong> —— 分数越高越容易获批，也更好谈押金。",
       "8. Trợ lý AI tìm trọ": "8. AI 找房助手",
-      "Bấm nút tím <strong>AI Tìm Trọ</strong> trên thanh công cụ và hỏi bằng câu tự nhiên, ví dụ: <em>“phòng dưới 3 triệu gần UEH có máy lạnh”</em>.": "点击工具栏上紫色的 <strong>AI 找房</strong>按钮，用日常语言提问，例如：<em>「UEH 附近、300 万以下、带空调的房子」</em>。",
+      "Bấm nút tím <strong>AI Tìm Trọ</strong> và hỏi, ví dụ: <em>“Quận 10 gần UEH dưới 3 triệu có xe buýt và quán cơm”</em>.": "点击<strong>AI 找房</strong>并提问，例如：<em>「第十郡 UEH 附近、300 万以下、有公交和便宜饭馆的房子」</em>。",
       "AI trả gợi ý ngay trong khung chat và <strong>không làm thay đổi bộ lọc</strong> ở trang chủ, nên bạn không bị mất danh sách đang xem.": "AI 会直接在对话框中给出建议，并<strong>不会改动首页的筛选条件</strong>，因此你正在浏览的列表不会丢失。",
       "Phân hệ dành cho Cô Nga — chủ trọ khu Sư Vạn Hạnh & Nguyễn Tri Phương (Q.10). Tài khoản mẫu: <span class='font-mono text-amber-300'>conga.chutro@gmail.com</span> / <span class='font-mono text-amber-300'>ChuTro@2026</span>.": "面向 Cô Nga 的模块 —— Sư Vạn Hạnh 与 Nguyễn Tri Phương 一带（第10郡）的房东。示例账号：<span class='font-mono text-amber-300'>conga.chutro@gmail.com</span> / <span class='font-mono text-amber-300'>ChuTro@2026</span>。",
       "1. Đăng nhập phân hệ Chủ Nhà": "1. 以房东身份登录",
@@ -2771,15 +2888,21 @@
       "Bấm <strong>Vừa Khung</strong> để tự căn vừa cửa sổ, <strong>100%</strong> để về kích thước gốc, hoặc dùng nút <strong>+ / −</strong> để chỉnh từng nấc.": "点击<strong>适应窗口</strong>自动贴合窗口，点击 <strong>100%</strong> 回到原始尺寸，或用 <strong>+ / −</strong> 逐级调整。",
       "Cuộn & kéo màn hình": "滚动与拖动界面",
       "<strong>Lăn chuột</strong> để cuộn nội dung dài. <strong>Giữ chuột và kéo dọc</strong> ngay trên khung giao diện cũng cuộn được.": "<strong>滚动鼠标滚轮</strong>可浏览较长内容。在界面上<strong>按住并上下拖动</strong>同样可以滚动。",
-      "Riêng khung bản đồ ở Desktop: giữ chuột và kéo sẽ <strong>di chuyển bản đồ</strong> thay vì cuộn trang.": "但在桌面端的地图区域内，按住拖动会<strong>平移地图</strong>而不是滚动页面。",
+      "Trong khung bản đồ: kéo chuột hoặc vuốt một ngón sẽ <strong>di chuyển bản đồ</strong> thay vì cuộn trang.": "在地图区域：用鼠标拖动或单指滑动将<strong>平移地图</strong>而不是滚动页面。",
       "Đổi vai trò nhanh khi thuyết trình": "演示时快速切换角色",
       "Nút <strong>Đổi Vai Trò Demo</strong> chuyển thẳng giữa sinh viên Quốc Anh và chủ trọ Cô Nga, không cần đăng xuất rồi đăng nhập lại.": "<strong>切换演示角色</strong>按钮可在学生 Quốc Anh 与房东 Cô Nga 之间直接切换，无需退出再登录。",
       "Xuất ảnh màn hình": "导出屏幕截图",
       "Bấm biểu tượng <strong>tải xuống</strong> ở góc phải thanh công cụ để lưu màn hình đang xem thành file PNG chất lượng cao — tiện để chèn vào báo cáo hoặc slide.": "点击工具栏右侧的<strong>下载</strong>图标，可将当前界面保存为高清 PNG —— 方便插入报告或幻灯片。",
       "Phím tắt": "快捷键",
       "<strong class='font-mono'>?</strong> — mở lại bảng hướng dẫn này bất cứ lúc nào.": "<strong class='font-mono'>?</strong> —— 随时重新打开本指南。",
+      "<strong class='font-mono'>H</strong> — ẩn hoặc hiện thanh điều khiển Studio (chế độ tập trung).": "<strong class='font-mono'>H</strong> —— 隐藏或显示 Studio 控制栏（专注模式）。",
       "<strong class='font-mono'>Esc</strong> — đóng mọi hộp thoại đang mở.": "<strong class='font-mono'>Esc</strong> —— 关闭所有已打开的对话框。",
+      "<strong class='font-mono'>Esc</strong> — đóng mọi hộp thoại đang mở. Nếu không có hộp thoại, Esc hiện lại thanh Studio.": "<strong class='font-mono'>Esc</strong> —— 关闭所有已打开的对话框。若没有对话框，Esc 会重新显示 Studio 控制栏。",
       "<strong class='font-mono'>Enter</strong> — đăng nhập luôn khi đang ở hộp đăng nhập.": "<strong class='font-mono'>Enter</strong> —— 在登录框中直接登录。",
+      "Ẩn thanh điều khiển Studio": "隐藏 Studio 控制栏",
+      "Bấm nút mũi tên lên ở góc phải thanh tiêu đề, hoặc phím <strong class='font-mono'>H</strong>, để <strong>ẩn toàn bộ thanh Studio</strong> (logo, nút vai trò, tab, bộ lọc, zoom) — canvas chiếm gần hết màn hình, đỡ rối khi thuyết trình.": "点击标题栏右侧的向上箭头，或按 <strong class='font-mono'>H</strong>，即可<strong>隐藏整个 Studio 控制栏</strong>（标志、角色按钮、标签、筛选、缩放），让画布几乎占满屏幕，演示时更干净。",
+      "Khi đã ẩn, một viên thuốc <strong>Hiện thanh điều khiển</strong> hiện ở mép trên. Bấm vào đó, phím <strong class='font-mono'>H</strong>, hoặc <strong>Esc</strong> (nếu không có hộp thoại đang mở) để hiện lại.": "隐藏后，顶部会出现<strong>显示控制栏</strong>胶囊按钮。点击它、按 <strong class='font-mono'>H</strong>，或在没有对话框时按 <strong>Esc</strong>，即可重新显示。",
+      "Nhấp đúp vào vùng trống trên canvas cũng ẩn/hiện thanh Studio — tiện khi đang đứng thuyết trình.": "双击画布空白区域也可切换 Studio 控制栏 —— 站着演示时很方便。",
       "Lưu ý về dữ liệu demo": "关于演示数据的说明",
       "Đây là <strong>bản mô phỏng trình diễn</strong>: toàn bộ dữ liệu là dữ liệu mẫu dựng sẵn, không có máy chủ thật.": "这是一个<strong>演示用模拟版本</strong>：所有数据均为预设的示例数据，没有真实服务器。",
       "Mọi thay đổi bạn tạo ra (đánh giá mới, kết quả trắc nghiệm, giá phòng vừa sửa...) chỉ sống trong phiên làm việc và <strong>sẽ trở về ban đầu khi tải lại trang</strong>.": "你做出的任何改动（新评价、测试结果、刚修改的房价等）仅存在于本次会话，<strong>刷新页面后会恢复原样</strong>。"
@@ -2844,13 +2967,11 @@
       { value: 5, label: "< 5 km" }
     ];
 
-    // Chiều cao khung bản đồ desktop (đã phóng to so với bản cũ 500px để dễ quan sát/kéo xem hơn)
+    // Chiều cao khung desktop vừa trọn canvas 860px; bản mobile cao hơn để dễ quan sát.
     const MAP_BOX_H = 680;
 
-    // Không gian toạ độ cục bộ dùng cho MỌI tỉnh/thành (0-620 x 0-520, trừu tượng, KHÔNG phải GPS thật) —
-    // khớp với coordScaleX/Y = mapW/620, mapH/520 dùng khi vẽ pin. Vùng "vật cản" (đường lớn/sông/công viên)
-    // được định nghĩa cố định trong không gian này vì nền minh hoạ (drawCityMapBackground) dùng chung 1 bố cục
-    // theo tỉ lệ % cho mọi thành phố.
+    // Ghim dùng vùng tâm 620×520; nền đường phố sinh thêm khi pan ra khỏi vùng này.
+    // Toạ độ trừu tượng, KHÔNG phải GPS và không thể dùng làm chỉ đường thật.
     const MAP_LOCAL_W = 620;
     const MAP_LOCAL_H = 520;
 
@@ -3918,25 +4039,10 @@
       return Math.round((units * MAP_SCALE_M_PER_UNIT / 1000) * 10) / 10;
     }
 
-    // Đảm bảo pin (phòng/trường) không bị vẽ đè lên đường lớn/sông/công viên minh hoạ trên bản đồ.
-    // Vùng "vật cản" dưới đây khớp với các hình dạng % cố định trong drawCityMapBackground — dùng
-    // CHUNG cho mọi tỉnh/thành (nền minh hoạ có cùng 1 bố cục cho tất cả) và CHUNG cho desktop lẫn mobile
-    // (cả 2 đều quy đổi qua coordScaleX/Y = mapW/620, mapH/520 nên toạ độ cục bộ luôn giống nhau).
+    // Giữ ghim ở tọa độ dữ liệu (khoảng cách ước tính vẫn tính từ tọa độ gốc).
+    // Đường phố v11.2 bao phủ toàn bộ không gian nên không phải đẩy ghim khỏi các dải cố định nữa.
     function getSafeMapCoord(x, y) {
-      let sx = x, sy = y;
-      // Sông (dải cong nhẹ quanh y 250-340 theo toàn bộ chiều rộng)
-      if (sy >= 248 && sy <= 342) sy = sy < 295 ? 244 : 348;
-      // Đường ngang trục chính (quanh y 226-254)
-      if (sy >= 224 && sy <= 256) sy = sy < 240 ? 218 : 262;
-      // Đường dọc trục chính màu vàng (quanh x 188-222)
-      if (sx >= 186 && sx <= 224) sx = sx < 205 ? 178 : 232;
-      // Đường chéo phụ (quanh x 328-356, phần đứng phía trên khúc cua ở đáy)
-      if (sx >= 326 && sx <= 358 && sy < 470) sx = sx < 341 ? 318 : 364;
-      // Đường chéo phụ (đoạn nằm ngang ở đáy, quanh y 468-490)
-      if (sy >= 466 && sy <= 492 && sx >= 326 && sx <= 500) sy = sy < 478 ? 458 : 498;
-      // Công viên góc trên-trái (x 35-190, y 45-150)
-      if (sx >= 30 && sx <= 195 && sy >= 40 && sy <= 155) sx = sx < 112 ? 20 : 202;
-      return { x: sx, y: sy };
+      return { x, y };
     }
 
     // Danh sách phòng gần nhất tính từ 1 vị trí đã chọn trên bản đồ (dùng chung desktop/mobile) —
@@ -4093,8 +4199,8 @@
           {
             icon: "fa-map-location-dot", title: "5. Bản đồ tương tác",
             body: [
-              "<strong>Giữ chuột trái và kéo</strong> trên bản đồ để di chuyển xem khu vực xung quanh (thao tác kéo hiện chỉ có ở chế độ Desktop Web).",
-              "Bấm ô <strong>tìm kiếm khu vực/trường</strong> để nhảy tới vị trí, rồi chọn <strong>bán kính</strong> (1km / 2km / 3km) để lọc phòng quanh điểm đó.",
+              "<strong>Kéo chuột hoặc vuốt một ngón</strong> trong khung bản đồ để xem khu vực xung quanh; chạm nhẹ vào ghim để mở phòng.",
+              "Bấm ô <strong>tìm kiếm khu vực/trường</strong> để nhảy tới vị trí, rồi chọn <strong>bán kính</strong> (1km / 3km / 5km) để lọc phòng quanh điểm đó.",
               "Dùng các công tắc lớp bản đồ để bật/tắt hiển thị: trường học, phòng trọ, trạm buýt, tiện ích."
             ]
           },
@@ -4119,7 +4225,7 @@
           {
             icon: "fa-wand-magic-sparkles", title: "8. Trợ lý AI tìm trọ",
             body: [
-              "Bấm nút tím <strong>AI Tìm Trọ</strong> trên thanh công cụ và hỏi bằng câu tự nhiên, ví dụ: <em>“phòng dưới 3 triệu gần UEH có máy lạnh”</em>.",
+              "Bấm nút tím <strong>AI Tìm Trọ</strong> và hỏi, ví dụ: <em>“Quận 10 gần UEH dưới 3 triệu có xe buýt và quán cơm”</em>.",
               "AI trả gợi ý ngay trong khung chat và <strong>không làm thay đổi bộ lọc</strong> ở trang chủ, nên bạn không bị mất danh sách đang xem."
             ]
           }
@@ -4210,6 +4316,14 @@
             ]
           },
           {
+            icon: "fa-down-left-and-up-right-to-center", title: "Ẩn thanh điều khiển Studio",
+            body: [
+              "Bấm nút mũi tên lên ở góc phải thanh tiêu đề, hoặc phím <strong class='font-mono'>H</strong>, để <strong>ẩn toàn bộ thanh Studio</strong> (logo, nút vai trò, tab, bộ lọc, zoom) — canvas chiếm gần hết màn hình, đỡ rối khi thuyết trình.",
+              "Khi đã ẩn, một viên thuốc <strong>Hiện thanh điều khiển</strong> hiện ở mép trên. Bấm vào đó, phím <strong class='font-mono'>H</strong>, hoặc <strong>Esc</strong> (nếu không có hộp thoại đang mở) để hiện lại.",
+              "Nhấp đúp vào vùng trống trên canvas cũng ẩn/hiện thanh Studio — tiện khi đang đứng thuyết trình."
+            ]
+          },
+          {
             icon: "fa-desktop", title: "Đổi giữa Desktop Web và Mobile App",
             body: [
               "Dùng cặp nút <strong>Desktop Web / Mobile App</strong> ở góc phải thanh công cụ. Mọi nội dung đều có đủ ở cả hai chế độ, chỉ khác cách bố trí cho màn rộng/hẹp."
@@ -4225,7 +4339,7 @@
             icon: "fa-computer-mouse", title: "Cuộn & kéo màn hình",
             body: [
               "<strong>Lăn chuột</strong> để cuộn nội dung dài. <strong>Giữ chuột và kéo dọc</strong> ngay trên khung giao diện cũng cuộn được.",
-              "Riêng khung bản đồ ở Desktop: giữ chuột và kéo sẽ <strong>di chuyển bản đồ</strong> thay vì cuộn trang."
+              "Trong khung bản đồ: kéo chuột hoặc vuốt một ngón sẽ <strong>di chuyển bản đồ</strong> thay vì cuộn trang."
             ]
           },
           {
@@ -4244,7 +4358,8 @@
             icon: "fa-keyboard", title: "Phím tắt",
             body: [
               "<strong class='font-mono'>?</strong> — mở lại bảng hướng dẫn này bất cứ lúc nào.",
-              "<strong class='font-mono'>Esc</strong> — đóng mọi hộp thoại đang mở.",
+              "<strong class='font-mono'>H</strong> — ẩn hoặc hiện thanh điều khiển Studio (chế độ tập trung).",
+              "<strong class='font-mono'>Esc</strong> — đóng mọi hộp thoại đang mở. Nếu không có hộp thoại, Esc hiện lại thanh Studio.",
               "<strong class='font-mono'>Enter</strong> — đăng nhập luôn khi đang ở hộp đăng nhập."
             ]
           },
@@ -4302,6 +4417,13 @@
       screenEnterAt: 0,
       hoveredLabel: null,
       helpTab: 'student',
+      // V11.1: ẩn thanh Studio + cuộn mượt + gợn khi bấm
+      studioChromeHidden: false,
+      desktopScrollTarget: 0,
+      mobileScrollTarget: 0,
+      clickRipples: [],
+      pressPulseAt: 0,
+      hoverPulseAt: 0,
       // V10.7: ngôn ngữ hiển thị và tông màu giao diện
       language: 'vi',
       theme: 'light',
@@ -4508,8 +4630,7 @@
         busRadiusFilter: state.busRadiusFilter,
         selectedFoodTags: [...state.selectedFoodTags]
       };
-      state.desktopScrollY = 0;
-      state.mobileScrollY = 0;
+      resetCanvasScroll();
       resizeAndDraw();
       showToast("✓ Đã áp dụng bộ lọc!");
     }
@@ -4604,8 +4725,7 @@
       if (headerDisplay) headerDisplay.innerText = displayText;
       if (modalLabel) modalLabel.innerText = displayText;
 
-      state.desktopScrollY = 0;
-      state.mobileScrollY = 0;
+      resetCanvasScroll();
       resizeAndDraw();
     }
 
@@ -4638,8 +4758,7 @@
         if (!state.isUnlimitedPrice) handlePriceSliderChange(5000000);
       }
       updateShowAllButtonUI();
-      state.desktopScrollY = 0;
-      state.mobileScrollY = 0;
+      resetCanvasScroll();
       resizeAndDraw();
       showToast(state.showAllRooms ? "✓ Đang hiển thị TẤT CẢ phòng trên hệ thống (đã xoá mọi bộ lọc)!" : "Đã kích hoạt lại bộ lọc theo khu vực.");
     }
@@ -4669,8 +4788,7 @@
       });
       if (budgetStr === '2.0tr' || budgetStr === '2.5tr') state.priceFilter = 'under25';
       else if (budgetStr === '3.0tr' || budgetStr === '3.5tr') state.priceFilter = '25to35';
-      state.desktopScrollY = 0;
-      state.mobileScrollY = 0;
+      resetCanvasScroll();
       resizeAndDraw();
       showToast(`Persona Quốc Anh đổi mức lọc: ${budgetStr.toUpperCase()}`);
     }
@@ -4715,8 +4833,7 @@
           }
           updateShowAllButtonUI();
           closeCityModal();
-          state.desktopScrollY = 0;
-          state.mobileScrollY = 0;
+          resetCanvasScroll();
           resizeAndDraw();
           showToast(`Đã chọn (nháp): ${city} — bấm "Áp Dụng Bộ Lọc" để xem kết quả.`);
         };
@@ -4762,8 +4879,7 @@
           if (u.id === 'all') state.showAllRooms = true;
           updateShowAllButtonUI();
           closeUniversityModal();
-          state.desktopScrollY = 0;
-          state.mobileScrollY = 0;
+          resetCanvasScroll();
           resizeAndDraw();
           showToast(`Đã chọn (nháp): ${u.name} — bấm "Áp Dụng Bộ Lọc" để xem kết quả.`);
         };
@@ -4898,18 +5014,133 @@
       if (input) input.value = promptText;
       submitAiPrompt();
     }
-    // AI tự tìm trong ROOMS_DATABASE theo từ khoá, HOÀN TOÀN độc lập với state bộ lọc chính ở trang chủ
-    // (không đụng state.selectedAmenities/showAllRooms/maxPriceBudget...) để không làm rối/kẹt bộ lọc thật.
-    function aiSearchRooms(text) {
-      const lower = text.toLowerCase();
-      let list = [...ROOMS_DATABASE];
-      if (lower.includes('hồ bơi') || lower.includes('pool')) list = list.filter(r => r.amenities.includes('pool'));
-      if (lower.includes('buýt') || lower.includes('bus')) list = list.filter(r => r.amenities.includes('bus'));
-      if (lower.includes('gym')) list = list.filter(r => r.amenities.includes('gym'));
-      if (lower.includes('dưới 2.5') || lower.includes('2.5tr')) list = list.filter(r => r.priceNum <= 2500000);
-      else if (lower.includes('3.5') || lower.includes('3.5tr') || lower.includes('3tr')) list = list.filter(r => r.priceNum <= 3500000);
-      if (lower.includes('tất cả') || lower.includes('toàn bộ')) list = [...ROOMS_DATABASE];
-      return list.slice(0, 5);
+    // Trợ lý quy tắc chạy offline: chỉ trả lời từ dữ liệu mẫu; không đọc/ghi bộ lọc trang chủ.
+    function aiNormalize(text) {
+      return String(text || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd');
+    }
+
+    function aiPriceValue(raw) {
+      const m = raw.trim().match(/^(\d+(?:[.,]\d+)?)\s*(trieu|tr|k|nghin|ngan|dong|vnd|d)?$/);
+      if (!m) return null;
+      const amount = Number(m[1].replace(',', '.'));
+      if (!Number.isFinite(amount)) return null;
+      const unit = m[2];
+      const multiplier = ['k', 'nghin', 'ngan'].includes(unit) ? 1000
+        : ['dong', 'vnd', 'd'].includes(unit) ? 1 : unit || amount < 100000 ? 1000000 : 1;
+      return Math.round(amount * multiplier);
+    }
+
+    function parseAiRequest(text) {
+      const q = aiNormalize(text);
+      const result = { city: null, area: null, universities: [], amenities: [], food: [], maxPrice: null, minPrice: null, busMeters: null, nearKm: null, sortCheap: false, notes: [], recognized: false };
+      const cities = [
+        { city: 'Hồ Chí Minh', re: /\b(ho chi minh|tp\.?\s*hcm|tphcm|sai gon|saigon|hcm)\b/ },
+        { city: 'Hà Nội', re: /\b(ha noi|hanoi)\b/ },
+        { city: 'Đà Nẵng', re: /\b(da nang|danang)\b/ },
+        { city: 'Cần Thơ', re: /\b(can tho|cantho)\b/ },
+        { city: 'Bình Dương', re: /\b(binh duong)\b/ }
+      ];
+      const foundCity = cities.find(c => c.re.test(q));
+      if (foundCity) result.city = foundCity.city;
+      else result.city = PROVINCES_CITIES_LIST.find(c => c !== 'Tất Cả' && q.includes(aiNormalize(c))) || null;
+      const district = q.match(/\b(?:quan|q)\.?\s*(\d{1,2})\b/);
+      if (district) {
+        result.area = `Q.${district[1]}`;
+        if (!result.city) result.city = 'Hồ Chí Minh';
+      } else {
+        const streets = ['Sư Vạn Hạnh', 'Nguyễn Tri Phương', 'Lý Thường Kiệt', 'Hòa Khánh', 'Xuân Khánh', 'Ninh Kiều', 'Thủ Dầu Một'];
+        result.area = streets.find(a => q.includes(aiNormalize(a))) || null;
+      }
+      const schools = [
+        { re: /\b(ueh|kinh te tp\.?\s*hcm)\b/, ids: ['ueh_b', 'ueh_a'] },
+        { re: /\b(bach khoa tp\.?\s*hcm|hcmut)\b/, ids: ['hcmut'] },
+        { re: /\b(khoa hoc tu nhien|hcmus)\b/, ids: ['hcmus'] },
+        { re: /\b(ngoai thuong|ftu)\b/, ids: ['ftu_hcm'] },
+        { re: /\b(kinh te quoc dan|neu)\b/, ids: ['neu'] },
+        { re: /\b(bach khoa ha noi|hust)\b/, ids: ['hust'] },
+        { re: /\b(dh|dai hoc) da nang\b/, ids: ['dnu'] },
+        { re: /\b(dh|dai hoc) can tho\b/, ids: ['ctu'] },
+        { re: /\b(dh|dai hoc) binh duong\b/, ids: ['bdu'] }
+      ];
+      result.universities = schools.filter(s => s.re.test(q)).flatMap(s => s.ids);
+      if (result.universities.includes('ueh_a') && result.universities.includes('ueh_b')) {
+        if (/\b(?:co so|cs)\s*a\b/.test(q)) result.universities = ['ueh_a'];
+        else if (/\b(?:co so|cs)\s*b\b/.test(q)) result.universities = ['ueh_b'];
+      }
+      if (result.universities.length && !result.city) {
+        result.city = UNIVERSITIES_LIST.find(u => u.id === result.universities[0]).city;
+      }
+      const amenityTerms = [
+        ['pool', /\b(ho boi|be boi|pool)\b/], ['gym', /\b(gym|fitness|phong tap)\b/],
+        ['elevator', /\b(thang may)\b/], ['security', /\b(bao ve|an ninh|van tay)\b/],
+        ['parking', /\b(bai xe|cho de xe|gui xe)\b/], ['park', /\b(cong vien|cay xanh)\b/],
+        ['stadium', /\b(san van dong)\b/], ['bus', /\b(xe buyt|bus|tram buyt|tuyen buyt)\b/]
+      ];
+      result.amenities = amenityTerms.filter(([, re]) => re.test(q)).map(([id]) => id);
+      const foodTerms = [
+        ['quanCom', /\b(quan com|com binh dan|hang an)\b/],
+        ['choSieuThi', /\b(gan cho|di cho|cho truyen thong|cho dau moi|sieu thi|cua hang tien loi)\b/],
+        ['khuPhoAmThuc', /\b(pho am thuc|khu an uong)\b/],
+        ['dem', /\b(an dem|dem khuya|24\/7)\b/]
+      ];
+      result.food = foodTerms.filter(([, re]) => re.test(q)).map(([id]) => id);
+      // Loại toàn bộ cụm khoảng cách trước khi đọc giá, kể cả "từ 1 đến 2 km".
+      // Không dùng "m" làm đơn vị triệu vì trong yêu cầu tiếng Việt nó là mét.
+      const priceQuery = q
+        .replace(/\b(?:tu|khoang)\s*\d+(?:[.,]\d+)?\s*(?:km|met|m)?\s*(?:den|toi|-)\s*\d+(?:[.,]\d+)?\s*(?:km|met|m)\b/g, ' ')
+        .replace(/\b\d+(?:[.,]\d+)?\s*(?:km|met|m)\b/g, ' ');
+      const range = priceQuery.match(/\b(?:tu|khoang)\s*(\d+(?:[.,]\d+)?)\s*(trieu|tr|k|nghin|ngan|dong|vnd|d)?\s*(?:den|toi|-)\s*(\d+(?:[.,]\d+)?)\s*(trieu|tr|k|nghin|ngan|dong|vnd|d)?\b/);
+      if (range) {
+        result.minPrice = aiPriceValue(range[1] + (range[2] || range[4] || 'tr'));
+        result.maxPrice = aiPriceValue(range[3] + (range[4] || range[2] || 'tr'));
+      } else {
+        const upper = priceQuery.match(/\b(?:duoi|khong qua|toi da|tam|<=?)\s*(\d+(?:[.,]\d+)?\s*(?:trieu|tr|k|nghin|ngan|dong|vnd|d)?\b)/) || priceQuery.match(/\b(?:gia|ngan sach)\s*(\d+(?:[.,]\d+)?\s*(?:trieu|tr|k|nghin|ngan|dong|vnd|d)\b)/);
+        const lower = priceQuery.match(/\b(?:tren|tu|it nhat|>=?)\s*(\d+(?:[.,]\d+)?\s*(?:trieu|tr|k|nghin|ngan|dong|vnd|d)?\b)/);
+        if (upper) result.maxPrice = aiPriceValue(upper[1]);
+        if (lower) result.minPrice = aiPriceValue(lower[1]);
+      }
+      result.sortCheap = /\b(gia re|re nhat|tiet kiem|binh dan)\b/.test(q);
+      const busDistance = q.match(/\b(?:buyt|bus|tram)\s*(?:duoi|trong vong|cach|gan)?\s*(\d+)\s*(m|met)\b/);
+      if (busDistance) result.busMeters = Number(busDistance[1]);
+      const nearDistance = q.match(/\b(?:gan|cach|trong vong)\s*(?:(?:truong|dh|dai hoc|ueh|neu|hust)\s*)?(?:(?:trong vong|duoi)\s*)?(\d+(?:[.,]\d+)?)\s*km\b/);
+      if (nearDistance) result.nearKm = Number(nearDistance[1].replace(',', '.'));
+      if (/\b(bus|buyt)\s*\d{1,3}\b(?!\s*(?:km|met|m)\b)/.test(q)) result.notes.push('Dữ liệu mẫu không có số tuyến xe buýt; chỉ có khoảng cách đến trạm.');
+      if (/\b(con phong|phong trong|dat phong|thoi gian di|duong di|ngap|an toan)\b/.test(q)) result.notes.push('Tình trạng phòng, giao thông và an ninh thực tế chưa được xác minh trong bản demo.');
+      if (/\b(may lanh|dieu hoa|wifi|internet|cho meo|thu cung)\b/.test(q)) result.notes.push('Dữ liệu mẫu chưa có thuộc tính xác minh máy lạnh, Wi-Fi hoặc thú cưng; tiêu chí này chưa được dùng để lọc.');
+      result.recognized = !!(result.city || result.area || result.universities.length || result.amenities.length || result.food.length || result.maxPrice != null || result.minPrice != null || result.busMeters != null || result.sortCheap || /\b(tat ca|toan bo|danh sach|phong tro|tro nao)\b/.test(q));
+      return result;
+    }
+
+    function aiFindRooms(text) {
+      const criteria = parseAiRequest(text);
+      let rooms = ROOMS_DATABASE.filter(r => {
+        if (criteria.city && r.city !== criteria.city) return false;
+        if (criteria.area) {
+          const context = aiNormalize(`${r.title} ${r.landlord} ${r.feedback}`);
+          if (!context.includes(aiNormalize(criteria.area))) return false;
+        }
+        // Bán kính dùng tọa độ, không giới hạn ở nhãn trường của tin đăng.
+        if (criteria.universities.length && criteria.nearKm == null && !criteria.universities.includes(r.universityTag)) return false;
+        if (criteria.maxPrice != null && r.priceNum > criteria.maxPrice) return false;
+        if (criteria.minPrice != null && r.priceNum < criteria.minPrice) return false;
+        if (!criteria.amenities.every(a => r.amenities.includes(a))) return false;
+        if (!criteria.food.every(f => r.nearbyFood && r.nearbyFood[f])) return false;
+        if (criteria.busMeters != null && (r.busStopDistanceM == null || r.busStopDistanceM > criteria.busMeters)) return false;
+        if (criteria.nearKm != null && criteria.universities.length) {
+          const nearby = UNIVERSITIES_LIST.filter(u => criteria.universities.includes(u.id) && u.city === r.city && u.mapCoord);
+          if (!nearby.some(u => mapDistanceKm(r.mapCoord, u.mapCoord) <= criteria.nearKm)) return false;
+        }
+        return true;
+      });
+      if (criteria.nearKm != null && !criteria.universities.length) criteria.notes.push('Muốn lọc theo bán kính, hãy cho mình tên trường cụ thể (ví dụ UEH hoặc NEU).');
+      if (criteria.sortCheap || criteria.maxPrice != null || criteria.minPrice != null) rooms.sort((a, b) => a.priceNum - b.priceNum || a.id - b.id);
+      return { criteria, rooms };
+    }
+
+    function aiSearchRooms(text) { return aiFindRooms(text).rooms.slice(0, 5); }
+
+    function aiEscape(text) {
+      return String(text).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
     }
 
     function aiGoToRoom(id) {
@@ -4933,7 +5164,7 @@
       const userDiv = document.createElement('div');
       userDiv.className = "flex items-start gap-2 justify-end";
       userDiv.innerHTML = `
-        <div class="bg-purple-600 text-white p-2.5 rounded-xl border border-purple-500 max-w-[85%]">${text}</div>
+        <div class="bg-purple-600 text-white p-2.5 rounded-xl border border-purple-500 max-w-[85%] break-words">${aiEscape(text)}</div>
         <div class="w-6 h-6 rounded-full bg-indigo-500 flex items-center justify-center text-white font-bold text-[10px] shrink-0">SV</div>
       `;
       chatContainer.appendChild(userDiv);
@@ -4941,15 +5172,25 @@
       chatContainer.scrollTop = chatContainer.scrollHeight;
 
       setTimeout(() => {
-        const matched = aiSearchRooms(text);
-        const aiReply = matched.length > 0
-          ? `Mình gợi ý ${matched.length} phòng trọ phù hợp với yêu cầu này (gợi ý riêng của AI, không thay đổi bộ lọc ở trang chủ):`
-          : "Mình chưa tìm thấy phòng nào khớp chính xác, đây là một vài phòng tiêu biểu bạn có thể tham khảo:";
-        const listHtml = matched.map(r => `
+        const { criteria, rooms } = aiFindRooms(text);
+        const found = rooms.slice(0, 5);
+        const filters = [criteria.city, criteria.area, criteria.universities.length ? `trường ${criteria.universities.map(id => UNIVERSITIES_LIST.find(u => u.id === id)?.name || id).join(' / ')}` : null,
+          criteria.maxPrice != null ? `giá ≤ ${(criteria.maxPrice / 1000000).toLocaleString('vi-VN')} triệu` : null,
+          criteria.minPrice != null ? `giá ≥ ${(criteria.minPrice / 1000000).toLocaleString('vi-VN')} triệu` : null,
+          ...criteria.amenities.map(id => EXTENDED_AMENITIES.find(a => a.id === id)?.label || id),
+          ...criteria.food.map(id => FOOD_TAGS.find(a => a.id === id)?.label || id),
+          criteria.busMeters != null ? `trạm buýt ≤ ${criteria.busMeters}m` : null,
+          criteria.nearKm != null && criteria.universities.length ? `cách trường ~${criteria.nearKm} km` : null].filter(Boolean);
+        const intro = !criteria.recognized
+          ? 'Mình chưa hiểu rõ tiêu chí. Hãy nêu tỉnh/thành, trường, mức giá hoặc tiện ích; dưới đây là vài phòng mẫu để tham khảo.'
+          : rooms.length ? `Tìm thấy ${rooms.length} phòng trong dữ liệu mẫu${filters.length ? ` theo: ${filters.join(' · ')}` : ''}. Hiển thị ${found.length} phòng đầu tiên, không thay đổi bộ lọc trang chủ.`
+            : `Chưa có phòng nào đồng thời khớp ${filters.length ? filters.join(' · ') : 'yêu cầu này'} trong dữ liệu mẫu. Thử bỏ bớt một tiêu chí hoặc nâng ngân sách nhé.`;
+        const caveat = `Thông tin khu vực và khoảng cách chỉ là mô phỏng theo tọa độ; hãy kiểm tra thực tế trước khi quyết định.${criteria.notes.length ? ' ' + criteria.notes.join(' ') : ''}`;
+        const listHtml = found.map(r => `
           <div class="mt-1.5 p-2 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-between gap-2">
             <div class="min-w-0">
-              <div class="font-bold text-white text-[11px] truncate">${r.title}</div>
-              <div class="text-[10px] text-teal-300">${r.priceStr} • ${r.city}</div>
+              <div class="font-bold text-white text-[11px] truncate">${aiEscape(r.title)}</div>
+              <div class="text-[10px] text-teal-300">${aiEscape(r.priceStr)} • ${aiEscape(r.city)}${r.busStopDistanceM != null && criteria.amenities.includes('bus') ? ` • trạm ~${r.busStopDistanceM}m` : ''}</div>
             </div>
             <button onclick="aiGoToRoom(${r.id})" class="px-2 py-1 rounded bg-purple-600 hover:bg-purple-500 text-white text-[10px] font-bold shrink-0">Xem</button>
           </div>
@@ -4959,7 +5200,7 @@
         aiDiv.className = "flex items-start gap-2";
         aiDiv.innerHTML = `
           <div class="w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold text-[10px] shrink-0">AI</div>
-          <div class="bg-slate-800 p-2.5 rounded-xl border border-slate-700 max-w-[85%] leading-relaxed">${aiReply}${listHtml}</div>
+          <div class="bg-slate-800 p-2.5 rounded-xl border border-slate-700 max-w-[85%] leading-relaxed break-words">${aiEscape(intro)}${listHtml}<div class="text-[10px] text-slate-400 mt-2">${aiEscape(caveat)}</div></div>
         `;
         chatContainer.appendChild(aiDiv);
         chatContainer.scrollTop = chatContainer.scrollHeight;
@@ -5086,6 +5327,7 @@
       state.userRole = account.role;
       state.currentUser = account;
       state.currentScreen = 0;
+      resetCanvasScroll();
       closeLoginModal();
       updateHeaderUI();
       renderTabs();
@@ -5100,6 +5342,7 @@
       state.userRole = null;
       state.currentUser = null;
       state.currentScreen = 0;
+      resetCanvasScroll();
       updateHeaderUI();
       renderTabs();
       updateSidePanels();
@@ -5109,16 +5352,11 @@
     }
 
     function updateHeaderUI() {
-      const roleBadge = document.getElementById('roleBadgeHeader');
-      const subHint = document.getElementById('subHeaderHint');
+      // V10.9: header không còn dòng vai trò và dòng chào mừng (đã có sẵn trong giao diện
+      // web app), chỉ còn dòng "Powered by Cuu Long Group" cố định — không cần cập nhật.
       const authContainer = document.getElementById('headerAuthContainer');
 
       if (!state.isLoggedIn) {
-        if (roleBadge) {
-          roleBadge.className = "text-[11px] text-amber-300 font-medium hidden sm:inline";
-          roleBadge.innerText = "• Chưa Đăng Nhập";
-        }
-        if (subHint) subHint.innerText = "🔒 Vui lòng đăng nhập để lọc phòng và sử dụng AI Assistant.";
         if (authContainer) {
           authContainer.innerHTML = `
             <button onclick="openLoginModal()" class="px-3 py-1 text-xs font-bold bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-slate-950 rounded-lg transition shadow-md shadow-teal-500/20 flex items-center gap-1.5 active:scale-95">
@@ -5129,11 +5367,6 @@
         }
       } else {
         const u = state.currentUser;
-        if (roleBadge) {
-          roleBadge.className = "text-[11px] text-teal-300 font-medium hidden sm:inline";
-          roleBadge.innerText = `• Vai trò: ${u.title}`;
-        }
-        if (subHint) subHint.innerText = `Xin chào ${u.name}! Phân hệ ${state.userRole === 'student' ? 'Người Tìm Trọ Sinh Viên' : 'Chủ Nhà Cho Thuê'}.`;
         if (authContainer) {
           authContainer.innerHTML = `
             <div class="flex items-center gap-2">
@@ -5258,10 +5491,10 @@
       resizeAndDraw();
     }
 
-    // ====== V10.5: ĐỘNG CƠ ANIMATION CHO CANVAS ======
+    // ====== V10.5 / V11.1: ĐỘNG CƠ ANIMATION CHO CANVAS ======
     // Canvas vốn chỉ vẽ lại khi có sự kiện. Vòng lặp dưới đây chỉ chạy khi thật sự cần
-    // (màn hình cổng xác thực, hoặc trong vài trăm ms sau khi đổi màn hình / rê chuột)
-    // để tránh vẽ lại liên tục vô ích trên các màn hình nặng như bản đồ.
+    // (màn hình cổng xác thực, đang cuộn mượt, gợn bấm, hoặc trong vài trăm ms sau khi
+    // đổi màn hình / rê chuột) để tránh vẽ lại liên tục vô ích trên các màn nặng như bản đồ.
     const REDUCED_MOTION = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     const ANIM_ORIGIN = performance.now();
     let animRafId = null;
@@ -5274,6 +5507,14 @@
       return 1 - Math.pow(1 - t, 3);
     }
 
+    function easeOutQuart(t) {
+      return 1 - Math.pow(1 - t, 4);
+    }
+
+    function lerp(a, b, k) {
+      return a + (b - a) * k;
+    }
+
     // Số "ngẫu nhiên" tất định theo chỉ số — để các hạt bay luôn ở cùng quỹ đạo mỗi lần vẽ lại
     function pseudoRand(i) {
       const x = Math.sin(i * 127.1 + 311.7) * 43758.5453;
@@ -5282,9 +5523,9 @@
 
     function screenEnterProgress() {
       if (REDUCED_MOTION) return 1;
-      const elapsed = (performance.now() - state.screenEnterAt) / 430;
+      const elapsed = (performance.now() - state.screenEnterAt) / 620;
       if (elapsed >= 1) return 1;
-      return easeOutCubic(Math.max(0, elapsed));
+      return easeOutQuart(Math.max(0, elapsed));
     }
 
     function bumpAnim(ms = 900) {
@@ -5294,20 +5535,72 @@
 
     function markScreenEnter() {
       state.screenEnterAt = performance.now();
-      bumpAnim(700);
+      bumpAnim(900);
+    }
+
+    function scrollSettled() {
+      return Math.abs(state.desktopScrollY - state.desktopScrollTarget) < 0.45
+        && Math.abs(state.mobileScrollY - state.mobileScrollTarget) < 0.45;
+    }
+
+    function pruneRipples() {
+      const now = performance.now();
+      state.clickRipples = (state.clickRipples || []).filter(r => now - r.at < 560);
+    }
+
+    function tickSmoothMotion() {
+      if (REDUCED_MOTION) {
+        state.desktopScrollY = state.desktopScrollTarget;
+        state.mobileScrollY = state.mobileScrollTarget;
+        return;
+      }
+      const k = 0.22;
+      state.desktopScrollY = lerp(state.desktopScrollY, state.desktopScrollTarget, k);
+      state.mobileScrollY = lerp(state.mobileScrollY, state.mobileScrollTarget, k);
+      if (Math.abs(state.desktopScrollY - state.desktopScrollTarget) < 0.45) {
+        state.desktopScrollY = state.desktopScrollTarget;
+      }
+      if (Math.abs(state.mobileScrollY - state.mobileScrollTarget) < 0.45) {
+        state.mobileScrollY = state.mobileScrollTarget;
+      }
+    }
+
+    function setCanvasScroll(delta, immediate) {
+      if (state.viewMode === 'desktop') {
+        const next = Math.max(0, Math.min(state.desktopMaxScroll, (immediate ? state.desktopScrollY : state.desktopScrollTarget) + delta));
+        state.desktopScrollTarget = next;
+        if (immediate || REDUCED_MOTION) state.desktopScrollY = next;
+      } else {
+        const next = Math.max(0, Math.min(state.mobileMaxScroll, (immediate ? state.mobileScrollY : state.mobileScrollTarget) + delta));
+        state.mobileScrollTarget = next;
+        if (immediate || REDUCED_MOTION) state.mobileScrollY = next;
+      }
+      if (!immediate) bumpAnim(480);
+    }
+
+    function resetCanvasScroll() {
+      state.desktopScrollY = 0;
+      state.desktopScrollTarget = 0;
+      state.mobileScrollY = 0;
+      state.mobileScrollTarget = 0;
     }
 
     function shouldKeepAnimating() {
       if (REDUCED_MOTION || state.bootLoading) return false;
+      pruneRipples();
       if (!state.isLoggedIn) return true;
+      if (!scrollSettled()) return true;
+      if (state.clickRipples.length) return true;
       return performance.now() < state.animateUntil;
     }
 
     function startAnimLoop() {
       if (animRafId !== null || REDUCED_MOTION) return;
       const tick = () => {
+        tickSmoothMotion();
         if (!shouldKeepAnimating()) {
           animRafId = null;
+          tickSmoothMotion();
           resizeAndDraw();
           return;
         }
@@ -5315,6 +5608,67 @@
         animRafId = requestAnimationFrame(tick);
       };
       animRafId = requestAnimationFrame(tick);
+    }
+
+    function drawHoverAndRipples() {
+      if (REDUCED_MOTION) return;
+      const now = performance.now();
+      const label = state.hoveredLabel;
+      if (label) {
+        const zone = interactiveZones.find(z => z.label === label);
+        if (zone && zone.w > 8 && zone.h > 8 && zone.w < 420 && zone.h < 90) {
+          const pulse = 0.5 + 0.5 * Math.sin((now - (state.hoverPulseAt || now)) / 180);
+          ctx.save();
+          ctx.globalAlpha = 0.22 + pulse * 0.12;
+          ctx.strokeStyle = "#0D9488";
+          ctx.lineWidth = 1.8;
+          ctx.beginPath();
+          ctx.roundRect(zone.x + 0.5, zone.y + 0.5, zone.w - 1, zone.h - 1, 8);
+          ctx.stroke();
+          ctx.restore();
+        }
+      }
+
+      pruneRipples();
+      (state.clickRipples || []).forEach(r => {
+        const p = Math.min(1, (now - r.at) / 520);
+        const eased = easeOutCubic(p);
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(r.x, r.y, 6 + eased * 34, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(13,148,136,${(1 - eased) * 0.5})`;
+        ctx.lineWidth = 2.2;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(r.x, r.y, 3 + eased * 16, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(45,212,191,${(1 - eased) * 0.28})`;
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+        ctx.restore();
+      });
+    }
+
+    function isAnyModalOpen() {
+      const modals = document.querySelectorAll('[id$="Modal"]');
+      for (let i = 0; i < modals.length; i++) {
+        if (!modals[i].classList.contains('hidden')) return true;
+      }
+      return false;
+    }
+
+    function isTypingTarget(el) {
+      return el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable);
+    }
+
+    function toggleStudioChrome(forceHidden) {
+      const hide = typeof forceHidden === 'boolean' ? forceHidden : !state.studioChromeHidden;
+      state.studioChromeHidden = hide;
+      document.body.classList.toggle('studio-chrome-hidden', hide);
+      const delay = REDUCED_MOTION ? 0 : 430;
+      window.setTimeout(() => autoFitToViewport(), delay);
+      showToast(hide
+        ? t("Đã ẩn thanh điều khiển Studio — phím H để hiện lại.")
+        : t("Đã hiện thanh điều khiển Studio."));
     }
 
     function resizeAndDraw() {
@@ -5343,6 +5697,8 @@
       } else {
         drawMobileScreenWrapper(targetSize.width, targetSize.height);
       }
+
+      drawHoverAndRipples();
     }
 
     function drawRoundedRect(x, y, w, h, radius, fillStyle, strokeStyle, lineWidth = 1) {
@@ -5623,12 +5979,13 @@
 
       ctx.fillStyle = "#0F172A";
       ctx.font = "800 18px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("UNINEST", 80, navY + 33);
+      ctx.fillText("UNINEST", 80, navY + 32);
 
       ctx.fillStyle = "#0D9488";
       ctx.font = "bold 9.5px 'Plus Jakarta Sans', sans-serif";
       const tagText = !state.isLoggedIn ? "CỔNG XÁC THỰC SINH VIÊN & CHỦ TRỌ" : (state.userRole === 'student' ? "PHÂN HỆ NGƯỜI TÌM TRỌ" : "PHÂN HỆ CHỦ NHÀ CHO THUÊ");
-      ctx.fillText(tagText, 80, navY + 45);
+      // V11.0: hạ dòng phụ xuống 47 (cũ 45) — chân chữ "UNINEST" cỡ 18px gần chạm nó.
+      ctx.fillText(tagText, 80, navY + 47);
 
       registerClickZone(36, navY + 12, 180, 38, () => {
         if (state.isLoggedIn) switchScreen(0);
@@ -5718,10 +6075,11 @@
         drawAvatar(w - 55, navY + 31, 16, u.avatar, u.color);
         ctx.fillStyle = "#1E293B";
         ctx.font = "700 12px 'Plus Jakarta Sans', sans-serif";
-        ctx.fillText(u.name, w - 145, navY + 33);
+        ctx.fillText(u.name, w - 145, navY + 31);
         ctx.fillStyle = "#64748B";
         ctx.font = "500 10px 'Plus Jakarta Sans', sans-serif";
-        ctx.fillText(state.userRole === 'student' ? "Chính quy" : "6 phòng", w - 145, navY + 45);
+        // V11.0: nới khoảng cách tên ↔ dòng phụ (cũ 33/45, chỉ hở 1.5px)
+        ctx.fillText(state.userRole === 'student' ? "Chính quy" : "6 phòng", w - 145, navY + 46);
 
         registerClickZone(w - 150, navY + 14, 110, 34, () => performLogout(), "Bấm để Đăng Xuất");
       }
@@ -5880,9 +6238,10 @@
       ctx.fillText(GATEWAY_HERO.brand, textX, hy + 62);
 
       // Gạch chân chạy dài dần dưới tên thương hiệu
+      // V11.0: hạ từ 70 xuống 74 — chữ 31px có chân chữ gần chạm vạch gạch chân.
       const brandW = ctx.measureText(GATEWAY_HERO.brand).width;
       const lineGrow = revealProgress(since, 0.3, 0.7);
-      drawRoundedRect(textX, hy + 70, brandW * lineGrow, 3, 1.5, "#5EEAD4", null);
+      drawRoundedRect(textX, hy + 74, brandW * lineGrow, 3, 1.5, "#5EEAD4", null);
 
       ctx.fillStyle = "rgba(204,251,241,0.94)";
       ctx.font = "600 13px 'Plus Jakarta Sans', sans-serif";
@@ -6365,15 +6724,18 @@
 
       ctx.fillStyle = "#0F172A";
       ctx.font = "700 12px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText(`Bảng Đánh Giá Đa Chiều (Verified Rubric) • ${room.rating} / 5.0 Điểm`, rightX + 16, rubricY + 20);
+      ctx.fillText(`Bảng Đánh Giá Đa Chiều (Verified Rubric) • ${room.rating} / 5.0 Điểm`, rightX + 16, rubricY + 24);
 
       ctx.fillStyle = "#64748B";
       ctx.font = "500 9.5px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText(`Xác minh ${room.reviews} đánh giá thực tế kèm hóa đơn cọc`, rightX + 16, rubricY + 34);
+      ctx.fillText(`Xác minh ${room.reviews} đánh giá thực tế kèm hóa đơn cọc`, rightX + 16, rubricY + 43);
 
       const criteriaList = ROOM_RUBRIC_CRITERIA;
 
-      let itemY = rubricY + 48;
+      // V11.0: giãn lại nhịp của mỗi tiêu chí. Bản cũ đặt thanh điểm cách chân chữ
+      // đúng 3px và dòng ghi chú cách thanh 7px → chữ chạm/đè lên thanh, rất khó đọc.
+      // Nhịp mới: tên (baseline) → thanh +11 → ghi chú +26, mỗi tiêu chí cách nhau 40px.
+      let itemY = rubricY + 70;
       criteriaList.forEach(c => {
         ctx.fillStyle = "#1E293B";
         ctx.font = "700 10px 'Plus Jakarta Sans', sans-serif";
@@ -6383,14 +6745,14 @@
         ctx.font = "bold 10px 'Plus Jakarta Sans', sans-serif";
         ctx.fillText(c.score, rightX + rightW - 55, itemY);
 
-        drawRoundedRect(rightX + 16, itemY + 3, rightW - 32, 4, 2, "#E2E8F0", null);
-        drawRoundedRect(rightX + 16, itemY + 3, (rightW - 32) * c.bar, 4, 2, "#0D9488", null);
+        drawRoundedRect(rightX + 16, itemY + 11, rightW - 32, 4, 2, "#E2E8F0", null);
+        drawRoundedRect(rightX + 16, itemY + 11, (rightW - 32) * c.bar, 4, 2, "#0D9488", null);
 
         ctx.fillStyle = "#64748B";
         ctx.font = "italic 9px 'Plus Jakarta Sans', sans-serif";
-        ctx.fillText("✓ " + c.note, rightX + 16, itemY + 14);
+        ctx.fillText("✓ " + c.note, rightX + 16, itemY + 26);
 
-        itemY += 34;
+        itemY += 40;
       });
 
       const roomReviewsList = getRoomReviews(room).slice(0, 3);
@@ -6464,14 +6826,15 @@
 
       ctx.fillStyle = "#64748B";
       ctx.font = "500 9px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText(data.stayDuration, x + 28, y + 26);
+      // V11.0: 15 → 28 để tên và dòng "đang ở trọ / tân sinh viên" không dính nhau
+      ctx.fillText(data.stayDuration, x + 28, y + 28);
 
       drawBadge("✓ " + data.verifiedTag, x + w - 130, y + 8, "#CCFBF1", "#0F766E");
-      drawStars(x + 14, y + 38, data.stars, 9);
+      drawStars(x + 14, y + 43, data.stars, 9);
 
       ctx.fillStyle = "#334155";
       ctx.font = "500 9px 'Plus Jakarta Sans', sans-serif";
-      wrapText(ctx, data.text, x + 14, y + 52, w - 24, 13);
+      wrapText(ctx, data.text, x + 14, y + 58, w - 24, 13);
     }
 
     function drawScreen3_Match(w, h) {
@@ -6537,9 +6900,10 @@
       ctx.fillStyle = data.scoreColor;
       ctx.font = "800 11px 'Plus Jakarta Sans', sans-serif";
       ctx.textAlign = "center";
-      ctx.fillText(data.matchScore + "%", x + w - 37, y + 26);
+      ctx.fillText(data.matchScore + "%", x + w - 37, y + 25);
       ctx.font = "600 6.5px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("MATCH", x + w - 37, y + 35);
+      // V11.0: 35 → 37, tách khỏi chân chữ số phần trăm
+      ctx.fillText("MATCH", x + w - 37, y + 37);
       ctx.textAlign = "start";
 
       ctx.strokeStyle = "#F1F5F9";
@@ -6593,7 +6957,7 @@
       ctx.font = "500 11px 'Plus Jakarta Sans', sans-serif";
       ctx.fillText("🖐️ Giữ chuột và kéo bản đồ theo mọi hướng để mở rộng góc nhìn. Tìm khu vực/trường ở BẤT KỲ tỉnh/thành nào và chọn bán kính ở bên phải để so sánh khoảng cách.", 40, topY + 20);
 
-      const mapW = w * 0.66;
+      const mapW = w * 0.70;
       const mapH = MAP_BOX_H;
       const mapX = 40;
       const mapY = topY + 34;
@@ -6607,12 +6971,11 @@
       ctx.roundRect(mapX, mapY, mapW, mapH, 12);
       ctx.clip();
 
-      drawMapTileFiller(mapX, mapY, mapW, mapH, state.mapOffsetX, state.mapOffsetY);
+      drawCityMapBackground(mapX, mapY, mapW, mapH, state.selectedCity, state.mapOffsetX, state.mapOffsetY);
 
       ctx.save();
       ctx.translate(state.mapOffsetX, state.mapOffsetY);
-
-      drawCityMapBackground(mapX, mapY, mapW, mapH, state.selectedCity);
+      mapPinViewport = { x: mapX, y: mapY, w: mapW, h: mapH, offsetX: state.mapOffsetX, offsetY: state.mapOffsetY };
 
       if (state.mapFilters.schools) {
         UNIVERSITIES_LIST.filter(u => u.id !== 'all' && u.city === state.selectedCity && u.mapCoord).forEach(u => {
@@ -6630,15 +6993,7 @@
         });
       }
 
-      if (state.mapFilters.bus) {
-        drawMapPin(mapX + 230 * coordScaleX, mapY + 120 * coordScaleY, "Trạm Buýt Gần Trường", "#2563EB", "🚌", () => showToast("Trạm xe buýt: Chạy thẳng qua các trường trong khu vực"));
-        drawMapPin(mapX + 380 * coordScaleX, mapY + 320 * coordScaleY, "Trạm Buýt Trung Tâm", "#2563EB", "🚌", () => showToast("Trạm xe buýt trung tâm khu vực"));
-      }
-
-      if (state.mapFilters.amenities) {
-        drawMapPin(mapX + 380 * coordScaleX, mapY + 130 * coordScaleY, "Phòng Gym / Fitness", "#D97706", "💪", () => showToast("Phòng Gym gần khu vực"));
-        drawMapPin(mapX + 130 * coordScaleX, mapY + 110 * coordScaleY, "Hồ Bơi Khuôn Viên", "#0284C7", "🏊", () => showToast("Hồ bơi công cộng sạch sẽ"));
-      }
+      drawMapStaticPins(mapX, mapY, coordScaleX, coordScaleY, false);
 
       if (state.mapSelectedLocation && state.mapSelectedLocation.city === state.selectedCity && state.mapSelectedLocation.mapCoord) {
         const sc = getSafeMapCoord(state.mapSelectedLocation.mapCoord.x, state.mapSelectedLocation.mapCoord.y);
@@ -6647,15 +7002,14 @@
 
       ctx.restore();
       ctx.restore();
-
-      registerClickZone(mapX, mapY, mapW, mapH, () => {}, "Bấm giữ và di chuyển chuột để xem khu vực");
+      mapPinViewport = null;
 
       const ctlX = mapX + 14;
       const ctlY = mapY + 14;
       drawRoundedRect(ctlX, ctlY, 110, 26, 6, "rgba(15, 23, 42, 0.85)", "rgba(255, 255, 255, 0.2)", 1);
       ctx.fillStyle = "#38BDF8";
       ctx.font = "bold 9.5px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("🧭 Chế độ: Pan & Drag", ctlX + 8, ctlY + 17);
+      ctx.fillText("🧭 Kéo khám phá phố", ctlX + 8, ctlY + 17);
 
       const sideX = mapX + mapW + 16;
       const sideW = w - sideX - 40;
@@ -6783,100 +7137,96 @@
       const noteY = mapY + mapH - 34;
       ctx.fillStyle = "#64748B";
       ctx.font = "500 9.5px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("🔒 Tọa độ & khoảng cách được kiểm chứng bởi UNINEST", sideX + 16, noteY);
+      ctx.fillText("ℹ Bản đồ và khoảng cách chỉ mô phỏng", sideX + 16, noteY);
     }
 
-    // Lớp nền "ô phố" lặp vô hạn, vẽ TRƯỚC khi áp dụng ctx.translate(offsetX, offsetY) và tự dịch pha theo
-    // offsetX/offsetY (chia lấy dư theo kích thước ô) — nhờ vậy khi kéo bản đồ theo bất kỳ hướng nào, luôn có
-    // thêm "mặt bản đồ" xuất hiện thay vì lộ ra nền trống, mô phỏng cảm giác bản đồ trải dài vô tận.
-    function drawMapTileFiller(mapX, mapY, mapW, mapH, offsetX, offsetY, scale) {
-      const s = scale || 1;
-      const tile = 44 * s;
-      ctx.fillStyle = "#EEF2F6";
-      ctx.fillRect(mapX, mapY, mapW, mapH);
-      ctx.strokeStyle = "#E2E8F0";
-      ctx.lineWidth = 1;
-      const phaseX = ((offsetX % tile) + tile) % tile;
-      const phaseY = ((offsetY % tile) + tile) % tile;
-      ctx.beginPath();
-      for (let gx = mapX - tile + phaseX; gx < mapX + mapW + tile; gx += tile) {
-        ctx.moveTo(gx, mapY); ctx.lineTo(gx, mapY + mapH);
-      }
-      for (let gy = mapY - tile + phaseY; gy < mapY + mapH + tile; gy += tile) {
-        ctx.moveTo(mapX, gy); ctx.lineTo(mapX + mapW, gy);
-      }
-      ctx.stroke();
+    let mapPinViewport = null;
+    function drawMapStaticPins(x, y, scaleX, scaleY, compact) {
+      const pins = [
+        { layer: 'bus', x: 230, y: 120, label: 'Trạm Buýt Gần Trường', short: 'Trạm buýt', color: '#2563EB', emoji: '🚌' },
+        { layer: 'bus', x: 380, y: 320, label: 'Trạm Buýt Trung Tâm', short: 'Bến buýt', color: '#2563EB', emoji: '🚌' },
+        { layer: 'amenities', x: 380, y: 130, label: 'Phòng Gym / Fitness', short: 'Gym', color: '#D97706', emoji: '💪' },
+        { layer: 'amenities', x: 130, y: 110, label: 'Hồ Bơi Khuôn Viên', short: 'Hồ bơi', color: '#0284C7', emoji: '🏊' }
+      ];
+      pins.filter(pin => state.mapFilters[pin.layer]).forEach(pin => {
+        drawMapPin(x + pin.x * scaleX, y + pin.y * scaleY, compact ? pin.short : pin.label,
+          pin.color, pin.emoji, () => showToast(pin.label + ' (vị trí minh họa)'));
+      });
+    }
+    // Sinh các khu phố từ toạ độ ô tuyệt đối: pan qua biên vẫn gặp cùng một con đường,
+    // không tạo nền trống; chỉ vẽ các ô đang hiển thị để không tốn CPU khi kéo xa.
+    function mapHash(x, y, salt) {
+      let n = Math.imul(x, 374761393) + Math.imul(y, 668265263) + Math.imul(salt, 2246822519);
+      n = Math.imul(n ^ (n >>> 13), 1274126177);
+      return ((n ^ (n >>> 16)) >>> 0) / 4294967295;
     }
 
-    // Vẽ nền minh hoạ (công viên, sông, đường) theo tỉ lệ % của khung bản đồ, gắn nhãn theo đúng thành phố
-    // đang chọn — để bản đồ không còn luôn trông giống TP.HCM khi đang xem tỉnh/thành khác.
-    function drawCityMapBackground(mapX, mapY, mapW, mapH, city, scale) {
-      const s = scale || 1;
+    function drawCityMapBackground(mapX, mapY, mapW, mapH, city, offsetX = 0, offsetY = 0) {
       const theme = getCityMapTheme(city);
+      const block = Math.max(50, mapW / 8);
+      const step = block + 17;
+      const left = Math.floor((-offsetX - step) / step);
+      const top = Math.floor((-offsetY - step) / step);
+      const right = Math.ceil((mapW - offsetX + step) / step);
+      const bottom = Math.ceil((mapH - offsetY + step) / step);
+      const citySeed = Array.from(city).reduce((n, c) => n + c.charCodeAt(0), 0);
+      ctx.fillStyle = '#DDE6E2';
+      ctx.fillRect(mapX, mapY, mapW, mapH);
 
-      ctx.fillStyle = "#DCFCE7";
-      ctx.beginPath();
-      ctx.roundRect(mapX + mapW * 0.06, mapY + mapH * 0.09, mapW * 0.24, mapH * 0.19, 16 * s);
-      ctx.fill();
-      ctx.fillStyle = "#15803D";
-      ctx.font = `600 ${Math.round(11 * s)}px 'Plus Jakarta Sans', sans-serif`;
-      ctx.fillText("🌳 " + (s < 0.6 ? "" : theme.park), mapX + mapW * 0.075, mapY + mapH * 0.19);
-
-      ctx.strokeStyle = "#BAE6FD";
-      ctx.lineWidth = 42 * s;
-      ctx.beginPath();
-      ctx.moveTo(mapX - 60, mapY + mapH * 0.62);
-      ctx.bezierCurveTo(mapX + mapW * 0.22, mapY + mapH * 0.52, mapX + mapW * 0.5, mapY + mapH * 0.76, mapX + mapW + 80, mapY + mapH * 0.6);
-      ctx.stroke();
-      if (s >= 0.6) {
-        ctx.fillStyle = "#0284C7";
-        ctx.font = `bold ${Math.round(10.5 * s)}px 'Plus Jakarta Sans', sans-serif`;
-        ctx.fillText("🌊 " + theme.river, mapX + mapW * 0.26, mapY + mapH * 0.65);
+      // Trục chính & đường nhánh liên tục theo cả hai chiều; không phụ thuộc vị trí khung.
+      for (let i = left; i <= right; i++) {
+        const x = mapX + offsetX + i * step;
+        ctx.fillStyle = i % 5 === 0 ? '#C8D0D1' : '#CBD5D7';
+        ctx.fillRect(x - 9, mapY, 18, mapH);
+        ctx.fillStyle = '#F8FAF7';
+        ctx.fillRect(x - (i % 5 === 0 ? 7 : 6), mapY, i % 5 === 0 ? 14 : 12, mapH);
+        if (i % 5 === 0) {
+          ctx.fillStyle = '#FCD34D';
+          for (let j = top; j <= bottom; j++) ctx.fillRect(x - 0.5, mapY + offsetY + j * step + 22, 1, 11);
+        }
+      }
+      for (let j = top; j <= bottom; j++) {
+        const y = mapY + offsetY + j * step;
+        ctx.fillStyle = j % 5 === 0 ? '#C8D0D1' : '#CBD5D7';
+        ctx.fillRect(mapX, y - 9, mapW, 18);
+        ctx.fillStyle = '#F8FAF7';
+        ctx.fillRect(mapX, y - (j % 5 === 0 ? 7 : 6), mapW, j % 5 === 0 ? 14 : 12);
       }
 
-      ctx.fillStyle = "rgba(226, 232, 240, 0.7)";
-      ctx.fillRect(mapX + mapW * 0.08, mapY + mapH * 0.42, mapW * 0.13, mapH * 0.13);
-      ctx.fillRect(mapX + mapW * 0.38, mapY + mapH * 0.09, mapW * 0.11, mapH * 0.17);
-      ctx.fillRect(mapX + mapW * 0.58, mapY + mapH * 0.42, mapW * 0.16, mapH * 0.13);
-      ctx.fillRect(mapX + mapW * 0.72, mapY + mapH * 0.66, mapW * 0.15, mapH * 0.16);
-
-      ctx.strokeStyle = "#FFFFFF";
-      ctx.lineWidth = 30 * s;
-      ctx.beginPath();
-      ctx.moveTo(mapX + mapW * 0.33, mapY - 60);
-      ctx.lineTo(mapX + mapW * 0.33, mapY + mapH + 60);
-      ctx.stroke();
-
-      ctx.strokeStyle = "#FACC15";
-      ctx.lineWidth = 2;
-      ctx.setLineDash([8, 6]);
-      ctx.beginPath();
-      ctx.moveTo(mapX + mapW * 0.33, mapY - 60);
-      ctx.lineTo(mapX + mapW * 0.33, mapY + mapH + 60);
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      ctx.strokeStyle = "#FFFFFF";
-      ctx.lineWidth = 24 * s;
-      ctx.beginPath();
-      ctx.moveTo(mapX - 60, mapY + mapH * 0.46);
-      ctx.lineTo(mapX + mapW + 60, mapY + mapH * 0.46);
-      ctx.stroke();
-
-      ctx.strokeStyle = "#F1F5F9";
-      ctx.lineWidth = 16 * s;
-      ctx.beginPath();
-      ctx.moveTo(mapX + mapW * 0.55, mapY + mapH * 0.06);
-      ctx.lineTo(mapX + mapW * 0.55, mapY + mapH * 0.92);
-      ctx.lineTo(mapX + mapW * 0.8, mapY + mapH * 0.92);
-      ctx.stroke();
-
-      if (s >= 0.6) {
-        ctx.fillStyle = "#64748B";
-        ctx.font = `bold ${Math.round(10.5 * s)}px 'Plus Jakarta Sans', sans-serif`;
-        ctx.fillText((theme.road1 + " (TRỤC CHÍNH)").toUpperCase(), mapX + mapW * 0.35, mapY + mapH * 0.045);
-        ctx.fillText(theme.road2.toUpperCase(), mapX + mapW * 0.1, mapY + mapH * 0.445);
+      for (let i = left; i < right; i++) for (let j = top; j < bottom; j++) {
+        const x = mapX + offsetX + i * step + 11;
+        const y = mapY + offsetY + j * step + 11;
+        const type = mapHash(i, j, citySeed);
+        if (type < 0.12) {
+          ctx.fillStyle = '#BFE6C1'; ctx.fillRect(x, y, block - 5, block - 5);
+          ctx.fillStyle = '#7DBF88';
+          for (let k = 0; k < 5; k++) {
+            ctx.beginPath(); ctx.arc(x + 14 + mapHash(i, j, k + 7) * (block - 34), y + 14 + mapHash(j, i, k + 3) * (block - 34), 4, 0, Math.PI * 2); ctx.fill();
+          }
+        } else if (type < 0.18) {
+          ctx.fillStyle = '#ABDCE5'; ctx.fillRect(x, y, block - 5, block - 5);
+          ctx.strokeStyle = '#ECFEFF'; ctx.lineWidth = 2; ctx.strokeRect(x + 6, y + 6, block - 17, block - 17);
+        } else {
+          ctx.fillStyle = '#E4E9E7'; ctx.fillRect(x, y, block - 5, block - 5);
+          const palette = ['#FFFFFF', '#E8DFCE', '#DFE5E9', '#F5EFE3'];
+          for (let k = 0; k < 4; k++) {
+            const bx = x + 4 + (k % 2) * (block / 2 - 2), by = y + 4 + Math.floor(k / 2) * (block / 2 - 2);
+            ctx.fillStyle = '#BECBC8'; ctx.fillRect(bx + 1, by + 2, block / 2 - 8, block / 2 - 8);
+            ctx.fillStyle = palette[Math.floor(mapHash(i * 7 + k, j, citySeed) * palette.length)];
+            ctx.fillRect(bx, by, block / 2 - 8, block / 2 - 8);
+          }
+        }
+        if (type > 0.88 && block > 65) {
+          ctx.fillStyle = '#526B67'; ctx.font = "600 9px 'Plus Jakarta Sans', sans-serif";
+          ctx.fillText(type > 0.95 ? '☕' : '🏪', x + block / 2 - 6, y + block / 2);
+        }
       }
+      // Nhãn chỉ xuất hiện ở ô mốc; tên đường là nhãn minh hoạ theo chủ đề tỉnh/thành.
+      ctx.fillStyle = '#47627A'; ctx.font = "600 10px 'Plus Jakarta Sans', sans-serif";
+      if (left <= 0 && right >= 0) ctx.fillText(theme.road1, mapX + offsetX + 6, mapY + 18);
+      if (top <= 2 && bottom >= 2) ctx.fillText(theme.road2, mapX + 14, mapY + offsetY + 2 * step - 12);
+      ctx.fillStyle = '#166534';
+      if (left <= 2 && right >= 2 && top <= 1 && bottom >= 1) ctx.fillText('🌳 ' + theme.park, mapX + offsetX + 2 * step + 10, mapY + offsetY + step + 25);
     }
 
     function drawMapPin(x, y, label, color, emoji, onClick) {
@@ -6888,7 +7238,16 @@
       drawRoundedRect(x - tw / 2 - 5, y + 14, tw + 10, 16, 4, "rgba(15, 23, 42, 0.90)", null);
       ctx.fillStyle = "#FFFFFF"; ctx.fillText(label, x, y + 25);
       ctx.textAlign = "start";
-      if (onClick) registerClickZone(x - tw / 2 - 6, y - 12, tw + 12, 42, onClick, `Ghim: ${label}`);
+      if (onClick && mapPinViewport) {
+        // Canvas đã translate để vẽ ghim nhưng registerClickZone không theo ma trận ctx.
+        // Cắt vùng bấm theo khung nhìn, không cho ghim ẩn ngoài bản đồ bắt click ở panel.
+        const v = mapPinViewport;
+        const x1 = Math.max(v.x, x - tw / 2 - 6 + v.offsetX);
+        const y1 = Math.max(v.y + 34, state.viewMode === 'mobile' ? 90 + state.mobileScrollY : v.y, y - 12 + v.offsetY);
+        const x2 = Math.min(v.x + v.w, x + tw / 2 + 6 + v.offsetX);
+        const y2 = Math.min(v.y + v.h, state.viewMode === 'mobile' ? 762 + state.mobileScrollY : v.y + v.h, y + 30 + v.offsetY);
+        if (x2 > x1 && y2 > y1) registerClickZone(x1, y1, x2 - x1, y2 - y1, onClick, `Ghim: ${label}`);
+      }
     }
 
     // Chấm đỏ nổi bật đánh dấu vị trí vừa tìm kiếm trên bản đồ (khác hẳn pin trường/phòng thường)
@@ -6976,10 +7335,11 @@
       ctx.font = "800 26px 'Plus Jakarta Sans', sans-serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText(String(trust.score), cx, cy - 4);
+      // V11.0: cũ là cy-4 / cy+14 → hộp chữ số 26px và dòng "/ 100" chồng lên nhau 0.7px
+      ctx.fillText(String(trust.score), cx, cy - 8);
       ctx.fillStyle = "#94A3B8";
       ctx.font = "600 9px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("/ 100", cx, cy + 14);
+      ctx.fillText("/ 100", cx, cy + 15);
       ctx.textAlign = "start";
       ctx.textBaseline = "alphabetic";
     }
@@ -7664,7 +8024,6 @@
           ctx.font = isActive ? `bold ${tabFontSize + 0.5}px 'Plus Jakarta Sans', sans-serif` : `500 ${tabFontSize}px 'Plus Jakarta Sans', sans-serif`;
           ctx.textAlign = "center"; ctx.fillText(tb.label, tx, bottomY + 31); ctx.textAlign = "start";
           registerClickZone(screenMargin + tabW * i, bottomY, tabW, bottomBarH, () => { 
-            state.mobileScrollY = 0; 
             switchScreen(tb.screen); 
           }, `Mobile tab: ${tb.label}`);
         });
@@ -7861,7 +8220,6 @@
           ctx.fillStyle = "#FFFFFF"; ctx.font = "700 10px 'Plus Jakarta Sans', sans-serif"; ctx.textAlign = "center"; ctx.fillText("Xem Chi Tiết & Đặt Lịch", sw / 2, mBtnY + 20); ctx.textAlign = "start";
           registerClickZone(24, mBtnY, sw - 48, 32, () => {
             state.selectedRoomDetail = room;
-            state.mobileScrollY = 0;
             switchScreen(1);
           }, `Xem chi tiết: ${room.title}`);
 
@@ -7965,7 +8323,7 @@
     }
 
     function drawMobileScreen3_Map(sw, y) {
-      const boxX = 16, boxY = y, boxW = sw - 32, boxH = 460;
+      const boxX = 16, boxY = y, boxW = sw - 32, boxH = 520;
       drawRoundedRect(boxX, boxY, boxW, boxH, 10, "#E2E8F0", "#CBD5E1", 1);
       state.mobileMapBox = { x: boxX, y: boxY, w: boxW, h: boxH };
 
@@ -7974,12 +8332,11 @@
       ctx.roundRect(boxX, boxY, boxW, boxH, 10);
       ctx.clip();
 
-      drawMapTileFiller(boxX, boxY, boxW, boxH, state.mapOffsetX, state.mapOffsetY, 0.42);
+      drawCityMapBackground(boxX, boxY, boxW, boxH, state.selectedCity, state.mapOffsetX, state.mapOffsetY);
 
       ctx.save();
       ctx.translate(state.mapOffsetX, state.mapOffsetY);
-
-      drawCityMapBackground(boxX, boxY, boxW, boxH, state.selectedCity, 0.42);
+      mapPinViewport = { x: boxX, y: boxY, w: boxW, h: boxH, offsetX: state.mapOffsetX, offsetY: state.mapOffsetY };
 
       const scaleX = boxW / MAP_LOCAL_W, scaleY = boxH / MAP_LOCAL_H;
       if (state.mapFilters.schools) {
@@ -7996,12 +8353,14 @@
           drawMapPin(boxX + c.x * scaleX, boxY + c.y * scaleY, label, "#0D9488", "🏠", () => { state.selectedRoomDetail = r; switchScreen(1); });
         });
       }
+      drawMapStaticPins(boxX, boxY, scaleX, scaleY, true);
       if (state.mapSelectedLocation && state.mapSelectedLocation.city === state.selectedCity && state.mapSelectedLocation.mapCoord) {
         const sc = getSafeMapCoord(state.mapSelectedLocation.mapCoord.x, state.mapSelectedLocation.mapCoord.y);
         drawSearchMarker(boxX + sc.x * scaleX, boxY + sc.y * scaleY, "Vị trí tìm");
       }
       ctx.restore();
       ctx.restore();
+      mapPinViewport = null;
 
       drawRoundedRect(boxX + 8, boxY + 8, 96, 22, 6, "rgba(15, 23, 42, 0.85)", "rgba(255, 255, 255, 0.2)", 1);
       ctx.fillStyle = "#38BDF8"; ctx.font = "bold 8.5px 'Plus Jakarta Sans', sans-serif";
@@ -8023,8 +8382,6 @@
         resizeAndDraw();
         showToast("Đã đưa bản đồ về tâm vị trí ban đầu.");
       }, "Căn giữa bản đồ");
-
-      registerClickZone(boxX, boxY, boxW, boxH, () => {}, "Giữ và kéo để xem thêm khu vực bản đồ");
 
       let ctrlY = boxY + boxH + 12;
       const mSearchLabel = state.mapSelectedLocation ? `📍 ${state.mapSelectedLocation.name}` : "🔍 Bấm để tìm khu vực (mọi tỉnh/thành)...";
@@ -8096,7 +8453,7 @@
         }
       }
 
-      state.mobileMaxScroll = Math.max(650, ctrlY - y + 40);
+      state.mobileMaxScroll = Math.max(0, ctrlY + 40 - (SIZES.mobile.height - 58));
     }
 
     function drawMobileScreen4_Overview(sw, y) {
@@ -8493,8 +8850,8 @@
 
     function getCanvasCoordinates(e) {
       const rect = canvas.getBoundingClientRect();
-      const clientX = e.clientX || (e.touches && e.touches[0].clientX);
-      const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+      const clientX = e.clientX ?? (e.touches && e.touches[0].clientX);
+      const clientY = e.clientY ?? (e.touches && e.touches[0].clientY);
       const targetSize = state.viewMode === 'desktop' ? SIZES.desktop : SIZES.mobile;
       
       const scaleX = targetSize.width / rect.width;
@@ -8508,15 +8865,32 @@
       };
     }
 
+    let suppressMapClickUntil = 0;
+    let mapDragOrigin = null;
+    function isCanvasMapPoint(coords) {
+      if (!state.isLoggedIn || state.currentScreen !== 3 || state.userRole !== 'student') return false;
+      if (state.viewMode === 'desktop') return coords.x >= 40 && coords.x <= 40 + SIZES.desktop.width * 0.70
+        && coords.y >= 164 && coords.y <= 164 + MAP_BOX_H;
+      const mb = state.mobileMapBox;
+      return !!mb && coords.x >= mb.x && coords.x <= mb.x + mb.w
+        && coords.y >= Math.max(90, mb.y - state.mobileScrollY)
+        && coords.y <= Math.min(SIZES.mobile.height - 58, mb.y - state.mobileScrollY + mb.h);
+    }
+    function panMapTo(coords) {
+      const offsetX = coords.x - state.mapDragStartX;
+      const offsetY = coords.y - state.mapDragStartY;
+      if (mapDragOrigin && Math.hypot(coords.x - mapDragOrigin.x, coords.y - mapDragOrigin.y) > 5) suppressMapClickUntil = Date.now() + 500;
+      // Nền bản đồ sinh theo ô thế giới: không cần giới hạn kéo khi đi ra ngoài vùng ghim ban đầu.
+      state.mapOffsetX = offsetX;
+      state.mapOffsetY = offsetY;
+      resizeAndDraw();
+    }
+
     canvas.addEventListener('mousemove', (e) => {
       const coords = getCanvasCoordinates(e);
 
       if (state.isDraggingMap) {
-        const panX = state.viewMode === 'desktop' ? 420 : 240;
-        const panY = state.viewMode === 'desktop' ? 320 : 220;
-        state.mapOffsetX = Math.max(-panX, Math.min(panX, coords.x - state.mapDragStartX));
-        state.mapOffsetY = Math.max(-panY, Math.min(panY, coords.y - state.mapDragStartY));
-        resizeAndDraw();
+        panMapTo(coords);
         return;
       }
 
@@ -8540,39 +8914,26 @@
         setInnerText('hoverBadgeText', hitZone.label || "Bấm để mở");
         hoverBadge.classList.remove('hidden');
       } else {
-        canvas.style.cursor = (state.currentScreen === 3 && coords.x >= 40 && coords.x <= 40 + SIZES.desktop.width * 0.66) ? 'grab' : 'default';
+        canvas.style.cursor = isCanvasMapPoint(coords) ? 'grab' : 'default';
         hoverBadge.classList.add('hidden');
       }
 
       if (state.isDraggingCanvas) {
         const deltaY = (coords.y - state.dragStartY) * 1.2;
-        if (state.viewMode === 'desktop') {
-          state.desktopScrollY = Math.max(0, Math.min(state.desktopMaxScroll, state.desktopScrollY - deltaY));
-        } else {
-          state.mobileScrollY = Math.max(0, Math.min(state.mobileMaxScroll, state.mobileScrollY - deltaY));
-        }
+        setCanvasScroll(-deltaY, true);
         state.dragStartY = coords.y;
         resizeAndDraw();
       }
     });
 
     canvas.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return;
       const coords = getCanvasCoordinates(e);
-
-      const mapW = SIZES.desktop.width * 0.66;
-      const onDesktopMap = state.currentScreen === 3 && state.viewMode === 'desktop' && state.userRole === 'student' &&
-        coords.x >= 40 && coords.x <= 40 + mapW && coords.y >= 164 && coords.y <= 164 + MAP_BOX_H;
-
-      // Bản đồ mobile cuộn cả trang qua state.mobileScrollY, nên khung bản đồ hiển thị TRÊN MÀN HÌNH ở vị trí
-      // (boxY - mobileScrollY), không phải boxY "ảo" ghi trong state.mobileMapBox — phải trừ độ cuộn hiện tại
-      // trước khi so khớp toạ độ chuột thì mới kéo đúng bản đồ thay vì nhầm sang cuộn trang.
-      const mb = state.mobileMapBox;
-      const onMobileMap = mb && state.currentScreen === 3 && state.viewMode === 'mobile' && state.userRole === 'student' &&
-        coords.x >= mb.x && coords.x <= mb.x + mb.w &&
-        coords.y >= (mb.y - state.mobileScrollY) && coords.y <= (mb.y - state.mobileScrollY + mb.h);
-
-      if (onDesktopMap || onMobileMap) {
+      // Dừng cuộn mượt đang chờ để khung bản đồ không trôi trong khi kéo.
+      setCanvasScroll(0, true);
+      if (isCanvasMapPoint(coords)) {
         state.isDraggingMap = true;
+        mapDragOrigin = coords;
         state.mapDragStartX = coords.x - state.mapOffsetX;
         state.mapDragStartY = coords.y - state.mapOffsetY;
         canvas.style.cursor = 'grabbing';
@@ -8586,17 +8947,72 @@
     window.addEventListener('mouseup', () => {
       state.isDraggingMap = false;
       state.isDraggingCanvas = false;
+      mapDragOrigin = null;
+    });
+
+    // Một ngón trong bản đồ để pan; ngoài bản đồ để cuộn nội dung canvas, không cuộn vỏ Studio.
+    // Canvas không phải DOM cuộn thật nên cả hai thao tác phải cập nhật state.
+    let mapTouchStart = null;
+    let canvasTouchStart = null;
+    canvas.addEventListener('touchstart', e => {
+      if (e.touches.length !== 1) {
+        mapTouchStart = null;
+        canvasTouchStart = null;
+        suppressMapClickUntil = Date.now() + 500;
+        return;
+      }
+      if (state.viewMode !== 'mobile') return;
+      const coords = getCanvasCoordinates(e);
+      e.preventDefault();
+      setCanvasScroll(0, true);
+      const origin = { x: coords.x, y: coords.y, lastY: coords.y, moved: false };
+      if (isCanvasMapPoint(coords)) {
+        mapTouchStart = origin;
+        canvasTouchStart = null;
+        state.mapDragStartX = coords.x - state.mapOffsetX;
+        state.mapDragStartY = coords.y - state.mapOffsetY;
+      } else {
+        canvasTouchStart = origin;
+        mapTouchStart = null;
+      }
+    }, { passive: false });
+    canvas.addEventListener('touchmove', e => {
+      const touch = mapTouchStart || canvasTouchStart;
+      if (!touch) return;
+      e.preventDefault();
+      if (e.touches.length !== 1) { mapTouchStart = null; canvasTouchStart = null; return; }
+      const coords = getCanvasCoordinates(e);
+      if (Math.hypot(coords.x - touch.x, coords.y - touch.y) > 5) touch.moved = true;
+      if (touch.moved) {
+        if (mapTouchStart) panMapTo(coords);
+        else { setCanvasScroll((touch.lastY - coords.y) * 1.2, true); resizeAndDraw(); }
+      }
+      touch.lastY = coords.y;
+    }, { passive: false });
+    canvas.addEventListener('touchend', e => {
+      const touch = mapTouchStart || canvasTouchStart;
+      if (!touch) return;
+      e.preventDefault();
+      mapTouchStart = null;
+      canvasTouchStart = null;
+      suppressMapClickUntil = Date.now() + 500;
+      if (touch.moved || !e.changedTouches.length) return;
+      const coords = getCanvasCoordinates({ touches: e.changedTouches });
+      const hitZone = interactiveZones.find(z => coords.x >= z.x && coords.x <= z.x + z.w && coords.y >= z.y && coords.y <= z.y + z.h);
+      if (hitZone) { playClickBeep(); hitZone.onClick(); }
+    }, { passive: false });
+    canvas.addEventListener('touchcancel', () => {
+      mapTouchStart = null;
+      canvasTouchStart = null;
+      suppressMapClickUntil = Date.now() + 500;
     });
 
     const viewportEl = document.getElementById('canvasViewport');
     if (viewportEl) {
       viewportEl.addEventListener('wheel', (e) => {
         e.preventDefault();
-        if (state.viewMode === 'desktop') {
-          state.desktopScrollY = Math.max(0, Math.min(state.desktopMaxScroll, state.desktopScrollY + e.deltaY * 0.6));
-        } else {
-          state.mobileScrollY = Math.max(0, Math.min(state.mobileMaxScroll, state.mobileScrollY + e.deltaY * 0.6));
-        }
+        if (state.isDraggingMap || mapTouchStart) return;
+        setCanvasScroll(e.deltaY * 0.6, false);
         resizeAndDraw();
       }, { passive: false });
     }
@@ -8605,9 +9021,11 @@
       hoverBadge.classList.add('hidden');
       state.isDraggingCanvas = false;
       state.isDraggingMap = false;
+      mapDragOrigin = null;
     });
 
     canvas.addEventListener('click', (e) => {
+      if (Date.now() < suppressMapClickUntil) { suppressMapClickUntil = 0; return; }
       const coords = getCanvasCoordinates(e);
       const hitZone = interactiveZones.find(z => 
         coords.x >= z.x && coords.x <= z.x + z.w &&
@@ -8622,8 +9040,7 @@
 
     function switchScreen(index) {
       state.currentScreen = index;
-      state.desktopScrollY = 0;
-      state.mobileScrollY = 0;
+      resetCanvasScroll();
       renderTabs();
       updateSidePanels();
       markScreenEnter();
@@ -8632,8 +9049,7 @@
 
     function setViewMode(mode) {
       state.viewMode = mode;
-      state.desktopScrollY = 0;
-      state.mobileScrollY = 0;
+      resetCanvasScroll();
       const deskBtn = document.getElementById('viewDesktopBtn');
       const mobBtn = document.getElementById('viewMobileBtn');
 

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+  <base href="../">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UNINEST - Canvas UI Mockup V11.2</title>
+<title>UNINEST - Canvas UI Mockup V11.4</title>
   <!-- Tailwind CSS & Google Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -195,20 +196,31 @@
     body.studio-chrome-hidden #studioChrome {
       grid-template-rows: 0fr;
     }
+    /* V11.4: dành một dải riêng cho nút khôi phục, không phủ lên canvas. */
+    #canvasStage {
+      min-height: 0;
+      transition: padding-top .42s cubic-bezier(.16, 1, .3, 1);
+    }
+    body.studio-chrome-hidden #canvasStage {
+      padding-top: 52px;
+      box-sizing: border-box;
+    }
     #chromeRevealDock {
       position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%) translateY(-18px);
+      top: 8px;
+      right: 12px;
+      transform: translateY(-18px);
       z-index: 40;
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
       transition: opacity .32s ease, transform .42s cubic-bezier(.16, 1, .3, 1);
     }
     body.studio-chrome-hidden #chromeRevealDock {
       opacity: 1;
+      visibility: visible;
       pointer-events: auto;
-      transform: translateX(-50%) translateY(0);
+      transform: translateY(0);
     }
     body.studio-chrome-hidden #personaCard,
     body.studio-chrome-hidden #landlordCard,
@@ -238,7 +250,7 @@
       .uni-float, .uni-blink, .uni-ring-spin, .boot-star, .uni-shine::after {
         animation: none !important;
       }
-      #studioChrome, #chromeRevealDock, #personaCard, #landlordCard, #interactiveTipPill, #designCanvas {
+      #studioChrome, #canvasStage, #chromeRevealDock, #personaCard, #landlordCard, #interactiveTipPill, #designCanvas {
         transition: none !important;
       }
     }
@@ -336,7 +348,7 @@
       <div>
         <div class="flex items-center gap-2">
           <h1 class="font-bold text-xs sm:text-sm tracking-tight text-white flex items-center gap-1.5">
-              UNINEST <span class="text-teal-300 font-mono text-[10px] px-1.5 py-0.2 rounded bg-teal-500/10 border border-teal-500/30">V11.2</span>
+              UNINEST <span class="text-teal-300 font-mono text-[10px] px-1.5 py-0.2 rounded bg-teal-500/10 border border-teal-500/30">V11.4</span>
           </h1>
         </div>
         <p id="poweredByHeader" data-i18n-skip="true" class="text-[10px] text-slate-400 font-medium tracking-wide whitespace-nowrap">
@@ -463,9 +475,9 @@
   </div>
 
   <!-- MAIN CANVAS AREA -->
-  <main class="flex-1 relative overflow-hidden canvas-grid-bg flex items-center justify-center">
+  <main id="canvasStage" class="flex-1 relative overflow-hidden canvas-grid-bg flex items-center justify-center">
 
-    <!-- V11.1: thanh mỏng hiện lại khi Studio chrome đã ẩn -->
+    <!-- V11.4: dock nằm trong dải riêng, không đè lên màn hình canvas -->
     <div id="chromeRevealDock">
       <button onclick="toggleStudioChrome(false)" class="glass-panel px-3.5 py-1.5 rounded-full border border-teal-500/40 flex items-center gap-2 text-[11px] text-slate-100 shadow-xl shadow-teal-950/40 hover:border-teal-400/70 hover:bg-slate-800/90 transition active:scale-95">
         <i class="fa-solid fa-chevron-down text-teal-300 text-[10px]"></i>
@@ -882,7 +894,7 @@
 
     <!-- BOOKING MODAL -->
     <div id="bookingModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-200">
-      <div class="bg-slate-900 border border-slate-700 w-full max-w-md rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+      <div class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl shadow-2xl flex flex-col overflow-hidden">
         <div class="px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-900/95">
           <div class="flex items-center gap-2 text-teal-300 font-bold text-xs sm:text-sm">
             <i class="fa-solid fa-calendar-plus"></i> ĐẶT LỊCH HẸN XEM PHÒNG TRỰC TIẾP
@@ -923,7 +935,7 @@
             <textarea id="bookingNote" rows="2" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white text-xs focus:outline-none focus:border-teal-500" placeholder="Chào chủ nhà, con là Quốc Anh (SV UEH K51) muốn qua kiểm tra đồng hồ điện riêng và áp lực nước sinh hoạt ạ..."></textarea>
           </div>
         </div>
-        <div class="px-4 py-2.5 border-t border-slate-800 flex justify-end gap-2 bg-slate-900/95">
+        <div class="px-4 py-2.5 border-t border-slate-800 flex flex-wrap justify-end items-center gap-2 bg-slate-900/95">
           <button onclick="closeBookingModal()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium">Hủy</button>
           <button onclick="submitBookingRequest()" class="px-4 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold shadow flex items-center gap-1.5">
             <i class="fa-solid fa-paper-plane text-[10px]"></i> Gửi Yêu Cầu Hẹn
@@ -961,7 +973,7 @@
 
     <!-- REVIEW MODAL -->
     <div id="reviewModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-200">
-      <div class="bg-slate-900 border border-slate-700 w-full max-w-md rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+      <div class="bg-slate-900 border border-slate-700 w-full max-w-md rounded-2xl shadow-2xl flex flex-col overflow-hidden max-h-[90vh]">
         <div class="px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-900/95">
           <div class="flex items-center gap-2 text-teal-300 font-bold text-xs sm:text-sm">
             <i class="fa-solid fa-star text-amber-400"></i> ĐÁNH GIÁ ẨN DANH RUBRIC 5 TIÊU CHÍ
@@ -999,7 +1011,7 @@
             <textarea id="reviewText" rows="2.5" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white text-xs focus:outline-none focus:border-teal-500" placeholder="Khu trọ an ninh, chủ nhà rất tốt bụng..."></textarea>
           </div>
         </div>
-        <div class="px-4 py-2.5 border-t border-slate-800 flex justify-end gap-2 bg-slate-900/95">
+        <div class="px-4 py-2.5 border-t border-slate-800 flex flex-wrap justify-end gap-2 bg-slate-900/95">
           <button onclick="closeReviewModal()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium">Hủy</button>
           <button onclick="submitReviewAction()" class="px-4 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold shadow">Gửi Đánh Giá</button>
         </div>
@@ -1008,7 +1020,7 @@
 
     <!-- LIFESTYLE QUIZ MODAL (Roommate Match) -->
     <div id="lifestyleQuizModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-200">
-      <div class="bg-slate-900 border border-slate-700 w-full max-w-md rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+      <div class="bg-slate-900 border border-slate-700 w-full max-w-md rounded-2xl shadow-2xl flex flex-col overflow-hidden max-h-[90vh]">
         <div class="px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-900/95">
           <div class="flex items-center gap-2 text-teal-300 font-bold text-xs sm:text-sm">
             <i class="fa-solid fa-clipboard-list text-amber-400"></i> TRẮC NGHIỆM PHONG CÁCH SỐNG
@@ -1016,9 +1028,9 @@
           <button onclick="closeLifestyleQuizModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div id="lifestyleQuizBody" class="p-4 space-y-3 text-xs text-slate-300 max-h-[75vh] overflow-y-auto"></div>
-        <div class="px-4 py-2.5 border-t border-slate-800 flex justify-end gap-2 bg-slate-900/95">
-          <button onclick="closeLifestyleQuizModal()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium">Hủy</button>
-          <button onclick="submitLifestyleQuiz()" class="px-4 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold shadow">Lưu Hồ Sơ Phong Cách Sống</button>
+        <div class="px-4 py-2.5 border-t border-slate-800 flex flex-wrap justify-end gap-2 bg-slate-900/95">
+          <button onclick="closeLifestyleQuizModal()" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium">Hủy</button>
+          <button onclick="submitLifestyleQuiz()" class="px-3 py-2 rounded-lg bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold shadow text-center leading-tight">Lưu Hồ Sơ Phong Cách Sống</button>
         </div>
       </div>
     </div>
@@ -3995,31 +4007,69 @@
       { short: "Cách âm / yên tĩnh", name: "5. Độ cách âm / yên tĩnh khu trọ", score: "4.7 / 5.0", bar: 0.94 }
     ];
 
+    // Hồ sơ demo dùng chung cho cả hai giao diện. Giới tính tự khai báo, không suy từ tên/ảnh.
+    const MATCH_INTERESTS = [
+      { id: 'study', label: 'Học nhóm', icon: '📚' },
+      { id: 'cooking', label: 'Nấu ăn', icon: '🍳' },
+      { id: 'quiet', label: 'Không gian yên tĩnh', icon: '🌿' },
+      { id: 'sports', label: 'Thể thao', icon: '🏸' },
+      { id: 'music', label: 'Âm nhạc', icon: '🎵' },
+      { id: 'games', label: 'Trò chơi', icon: '🎮' }
+    ];
+    const MY_MATCH_PROFILE = { sleep: 'late', cleanliness: 'high', smoking: 'no', guests: 'rare', budget: '25to35' };
+    const MY_MATCH_INTERESTS = ['study', 'cooking', 'quiet'];
+    function demoCandidate(name, school, gender, color, profile, interests, bio) {
+      return { name, school, gender, avatarColor: color, lifestyleProfile: profile, interests,
+        traits: interests.slice(0, 3).map(id => {
+          const item = MATCH_INTERESTS.find(option => option.id === id);
+          return { icon: item.icon, label: item.label };
+        }), bio: `“${bio}”`, agreementStatus: 'Sẵn sàng ký Cam Kết' };
+    }
     // Danh sách ứng viên ghép phòng dùng chung desktop/mobile
     const CANDIDATES = [
       {
-        name: "Hoàng Yến (19t)", school: "Marketing - K51", matchScore: 94, scoreColor: "#059669", avatarColor: "#EC4899",
+        name: "Hoàng Yến (19t)", school: "Marketing - K51", gender: 'female', interests: ['study', 'cooking', 'quiet'], avatarColor: "#EC4899",
         traits: [{ icon: "🌙", label: "Ngủ 0h ôn bài" }, { icon: "✨", label: "Sạch sẽ tuyệt đối" }, { icon: "💰", label: "Chia tiền sòng phẳng" }],
         bio: "“Mình hướng nội, nấu ăn tiết kiệm. Muốn tìm bạn cùng thuê phòng gần trường.”", agreementStatus: "Đã ký Cam Kết Quy Tắc",
         lifestyleProfile: { sleep: 'late', cleanliness: 'high', smoking: 'no', guests: 'rare', budget: '25to35' }
       },
       {
-        name: "Thanh Trúc (18t)", school: "Kinh Doanh Quốc Tế", matchScore: 89, scoreColor: "#0D9488", avatarColor: "#8B5CF6",
+        name: "Thanh Trúc (18t)", school: "Kinh Doanh Quốc Tế", gender: 'female', interests: ['study', 'quiet', 'sports'], avatarColor: "#8B5CF6",
         traits: [{ icon: "⏰", label: "Dậy sớm 6h đi học" }, { icon: "🧹", label: "Lịch dọn dẹp cụ thể" }, { icon: "📚", label: "Học thư viện tối" }],
         bio: "“Tính thẳng thắn, tiền trọ chia đều mùng 1. Tôn trọng không gian riêng.”", agreementStatus: "Sẵn sàng ký Cam Kết",
         lifestyleProfile: { sleep: 'early', cleanliness: 'high', smoking: 'no', guests: 'rare', budget: 'under25' }
       },
       {
-        name: "Phương Linh (20t)", school: "ĐH Khoa Học Tự Nhiên", matchScore: 84, scoreColor: "#D97706", avatarColor: "#3B82F6",
+        name: "Phương Linh (20t)", school: "ĐH Khoa Học Tự Nhiên", gender: 'female', interests: ['cooking', 'music', 'games'], avatarColor: "#3B82F6",
         traits: [{ icon: "🚌", label: "Đi lại thuận tiện" }, { icon: "🍳", label: "Nấu ăn cuối tuần" }, { icon: "🔒", label: "Đã ở trọ 1 năm" }],
         bio: "“Đã có sẵn tủ lạnh mini & nồi cơm điện. Cần tìm bạn ở ghép chia sẻ phòng.”", agreementStatus: "Đã xác thực Thẻ SV",
         lifestyleProfile: { sleep: 'early', cleanliness: 'medium', smoking: 'no', guests: 'often', budget: '25to35' }
-      }
+      },
+      demoCandidate('Minh Khang (19t)', 'UEH - K51', 'male', '#2563EB', { sleep: 'late', cleanliness: 'high', smoking: 'no', guests: 'rare', budget: '25to35' }, ['study', 'cooking', 'quiet'], 'Thích học nhóm, nấu ăn và giữ phòng yên tĩnh.'),
+      demoCandidate('Đức Anh (20t)', 'ĐH Bách Khoa', 'male', '#0D9488', { sleep: 'late', cleanliness: 'high', smoking: 'no', guests: 'rare', budget: '25to35' }, ['study', 'sports', 'quiet'], 'Mình học buổi tối, thích chạy bộ và giữ nếp sống gọn gàng.'),
+      demoCandidate('Gia Bảo (19t)', 'UEH - K51', 'male', '#7C3AED', { sleep: 'late', cleanliness: 'medium', smoking: 'no', guests: 'rare', budget: '25to35' }, ['cooking', 'quiet', 'music'], 'Cuối tuần nấu cơm chung, tối cần không gian yên tĩnh.'),
+      demoCandidate('Hải Nam (21t)', 'ĐH Sư Phạm', 'male', '#EA580C', { sleep: 'early', cleanliness: 'high', smoking: 'no', guests: 'rare', budget: 'under25' }, ['study', 'quiet', 'sports'], 'Ưu tiên sạch sẽ và có lịch sinh hoạt ổn định.'),
+      demoCandidate('Quang Huy (20t)', 'ĐH Khoa Học Tự Nhiên', 'male', '#0891B2', { sleep: 'late', cleanliness: 'high', smoking: 'no', guests: 'often', budget: '25to35' }, ['study', 'games', 'cooking'], 'Thích học cùng bạn và nấu cơm tự túc.'),
+      demoCandidate('Tuấn Kiệt (19t)', 'UEH - K51', 'male', '#4F46E5', { sleep: 'late', cleanliness: 'high', smoking: 'no', guests: 'rare', budget: 'under25' }, ['study', 'quiet', 'games'], 'Tôn trọng không gian riêng, cùng chia lịch dọn phòng.'),
+      demoCandidate('Nhật Minh (20t)', 'ĐH Công Nghiệp', 'male', '#16A34A', { sleep: 'early', cleanliness: 'medium', smoking: 'no', guests: 'often', budget: '25to35' }, ['sports', 'cooking', 'music'], 'Thích chơi cầu lông và nấu ăn cuối tuần.'),
+      demoCandidate('Bảo Long (18t)', 'UEH - K52', 'male', '#BE185D', { sleep: 'late', cleanliness: 'high', smoking: 'no', guests: 'rare', budget: '25to35' }, ['cooking', 'study', 'sports'], 'Đi học ban ngày, tối đọc sách và nấu ăn tại nhà.'),
+      demoCandidate('Ngọc Hân (19t)', 'ĐH Y Dược', 'female', '#DB2777', { sleep: 'late', cleanliness: 'high', smoking: 'no', guests: 'rare', budget: '25to35' }, ['study', 'quiet', 'cooking'], 'Thích học yên tĩnh, phòng sạch và chia sẻ tiền trọ rõ ràng.'),
+      demoCandidate('Mai Chi (20t)', 'ĐH Sài Gòn', 'female', '#9333EA', { sleep: 'early', cleanliness: 'high', smoking: 'no', guests: 'rare', budget: 'under25' }, ['sports', 'quiet', 'study'], 'Dậy sớm tập thể thao, thích phòng sạch và yên tĩnh.'),
+      demoCandidate('Khánh Vy (19t)', 'UEH - K51', 'female', '#E11D48', { sleep: 'late', cleanliness: 'medium', smoking: 'no', guests: 'rare', budget: '25to35' }, ['music', 'cooking', 'study'], 'Muốn tìm bạn ở ghép cùng nấu ăn và học nhóm.'),
+      demoCandidate('Trung Hiếu (21t)', 'ĐH Giao Thông Vận Tải', 'male', '#0369A1', { sleep: 'early', cleanliness: 'high', smoking: 'no', guests: 'rare', budget: '25to35' }, ['study', 'sports', 'cooking'], 'Thích chạy bộ buổi sáng, học nhóm và nấu ăn lành mạnh.'),
+      demoCandidate('Hoàng Phúc (19t)', 'UEH - K51', 'male', '#7C2D12', { sleep: 'late', cleanliness: 'medium', smoking: 'no', guests: 'rare', budget: '25to35' }, ['music', 'games', 'quiet'], 'Nghe nhạc nhẹ, chơi game cuối tuần và tôn trọng giờ nghỉ.'),
+      demoCandidate('Văn Minh (20t)', 'ĐH Công Nghệ Thông Tin', 'male', '#15803D', { sleep: 'late', cleanliness: 'high', smoking: 'no', guests: 'often', budget: 'under25' }, ['games', 'study', 'quiet'], 'Học công nghệ, chơi game có giờ và giữ góc học tập gọn gàng.'),
+      demoCandidate('Đình Khoa (19t)', 'ĐH Kinh Tế TP.HCM', 'male', '#C2410C', { sleep: 'early', cleanliness: 'medium', smoking: 'no', guests: 'rare', budget: '25to35' }, ['cooking', 'sports', 'music'], 'Thích đá cầu, nấu ăn cùng bạn và nghe nhạc acoustic.'),
+      demoCandidate('Tuấn Vũ (22t)', 'ĐH Sư Phạm Kỹ Thuật', 'male', '#4338CA', { sleep: 'late', cleanliness: 'high', smoking: 'no', guests: 'rare', budget: '25to35' }, ['quiet', 'study', 'music'], 'Ưu tiên không gian yên tĩnh để học và nghe nhạc thư giãn.'),
+      demoCandidate('Bảo Ngọc (19t)', 'ĐH Khoa Học Xã Hội', 'female', '#BE185D', { sleep: 'late', cleanliness: 'high', smoking: 'no', guests: 'rare', budget: '25to35' }, ['study', 'music', 'quiet'], 'Thích đọc sách, học nhóm nhỏ và chia sẻ không gian yên tĩnh.'),
+      demoCandidate('Thảo My (20t)', 'ĐH Tôn Đức Thắng', 'female', '#7E22CE', { sleep: 'early', cleanliness: 'medium', smoking: 'no', guests: 'rare', budget: 'under25' }, ['sports', 'cooking', 'quiet'], 'Tập yoga, nấu ăn tại nhà và giữ lịch sinh hoạt ngăn nắp.'),
+      demoCandidate('Diệu Linh (18t)', 'UEH - K52', 'female', '#BE123C', { sleep: 'late', cleanliness: 'medium', smoking: 'no', guests: 'often', budget: '25to35' }, ['games', 'music', 'cooking'], 'Vui vẻ, thích nấu ăn cuối tuần và xem phim cùng bạn.'),
+      demoCandidate('Yến Nhi (21t)', 'ĐH Bách Khoa', 'female', '#0F766E', { sleep: 'early', cleanliness: 'high', smoking: 'no', guests: 'rare', budget: '25to35' }, ['study', 'sports', 'quiet'], 'Dậy sớm tập thể thao, học tập tập trung và thích phòng sạch.')
     ];
 
     function computeMatchScore(myAnswers, candidateProfile) {
       if (!myAnswers) return null;
-      const keys = Object.keys(myAnswers);
+      const keys = Object.keys(MY_MATCH_PROFILE);
       const matched = keys.filter(k => myAnswers[k] === candidateProfile[k]).length;
       return Math.round((matched / keys.length) * 100);
     }
@@ -4084,12 +4134,17 @@
     }
 
     function getRankedCandidates() {
-      const list = CANDIDATES.map(c => {
-        const live = state.quizCompleted ? computeMatchScore(state.myLifestyleAnswers, c.lifestyleProfile) : c.matchScore;
-        return Object.assign({}, c, { matchScore: live, scoreColor: scoreColorFor(live) });
-      });
-      list.sort((a, b) => b.matchScore - a.matchScore);
-      return list;
+      const profileInterests = state.myMatchInterests;
+      if (!profileInterests.length) return [];
+      return CANDIDATES.filter(c => (state.matchGenderFilter === 'all' || c.gender === state.matchGenderFilter) &&
+        (state.matchInterestFilter === 'all' || c.interests.includes(state.matchInterestFilter)) &&
+        profileInterests.some(id => c.interests.includes(id)))
+        .map(c => {
+          const shared = profileInterests.filter(id => c.interests.includes(id));
+          const lifestyle = computeMatchScore(state.quizCompleted ? state.myLifestyleAnswers : MY_MATCH_PROFILE, c.lifestyleProfile);
+          const live = Math.round(lifestyle * 0.8 + (shared.length / profileInterests.length) * 20);
+          return { ...c, matchScore: live, scoreColor: scoreColorFor(live), sharedInterests: shared };
+        }).sort((a, b) => b.matchScore - a.matchScore || a.name.localeCompare(b.name, 'vi'));
     }
 
     const LIFESTYLE_QUESTIONS = [
@@ -4107,6 +4162,38 @@
       guests: { rare: 'Ít dẫn khách về', often: 'Hay có khách' },
       budget: { under25: 'Dưới 2.5tr', '25to35': '2.5-3.5tr' }
     };
+
+    // Nhãn mới của v11.3 được dịch theo cùng cơ chế canvas/DOM của các bản trước.
+    Object.assign(I18N.en, {
+      'Tất cả': 'All', 'Nam': 'Male', 'Nữ': 'Female', 'Giới tính': 'Gender',
+      'Sở thích': 'Interests', 'Sở thích chung:': 'Shared interests:',
+      'Tất cả sở thích': 'All interests', 'Học nhóm': 'Study groups', 'Nấu ăn': 'Cooking',
+      'Không gian yên tĩnh': 'Quiet space', 'Thể thao': 'Sports', 'Âm nhạc': 'Music',
+      'Trò chơi': 'Gaming', 'Xem toàn bộ ứng viên phù hợp': 'Browse all compatible candidates',
+      'Chưa có ứng viên phù hợp. Hãy thử giới tính hoặc sở thích khác.': 'No compatible candidates. Try another gender or interest.',
+      'Điểm tham khảo trước khi làm trắc nghiệm.': 'Preview score before the quiz.',
+      'Điểm được tính từ lối sống và sở thích chung.': 'Score based on lifestyle and shared interests.',
+      'Làm trắc nghiệm': 'Take the quiz', '✓ Sửa trắc nghiệm': '✓ Edit quiz',
+      'bạn phù hợp': 'compatible people', 'Lập nhóm ở ghép': 'Start a group'
+      , 'Điểm ghép dựa trên 5 thói quen sống (80%) và sở thích chung (20%).': 'Match score: five living habits (80%) and shared interests (20%).',
+      '🤝 Ghép bạn cùng phòng': '🤝 Find a roommate',
+      'Xem Bản Cam Kết Mẫu': 'View sample agreement'
+    });
+    Object.assign(I18N.zh, {
+      'Tất cả': '全部', 'Nam': '男', 'Nữ': '女', 'Giới tính': '性别',
+      'Sở thích': '兴趣', 'Sở thích chung:': '共同兴趣：',
+      'Tất cả sở thích': '所有兴趣', 'Học nhóm': '小组学习', 'Nấu ăn': '做饭',
+      'Không gian yên tĩnh': '安静空间', 'Thể thao': '运动', 'Âm nhạc': '音乐',
+      'Trò chơi': '游戏', 'Xem toàn bộ ứng viên phù hợp': '浏览所有合适室友',
+      'Chưa có ứng viên phù hợp. Hãy thử giới tính hoặc sở thích khác.': '暂无合适室友，请尝试其他性别或兴趣。',
+      'Điểm tham khảo trước khi làm trắc nghiệm.': '问卷前的参考评分。',
+      'Điểm được tính từ lối sống và sở thích chung.': '按生活习惯和共同兴趣评分。',
+      'Làm trắc nghiệm': '填写问卷', '✓ Sửa trắc nghiệm': '✓ 修改问卷',
+      'bạn phù hợp': '位合适室友', 'Lập nhóm ở ghép': '组建合租小组'
+      , 'Điểm ghép dựa trên 5 thói quen sống (80%) và sở thích chung (20%).': '匹配分数：五项生活习惯（80%）与共同兴趣（20%）。',
+      '🤝 Ghép bạn cùng phòng': '🤝 寻找合租室友',
+      'Xem Bản Cam Kết Mẫu': '查看合租协议样本'
+    });
 
     let currentEditingRoomIndex = -1;
 
@@ -4400,7 +4487,10 @@
         selectedFoodTags: []
       },
       myLifestyleAnswers: null,
+      myMatchInterests: [...MY_MATCH_INTERESTS],
       quizCompleted: false,
+      matchGenderFilter: 'all',
+      matchInterestFilter: 'all',
       roomReviews: {},
       mapRadiusFilter: null,
       mapSelectedLocation: null,
@@ -6837,51 +6927,90 @@
     }
 
     function drawScreen3_Match(w, h) {
-      state.desktopMaxScroll = 0;
       const topY = 132;
       ctx.fillStyle = "#0F172A";
       ctx.font = "800 18px 'Plus Jakarta Sans', sans-serif";
       ctx.fillText("Ghép Bạn Cùng Phòng Thông Minh (Roommate Match Score)", 40, topY);
-
       ctx.fillStyle = "#475569";
       ctx.font = "500 11px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText(`Thuật toán tương thích tại ${state.selectedCity} giúp bạn tìm bạn cùng phòng ăn ý >85%.`, 40, topY + 22);
-
-      const filterBoxY = topY + 36;
-      drawRoundedRect(40, filterBoxY, w - 80, 68, 10, "#FFFFFF", "#E2E8F0", 1);
+      ctx.fillText("Điểm ghép dựa trên 5 thói quen sống (80%) và sở thích chung (20%).", 40, topY + 22);
+      const filterBoxY = topY + 36, boxW = w - 80;
+      drawRoundedRect(40, filterBoxY, boxW, 204, 10, "#FFFFFF", "#E2E8F0", 1);
       ctx.fillStyle = "#0F172A";
       ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText(`Hồ Sơ Phong Cách Sống Quốc Anh (Ngân sách share: ~${state.personaBudget.toUpperCase()}):`, 50, filterBoxY + 20);
-
-      const myTags = state.quizCompleted
-        ? ["Giờ ngủ: " + LIFESTYLE_LABELS.sleep[state.myLifestyleAnswers.sleep], "Gọn gàng: " + LIFESTYLE_LABELS.cleanliness[state.myLifestyleAnswers.cleanliness], "Khu vực: " + state.selectedCity]
-        : ["Giờ ngủ: 23h30", "Gọn gàng (5/5)", "Không hút thuốc", "Khu vực: " + state.selectedCity];
-      let tagX = 50;
-      myTags.forEach(t => {
-        const tw = drawBadge(t, tagX, filterBoxY + 32, "#F1F5F9", "#0F766E");
-        tagX += tw + 6;
-      });
-
-      const quizBtnW = 170;
-      drawRoundedRect(w - 80 - quizBtnW + 40, filterBoxY + 16, quizBtnW, 36, 7, state.quizCompleted ? "#F0FDF4" : "#0D9488", state.quizCompleted ? "#BBF7D0" : null, state.quizCompleted ? 1 : 0);
-      ctx.fillStyle = state.quizCompleted ? "#059669" : "#FFFFFF";
-      ctx.font = "700 10.5px 'Plus Jakarta Sans', sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText(state.quizCompleted ? "✓ Đã Làm Trắc Nghiệm" : "📝 Làm Trắc Nghiệm Phong Cách Sống", w - 80 - quizBtnW / 2 + 40, filterBoxY + 39);
-      ctx.textAlign = "start";
-      registerClickZone(w - 80 - quizBtnW + 40, filterBoxY + 16, quizBtnW, 36, () => openLifestyleQuizModal(), "Làm bài trắc nghiệm phong cách sống");
-
+      ctx.fillText("Hồ sơ Quốc Anh · Ngân sách ~" + state.personaBudget.toUpperCase(), 56, filterBoxY + 24);
+      const answers = state.quizCompleted ? state.myLifestyleAnswers : MY_MATCH_PROFILE;
+      ctx.fillStyle = "#475569"; ctx.font = "500 10px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText(`${LIFESTYLE_LABELS.sleep[answers.sleep]} · ${LIFESTYLE_LABELS.cleanliness[answers.cleanliness]} · ${state.selectedCity}`, 56, filterBoxY + 44);
+      drawMatchQuizButton(w - 238, filterBoxY + 13, 182, 36);
+      drawMatchFilters(56, filterBoxY + 61, boxW - 32, false);
+      const ranked = getRankedCandidates();
       ctx.fillStyle = "#0F172A";
       ctx.font = "700 13px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("Danh Sách Bạn Cùng Phòng Phù Hợp Cao (>85% Tương Thích)", 40, filterBoxY + 95);
+      ctx.fillText(`${ranked.length} ${t('bạn phù hợp')}`, 40, filterBoxY + 225);
+      ctx.fillStyle = "#64748B"; ctx.font = "500 10px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText(state.quizCompleted ? "Điểm được tính từ lối sống và sở thích chung." : "Điểm tham khảo trước khi làm trắc nghiệm.", 40, filterBoxY + 243);
+      const cardW = (boxW - 30) / 3, cardH = 330, gap = 15, cardY = filterBoxY + 257;
+      if (!ranked.length) drawMatchEmpty(40, cardY, boxW);
+      ranked.forEach((c, i) => drawCandidateCard(40 + (cardW + gap) * (i % 3), cardY + (cardH + gap) * Math.floor(i / 3), cardW, cardH, c));
+      const bottom = cardY + (ranked.length ? Math.ceil(ranked.length / 3) * (cardH + gap) - gap : 76);
+      state.desktopMaxScroll = Math.max(0, Math.ceil(bottom + 36 - h));
+    }
 
-      const cardW = (w - 110) / 3;
-      const cardY = filterBoxY + 110;
+    function changeMatchFilter(key, value) {
+      state[key] = value;
+      resetCanvasScroll();
+      resizeAndDraw();
+    }
 
-      const ranked = getRankedCandidates();
-      ranked.forEach((c, i) => {
-        drawCandidateCard(40 + (cardW + 15) * i, cardY, cardW, 370, c);
+    function drawMatchQuizButton(x, y, w, h) {
+      drawRoundedRect(x, y, w, h, 7, state.quizCompleted ? "#F0FDF4" : "#0D9488", state.quizCompleted ? "#BBF7D0" : null);
+      ctx.fillStyle = state.quizCompleted ? "#059669" : "#FFFFFF";
+      ctx.font = "700 10px 'Plus Jakarta Sans', sans-serif";
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(state.quizCompleted ? "✓ Sửa trắc nghiệm" : "Làm trắc nghiệm", x + w / 2, y + h / 2);
+      ctx.textAlign = 'start'; ctx.textBaseline = 'alphabetic';
+      registerClickZone(x, y, w, h, () => openLifestyleQuizModal(), 'Làm bài trắc nghiệm phong cách sống');
+    }
+
+    function drawMatchFilters(x, y, w, compact) {
+      const gender = [{ id: 'all', label: 'Tất cả' }, { id: 'male', label: 'Nam' }, { id: 'female', label: 'Nữ' }];
+      function choice(item, bx, by, bw, key, height) {
+        const selected = state[key] === item.id;
+        drawRoundedRect(bx, by, bw, height, 7, selected ? '#0F766E' : '#F1F5F9', selected ? null : '#CBD5E1');
+        ctx.fillStyle = selected ? '#FFFFFF' : '#334155';
+        ctx.font = `${selected ? 700 : 600} ${compact ? 9.5 : 10}px 'Plus Jakarta Sans', sans-serif`;
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(item.label, bx + bw / 2, by + height / 2, bw - 12);
+        ctx.textAlign = 'start'; ctx.textBaseline = 'alphabetic';
+        registerClickZone(bx, by, bw, height, () => changeMatchFilter(key, item.id), `${key}: ${item.label}`);
+      }
+      ctx.fillStyle = '#475569'; ctx.font = "700 10px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText('Giới tính', x, y + 10);
+      const h = compact ? 29 : 30, gy = y + 17;
+      gender.forEach((item, i) => choice(item, x + i * (compact ? 85 : 110), gy, compact ? 79 : 102, 'matchGenderFilter', h));
+      const labelY = compact ? y + 64 : y + 62;
+      ctx.fillStyle = '#475569'; ctx.font = "700 10px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText('Sở thích', x, labelY);
+      const options = [{ id: 'all', label: 'Tất cả sở thích' }, ...MATCH_INTERESTS];
+      let ox = x, oy = labelY + 8;
+      options.forEach(item => {
+        ctx.font = `${compact ? 9.5 : 10}px 'Plus Jakarta Sans', sans-serif`;
+        const display = item.icon ? item.icon + ' ' + t(item.label) : t(item.label);
+        const bw = Math.min(w, Math.ceil(ctx.measureText(display).width + 24));
+        if (ox + bw > x + w + 0.01) { ox = x; oy += h + 6; }
+        choice({ ...item, label: display }, ox, oy, bw, 'matchInterestFilter', h);
+        ox += bw + 7;
       });
+      return oy + h - y;
+    }
+
+    function drawMatchEmpty(x, y, w) {
+      drawRoundedRect(x, y, w, 76, 10, '#FFFFFF', '#E2E8F0');
+      ctx.fillStyle = '#475569'; ctx.font = "600 12px 'Plus Jakarta Sans', sans-serif";
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('Chưa có ứng viên phù hợp. Hãy thử giới tính hoặc sở thích khác.', x + w / 2, y + 38, w - 24);
+      ctx.textAlign = 'start'; ctx.textBaseline = 'alphabetic';
     }
 
     function drawCandidateCard(x, y, w, h, data) {
@@ -6890,10 +7019,10 @@
 
       ctx.fillStyle = "#0F172A";
       ctx.font = "700 11.5px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText(data.name, x + 50, y + 24);
+      ctx.fillText(data.name, x + 50, y + 24, w - 120);
       ctx.fillStyle = "#64748B";
       ctx.font = "500 9.5px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText(data.school, x + 50, y + 36);
+      ctx.fillText(data.school + ' · ' + (data.gender === 'female' ? t('Nữ') : t('Nam')), x + 50, y + 40, Math.max(40, w - 130));
 
       drawRoundedRect(x + w - 60, y + 14, 46, 28, 5, "#F0FDF4", "#BBF7D0", 1);
       ctx.fillStyle = data.scoreColor;
@@ -6906,9 +7035,9 @@
       ctx.textAlign = "start";
 
       ctx.strokeStyle = "#F1F5F9";
-      ctx.strokeRect(x + 12, y + 54, w - 24, 1);
+      ctx.strokeRect(x + 12, y + 57, w - 24, 1);
 
-      let traitY = y + 68;
+      let traitY = y + 72;
       data.traits.forEach(tr => {
         ctx.fillStyle = "#334155";
         ctx.font = "500 10px 'Plus Jakarta Sans', sans-serif";
@@ -6916,22 +7045,24 @@
         traitY += 18;
       });
 
-      drawRoundedRect(x + 12, y + 130, w - 24, 65, 6, "#F8FAFC", "#E2E8F0", 1);
+      ctx.fillStyle = "#0F766E"; ctx.font = "600 9px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText('Sở thích chung: ' + data.sharedInterests.map(id => MATCH_INTERESTS.find(i => i.id === id).label).join(', '), x + 14, y + 132, w - 28);
+      drawRoundedRect(x + 12, y + 141, w - 24, 56, 6, "#F8FAFC", "#E2E8F0", 1);
       ctx.fillStyle = "#475569";
       ctx.font = "italic 9.5px 'Plus Jakarta Sans', sans-serif";
-      wrapText(ctx, data.bio, x + 18, y + 146, w - 36, 14);
+      wrapText(ctx, data.bio, x + 18, y + 157, w - 36, 14);
 
       drawRoundedRect(x + 12, y + 205, w - 24, 26, 4, "#FEF3C7", null);
       ctx.fillStyle = "#92400E";
       ctx.font = "600 9.5px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("📜 " + data.agreementStatus, x + 18, y + 221);
+      ctx.fillText("📜 " + data.agreementStatus, x + 18, y + 221, w - 36);
 
       const btn1Y = y + 245;
       drawRoundedRect(x + 12, btn1Y, w - 24, 30, 6, "#0D9488", null);
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "700 10.5px 'Plus Jakarta Sans', sans-serif";
       ctx.textAlign = "center";
-      ctx.fillText("💬 Xem Thỏa Thuận Mẫu", x + w / 2, btn1Y + 19);
+      ctx.textBaseline = 'middle'; ctx.fillText("💬 Xem Thỏa Thuận Mẫu", x + w / 2, btn1Y + 15, w - 36); ctx.textBaseline = 'alphabetic';
       ctx.textAlign = "start";
       registerClickZone(x + 12, btn1Y, w - 24, 30, () => openAgreementModal(), `Xem cam kết cùng ${data.name}`);
 
@@ -6940,7 +7071,7 @@
       ctx.fillStyle = "#475569";
       ctx.font = "600 10px 'Plus Jakarta Sans', sans-serif";
       ctx.textAlign = "center";
-      ctx.fillText("Lập Nhóm Thuê Trọ Chung", x + w / 2, btn2Y + 18);
+      ctx.textBaseline = 'middle'; ctx.fillText("Lập nhóm ở ghép", x + w / 2, btn2Y + 14, w - 36); ctx.textBaseline = 'alphabetic';
       ctx.textAlign = "start";
       registerClickZone(x + 12, btn2Y, w - 24, 28, () => { showToast(`Đã thêm ${data.name} vào danh sách ghép phòng!`); switchScreen(0); }, "Ghép nhóm thuê trọ");
     }
@@ -7600,14 +7731,14 @@
 
       // Chủ trọ kiểm tra điểm uy tín thanh toán của người muốn thuê ngay tại đây
       const trust = getStudentTrust();
-      const trustBtnX = 600;
+      const trustBtnX = 780;
       const trustLabel = "Xem hồ sơ uy tín thanh toán của Quốc Anh";
       const trustHover = state.hoveredLabel === trustLabel;
       drawRoundedRect(trustBtnX, cardApptY + 28, 250, 44, 8, trustHover ? trust.rank.soft : "#FFFFFF", trust.rank.color, 1.5);
       ctx.fillStyle = "#64748B"; ctx.font = "700 8.5px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("ĐIỂM UY TÍN THANH TOÁN", trustBtnX + 14, cardApptY + 44);
       ctx.fillStyle = trust.rank.color; ctx.font = "800 17px 'Plus Jakarta Sans', sans-serif"; ctx.fillText(`${trust.score}/100`, trustBtnX + 14, cardApptY + 64);
       drawBadge(trust.rank.label, trustBtnX + 105, cardApptY + 46, trust.rank.soft, trust.rank.color);
-      ctx.fillStyle = "#94A3B8"; ctx.font = "600 8.5px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("Bấm để xem chi tiết →", trustBtnX + 168, cardApptY + 44);
+      ctx.fillStyle = "#64748B"; ctx.font = "700 14px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("→", trustBtnX + 226, cardApptY + 64);
       registerClickZone(trustBtnX, cardApptY + 28, 250, 44, () => openTrustScoreModal(), trustLabel);
 
       const actBtnX = w - 250;
@@ -7787,7 +7918,7 @@
           const isOverdue = p.status === 'overdue';
           const btnLabel = isOverdue ? `Gửi cảnh báo quá hạn tới ${r.tenant.name}` : `Gửi nhắc nhở tới ${r.tenant.name}`;
           const btnHover = state.hoveredLabel === btnLabel;
-          const btnX = x + w - 230;
+          const btnX = x + w - 246;
           const btnY = ry + rowH / 2 - 16;
           const btnColor = isOverdue ? (btnHover ? "#9F1239" : "#E11D48") : (btnHover ? "#B45309" : "#D97706");
           drawRoundedRect(btnX, btnY, 108, 32, 7, btnColor, null);
@@ -7813,7 +7944,7 @@
     }
 
     function drawLandlordScreen2_Rooms(w, h) {
-      state.desktopMaxScroll = 280;
+      state.desktopMaxScroll = 0;
       const topY = 132;
       ctx.fillStyle = "#0F172A"; ctx.font = "800 18px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("Quản Lý Phòng Cho Thuê & Biểu Phí Cam Kết (Cô Nga)", 40, topY);
       ctx.fillStyle = "#475569"; ctx.font = "500 11px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("Kiểm soát giá niêm yết, công tơ điện nước và trạng thái phòng trống. Bấm nút 'Sửa' để cập nhật.", 40, topY + 22);
@@ -7826,15 +7957,15 @@
         ctx.fillStyle = "#64748B"; ctx.font = "500 10px 'Plus Jakarta Sans', sans-serif"; ctx.fillText(`⚖ Biểu phí chuẩn: ${r.cost}`, 280, ry + 46);
 
         const isVacant = r.status.includes('Trống') || r.status.includes('suất');
-        drawBadge(r.status, w - 210, ry + 24, isVacant ? "#FEF3C7" : "#CCFBF1", isVacant ? "#92400E" : "#0F766E");
-        registerClickZone(w - 210, ry + 20, 100, 28, () => {
+        const statusW = drawBadge(r.status, w - 210, ry + 28, isVacant ? "#FEF3C7" : "#CCFBF1", isVacant ? "#92400E" : "#0F766E");
+        registerClickZone(w - 210, ry + 28, statusW, 20, () => {
           r.status = r.status === 'Đang cho thuê' ? 'Trống sẵn' : 'Đang cho thuê';
           resizeAndDraw();
           showToast(`Đã chuyển trạng thái: ${r.name} sang [${r.status}]`);
         }, `Đổi trạng thái: ${r.name}`);
 
         drawRoundedRect(w - 95, ry + 22, 55, 32, 6, "#D97706", null);
-        ctx.fillStyle = "#FFFFFF"; ctx.font = "700 10px 'Plus Jakarta Sans', sans-serif"; ctx.textAlign = "center"; ctx.fillText("Sửa", w - 67, ry + 42); ctx.textAlign = "start";
+        ctx.fillStyle = "#FFFFFF"; ctx.font = "700 10px 'Plus Jakarta Sans', sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = 'middle'; ctx.fillText("Sửa", w - 67.5, ry + 38); ctx.textAlign = "start"; ctx.textBaseline = 'alphabetic';
         registerClickZone(w - 95, ry + 22, 55, 32, () => openLandlordEditModal(idx), `Sửa thông tin: ${r.name}`);
 
         ry += 86;
@@ -8292,33 +8423,50 @@
     }
 
     function drawMobileScreen2_Match(sw, y) {
-      state.mobileMaxScroll = 560;
       drawRoundedRect(16, y, sw - 32, 55, 8, "#F0FDFA", "#99F6E4", 1);
-      ctx.fillStyle = "#0F766E"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("🤝 Roommate Match (>85% Tương Thích)", 26, y + 22);
-      ctx.fillStyle = "#334155"; ctx.font = "500 9.5px 'Plus Jakarta Sans', sans-serif"; ctx.fillText(`Quốc Anh • ${state.selectedCity} • Ngân sách: ~${state.personaBudget.toUpperCase()}`, 26, y + 38);
-
-      const quizBtnY = y + 63;
-      drawRoundedRect(16, quizBtnY, sw - 32, 30, 7, state.quizCompleted ? "#F0FDF4" : "#0D9488", state.quizCompleted ? "#BBF7D0" : null, state.quizCompleted ? 1 : 0);
-      ctx.fillStyle = state.quizCompleted ? "#059669" : "#FFFFFF"; ctx.font = "700 10px 'Plus Jakarta Sans', sans-serif"; ctx.textAlign = "center";
-      ctx.fillText(state.quizCompleted ? "✓ Đã Làm Trắc Nghiệm Phong Cách Sống" : "📝 Làm Trắc Nghiệm Phong Cách Sống", sw / 2, quizBtnY + 19);
-      ctx.textAlign = "start";
-      registerClickZone(16, quizBtnY, sw - 32, 30, () => openLifestyleQuizModal(), "Làm bài trắc nghiệm phong cách sống");
-
+      ctx.fillStyle = "#0F766E"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("🤝 Ghép bạn cùng phòng", 26, y + 22);
+      ctx.fillStyle = "#334155"; ctx.font = "500 9.5px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText(`Quốc Anh • ${state.selectedCity} • ~${state.personaBudget.toUpperCase()}`, 26, y + 39, sw - 52);
+      drawMatchQuizButton(16, y + 63, sw - 32, 32);
+      const filterY = y + 107;
+      drawRoundedRect(16, filterY, sw - 32, 290, 10, "#FFFFFF", "#E2E8F0", 1);
+      const used = drawMatchFilters(26, filterY + 14, sw - 52, true);
       const ranked = getRankedCandidates();
-      let cardY = quizBtnY + 40;
+      let cardY = Math.max(filterY + 290, filterY + used + 30) + 14;
+      ctx.fillStyle = '#0F172A'; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText(`${ranked.length} ${t('bạn phù hợp')}`, 16, cardY + 11);
+      cardY += 23;
+      if (!ranked.length) { drawMatchEmpty(16, cardY, sw - 32); cardY += 76; }
       ranked.forEach(m => {
-        drawRoundedRect(16, cardY, sw - 32, 110, 10, "#FFFFFF", "#E2E8F0", 1);
-        ctx.fillStyle = "#0F172A"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif"; ctx.fillText(m.name, 26, cardY + 22);
-        drawBadge(m.matchScore + "% Match", sw - 95, cardY + 12, "#D1FAE5", "#065F46");
-        ctx.fillStyle = "#64748B"; ctx.font = "500 10px 'Plus Jakarta Sans', sans-serif"; ctx.fillText(m.bio.replace(/[“”]/g, ''), 26, cardY + 42, sw - 52);
-
-        const agBtnY = cardY + 62;
-        drawRoundedRect(26, agBtnY, sw - 52, 28, 6, "#0D9488", null);
-        ctx.fillStyle = "#FFFFFF"; ctx.font = "700 10px 'Plus Jakarta Sans', sans-serif"; ctx.textAlign = "center"; ctx.fillText("Xem Bản Cam Kết Mẫu", sw / 2, agBtnY + 18); ctx.textAlign = "start";
-        registerClickZone(26, agBtnY, sw - 52, 28, () => openAgreementModal(), `Xem cam kết ${m.name}`);
-
-        cardY += 122;
+        drawRoundedRect(16, cardY, sw - 32, 222, 10, "#FFFFFF", "#E2E8F0", 1);
+        drawAvatar(42, cardY + 26, 13, m.name[0], m.avatarColor);
+        ctx.fillStyle = "#0F172A"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText(m.name, 64, cardY + 22, sw - 172);
+        ctx.fillStyle = "#64748B"; ctx.font = "500 9px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText(m.school + ' · ' + (m.gender === 'female' ? t('Nữ') : t('Nam')), 64, cardY + 39, sw - 172);
+        drawBadge(m.matchScore + '%', sw - 78, cardY + 14, '#D1FAE5', '#065F46');
+        ctx.fillStyle = '#0F766E'; ctx.font = "600 9px 'Plus Jakarta Sans', sans-serif";
+        const common = m.sharedInterests.map(id => MATCH_INTERESTS.find(i => i.id === id).label).join(', ');
+        ctx.fillText('Sở thích chung: ' + common, 26, cardY + 64, sw - 52);
+        drawRoundedRect(26, cardY + 75, sw - 52, 53, 7, '#F8FAFC', '#E2E8F0');
+        ctx.fillStyle = '#475569'; ctx.font = "italic 9px 'Plus Jakarta Sans', sans-serif";
+        wrapText(ctx, m.bio, 34, cardY + 92, sw - 68, 13);
+        ctx.fillStyle = '#92400E'; ctx.font = "600 9px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText('📜 ' + m.agreementStatus, 26, cardY + 143, sw - 52);
+        drawRoundedRect(26, cardY + 153, sw - 52, 27, 6, '#0D9488', null);
+        ctx.fillStyle = '#FFFFFF'; ctx.font = "700 10px 'Plus Jakarta Sans', sans-serif";
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText('Xem Bản Cam Kết Mẫu', sw / 2, cardY + 166.5);
+        ctx.textAlign = 'start'; ctx.textBaseline = 'alphabetic';
+        registerClickZone(26, cardY + 153, sw - 52, 27, () => openAgreementModal(), `Xem cam kết ${m.name}`);
+        drawRoundedRect(26, cardY + 187, sw - 52, 27, 6, '#FFFFFF', '#CBD5E1');
+        ctx.fillStyle = '#475569'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText('Lập nhóm ở ghép', sw / 2, cardY + 200.5);
+        ctx.textAlign = 'start'; ctx.textBaseline = 'alphabetic';
+        registerClickZone(26, cardY + 187, sw - 52, 27, () => { showToast(`Đã thêm ${m.name} vào danh sách ghép phòng!`); switchScreen(0); }, `Ghép nhóm thuê trọ ${m.name}`);
+        cardY += 234;
       });
+      state.mobileMaxScroll = Math.max(0, Math.ceil(cardY + 12 - (SIZES.mobile.height - 66)));
     }
 
     function drawMobileScreen3_Map(sw, y) {
@@ -8771,7 +8919,6 @@
     }
 
     function drawMobileLandlord1_Rooms(sw, y) {
-      state.mobileMaxScroll = 700;
       drawRoundedRect(16, y, sw - 32, 50, 8, "#FEF3C7", "#FDE68A", 1);
       ctx.fillStyle = "#92400E"; ctx.font = "700 11px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("🏡 Quản Lý 6 Phòng Của Cô Nga", 26, y + 20);
       ctx.font = "500 9.5px 'Plus Jakarta Sans', sans-serif"; ctx.fillText("Bấm nút [Sửa] để đổi giá, biểu phí điện nước", 26, y + 36);
@@ -8786,8 +8933,8 @@
         ctx.fillStyle = "#64748B"; ctx.font = "500 9px 'Plus Jakarta Sans', sans-serif"; ctx.fillText(r.cost, 24, cardY + 56);
 
         const isVacant = r.status.includes('Trống') || r.status.includes('suất');
-        drawBadge(r.status, 24, cardY + 66, isVacant ? "#FEF3C7" : "#CCFBF1", isVacant ? "#92400E" : "#0F766E");
-        registerClickZone(24, cardY + 64, 85, 24, () => {
+        const badgeW = drawBadge(r.status, 24, cardY + 67, isVacant ? "#FEF3C7" : "#CCFBF1", isVacant ? "#92400E" : "#0F766E");
+        registerClickZone(24, cardY + 67, badgeW, 20, () => {
           r.status = r.status === 'Đang cho thuê' ? 'Trống sẵn' : 'Đang cho thuê';
           resizeAndDraw();
           showToast(`Đổi trạng thái: ${r.name} sang [${r.status}]`);
@@ -8795,11 +8942,12 @@
 
         drawRoundedRect(sw - 68, cardY + 64, 52, 24, 5, "#D97706", null);
         ctx.fillStyle = "#FFFFFF"; ctx.font = "700 10px 'Plus Jakarta Sans', sans-serif"; ctx.textAlign = "center";
-        ctx.fillText("Sửa", sw - 42, cardY + 80); ctx.textAlign = "start";
+        ctx.textBaseline = 'middle'; ctx.fillText("Sửa", sw - 42, cardY + 76); ctx.textBaseline = 'alphabetic'; ctx.textAlign = "start";
         registerClickZone(sw - 68, cardY + 64, 52, 24, () => openLandlordEditModal(idx), `Sửa phòng: ${r.name}`);
 
         cardY += 105;
       });
+      state.mobileMaxScroll = Math.max(0, Math.ceil(cardY + 12 - (SIZES.mobile.height - 66)));
     }
 
     function drawMobileLandlord2_Rubric(sw, y) {
@@ -9171,6 +9319,7 @@
     }
 
     let quizDraftAnswers = {};
+    let quizDraftInterests = [];
 
     function renderLifestyleQuizBody() {
       const body = document.getElementById('lifestyleQuizBody');
@@ -9187,7 +9336,18 @@
             `).join('')}
           </div>
         </div>
-      `).join('');
+      `).join('') + `
+        <div>
+          <div class="font-bold text-slate-200 mb-1 text-[11px]">Sở thích của bạn (chọn ít nhất một)</div>
+          <div class="flex flex-wrap gap-1.5">
+            ${MATCH_INTERESTS.map(item => `
+              <button type="button" onclick="toggleQuizInterest('${item.id}')"
+                class="px-2 py-1 rounded-lg border text-[10.5px] font-medium transition-colors ${quizDraftInterests.includes(item.id) ? 'bg-teal-600 border-teal-500 text-white' : 'bg-slate-950 border-slate-700 text-slate-300 hover:border-teal-600'}">
+                ${item.icon} ${item.label}
+              </button>
+            `).join('')}
+          </div>
+        </div>`;
     }
 
     function selectQuizAnswer(key, value) {
@@ -9195,8 +9355,16 @@
       renderLifestyleQuizBody();
     }
 
+    function toggleQuizInterest(id) {
+      if (!MATCH_INTERESTS.some(item => item.id === id)) return;
+      quizDraftInterests = quizDraftInterests.includes(id)
+        ? quizDraftInterests.filter(value => value !== id) : [...quizDraftInterests, id];
+      renderLifestyleQuizBody();
+    }
+
     function openLifestyleQuizModal() {
       quizDraftAnswers = Object.assign({}, state.myLifestyleAnswers || {});
+      quizDraftInterests = [...state.myMatchInterests];
       renderLifestyleQuizBody();
       const m = document.getElementById('lifestyleQuizModal');
       if (m) {
@@ -9218,8 +9386,17 @@
         showToast("Vui lòng trả lời đủ " + LIFESTYLE_QUESTIONS.length + " câu hỏi!");
         return;
       }
+      if (!quizDraftInterests.length) {
+        showToast('Vui lòng chọn ít nhất một sở thích!');
+        return;
+      }
       state.myLifestyleAnswers = Object.assign({}, quizDraftAnswers);
+      state.myMatchInterests = MATCH_INTERESTS.map(item => item.id).filter(id => quizDraftInterests.includes(id));
       state.quizCompleted = true;
+      if (state.matchInterestFilter !== 'all' && !state.myMatchInterests.includes(state.matchInterestFilter)) {
+        state.matchInterestFilter = 'all';
+      }
+      resetCanvasScroll();
       closeLifestyleQuizModal();
       showToast("Đã lưu hồ sơ phong cách sống! Điểm ghép phòng đã được cập nhật.");
       resizeAndDraw();
