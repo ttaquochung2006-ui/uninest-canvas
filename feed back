@@ -1,0 +1,14 @@
+Một số phần sửa lại, thêm phần chức năng cho giao diện
+1. Thêm phần chức năng book chuyển trọ, dịch vụ chuyển trọ từ trọ cũ sang trọ mới,
+phần này sẽ được liên hệ, có thể xem giá và chat với các bên thứ 3, tính khoảng cách trọ và
+đưa ra số tiền giữa các broker so sánh, có phần đánh giá của các bạn đã từng dùng dịch vụ
+2. Cải tiến phần bản đồ, hiện tại phần bản đồ chưa có chức năng thật sự ý nghĩa cho giao diện web app, chỉ dùng để
+check map thôi, tôi cần bạn cải tiến lên ta có thể nhập tìm kiếm để tìm kiếm các khu vực hoặc trường học (khi nhập vào
+sẽ có phần gợi ý để ta có thể chọn đúng vị trí đó), kết hợp với chọn khoanh vùng khu vực cách chỗ đó bao nhiêu Km để ta
+có thể khoanh vùng quan sát, sau đó map sẽ hiển thị các vị trí phòng trọ trong bán kính khu vực trên bản đồ.
+3. Mở rộng thêm nhiều trọ minh họa hơn, hiện tại chỉ có trọ của cô Nga và 6 cái trọ minh họa thoi, toi cần thêm trọ của những người khác
+và nhiều trọ hơn để dễ dàng quan sát hơn, cũng như có thể trực quan tích hợp với các tính năng khác, lưu ý mỗi trọ sẽ có một đặc tính khác nhau
+để có thể dễ dàng minh họa hơn.
+4. Ở phần mobile của chủ trọ hiện tại chưa có phần thống kê doanh thu như trên web app, toi cần bạn cải tiến để bản mẫu thử tiến sát nhất giữa bản mobile và web nhất có thể.
+===============
+Cải tiến lên bản v10.3 giúp toi

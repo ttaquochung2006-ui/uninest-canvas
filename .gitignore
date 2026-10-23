@@ -1,0 +1,14 @@
+# Local/editor files
+.env
+.env.*
+.DS_Store
+Thumbs.db
+*.log
+.vscode/*.code-workspace
+
+# Temporary browser/test output
+browser-result*.html
+tmp/
+temp/
+dist/
+node_modules/
